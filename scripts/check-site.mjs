@@ -61,7 +61,7 @@ for (const page of pages) {
   }
 
   for (const match of html.matchAll(/src=["']\.\/([^"']+)["']/g)) {
-    const asset = match[1];
+    const asset = match[1].split("?")[0].split("#")[0];
     if (!fs.existsSync(path.join(root, asset))) {
       errors.push(`${page}: missing local asset ${asset}`);
     }
