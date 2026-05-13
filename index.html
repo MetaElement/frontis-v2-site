@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Frontis AI 衔远科技 · 为企业打造持续进化的 AI 专家团能力</title>
+  <title>衔远科技 Frontis AI - 打造可持续进化的AI生产力</title>
   <meta name="description" content="衔远科技 Frontis AI，为企业和领导者打造持续进化的 AI 专家团能力。Frontis Horizon 企业级 AI 专家体系，Leadeep AI 企业家专属 AI 数字分身。" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -207,7 +207,7 @@
       margin-top: 2px;
     }
     .nav-cta { margin-left: auto; }
-    /* 导航栏「申请演示」按钮 */
+    /* 导航栏「申请试用」按钮 */
     .nav-cta a {
       background: transparent;
       color: var(--threshold-cyan);
@@ -362,7 +362,7 @@
       position: absolute;
       left: 64px;
       bottom: calc(100vh - 76vh + 70px);
-      max-width: 65%;
+      max-width: min(860px, calc(100% - 128px));
       z-index: 20;
     }
     /* 主标题 */
@@ -381,6 +381,14 @@
       display: block;
       opacity: 0;
       transform: translateX(-30px);
+    }
+    .hero-title .line3:empty { display: none; }
+    .hero-title-accent {
+      color: var(--threshold-cyan);
+      letter-spacing: -0.05em;
+    }
+    .hero-title-dot {
+      color: var(--energy-orange);
     }
     .hero-title .line1.hero-visible {
       opacity: 1;
@@ -403,7 +411,7 @@
       color: var(--level-gray);
       margin-bottom: 0;
       margin-top: 20px;
-      max-width: 520px;
+      max-width: 820px;
       opacity: 0;
       transform: translateX(-20px);
     }
@@ -957,7 +965,7 @@
     .btn-secondary-dark:hover { border-color: var(--threshold-cyan); color: var(--threshold-cyan); }
 
     /* =============================================
-       Screen 6 · 申请演示
+       Screen 6 · 申请试用
     ============================================= */
     #contact {
       background: var(--pure-white);
@@ -1244,20 +1252,21 @@
   <!-- 主内容（绝对覆盖层） -->
   <div class="hero-content">
     <!-- 文字区（临界线上方，左侧65%） -->
-    <div class="hero-text-area">
+    <div class="hero-text-area" aria-live="polite">
       <h1 class="hero-title">
-        <span class="line1">企业跃迁不等人<span style="color:var(--threshold-cyan);letter-spacing:-0.05em;">&#x2014;&#x2014;</span></span>
-        <span class="line2">AI专家团能力，今天部署<span style="color:var(--energy-orange)">。</span></span>
+        <span class="line1" id="heroLine1">成为AI原生<span class="hero-title-accent">&#x2014;&#x2014;</span></span>
+        <span class="line2" id="heroLine2">智能跃迁，持续进化<span class="hero-title-dot">。</span></span>
+        <span class="line3" id="heroLine3"></span>
       </h1>
-      <p class="hero-subtitle">
-        让你的组织和你自己，都拥有永不下班的 AI 专家
+      <p class="hero-subtitle" id="heroSubtitle">
+        让每一个企业拥有高价值、可进化、强协同的 AI 生产力网络
       </p>
     </div>
   </div>
 
-  <!-- 申请演示按钮（黑色区） -->
+  <!-- 申请试用按钮（黑色区） -->
   <div class="hero-cta">
-    <a href="#contact" class="btn-demo">申请演示</a>
+    <a href="#contact" class="btn-demo">申请试用</a>
   </div>
 
   <!-- 修改4：hero-svg-wrap 保留容器但清空SVG内容 -->
@@ -1499,9 +1508,9 @@
 
 
 <!-- =============================================
-     Screen 6 · 申请演示表单
+     Screen 6 · 申请试用表单
 ============================================= -->
-<section id="contact" aria-label="申请演示">
+<section id="contact" aria-label="申请试用">
 
   <div class="contact-header animate-in">
     <h2 class="contact-title">准备好跨过那条线了吗？</h2>
@@ -1637,21 +1646,121 @@
   (function initHeroAnimation() {
     var thresholdLine = document.getElementById('thresholdLine');
     var navbar        = document.getElementById('navbar');
-    var titleLine1    = document.querySelector('.hero-title .line1');
-    var titleLine2    = document.querySelector('.hero-title .line2');
-    var titleLine3    = document.querySelector('.hero-title .line3');
-    var subtitle      = document.querySelector('.hero-subtitle');
+    var titleLine1    = document.getElementById('heroLine1');
+    var titleLine2    = document.getElementById('heroLine2');
+    var titleLine3    = document.getElementById('heroLine3');
+    var subtitle      = document.getElementById('heroSubtitle');
     var ctaWrap       = document.querySelector('.hero-cta');
     var heroSvgWrap   = document.getElementById('heroSvgWrap');
+    var slideIndex    = 0;
+    var slideTimer;
+    var slideDelay    = 8200;
+    var heroSlides    = [
+      {
+        line1: '成为AI原生<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: '智能跃迁，持续进化<span class="hero-title-dot">。</span>',
+        line3: '',
+        subtitle: '让每一个企业拥有高价值、可进化、强协同的 AI 生产力网络'
+      },
+      {
+        line1: '从战略到执行<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: 'AI深度参与',
+        line3: '每一次业务闭环<span class="hero-title-dot">。</span>',
+        subtitle: '把目标、任务、复盘和知识更新连接成可持续的增长系统'
+      },
+      {
+        line1: '让经验开始进化<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: '知识沉淀为',
+        line3: '企业AI专家<span class="hero-title-dot">。</span>',
+        subtitle: '从一次交付到长期复用，让组织能力越用越强'
+      },
+      {
+        line1: '每个关键岗位<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: '都配备一支可持续进化的',
+        line3: 'AI 专家团<span class="hero-title-dot">。</span>',
+        subtitle: '战略、管理、研发、生产、销售、运营，让专业判断不再受限'
+      },
+      {
+        line1: '让知识成为资产<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: 'AI专家持续训练',
+        line3: '组织能力自我增长<span class="hero-title-dot">。</span>',
+        subtitle: '把流程、经验和决策沉淀为可复用、可协同、可进化的企业智能'
+      },
+      {
+        line1: '把人才经验放大<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: '从个人能力',
+        line3: '到组织网络<span class="hero-title-dot">。</span>',
+        subtitle: '让专家方法被沉淀、被调用、被迭代，形成跨团队的智能协同'
+      },
+      {
+        line1: '构建企业智能中枢<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: '连接业务现场',
+        line3: '与战略判断<span class="hero-title-dot">。</span>',
+        subtitle: '让数据、知识、任务和专家能力在同一套生产力网络中持续流动'
+      },
+      {
+        line1: '面向未来组织<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: '人与AI共创',
+        line3: '新生产力<span class="hero-title-dot">。</span>',
+        subtitle: '让每一次业务行动都成为下一次智能进化的燃料'
+      }
+    ];
+
+    function setSlide(index) {
+      var slide = heroSlides[index];
+      if (!slide) return;
+      titleLine1.innerHTML = slide.line1;
+      titleLine2.innerHTML = slide.line2;
+      titleLine3.innerHTML = slide.line3;
+      subtitle.textContent = slide.subtitle;
+    }
+
+    function hideHeroText() {
+      [titleLine1, titleLine2, titleLine3, subtitle].forEach(function (el) {
+        if (el) el.classList.remove('hero-visible');
+      });
+    }
+
+    function revealHeroText() {
+      setTimeout(function () { titleLine1.classList.add('hero-visible'); }, 0);
+      setTimeout(function () { titleLine2.classList.add('hero-visible'); }, 240);
+      setTimeout(function () {
+        if (titleLine3.textContent.trim()) titleLine3.classList.add('hero-visible');
+      }, 480);
+      setTimeout(function () { subtitle.classList.add('hero-visible'); }, 760);
+    }
+
+    function drawThresholdLine() {
+      if (!thresholdLine) return;
+      thresholdLine.classList.remove('line-drawn');
+      void thresholdLine.offsetWidth;
+      thresholdLine.classList.add('line-drawn');
+    }
+
+    function scheduleNextSlide() {
+      window.clearTimeout(slideTimer);
+      slideTimer = window.setTimeout(function () {
+        slideIndex = (slideIndex + 1) % heroSlides.length;
+        drawThresholdLine();
+        hideHeroText();
+        setTimeout(function () {
+          setSlide(slideIndex);
+          revealHeroText();
+          scheduleNextSlide();
+        }, 360);
+      }, slideDelay);
+    }
+
+    setSlide(slideIndex);
 
     // t=0: 临界线开始绘制（1400ms ease-in：缓慢→加速）
     setTimeout(function () {
-      thresholdLine.classList.add('line-drawn');
+      drawThresholdLine();
     }, 0);
 
     // t=200ms: 导航栏切入（和线同步出现）
     setTimeout(function () {
-      navbar.classList.add('nav-visible');
+      if (navbar) navbar.classList.add('nav-visible');
     }, 200);
 
     // t=1100ms: 线进行到约75%时，主标题第一行开始（慢→快 700ms）
@@ -1659,30 +1768,39 @@
       titleLine1.classList.add('hero-visible');
     }, 1100);
 
-    // t=1280ms: 主标题第二行（交错80ms）
+    // t=1340ms: 主标题第二行（稍慢于默认切入）
     setTimeout(function () {
       titleLine2.classList.add('hero-visible');
-    }, 1280);
+    }, 1340);
 
-    // t=1360ms: 主标题第三行
+    // t=1580ms: 主标题第三行
     setTimeout(function () {
-      if (titleLine3) titleLine3.classList.add('hero-visible');
-    }, 1360);
+      if (titleLine3 && titleLine3.textContent.trim()) titleLine3.classList.add('hero-visible');
+    }, 1580);
 
-    // t=1540ms: 副标题（线已完成后出现）
+    // t=1900ms: 副标题（线已完成后出现）
     setTimeout(function () {
       subtitle.classList.add('hero-visible');
-    }, 1540);
+      scheduleNextSlide();
+    }, 1900);
 
     // t=1780ms: CTA 按钮
     setTimeout(function () {
-      ctaWrap.classList.add('hero-visible');
-    }, 1780);
+      if (ctaWrap) ctaWrap.classList.add('hero-visible');
+    }, 2100);
 
     // t=1400ms: Hero 右侧包裹区（随线完成同步）
     setTimeout(function () {
-      heroSvgWrap.classList.add('hero-visible');
+      if (heroSvgWrap) heroSvgWrap.classList.add('hero-visible');
     }, 1400);
+
+    document.addEventListener('visibilitychange', function () {
+      if (document.hidden) {
+        window.clearTimeout(slideTimer);
+      } else {
+        scheduleNextSlide();
+      }
+    });
   })();
 
   // ============================================
