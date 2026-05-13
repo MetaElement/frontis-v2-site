@@ -1,0 +1,827 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>关于衔远 · Frontis AI 衔远科技</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --quantum-black: #000000;
+  --threshold-cyan: #00C1D4;
+  --pure-white: #FFFFFF;
+  --level-gray: #3D4145;
+  --energy-gray: #F0F2F4;
+  --energy-orange: #FA5F26;
+  --font-en: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-cn: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --ease-threshold: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0, 1, 0.45);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-cn);
+  background: var(--pure-white);
+  color: var(--quantum-black);
+  overflow-x: hidden;
+}
+@keyframes threshold-pulse {
+  0%   { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
+  50%  { box-shadow: 0 0 16px 4px rgba(0,193,212,0.7); }
+  100% { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
+}
+
+/* ── 动效升级：轨道归位感 ── */
+.animate-in {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.animate-in.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.section-enter {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-enter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+section {
+  min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+
+/* ── 导航（浅色背景黑色Logo）── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: var(--pure-white);
+  border-bottom: 1px solid #E5E7EA;
+  display: flex; align-items: center; justify-content: space-between;
+  padding: 0 64px; height: 64px;
+}
+.nav-logo { display:flex; align-items:center; text-decoration:none; }
+.nav-links { display:flex; align-items:center; gap:32px; list-style:none; margin-left:auto; }
+.nav-links a {
+  font-family: var(--font-en); font-size:14px; font-weight:500;
+  color: var(--quantum-black); text-decoration:none;
+  position:relative; padding-bottom:2px;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:0; height:1px; background:var(--threshold-cyan);
+  transition: width 200ms var(--ease-threshold);
+}
+.nav-links a:hover::after { width:100%; }
+.nav-links a.active { color:var(--threshold-cyan); }
+.nav-dropdown { position:relative; }
+.dropdown-menu {
+  display:none; position:absolute; top:100%; left:0;
+  background:var(--pure-white); border:1px solid #E5E7EA;
+  min-width:160px; z-index:200;
+}
+.dropdown-menu a { display:block; padding:10px 16px; font-size:13px; color:var(--quantum-black); white-space:nowrap; }
+.dropdown-menu a:hover { background:var(--energy-gray); }
+.nav-dropdown:hover .dropdown-menu { display:block; }
+.btn-nav {
+  font-family:var(--font-en); font-size:13px; font-weight:600;
+  background: transparent; color: var(--threshold-cyan);
+  border: 1.5px solid var(--threshold-cyan);
+  padding: 9px 20px; cursor:pointer;
+  text-decoration:none;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 200ms var(--ease-threshold), color 200ms var(--ease-threshold);
+}
+.btn-nav:hover { background: var(--threshold-cyan); color: var(--quantum-black); }
+
+/* ── 临界线 ── */
+.threshold-line {
+  width:48px; height:2px; background:var(--threshold-cyan);
+  animation: threshold-pulse 2.5s ease-in-out infinite;
+  margin: 24px 0;
+}
+
+/* ── 通用 ── */
+section { padding: 96px 64px; }
+.tag {
+  display:inline-block; font-family:var(--font-en); font-size:11px;
+  font-weight:600; letter-spacing:2px; color:var(--threshold-cyan);
+  text-transform:uppercase; margin-bottom:16px;
+}
+.btn-primary {
+  display:inline-flex; align-items:center; justify-content:center;
+  font-family:var(--font-en); font-size:14px; font-weight:600;
+  background:var(--quantum-black); color:var(--pure-white);
+  padding:14px 32px; text-decoration:none; margin-top:32px;
+  border:none; cursor:pointer;
+  transition: background 200ms var(--ease-threshold);
+}
+.btn-primary:hover { background:var(--threshold-cyan); color:var(--quantum-black); border-color:var(--threshold-cyan); }
+
+/* ── Screen 1 · 跃迁首屏（两栏布局）── */
+#brand {
+  padding-top: 140px;
+  padding-bottom: 96px;
+  padding-left: 64px;
+  padding-right: 64px;
+  background: var(--pure-white);
+  display: grid;
+  grid-template-columns: 60fr 40fr;
+  gap: 80px;
+  align-items: center;
+  min-height: 100vh;
+}
+.brand-left {}
+.brand-right {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+#brand h1 {
+  font-family:var(--font-en); font-size:56px; font-weight:700;
+  color:var(--quantum-black); line-height:1.1; margin-bottom:8px;
+}
+#brand .sub-h1 {
+  font-size:22px; color:var(--level-gray); font-weight:400; margin-bottom:40px;
+}
+.guide-block {
+  display:flex; gap:24px; max-width:720px; margin-top:32px;
+}
+.guide-line { width:2px; background:var(--threshold-cyan); flex-shrink:0; }
+.guide-text { font-size:17px; color:var(--level-gray); line-height:1.9; }
+.guide-text em { color:var(--quantum-black); font-style:normal; font-weight:600; }
+
+/* ── Screen 2 · 创始人 ── */
+#team { background:var(--quantum-black); padding:96px 64px; }
+#team h2 {
+  font-family:var(--font-en); font-size:40px; font-weight:700;
+  color:var(--pure-white); margin-bottom:56px;
+}
+.founder-layout {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 80px;
+  align-items: start;
+  max-width: 960px;
+}
+.founder-photo .img-placeholder {
+  width: 240px; height: 300px;
+  background: #0D0D0D;
+  border: 1px solid #00C1D4;
+  display: flex; align-items: center; justify-content: center;
+  color: #8A8F96; font-size: 11px; font-family: sans-serif;
+  text-align: center; padding: 16px; line-height: 1.5;
+}
+.founder-name {
+  font-family: var(--font-en);
+  font-size: 48px; font-weight: 700;
+  color: var(--pure-white); margin-bottom: 4px;
+}
+.founder-role { font-size: 16px; color: var(--threshold-cyan); margin-bottom: 24px; }
+.threshold-line-small { width: 48px; height: 2px; background: var(--threshold-cyan); margin-bottom: 24px; }
+.founder-desc { font-size: 16px; color: #C8CACF; line-height: 1.9; margin-bottom: 40px; }
+.team-bg { border-left: 2px solid #1A1A1A; padding-left: 20px; }
+.team-bg-label { font-family: var(--font-en); font-size: 11px; letter-spacing: 2px; color: #555; text-transform: uppercase; display: block; margin-bottom: 8px; }
+.team-bg-text { font-size: 14px; color: #8A8F96; line-height: 1.7; }
+
+/* ── 服务客户 logo墙 ── */
+#clients { background: var(--pure-white); padding: 96px 0; overflow: hidden; }
+#clients .section-header { padding: 0 64px 56px; }
+#clients h2 {
+  font-family: var(--font-en); font-size: 40px; font-weight: 700;
+  color: var(--quantum-black); margin-bottom: 12px;
+}
+#clients .sub { font-size: 17px; color: var(--level-gray); }
+.logo-track-wrap {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.logo-track-wrap::before,
+.logo-track-wrap::after {
+  content: '';
+  position: absolute;
+  top: 0; bottom: 0;
+  width: 120px;
+  z-index: 2;
+  pointer-events: none;
+}
+.logo-track-wrap::before { left: 0; background: linear-gradient(to right, var(--pure-white), transparent); }
+.logo-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--pure-white), transparent); }
+.logo-track {
+  display: flex;
+  gap: 0;
+  width: max-content;
+}
+.logo-track.row1 { animation: scroll-left  32s linear infinite; }
+.logo-track.row2 { animation: scroll-right 28s linear infinite; }
+.logo-track.row3 { animation: scroll-left  36s linear infinite; }
+@keyframes scroll-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+@keyframes scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
+.logo-track-wrap:hover .logo-track { animation-play-state: paused; }
+.logo-cell {
+  width: 180px; height: 80px;
+  display: flex; align-items: center; justify-content: center;
+  border: 1px solid #E8EAED;
+  margin: 8px;
+  flex-shrink: 0;
+  background: var(--pure-white);
+  transition: border-color 200ms;
+}
+.logo-cell:hover { border-color: var(--threshold-cyan); }
+.logo-cell span {
+  font-family: var(--font-en); font-size: 13px; font-weight: 700;
+  color: #B0B5BC; letter-spacing: 1px; text-transform: uppercase;
+}
+
+/* ── 加入我们 ── */
+#join {
+  position: relative;
+  padding: 0;
+  overflow: hidden;
+}
+/* 背景大图区域 + 黑色半透明蒙层 */
+.join-bg {
+  position: absolute;
+  inset: 0;
+  /* 背景图占位：请替换为实际团队/办公室照片 URL
+     推荐尺寸：1920×900px，深色调或高对比度场景
+     示例：background-image: url('https://your-cdn/join-bg.jpg'); */
+  background-color: #0A0C0E;
+  background-image: none; /* TODO: 替换为实际图片 */
+  background-size: cover;
+  background-position: center;
+}
+.join-bg-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.72);
+}
+.join-inner {
+  position: relative;
+  z-index: 2;
+  padding: 96px 64px;
+}
+/* 顶部标题区 */
+.join-header { margin-bottom: 16px; }
+#join h2 {
+  font-family: var(--font-en); font-size: 48px; font-weight: 700;
+  color: var(--pure-white); margin-bottom: 6px; letter-spacing: -1px;
+}
+.join-tagline {
+  font-size: 17px; color: var(--threshold-cyan); font-style: italic; margin-bottom: 12px;
+}
+.join-desc {
+  font-size: 15px; color: #8A8F96; line-height: 1.8; max-width: 560px; margin-bottom: 56px;
+}
+/* 企业文化横条 */
+.join-culture {
+  display: flex; gap: 0; margin-bottom: 64px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.culture-item {
+  flex: 1; padding: 28px 32px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.culture-item:last-child { border-right: none; }
+.culture-kw {
+  font-family: var(--font-en); font-size: 11px; font-weight: 700;
+  letter-spacing: 2px; color: var(--threshold-cyan); text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.culture-zh { font-size: 18px; font-weight: 700; color: var(--pure-white); margin-bottom: 6px; }
+.culture-desc { font-size: 13px; color: #666; line-height: 1.7; }
+/* 左右双栏 */
+.join-two-col {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.join-col {
+  padding: 40px 40px;
+}
+.join-col-left {
+  border-right: 1px solid rgba(255,255,255,0.08);
+}
+.join-col-label {
+  font-family: var(--font-en); font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; color: #555; text-transform: uppercase;
+  padding-bottom: 16px; margin-bottom: 24px;
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+}
+/* 职位列表 */
+.positions-list { display: flex; flex-direction: column; }
+.position-item {
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  padding: 18px 0;
+  cursor: pointer;
+  transition: border-bottom-color 200ms;
+}
+.position-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+.position-item:hover { border-bottom-color: var(--threshold-cyan); }
+.pos-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
+.pos-title { font-size: 15px; font-weight: 700; color: var(--pure-white); }
+.pos-meta { font-size: 11px; color: #555; font-family: var(--font-mono); white-space: nowrap; padding-top: 2px; }
+.pos-tag {
+  display: inline-block; font-size: 10px; font-family: var(--font-mono);
+  color: var(--threshold-cyan); border: 1px solid rgba(0,193,212,0.4);
+  padding: 2px 8px; margin-top: 8px; letter-spacing: 0.5px;
+}
+.join-cta-row { margin-top: 32px; }
+.join-cta-row a {
+  display: inline-flex; align-items: center; justify-content: center;
+  background: transparent; color: var(--threshold-cyan);
+  border: 1.5px solid var(--threshold-cyan);
+  padding: 13px 36px; font-family: var(--font-en); font-size: 13px; font-weight: 600;
+  text-decoration: none; letter-spacing: 0.5px;
+  transition: background 200ms, color 200ms;
+}
+.join-cta-row a:hover { background: var(--threshold-cyan); color: var(--quantum-black); }
+/* 福利卡片 */
+.benefits-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+.benefit-card {
+  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  overflow: hidden;
+  transition: border-color 200ms;
+}
+.benefit-card:hover { border-color: var(--threshold-cyan); }
+.benefit-img-placeholder {
+  width: 100%; height: 100px;
+  background: rgba(255,255,255,0.04);
+  border-bottom: 1px solid rgba(255,255,255,0.06);
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  gap: 6px;
+}
+.benefit-img-placeholder .ph-icon { font-size: 20px; color: #333; }
+.benefit-img-placeholder .ph-label {
+  font-size: 10px; font-family: var(--font-mono);
+  color: #444; letter-spacing: 0.5px; text-align: center; line-height: 1.5; padding: 0 8px;
+}
+.benefit-info { padding: 14px 16px; }
+.benefit-name { font-size: 14px; font-weight: 700; color: var(--pure-white); margin-bottom: 4px; }
+.benefit-sub { font-size: 12px; color: #666; line-height: 1.6; }
+
+/* ── Screen 6 · 联系方式 ── */
+#contact { background:var(--quantum-black); padding:96px 64px; }
+#contact h2 {
+  font-family:var(--font-en); font-size:40px; font-weight:700;
+  color:var(--pure-white); margin-bottom:56px;
+}
+.contact-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:0; max-width:640px; }
+.contact-row {
+  display:flex; justify-content:space-between; align-items:center;
+  padding:20px 0; border-bottom:1px solid #1A1A1A;
+}
+.contact-row:last-child { border-bottom:none; }
+.contact-label { font-size:15px; font-weight:600; color:#8A8F96; }
+.contact-email-link { font-family:var(--font-mono); font-size:14px; color:var(--threshold-cyan); text-decoration:none; }
+.contact-email-link:hover { text-decoration:underline; }
+.contact-list { max-width:640px; }
+
+/* ── Footer ── */
+footer {
+  background:var(--quantum-black); padding:64px;
+  border-top:1px solid #1A1A1A;
+  scroll-snap-align: none;
+}
+.footer-grid {
+  display:grid; grid-template-columns:240px 1fr 1fr 1fr 1fr; gap:40px;
+  margin-bottom:48px;
+}
+.footer-brand p { font-size:13px; color:#8A8F96; margin-top:16px; line-height:1.7; }
+.footer-col h4 {
+  font-family:var(--font-en); font-size:11px; font-weight:600;
+  letter-spacing:2px; color:#8A8F96; text-transform:uppercase; margin-bottom:16px;
+}
+.footer-col a {
+  display:block; font-size:13px; color:#8A8F96; text-decoration:none;
+  margin-bottom:10px; transition: color 200ms;
+}
+.footer-col a:hover { color:var(--threshold-cyan); }
+.footer-bottom {
+  border-top:1px solid #1A1A1A; padding-top:24px;
+  display:flex; justify-content:space-between;
+}
+.footer-bottom p { font-size:12px; color:#555; }
+</style>
+  <link rel="stylesheet" href="./components/site-shell.css" />
+</head>
+<body>
+
+<!-- ── 导航（浅色背景黑色Logo）── -->
+<div data-site-header></div>
+
+<!-- ── Screen 1 · 跃迁首屏（左右两栏 60/40）── -->
+<section id="brand">
+  <!-- 左侧 60%：文字内容 -->
+  <div class="brand-left">
+    <span class="tag animate-in">公司理念</span>
+    <div class="threshold-line"></div>
+    <h1 class="animate-in" style="transition-delay:80ms;">跃迁</h1>
+    <p class="sub-h1 animate-in" style="transition-delay:120ms;">不是转型，不是升级，不是进化</p>
+    <div class="guide-block animate-in" style="transition-delay:200ms;">
+      <div class="guide-line"></div>
+      <div class="guide-text">
+        跃迁，是系统跨越临界点后进入全新状态的瞬间。<br>
+        电子吸收能量，从低能级跃迁至高能级——<br>
+        这个过程不是渐变，而是<em>「越过临界点，不可回头」</em>。<br><br>
+        Frontis AI 相信：企业导入 AI 的真正目标，<br>
+        不是流程自动化，不是降本增效，<br>
+        而是帮助组织和领导者跨过那条线，<br>
+        进入一个过去不可能存在的工作状态。<br><br>
+        这，就是我们命名<em>「衔远」</em>的原因。
+      </div>
+    </div>
+  </div>
+
+  <!-- 右侧 40%：量子跃迁 SVG 可视化 -->
+  <div class="brand-right">
+    <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" width="500" height="600" style="max-width:100%;display:block;">
+
+      <!-- 右下角点阵网格背景装饰（5×5，间距20px） -->
+      <circle cx="320" cy="440" r="1" fill="#F0F2F4"/>
+      <circle cx="340" cy="440" r="1" fill="#F0F2F4"/>
+      <circle cx="360" cy="440" r="1" fill="#F0F2F4"/>
+      <circle cx="380" cy="440" r="1" fill="#F0F2F4"/>
+      <circle cx="400" cy="440" r="1" fill="#F0F2F4"/>
+      <circle cx="320" cy="460" r="1" fill="#F0F2F4"/>
+      <circle cx="340" cy="460" r="1" fill="#F0F2F4"/>
+      <circle cx="360" cy="460" r="1" fill="#F0F2F4"/>
+      <circle cx="380" cy="460" r="1" fill="#F0F2F4"/>
+      <circle cx="400" cy="460" r="1" fill="#F0F2F4"/>
+      <circle cx="320" cy="480" r="1" fill="#F0F2F4"/>
+      <circle cx="340" cy="480" r="1" fill="#F0F2F4"/>
+      <circle cx="360" cy="480" r="1" fill="#F0F2F4"/>
+      <circle cx="380" cy="480" r="1" fill="#F0F2F4"/>
+      <circle cx="400" cy="480" r="1" fill="#F0F2F4"/>
+      <circle cx="320" cy="500" r="1" fill="#F0F2F4"/>
+      <circle cx="340" cy="500" r="1" fill="#F0F2F4"/>
+      <circle cx="360" cy="500" r="1" fill="#F0F2F4"/>
+      <circle cx="380" cy="500" r="1" fill="#F0F2F4"/>
+      <circle cx="400" cy="500" r="1" fill="#F0F2F4"/>
+      <circle cx="320" cy="520" r="1" fill="#F0F2F4"/>
+      <circle cx="340" cy="520" r="1" fill="#F0F2F4"/>
+      <circle cx="360" cy="520" r="1" fill="#F0F2F4"/>
+      <circle cx="380" cy="520" r="1" fill="#F0F2F4"/>
+      <circle cx="400" cy="520" r="1" fill="#F0F2F4"/>
+
+      <!-- 高能级轨道（顶部偏右，y=160，比低能级短） -->
+      <line x1="120" y1="160" x2="420" y2="160" stroke="#3D4145" stroke-width="1.5"/>
+      <!-- 高能级标注 n=2 -->
+      <text x="60" y="164" font-family="'JetBrains Mono',monospace" font-size="11" fill="#8A8F96">n=2</text>
+
+      <!-- 低能级轨道（底部，y=340，延伸到左右边缘） -->
+      <line x1="20" y1="340" x2="460" y2="340" stroke="#3D4145" stroke-width="1.5"/>
+      <!-- 低能级标注 n=1 -->
+      <text x="60" y="358" font-family="'JetBrains Mono',monospace" font-size="11" fill="#8A8F96">n=1</text>
+
+      <!-- 跃迁路径虚线（从低能级电子位置垂直向上到高能级电子） -->
+      <line x1="200" y1="328" x2="200" y2="176" stroke="#00C1D4" stroke-width="1.5" stroke-dasharray="4 6"/>
+
+      <!-- 低能级上的电子（实心圆，12px，量子黑） -->
+      <circle cx="200" cy="340" r="12" fill="#000000"/>
+
+      <!-- 高能级上的电子光晕（透明青色圆环） -->
+      <circle cx="200" cy="160" r="44" fill="none" stroke="#00C1D4" stroke-width="1" opacity="0.18"/>
+      <circle cx="200" cy="160" r="28" fill="none" stroke="#00C1D4" stroke-width="1" opacity="0.35"/>
+      <!-- 高能级上的电子（实心圆，16px，跃迁青） -->
+      <circle cx="200" cy="160" r="16" fill="#00C1D4"/>
+
+      <!-- 右侧能量箭头（↑）与 ΔE 标注 -->
+      <line x1="380" y1="330" x2="380" y2="175" stroke="#00C1D4" stroke-width="1.5"/>
+      <polyline points="373,188 380,170 387,188" fill="none" stroke="#00C1D4" stroke-width="1.5"/>
+      <text x="390" y="255" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00C1D4">ΔE</text>
+      <text x="390" y="271" font-family="'JetBrains Mono',monospace" font-size="10" fill="#00C1D4">input</text>
+
+      <!-- 分隔细横线（将图形区与标注区分开） -->
+      <line x1="20" y1="420" x2="480" y2="420" stroke="#F0F2F4" stroke-width="1"/>
+
+      <!-- 底部标注文字 -->
+      <text x="20" y="447" font-family="'JetBrains Mono',monospace" font-size="14" font-weight="700" letter-spacing="3" fill="#000000">QUANTUM LEAP</text>
+      <text x="20" y="470" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#3D4145">不连续 · 不可回头 · 越过临界</text>
+      <text x="20" y="490" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#00C1D4">这不是进化，是跃迁</text>
+    </svg>
+  </div>
+</section>
+
+<!-- ── Screen 2 · 创始人 ── -->
+<section id="team">
+  <h2 class="animate-in">创始人</h2>
+  <div class="founder-layout animate-in" style="transition-delay:80ms;">
+    <div class="founder-photo">
+      <div class="img-placeholder">[待提供：周伯文教授正式商务照 240×300px · 市场/PR团队]</div>
+    </div>
+    <div class="founder-bio">
+      <div class="founder-name">周伯文</div>
+      <div class="founder-role">创始人 · 首席科学家</div>
+      <div class="threshold-line-small"></div>
+      <p class="founder-desc">
+        Transformer 奠基人之一，学术论文引用超过 28,000 次。<br>
+        曾任上海人工智能实验室主任、IBM 研究院院长，现为清华大学惠妍讲席教授。<br><br>
+        2021 年创立衔远科技，专注于将世界领先的 AI 研究能力转化为企业可用的生产力。
+      </p>
+      <div class="team-bg animate-in" style="transition-delay:200ms;">
+        <span class="team-bg-label">团队背景</span>
+        <p class="team-bg-text">核心团队成员来自京东、阿里巴巴、中国电子云、清华大学等顶尖机构，兼具深厚技术积累与一线产业落地经验。</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 服务客户 ── -->
+<section id="clients">
+  <div class="section-header animate-in">
+    <h2>服务客户</h2>
+    <p class="sub">正在帮助领先企业跨越 AI 临界线</p>
+  </div>
+  <!-- Row 1 -->
+  <div class="logo-track-wrap" style="margin-bottom:0;">
+    <div class="logo-track row1">
+      <div class="logo-cell"><span>建发集团</span></div>
+      <div class="logo-cell"><span>国家电网</span></div>
+      <div class="logo-cell"><span>中建集团</span></div>
+      <div class="logo-cell"><span>一汽集团</span></div>
+      <div class="logo-cell"><span>飞鹤乳业</span></div>
+      <div class="logo-cell"><span>中国电信</span></div>
+      <div class="logo-cell"><span>中远海运</span></div>
+      <!-- duplicate for seamless loop -->
+      <div class="logo-cell"><span>建发集团</span></div>
+      <div class="logo-cell"><span>国家电网</span></div>
+      <div class="logo-cell"><span>中建集团</span></div>
+      <div class="logo-cell"><span>一汽集团</span></div>
+      <div class="logo-cell"><span>飞鹤乳业</span></div>
+      <div class="logo-cell"><span>中国电信</span></div>
+      <div class="logo-cell"><span>中远海运</span></div>
+    </div>
+  </div>
+  <!-- Row 2 -->
+  <div class="logo-track-wrap" style="margin-bottom:0;">
+    <div class="logo-track row2">
+      <div class="logo-cell"><span>中国五矿</span></div>
+      <div class="logo-cell"><span>华润置地</span></div>
+      <div class="logo-cell"><span>招商局集团</span></div>
+      <div class="logo-cell"><span>中粮集团</span></div>
+      <div class="logo-cell"><span>保利发展</span></div>
+      <div class="logo-cell"><span>中信集团</span></div>
+      <div class="logo-cell"><span>国药控股</span></div>
+      <!-- duplicate -->
+      <div class="logo-cell"><span>中国五矿</span></div>
+      <div class="logo-cell"><span>华润置地</span></div>
+      <div class="logo-cell"><span>招商局集团</span></div>
+      <div class="logo-cell"><span>中粮集团</span></div>
+      <div class="logo-cell"><span>保利发展</span></div>
+      <div class="logo-cell"><span>中信集团</span></div>
+      <div class="logo-cell"><span>国药控股</span></div>
+    </div>
+  </div>
+  <!-- Row 3 -->
+  <div class="logo-track-wrap">
+    <div class="logo-track row3">
+      <div class="logo-cell"><span>TCL科技</span></div>
+      <div class="logo-cell"><span>美的集团</span></div>
+      <div class="logo-cell"><span>格力电器</span></div>
+      <div class="logo-cell"><span>比亚迪</span></div>
+      <div class="logo-cell"><span>海尔集团</span></div>
+      <div class="logo-cell"><span>三一重工</span></div>
+      <div class="logo-cell"><span>中联重科</span></div>
+      <!-- duplicate -->
+      <div class="logo-cell"><span>TCL科技</span></div>
+      <div class="logo-cell"><span>美的集团</span></div>
+      <div class="logo-cell"><span>格力电器</span></div>
+      <div class="logo-cell"><span>比亚迪</span></div>
+      <div class="logo-cell"><span>海尔集团</span></div>
+      <div class="logo-cell"><span>三一重工</span></div>
+      <div class="logo-cell"><span>中联重科</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── 加入我们 ── -->
+<section id="join">
+  <!-- 背景大图 + 蒙层 -->
+  <div class="join-bg">
+    <!-- TODO: 将下方 background-image 替换为实际图片
+         推荐：团队合照 / 办公室实景 / 城市夜景
+         规格：1920×900px，深色或高对比度
+         示例：style="background-image:url('https://your-cdn/join-bg.jpg')"
+    -->
+  </div>
+  <div class="join-bg-overlay"></div>
+
+  <div class="join-inner">
+    <!-- 标题区 -->
+    <div class="join-header animate-in">
+      <h2>加入我们</h2>
+      <div class="join-tagline">共赴星河，行远山海</div>
+      <p class="join-desc">在这里，你的价值不被重复决定于用途<br>你的大脑属于创造，剩下的交给 AI</p>
+    </div>
+
+    <!-- 企业文化横条 -->
+    <div class="join-culture animate-in">
+      <div class="culture-item">
+        <div class="culture-kw">MISSION</div>
+        <div class="culture-zh">使命驱动</div>
+        <div class="culture-desc">让企业跨越 AI 临界线，<br>真正进入自动驾驶时代</div>
+      </div>
+      <div class="culture-item">
+        <div class="culture-kw">OWNERSHIP</div>
+        <div class="culture-zh">主人心态</div>
+        <div class="culture-desc">每个人都是公司的建设者，<br>你的判断直接影响产品走向</div>
+      </div>
+      <div class="culture-item">
+        <div class="culture-kw">FRONTIER</div>
+        <div class="culture-zh">前沿探索</div>
+        <div class="culture-desc">与顶尖研究者共同定义<br>下一代 AI Agent 的边界</div>
+      </div>
+      <div class="culture-item">
+        <div class="culture-kw">IMPACT</div>
+        <div class="culture-zh">真实落地</div>
+        <div class="culture-desc">不做 Demo，直接服务<br>头部企业的真实业务场景</div>
+      </div>
+    </div>
+
+    <!-- 左右双栏：职位 + 福利 -->
+    <div class="join-two-col animate-in">
+      <!-- 左栏：招聘职位 -->
+      <div class="join-col join-col-left">
+        <div class="join-col-label">开放职位 · Open Positions</div>
+        <div class="positions-list">
+          <div class="position-item">
+            <div class="pos-header">
+              <span class="pos-title">算法工程师 · Agentic RL</span>
+              <span class="pos-meta">北京 · 全职</span>
+            </div>
+            <div class="pos-tag">ALGORITHM</div>
+          </div>
+          <div class="position-item">
+            <div class="pos-header">
+              <span class="pos-title">算法工程师 · Agent 架构</span>
+              <span class="pos-meta">北京 · 全职</span>
+            </div>
+            <div class="pos-tag">ALGORITHM</div>
+          </div>
+          <div class="position-item">
+            <div class="pos-header">
+              <span class="pos-title">算法工程师 · 供应链方向</span>
+              <span class="pos-meta">厦门 / 上海 / 北京 · 全职</span>
+            </div>
+            <div class="pos-tag">ALGORITHM</div>
+          </div>
+          <div class="position-item">
+            <div class="pos-header">
+              <span class="pos-title">前端开发工程师</span>
+              <span class="pos-meta">北京 · 全职</span>
+            </div>
+            <div class="pos-tag">ENGINEERING</div>
+          </div>
+          <div class="position-item">
+            <div class="pos-header">
+              <span class="pos-title">后端开发工程师</span>
+              <span class="pos-meta">北京 · 全职</span>
+            </div>
+            <div class="pos-tag">ENGINEERING</div>
+          </div>
+        </div>
+        <div class="join-cta-row">
+          <a href="mailto:hr@frontis.cn">投递简历 → hr@frontis.cn</a>
+        </div>
+      </div>
+
+      <!-- 右栏：员工福利 -->
+      <div class="join-col">
+        <div class="join-col-label">员工福利 · Benefits</div>
+        <div class="benefits-grid">
+          <div class="benefit-card">
+            <div class="benefit-img-placeholder">
+              <div class="ph-icon">◈</div>
+              <div class="ph-label">图片占位<br>期权激励场景</div>
+            </div>
+            <div class="benefit-info">
+              <div class="benefit-name">期权激励</div>
+              <div class="benefit-sub">与公司共同成长，分享价值创造</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-img-placeholder">
+              <div class="ph-icon">◈</div>
+              <div class="ph-label">图片占位<br>医疗保障场景</div>
+            </div>
+            <div class="benefit-info">
+              <div class="benefit-name">补充医疗</div>
+              <div class="benefit-sub">全员补充商业医疗险保障</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-img-placeholder">
+              <div class="ph-icon">◈</div>
+              <div class="ph-label">图片占位<br>办公室下午茶</div>
+            </div>
+            <div class="benefit-info">
+              <div class="benefit-name">下午茶</div>
+              <div class="benefit-sub">每日下午茶，保持最佳状态</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-img-placeholder">
+              <div class="ph-icon">◈</div>
+              <div class="ph-label">图片占位<br>培训学习场景</div>
+            </div>
+            <div class="benefit-info">
+              <div class="benefit-name">培训赋能</div>
+              <div class="benefit-sub">顶级技术培训与外部学习资源</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-img-placeholder">
+              <div class="ph-icon">◈</div>
+              <div class="ph-label">图片占位<br>团队活动场景</div>
+            </div>
+            <div class="benefit-info">
+              <div class="benefit-name">全面五险一金</div>
+              <div class="benefit-sub">足额缴纳，合规保障</div>
+            </div>
+          </div>
+          <div class="benefit-card">
+            <div class="benefit-img-placeholder">
+              <div class="ph-icon">◈</div>
+              <div class="ph-label">图片占位<br>年度体检场景</div>
+            </div>
+            <div class="benefit-info">
+              <div class="benefit-name">年度体检</div>
+              <div class="benefit-sub">关注每位成员的健康状态</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Screen 6 · 联系方式 ── -->
+<section id="contact">
+  <h2 class="animate-in">与我们联系</h2>
+  <div class="contact-list">
+    <div class="contact-row animate-in" style="transition-delay:40ms;">
+      <span class="contact-label">商务合作</span>
+      <a href="mailto:cooperation@frontis.cn" class="contact-email-link">cooperation@frontis.cn</a>
+    </div>
+    <div class="contact-row animate-in" style="transition-delay:80ms;">
+      <span class="contact-label">市场合作</span>
+      <a href="mailto:marketing@frontis.cn" class="contact-email-link">marketing@frontis.cn</a>
+    </div>
+    <div class="contact-row animate-in" style="transition-delay:120ms;">
+      <span class="contact-label">人才招聘</span>
+      <a href="mailto:hr@frontis.cn" class="contact-email-link">hr@frontis.cn</a>
+    </div>
+    <div class="contact-row animate-in" style="transition-delay:160ms;">
+      <span class="contact-label">媒体合作</span>
+      <a href="mailto:pr@frontis.cn" class="contact-email-link">pr@frontis.cn</a>
+    </div>
+    <div class="contact-row animate-in" style="transition-delay:200ms;">
+      <span class="contact-label">合作伙伴</span>
+      <a href="mailto:partner@frontis.cn" class="contact-email-link">partner@frontis.cn</a>
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<div data-site-footer></div>
+<script src="./components/site-shell.js"></script>
+
+<script>
+// 板块整体 + 子元素依次入场
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const section = entry.target;
+    section.classList.add('visible');
+    const children = section.querySelectorAll('.animate-in');
+    children.forEach((child, i) => {
+      setTimeout(() => child.classList.add('visible'), i * 100);
+    });
+    sectionObserver.unobserve(section);
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('section').forEach(s => {
+  s.classList.add('section-enter');
+  sectionObserver.observe(s);
+});
+
+</script>
+</body>
+</html>

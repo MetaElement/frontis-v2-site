@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>技术架构 · Frontis AI 衔远科技</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --quantum-black: #000000;
+  --threshold-cyan: #00C1D4;
+  --pure-white: #FFFFFF;
+  --level-gray: #3D4145;
+  --energy-gray: #F0F2F4;
+  --energy-orange: #FA5F26;
+  --font-en: 'Space Grotesk', sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --font-cn: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --ease-threshold: cubic-bezier(0.22, 1, 0.36, 1);
+  --ease-exit: cubic-bezier(0.55, 0, 1, 0.45);
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html {
+  scroll-behavior: smooth;
+}
+body {
+  font-family: var(--font-cn);
+  background: var(--pure-white);
+  color: var(--quantum-black);
+  overflow-x: hidden;
+}
+/* ── 动效 ── */
+@keyframes threshold-pulse {
+  0%   { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
+  50%  { box-shadow: 0 0 16px 4px rgba(0,193,212,0.7); }
+  100% { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
+}
+@keyframes fadeUp {
+  from { opacity:0; transform:translateY(16px); }
+  to   { opacity:1; transform:translateY(0); }
+}
+.animate-in {
+  opacity: 0;
+  transform: translateX(-20px);
+  transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.animate-in.visible {
+  opacity: 1;
+  transform: translateX(0);
+}
+.section-enter {
+  opacity: 0;
+  transform: translateY(60px);
+  transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+              transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+.section-enter.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+section {
+  min-height: 100vh;
+}
+@media (prefers-reduced-motion: reduce) {
+  * { animation-duration:0.01ms !important; transition-duration:0.01ms !important; }
+}
+
+/* ── 导航 ── */
+nav {
+  position: fixed; top:0; left:0; right:0; z-index:100;
+  background: var(--pure-white);
+  border-bottom: 1px solid #E5E7EA;
+  display: flex; align-items: center;
+  padding: 0 64px; height: 64px;
+}
+.nav-logo { display:flex; align-items:center; text-decoration:none; }
+.nav-links { display:flex; align-items:center; gap:32px; list-style:none; margin-left:auto; }
+.nav-links a {
+  font-family: var(--font-en); font-size:14px; font-weight:500;
+  color: var(--quantum-black); text-decoration:none;
+  position:relative; padding-bottom:2px;
+}
+.nav-links a::after {
+  content:''; position:absolute; bottom:0; left:0;
+  width:0; height:1px; background:var(--threshold-cyan);
+  transition: width 200ms var(--ease-threshold);
+}
+.nav-links a:hover::after { width:100%; }
+.nav-links a.active { color:var(--threshold-cyan); }
+.nav-dropdown { position:relative; }
+.nav-dropdown > a { cursor:pointer; }
+.dropdown-menu {
+  display:none; position:absolute; top:100%; left:0;
+  background:var(--pure-white); border:1px solid #E5E7EA;
+  min-width:160px; z-index:200;
+}
+.dropdown-menu a {
+  display:block; padding:10px 16px;
+  font-size:13px; color:var(--quantum-black);
+  white-space:nowrap;
+}
+.dropdown-menu a:hover { background:var(--energy-gray); }
+.nav-dropdown:hover .dropdown-menu { display:block; }
+.btn-nav {
+  font-family:var(--font-en); font-size:13px; font-weight:600;
+  background: transparent; color: var(--threshold-cyan);
+  border: 1.5px solid var(--threshold-cyan);
+  padding: 9px 20px; cursor:pointer;
+  display: inline-flex; align-items: center; justify-content: center;
+  transition: background 200ms var(--ease-threshold), color 200ms var(--ease-threshold);
+  text-decoration:none;
+}
+.btn-nav:hover { background: var(--threshold-cyan); color: var(--quantum-black); }
+
+/* ── 临界线 ── */
+.threshold-line {
+  width:48px; height:2px; background:var(--threshold-cyan);
+  animation: threshold-pulse 2.5s ease-in-out infinite;
+  margin: 24px 0;
+}
+
+/* ── 通用 Section ── */
+section { padding: 96px 64px; }
+.section-white { background:var(--pure-white); }
+.section-black { background:var(--quantum-black); }
+.tag {
+  display:inline-block; font-family:var(--font-en); font-size:11px;
+  font-weight:600; letter-spacing:2px; color:var(--threshold-cyan);
+  text-transform:uppercase; margin-bottom:16px;
+}
+h1.hero-title {
+  font-family:var(--font-en); font-size:56px; font-weight:700;
+  line-height:1.1; color:var(--quantum-black); max-width:640px;
+}
+h2.section-title {
+  font-family:var(--font-en); font-size:40px; font-weight:700;
+  line-height:1.15;
+}
+.subtitle {
+  font-size:18px; color:var(--level-gray); line-height:1.7;
+  max-width:580px; margin-top:20px;
+}
+.two-col { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:center; }
+.six-ten { display:grid; grid-template-columns:3fr 2fr; gap:80px; align-items:center; }
+
+/* ── Screen 1 · Hero ── */
+#hero {
+  padding-top: 160px; padding-bottom: 96px;
+  background: var(--pure-white);
+  padding-left:64px; padding-right:64px;
+}
+
+/* ── Screen 2 · 产业链图 ── */
+#chain { padding:96px 64px; }
+#chain .chain-title {
+  font-family:var(--font-en); font-size:40px; font-weight:700;
+  color:var(--pure-white); margin-bottom:56px;
+}
+.chain-table { width:100%; border-collapse:collapse; }
+.chain-table td {
+  padding:18px 24px; font-size:15px; vertical-align:middle;
+}
+.chain-table .col-level {
+  font-family:var(--font-mono); font-weight:500; color:#8A8F96;
+  width:60px; white-space:nowrap;
+}
+.chain-table .col-name {
+  font-weight:600; color:var(--pure-white); width:160px;
+}
+.chain-table .col-detail { color:#8A8F96; width:320px; }
+.chain-table .col-tag { color:#8A8F96; font-size:13px; text-align:right; }
+.chain-row { opacity:0; transform:translateY(12px); }
+.chain-row.visible {
+  opacity:1; transform:translateY(0);
+  transition: opacity 400ms var(--ease-threshold), transform 400ms var(--ease-threshold);
+}
+.chain-row-highlight { background:rgba(0,193,212,0.08); border-left:3px solid var(--threshold-cyan); }
+.chain-row-highlight .col-level { color:var(--threshold-cyan); }
+.chain-row-highlight .col-name { color:var(--pure-white); font-weight:700; }
+.frontis-label { color:var(--threshold-cyan); font-weight:700; font-family:var(--font-en); }
+.chain-divider td { padding:0; }
+.chain-divider-line {
+  height:1px; background:var(--threshold-cyan); opacity:0.6;
+  display:block; width:100%;
+}
+
+/* ── Screen 3 · 对比 ── */
+#why { padding:96px 64px; background:var(--pure-white); }
+#why .left-title {
+  font-family:var(--font-en); font-size:40px; font-weight:700;
+  color:var(--quantum-black); margin-bottom:0;
+}
+.compare-col {
+  border-left:2px solid var(--threshold-cyan); padding-left:24px;
+  margin-bottom:40px;
+}
+.compare-col h3 { font-size:18px; font-weight:700; margin-bottom:8px; }
+.compare-col p { font-size:15px; color:var(--level-gray); line-height:1.7; }
+.compare-col.highlight h3 { color:var(--threshold-cyan); }
+
+/* ── Screen 4 · 通专融合 ── */
+#fusion { padding:96px 64px; background:var(--quantum-black); }
+#fusion .left-text { color:var(--pure-white); }
+#fusion .left-text h2 {
+  font-family:var(--font-en); font-size:40px; font-weight:700; color:var(--pure-white); margin-bottom:16px;
+}
+#fusion .left-text .lead { font-size:18px; color:#8A8F96; margin-bottom:32px; }
+#fusion .left-text p { font-size:15px; color:#8A8F96; line-height:1.8; margin-bottom:12px; }
+
+/* ── Screen 5 · RL ── */
+#rl { padding:96px 64px; background:var(--pure-white); }
+#rl .section-title { color:var(--quantum-black); margin-bottom:48px; }
+.rl-points { margin-top:32px; }
+.rl-points li {
+  list-style:none; padding:12px 0;
+  border-bottom:1px solid var(--energy-gray);
+  font-size:15px; color:var(--level-gray); line-height:1.7;
+  padding-left:16px; position:relative;
+}
+.rl-points li::before {
+  content:''; position:absolute; left:0; top:50%;
+  width:4px; height:4px; background:var(--threshold-cyan);
+  transform:translateY(-50%);
+}
+
+/* ── Screen 6 · 数字风洞 ── */
+#windtunnel { padding:96px 64px; background:var(--quantum-black); }
+#windtunnel .left-text h2 {
+  font-family:var(--font-en); font-size:40px; font-weight:700; color:var(--pure-white); margin-bottom:16px;
+}
+#windtunnel .left-text .lead { font-size:18px; color:#8A8F96; margin-bottom:32px; }
+#windtunnel .left-text p { font-size:15px; color:#8A8F96; line-height:1.8; margin-bottom:12px; }
+
+/* ── Screen 7 · CTA ── */
+#cta { padding:120px 64px; background:var(--pure-white); }
+#cta h2 { font-family:var(--font-en); font-size:40px; font-weight:700; color:var(--quantum-black); margin-bottom:12px; }
+#cta p { font-size:17px; color:var(--level-gray); margin-bottom:48px; }
+.btn-primary {
+  display:inline-block; font-family:var(--font-en); font-size:14px; font-weight:600;
+  background:var(--quantum-black); color:var(--pure-white);
+  padding:14px 32px; text-decoration:none; margin-right:16px;
+  border:none; cursor:pointer;
+  transition: background 200ms var(--ease-threshold);
+}
+.btn-primary:hover { background:var(--threshold-cyan); }
+.btn-secondary {
+  display:inline-block; font-family:var(--font-en); font-size:14px; font-weight:600;
+  background:var(--pure-white); color:var(--quantum-black);
+  padding:14px 32px; text-decoration:none;
+  border:1px solid var(--quantum-black); cursor:pointer;
+  transition: color 200ms var(--ease-threshold), border-color 200ms var(--ease-threshold);
+}
+.btn-secondary:hover { color:var(--threshold-cyan); border-color:var(--threshold-cyan); }
+.contact-email { margin-top:40px; font-size:14px; color:var(--level-gray); }
+.contact-email strong { color:var(--quantum-black); }
+
+/* ── Footer ── */
+footer {
+  background:var(--quantum-black); padding:64px;
+  border-top:1px solid #1A1A1A;
+  scroll-snap-align: none;
+}
+.footer-grid {
+  display:grid; grid-template-columns:240px 1fr 1fr 1fr 1fr; gap:40px;
+  margin-bottom:48px;
+}
+.footer-brand p { font-size:13px; color:#8A8F96; margin-top:16px; line-height:1.7; }
+.footer-col h4 {
+  font-family:var(--font-en); font-size:11px; font-weight:600;
+  letter-spacing:2px; color:#8A8F96; text-transform:uppercase; margin-bottom:16px;
+}
+.footer-col a {
+  display:block; font-size:13px; color:#8A8F96; text-decoration:none;
+  margin-bottom:10px; transition: color 200ms;
+}
+.footer-col a:hover { color:var(--threshold-cyan); }
+.footer-bottom {
+  border-top:1px solid #1A1A1A; padding-top:24px;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.footer-bottom p { font-size:12px; color:#555; }
+</style>
+  <link rel="stylesheet" href="./components/site-shell.css" />
+</head>
+<body>
+
+<!-- ── 导航 ── -->
+<div data-site-header></div>
+
+<!-- ── Screen 1 · Hero ── -->
+<section id="hero">
+  <div class="animate-in">
+    <span class="tag">战略定位</span>
+  </div>
+  <div class="threshold-line"></div>
+  <h1 class="hero-title animate-in" style="transition-delay:80ms;">
+    占据 L4<br>AI 产业链中利润最厚的能力转化层
+  </h1>
+  <p class="subtitle animate-in" style="transition-delay:160ms;">
+    不在 L3 拼算力，不在 L5 抢开发者<br>
+    衔远科技以通专融合 + RL 全栈技术占据 L4
+  </p>
+</section>
+
+<!-- ── Screen 2 · 完整7层产业链图 ── -->
+<section id="chain" class="section-black">
+  <div class="chain-title animate-in">AI 产业链七层格局</div>
+  <table class="chain-table" id="chainTable">
+    <tbody>
+      <tr class="chain-row" data-delay="0">
+        <td class="col-level">L7</td>
+        <td class="col-name">终端应用</td>
+        <td class="col-detail">消费级应用 / SaaS / 2C 产品</td>
+        <td class="col-tag">红海 · 同质化</td>
+      </tr>
+      <tr class="chain-row" data-delay="80">
+        <td class="col-level">L6</td>
+        <td class="col-name">行业集成</td>
+        <td class="col-detail">系统集成商 / 实施伙伴</td>
+        <td class="col-tag">拥挤 · 利润薄</td>
+      </tr>
+      <tr class="chain-row" data-delay="160">
+        <td class="col-level">L5</td>
+        <td class="col-name">Agent 框架</td>
+        <td class="col-detail">开发工具 / Workflow 平台</td>
+        <td class="col-tag">工具层 · 训练弱</td>
+      </tr>
+      <tr class="chain-divider" data-delay="240">
+        <td colspan="4"><span class="chain-divider-line"></span></td>
+      </tr>
+      <tr class="chain-row chain-row-highlight" data-delay="320">
+        <td class="col-level">L4</td>
+        <td class="col-name"><span class="frontis-label">← FRONTIS</span></td>
+        <td class="col-detail" style="color:var(--pure-white);">通专融合 × RL 全栈 × Meta-Agent</td>
+        <td class="col-tag" style="color:var(--threshold-cyan);font-weight:700;">唯一能力转化层</td>
+      </tr>
+      <tr class="chain-divider" data-delay="400">
+        <td colspan="4"><span class="chain-divider-line"></span></td>
+      </tr>
+      <tr class="chain-row" data-delay="480">
+        <td class="col-level">L3</td>
+        <td class="col-name">基础模型</td>
+        <td class="col-detail">GPT / Claude / Gemini</td>
+        <td class="col-tag">军备竞赛 · 商品化</td>
+      </tr>
+      <tr class="chain-row" data-delay="560">
+        <td class="col-level">L2</td>
+        <td class="col-name">训练框架</td>
+        <td class="col-detail">PyTorch / JAX</td>
+        <td class="col-tag">开源主导</td>
+      </tr>
+      <tr class="chain-row" data-delay="640">
+        <td class="col-level">L1</td>
+        <td class="col-name">算力设施</td>
+        <td class="col-detail">英伟达 / 云厂商</td>
+        <td class="col-tag">寡头垄断</td>
+      </tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ── Screen 3 · 为什么选择L4 ── -->
+<section id="why" class="section-white">
+  <div class="two-col">
+    <div>
+      <p class="left-title animate-in">为什么选择 L4？</p>
+    </div>
+    <div>
+      <div class="compare-col animate-in" style="transition-delay:80ms;">
+        <h3>不做 L3（基础模型）</h3>
+        <p>昂贵的算力军备，赢家通吃，商品化不可避免</p>
+      </div>
+      <div class="compare-col animate-in" style="transition-delay:160ms;">
+        <h3>不做 L5（Agent 框架）</h3>
+        <p>工具层利润低，缺乏深度训练能力</p>
+      </div>
+      <div class="compare-col animate-in" style="transition-delay:240ms;">
+        <h3>不做 L6（行业集成）</h3>
+        <p>实施利润薄，无法形成核心技术壁垒</p>
+      </div>
+      <div class="compare-col highlight animate-in" style="transition-delay:320ms;">
+        <h3>L4 的独特价值</h3>
+        <p>通用能力 × 行业专家知识 = 不可替代的 AI 能力资产</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── Screen 4 · 通专融合架构 ── -->
+<section id="fusion" class="section-black">
+  <div class="six-ten">
+    <div class="left-text">
+      <span class="tag animate-in">核心技术</span>
+      <h2 class="animate-in" style="transition-delay:80ms;">通专融合</h2>
+      <p class="lead animate-in" style="transition-delay:120ms;">让 AI 既懂世界，又精通你的行业</p>
+      <p class="animate-in" style="transition-delay:160ms;">通用大模型提供语言理解和推理基础</p>
+      <p class="animate-in" style="transition-delay:200ms;">行业专家经验提供垂直场景的精准判断</p>
+      <p class="animate-in" style="transition-delay:240ms;">两者深度融合，形成超越单一路径的能力天花板</p>
+    </div>
+    <!-- 通专融合示意图（扩大版） -->
+    <div class="animate-in" style="transition-delay:200ms;flex:1;min-width:0;">
+      <svg viewBox="0 0 600 420" width="100%" style="display:block;max-width:640px;" xmlns="http://www.w3.org/2000/svg">
+        <!-- 左圆：通用大模型 -->
+        <circle cx="210" cy="210" r="155" stroke="#00C1D4" stroke-width="1.5" fill="rgba(0,193,212,0.04)"/>
+        <!-- 右圆：行业专家经验 -->
+        <circle cx="390" cy="210" r="155" stroke="#00C1D4" stroke-width="1.5" fill="rgba(0,193,212,0.04)"/>
+        <!-- 交汇区填充 -->
+        <path d="M300,75 Q355,100 368,210 Q355,320 300,345 Q245,320 232,210 Q245,100 300,75Z" fill="rgba(0,193,212,0.18)" stroke="rgba(0,193,212,0.4)" stroke-width="1"/>
+        <!-- 交汇区标注 -->
+        <text x="300" y="198" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">通专融合</text>
+        <text x="300" y="218" font-family="sans-serif" font-size="11" fill="rgba(255,255,255,0.55)" text-anchor="middle">能力天花板</text>
+        <!-- 左圆主标注 -->
+        <text x="170" y="200" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">通用</text>
+        <text x="170" y="220" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">大模型</text>
+        <!-- 右圆主标注 -->
+        <text x="430" y="200" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">行业专家</text>
+        <text x="430" y="220" font-family="sans-serif" font-size="15" font-weight="bold" fill="#ffffff" text-anchor="middle">经验</text>
+        <!-- 左侧能力节点 -->
+        <circle cx="60" cy="140" r="6" fill="#00C1D4"/>
+        <line x1="66" y1="140" x2="90" y2="152" stroke="#00C1D4" stroke-width="1" opacity="0.5"/>
+        <text x="52" y="124" font-family="sans-serif" font-size="12" fill="#8A8F96" text-anchor="middle">语言理解</text>
+        <circle cx="38" cy="210" r="6" fill="#00C1D4"/>
+        <line x1="44" y1="210" x2="72" y2="210" stroke="#00C1D4" stroke-width="1" opacity="0.5"/>
+        <text x="28" y="194" font-family="sans-serif" font-size="12" fill="#8A8F96" text-anchor="middle">逻辑推理</text>
+        <circle cx="60" cy="280" r="6" fill="#00C1D4"/>
+        <line x1="66" y1="278" x2="90" y2="268" stroke="#00C1D4" stroke-width="1" opacity="0.5"/>
+        <text x="52" y="308" font-family="sans-serif" font-size="12" fill="#8A8F96" text-anchor="middle">知识广度</text>
+        <!-- 右侧能力节点 -->
+        <circle cx="540" cy="140" r="6" fill="#00C1D4"/>
+        <line x1="534" y1="140" x2="510" y2="152" stroke="#00C1D4" stroke-width="1" opacity="0.5"/>
+        <text x="548" y="124" font-family="sans-serif" font-size="12" fill="#8A8F96" text-anchor="middle">垂直判断</text>
+        <circle cx="562" cy="210" r="6" fill="#00C1D4"/>
+        <line x1="556" y1="210" x2="528" y2="210" stroke="#00C1D4" stroke-width="1" opacity="0.5"/>
+        <text x="572" y="194" font-family="sans-serif" font-size="12" fill="#8A8F96" text-anchor="middle">行业数据</text>
+        <circle cx="540" cy="280" r="6" fill="#00C1D4"/>
+        <line x1="534" y1="278" x2="510" y2="268" stroke="#00C1D4" stroke-width="1" opacity="0.5"/>
+        <text x="548" y="308" font-family="sans-serif" font-size="12" fill="#8A8F96" text-anchor="middle">专家规则</text>
+        <!-- 交汇区内三个融合成果 -->
+        <circle cx="300" cy="258" r="4" fill="#FA5F26"/>
+        <text x="300" y="280" font-family="sans-serif" font-size="11" fill="#FA5F26" text-anchor="middle">精准决策</text>
+        <circle cx="278" cy="242" r="3" fill="rgba(255,255,255,0.4)"/>
+        <circle cx="322" cy="242" r="3" fill="rgba(255,255,255,0.4)"/>
+        <!-- 底部注释 -->
+        <text x="12" y="410" font-family="monospace" font-size="9" fill="#444">// 此处可替图 // 上线前须技术团队审核</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── Screen 5 · RL全栈 + MetaAgent ── -->
+<section id="rl" class="section-white">
+
+  <div style="text-align:center;margin-bottom:64px;">
+    <span class="tag" style="background:var(--quantum-black);color:var(--pure-white);padding:4px 14px;font-size:11px;letter-spacing:0.12em;">核心机制</span>
+    <h2 class="section-title animate-in" style="margin-top:20px;color:var(--quantum-black);font-size:40px;">RL 全栈 · Meta-Agent 自进化</h2>
+    <p class="animate-in" style="transition-delay:80ms;color:var(--level-gray);font-size:16px;max-width:600px;margin:12px auto 0;line-height:1.7;">
+      每一次执行，都是一次进化。个体 Agent 与 Agent 群体，同步学习、同步成长。
+    </p>
+  </div>
+
+  <!-- 两列：个人进化 + 群体进化 -->
+  <div style="display:grid;grid-template-columns:1fr 1fr;gap:1px;background:#e8eaec;margin-bottom:64px;">
+
+    <!-- 个人进化 -->
+    <div class="animate-in" style="background:var(--pure-white);padding:48px 40px;">
+      <div style="font-size:11px;letter-spacing:0.12em;color:var(--threshold-cyan);margin-bottom:16px;font-family:var(--font-en);">INDIVIDUAL EVOLUTION</div>
+      <h3 style="font-size:26px;font-weight:700;color:var(--quantum-black);margin-bottom:16px;line-height:1.3;">个人进化<br/><span style="font-size:18px;font-weight:400;color:var(--level-gray);">单一 Agent 的自我迭代</span></h3>
+      <p style="font-size:14px;color:var(--level-gray);line-height:1.8;margin-bottom:28px;">每个 Agent 在完成任务后，通过强化学习信号对自身行为策略进行更新——失败的路径被剪枝，成功的决策被强化，形成越用越精准的专家能力。</p>
+      <!-- 个人进化图示：单 Agent 循环 -->
+      <svg viewBox="0 0 360 200" width="100%" style="display:block;max-width:360px;" xmlns="http://www.w3.org/2000/svg">
+        <!-- 中心 Agent -->
+        <circle cx="180" cy="100" r="38" stroke="var(--quantum-black)" stroke-width="1.5" fill="var(--energy-gray)"/>
+        <text x="180" y="95" font-family="sans-serif" font-size="12" font-weight="bold" fill="var(--quantum-black)" text-anchor="middle">Agent</text>
+        <text x="180" y="112" font-family="sans-serif" font-size="10" fill="var(--level-gray)" text-anchor="middle">执行任务</text>
+        <!-- 上方：RL 奖励 -->
+        <rect x="136" y="18" width="88" height="30" rx="0" fill="none" stroke="#00C1D4" stroke-width="1.2"/>
+        <text x="180" y="38" font-family="sans-serif" font-size="11" fill="#00C1D4" text-anchor="middle">RL 奖励信号</text>
+        <!-- 箭头：Agent → 奖励 -->
+        <line x1="180" y1="62" x2="180" y2="48" stroke="#00C1D4" stroke-width="1.2"/>
+        <polygon points="176,50 180,42 184,50" fill="#00C1D4"/>
+        <!-- 左侧：失败剪枝 -->
+        <rect x="14" y="72" width="76" height="30" rx="0" fill="none" stroke="#3D4145" stroke-width="1.2"/>
+        <text x="52" y="92" font-family="sans-serif" font-size="11" fill="var(--level-gray)" text-anchor="middle">失败路径剪枝</text>
+        <line x1="142" y1="100" x2="90" y2="100" stroke="#3D4145" stroke-width="1.2" stroke-dasharray="4 3"/>
+        <!-- 右侧：策略强化 -->
+        <rect x="270" y="72" width="76" height="30" rx="0" fill="none" stroke="#FA5F26" stroke-width="1.2"/>
+        <text x="308" y="92" font-family="sans-serif" font-size="11" fill="#FA5F26" text-anchor="middle">成功策略强化</text>
+        <line x1="218" y1="100" x2="270" y2="100" stroke="#FA5F26" stroke-width="1.2"/>
+        <polygon points="264,96 272,100 264,104" fill="#FA5F26"/>
+        <!-- 下方：能力沉淀 -->
+        <rect x="116" y="158" width="128" height="30" rx="0" fill="var(--quantum-black)"/>
+        <text x="180" y="178" font-family="sans-serif" font-size="11" fill="var(--pure-white)" text-anchor="middle">能力沉淀 · 越用越准</text>
+        <line x1="180" y1="138" x2="180" y2="158" stroke="var(--quantum-black)" stroke-width="1.2"/>
+        <polygon points="176,156 180,164 184,156" fill="var(--quantum-black)"/>
+      </svg>
+    </div>
+
+    <!-- 群体进化 -->
+    <div class="animate-in" style="transition-delay:120ms;background:var(--quantum-black);padding:48px 40px;">
+      <div style="font-size:11px;letter-spacing:0.12em;color:var(--threshold-cyan);margin-bottom:16px;font-family:var(--font-en);">COLLECTIVE EVOLUTION</div>
+      <h3 style="font-size:26px;font-weight:700;color:var(--pure-white);margin-bottom:16px;line-height:1.3;">群体进化<br/><span style="font-size:18px;font-weight:400;color:#8A8F96;">Meta-Agent 编排下的协同涌现</span></h3>
+      <p style="font-size:14px;color:#8A8F96;line-height:1.8;margin-bottom:28px;">Meta-Agent 实时感知所有子 Agent 的执行状态，动态调整协同策略——最优 Agent 的经验被共享至全局，群体智能水平随任务积累持续提升，产生单一个体无法实现的能力涌现。</p>
+      <!-- 群体进化图示：Meta-Agent + 子节点 -->
+      <svg viewBox="0 0 360 200" width="100%" style="display:block;max-width:360px;" xmlns="http://www.w3.org/2000/svg">
+        <!-- Meta-Agent 中心 -->
+        <circle cx="180" cy="95" r="42" stroke="#00C1D4" stroke-width="1.5" fill="#111"/>
+        <text x="180" y="89" font-family="sans-serif" font-size="12" font-weight="bold" fill="#00C1D4" text-anchor="middle">Meta</text>
+        <text x="180" y="106" font-family="sans-serif" font-size="12" font-weight="bold" fill="#00C1D4" text-anchor="middle">Agent</text>
+        <!-- 子 Agent 1 -->
+        <circle cx="60" cy="44" r="22" stroke="#3D4145" stroke-width="1.2" fill="#1a1a1a"/>
+        <text x="60" y="48" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Agent A</text>
+        <line x1="81" y1="57" x2="140" y2="75" stroke="#3D4145" stroke-width="1"/>
+        <!-- 子 Agent 2 -->
+        <circle cx="300" cy="44" r="22" stroke="#3D4145" stroke-width="1.2" fill="#1a1a1a"/>
+        <text x="300" y="48" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Agent B</text>
+        <line x1="279" y1="57" x2="220" y2="75" stroke="#3D4145" stroke-width="1"/>
+        <!-- 子 Agent 3 -->
+        <circle cx="60" cy="156" r="22" stroke="#3D4145" stroke-width="1.2" fill="#1a1a1a"/>
+        <text x="60" y="160" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Agent C</text>
+        <line x1="81" y1="143" x2="140" y2="118" stroke="#3D4145" stroke-width="1"/>
+        <!-- 子 Agent 4 -->
+        <circle cx="300" cy="156" r="22" stroke="#3D4145" stroke-width="1.2" fill="#1a1a1a"/>
+        <text x="300" y="160" font-family="sans-serif" font-size="10" fill="#ffffff" text-anchor="middle">Agent D</text>
+        <line x1="279" y1="143" x2="220" y2="118" stroke="#3D4145" stroke-width="1"/>
+        <!-- 经验共享光束（橙色强调） -->
+        <line x1="140" y1="75" x2="81" y2="57" stroke="#FA5F26" stroke-width="1" stroke-dasharray="3 3" opacity="0.8"/>
+        <line x1="220" y1="75" x2="279" y2="57" stroke="#FA5F26" stroke-width="1" stroke-dasharray="3 3" opacity="0.6"/>
+        <!-- 底部说明 -->
+        <text x="180" y="192" font-family="sans-serif" font-size="10" fill="#8A8F96" text-anchor="middle">最优经验 → 全局共享 · 持续涌现</text>
+      </svg>
+    </div>
+  </div>
+
+  <!-- 底部三条核心说明 -->
+  <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid #e8eaec;">
+    <div class="animate-in" style="padding:32px 28px;border-right:1px solid #e8eaec;">
+      <div style="font-size:13px;color:var(--threshold-cyan);font-family:var(--font-en);letter-spacing:0.1em;margin-bottom:10px;">SELF-REINFORCEMENT</div>
+      <div style="font-size:15px;font-weight:700;color:var(--quantum-black);margin-bottom:8px;">强化学习全栈自研</div>
+      <div style="font-size:13px;color:var(--level-gray);line-height:1.7;">不依赖外部框架，从 reward 设计到策略优化全链路掌控，确保每个垂直场景的精准调优。</div>
+    </div>
+    <div class="animate-in" style="transition-delay:80ms;padding:32px 28px;border-right:1px solid #e8eaec;">
+      <div style="font-size:13px;color:var(--threshold-cyan);font-family:var(--font-en);letter-spacing:0.1em;margin-bottom:10px;">META-ORCHESTRATION</div>
+      <div style="font-size:15px;font-weight:700;color:var(--quantum-black);margin-bottom:8px;">Meta-Agent 动态编排</div>
+      <div style="font-size:13px;color:var(--level-gray);line-height:1.7;">实时感知任务状态，自动拆解、分配、协同多 Agent，无需人工干预即可处理复杂跨域任务。</div>
+    </div>
+    <div class="animate-in" style="transition-delay:160ms;padding:32px 28px;">
+      <div style="font-size:13px;color:var(--threshold-cyan);font-family:var(--font-en);letter-spacing:0.1em;margin-bottom:10px;">EMERGENT INTELLIGENCE</div>
+      <div style="font-size:15px;font-weight:700;color:var(--quantum-black);margin-bottom:8px;">能力涌现效应</div>
+      <div style="font-size:13px;color:var(--level-gray);line-height:1.7;">群体协同产生单一模型无法实现的能力上限——任务越多，系统越聪明，企业的 AI 资产持续增值。</div>
+    </div>
+  </div>
+
+</section>
+
+<!-- ── Screen 6 · 数字风洞 ── -->
+<section id="windtunnel" class="section-black">
+  <div class="six-ten">
+    <div class="left-text">
+      <span class="tag animate-in">独家技术</span>
+      <h2 class="animate-in" style="transition-delay:80ms;">数字风洞</h2>
+      <p class="lead animate-in" style="transition-delay:120ms;">仿真验证，上线前淘汰低效 Agent</p>
+      <p class="animate-in" style="transition-delay:160ms;">在真实业务部署前，通过数字仿真环境验证 Agent 性能</p>
+      <p class="animate-in" style="transition-delay:200ms;">剔除低效路径，保留最优解</p>
+      <p class="animate-in" style="transition-delay:240ms;">大幅降低企业 AI 部署风险</p>
+    </div>
+    <!-- A类SVG：仿真环境示意图 // 此处可替图 // 上线前须技术团队审核 -->
+    <div class="animate-in" style="transition-delay:200ms;">
+      <svg viewBox="0 0 500 340" width="100%" style="max-width:500px;display:block;" xmlns="http://www.w3.org/2000/svg">
+        <!-- 仿真空间大圆 -->
+        <circle cx="220" cy="170" r="130" stroke="#00C1D4" stroke-width="1.5" fill="rgba(0,193,212,0.04)"/>
+        <text x="220" y="44" font-family="sans-serif" font-size="15" fill="#8A8F96" text-anchor="middle">仿真空间</text>
+        <!-- 运行轨迹曲线 -->
+        <path d="M125,120 Q170,97 220,143 Q265,190 315,167" stroke="#00C1D4" stroke-width="1" fill="none" opacity="0.7"/>
+        <path d="M138,178 Q178,155 228,202 Q272,238 308,215" stroke="#00C1D4" stroke-width="1" fill="none" opacity="0.5"/>
+        <path d="M150,238 Q190,209 235,233 Q278,255 308,232" stroke="#00C1D4" stroke-width="1" fill="none" opacity="0.4"/>
+        <path d="M132,150 Q180,133 228,172 Q272,213 308,190" stroke="#00C1D4" stroke-width="1" fill="none" opacity="0.3"/>
+        <!-- 关键验证节点（能量橙，全页仅此处一处） -->
+        <circle cx="220" cy="143" r="7" fill="#FA5F26"/>
+        <text x="232" y="138" font-family="sans-serif" font-size="12" fill="#FA5F26">验证节点 A</text>
+        <circle cx="278" cy="190" r="7" fill="#FA5F26"/>
+        <text x="290" y="186" font-family="sans-serif" font-size="12" fill="#FA5F26">验证节点 B</text>
+        <!-- 最优解箭头 -->
+        <line x1="360" y1="168" x2="418" y2="168" stroke="#00C1D4" stroke-width="1.5"/>
+        <polygon points="414,162 426,168 414,174" fill="#00C1D4"/>
+        <text x="428" y="163" font-family="sans-serif" font-size="15" fill="#00C1D4">最优解</text>
+        <!-- 注释 -->
+        <text x="8" y="330" font-family="monospace" font-size="9" fill="#555">// 此处可替图 // 上线前须技术团队审核</text>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<!-- ── Screen 7 · CTA ── -->
+<section id="cta" class="section-white">
+  <div class="animate-in">
+    <h2>想深入了解技术架构？</h2>
+    <p>联系我们的技术团队，获取完整技术白皮书</p>
+    <a href="mailto:cooperation@frontis.cn" class="btn-primary">申请技术交流 →</a>
+    <a href="#" class="btn-secondary">了解产品 →</a>
+    <div class="contact-email">
+      <strong>商务合作</strong>&nbsp;&nbsp;cooperation@frontis.cn
+    </div>
+  </div>
+</section>
+
+<!-- ── Footer ── -->
+<div data-site-footer></div>
+<script src="./components/site-shell.js"></script>
+
+<script>
+// 板块整体 + 子元素依次入场
+const sectionObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    const section = entry.target;
+    section.classList.add('visible');
+    const children = section.querySelectorAll('.animate-in');
+    children.forEach((child, i) => {
+      setTimeout(() => child.classList.add('visible'), i * 100);
+    });
+    sectionObserver.unobserve(section);
+  });
+}, { threshold: 0.15 });
+
+document.querySelectorAll('section').forEach(s => {
+  s.classList.add('section-enter');
+  sectionObserver.observe(s);
+});
+
+// ── 产业链七层延时出现动效 ──
+const chainObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      const rows = document.querySelectorAll('.chain-row, .chain-divider');
+      rows.forEach(row => {
+        const delay = parseInt(row.dataset.delay || 0);
+        setTimeout(() => { row.classList.add('visible'); }, delay);
+      });
+      chainObserver.disconnect();
+    }
+  });
+}, { threshold: 0.1 });
+const chainTable = document.getElementById('chainTable');
+if (chainTable) chainObserver.observe(chainTable);
+
+// ── 页面加载淡入 ──
+document.body.style.opacity = '0';
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.style.transition = 'opacity 300ms ease';
+  document.body.style.opacity = '1';
+});
+
+</script>
+</body>
+</html>

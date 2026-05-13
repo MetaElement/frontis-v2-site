@@ -1,0 +1,1044 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Frontis Horizon · 衔远大观 — 企业级 AI 专家生产力平台</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet" />
+  <style>
+    /* ===== CSS 变量 ===== */
+    :root {
+      --color-black:   #000000;
+      --color-cyan:    #00C1D4;
+      --color-white:   #FFFFFF;
+      --color-dark:    #3D4145;
+      --color-light:   #F0F2F4;
+      --color-orange:  #FA5F26;
+      --color-gray1:   #8A8F96;
+      --color-gray2:   #555555;
+      --color-gray3:   #1A1A1A;
+      --color-gray4:   #0D0D0D;
+      --nav-height:    64px;
+      --section-pad-x: 64px;
+      --font-sans:     'Space Grotesk', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --font-mono:     'Space Mono', 'Courier New', monospace;
+      --ease-out:      cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ===== Reset ===== */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--font-sans);
+      background: var(--color-black);
+      color: var(--color-white);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { text-decoration: none; color: inherit; }
+    ul { list-style: none; }
+
+    /* ===== 动效基础类 ===== */
+    .reveal {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 600ms var(--ease-out), transform 600ms var(--ease-out);
+    }
+    .reveal.animate-in {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .reveal-d1 { transition-delay: 80ms; }
+    .reveal-d2 { transition-delay: 160ms; }
+    .reveal-d3 { transition-delay: 240ms; }
+    .reveal-d4 { transition-delay: 320ms; }
+    .reveal-d5 { transition-delay: 400ms; }
+    .section-enter {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-enter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section {
+      min-height: 100vh;
+    }
+
+    /* ===== NAV ===== */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      background: var(--color-black);
+      border-bottom: 1px solid var(--color-gray3);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 var(--section-pad-x);
+      height: var(--nav-height);
+    }
+    .nav-logo { display: flex; align-items: center; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      margin-left: auto;
+    }
+    .nav-item {
+      position: relative;
+    }
+    .nav-link {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      color: var(--color-white);
+      font-size: 13px;
+      font-weight: 500;
+      letter-spacing: 0.3px;
+      padding: 0 16px;
+      height: var(--nav-height);
+      white-space: nowrap;
+      transition: color 200ms;
+    }
+    .nav-link:hover { color: var(--color-cyan); }
+    .nav-link .arrow {
+      font-size: 9px;
+      opacity: 0.6;
+      transition: transform 200ms;
+    }
+    .nav-item:hover .arrow { transform: rotate(180deg); }
+    .nav-item.active > .nav-link { color: var(--threshold-cyan); }
+
+    /* 下拉菜单 */
+    .dropdown {
+      position: absolute;
+      top: calc(var(--nav-height) - 1px);
+      left: 0;
+      background: var(--color-black);
+      border: 1px solid var(--color-gray3);
+      border-top: 1px solid var(--color-cyan);
+      min-width: 200px;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(8px);
+      transition: opacity 200ms, transform 200ms;
+    }
+    .nav-item:hover .dropdown {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+    .dropdown a {
+      display: block;
+      padding: 12px 20px;
+      font-size: 13px;
+      color: var(--color-white);
+      border-bottom: 1px solid var(--color-gray3);
+      transition: color 200ms, background 200ms;
+    }
+    .dropdown a:last-child { border-bottom: none; }
+    .dropdown a:hover {
+      color: var(--color-cyan);
+      background: var(--color-gray4);
+    }
+    .dropdown a .sub-label {
+      display: block;
+      font-size: 11px;
+      color: var(--color-gray1);
+      margin-top: 2px;
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+    }
+
+    /* 申请演示按钮 */
+    .btn-demo-nav {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      border: 1.5px solid var(--threshold-cyan);
+      color: var(--threshold-cyan);
+      font-family: var(--font-sans);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 9px 20px;
+      cursor: pointer;
+      transition: background 200ms, border-color 200ms, color 200ms;
+      margin-left: 16px;
+      white-space: nowrap;
+    }
+    .btn-demo-nav:hover {
+      background: var(--threshold-cyan);
+      color: var(--quantum-black);
+    }
+
+    /* ===== SECTION 通用 ===== */
+    section {
+      width: 100%;
+    }
+    .section-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 0 var(--section-pad-x);
+    }
+
+    /* ===== SECTION 1 · HERO ===== */
+    #hero {
+      background: var(--color-black);
+      min-height: 100vh;
+      padding-top: var(--nav-height);
+      display: flex;
+      align-items: center;
+    }
+    .hero-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 80px var(--section-pad-x);
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      width: 100%;
+    }
+    .hero-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      color: var(--color-cyan);
+    }
+    .hero-rule {
+      width: 100%;
+      height: 3px;
+      background: var(--color-cyan);
+      margin: 28px 0;
+      box-shadow:
+        0 4px 24px 8px rgba(0,193,212,0.6),
+        0 8px 60px 20px rgba(0,193,212,0.3),
+        0 16px 120px 40px rgba(0,193,212,0.15);
+    }
+    .hero-h1 {
+      font-size: clamp(52px, 6vw, 80px);
+      font-weight: 800;
+      line-height: 1.1;
+      color: var(--color-white);
+      letter-spacing: -1px;
+    }
+    .hero-en {
+      font-family: var(--font-mono);
+      font-size: 28px;
+      font-weight: 500;
+      color: var(--color-cyan);
+      margin-top: 12px;
+      letter-spacing: 1px;
+    }
+    .hero-desc {
+      font-size: 16px;
+      color: var(--color-gray1);
+      margin-top: 24px;
+      letter-spacing: 0.3px;
+    }
+    .btn-hero {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-black);
+      border: 2px solid var(--color-white);
+      color: var(--color-white);
+      font-family: var(--font-sans);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 14px 40px;
+      cursor: pointer;
+      margin-top: 40px;
+      letter-spacing: 0.5px;
+      transition: border-color 200ms, color 200ms;
+    }
+    .btn-hero:hover {
+      border-color: var(--color-cyan);
+      color: var(--color-cyan);
+    }
+
+    /* ===== SECTION 2 · 三层架构 ===== */
+    #arch {
+      background: var(--color-white);
+      padding: 96px 0;
+      color: var(--color-black);
+    }
+    .arch-header { margin-bottom: 64px; }
+    .section-h2 {
+      font-size: 40px;
+      font-weight: 700;
+      color: var(--color-black);
+      letter-spacing: -0.5px;
+      line-height: 1.15;
+    }
+    .section-sub {
+      font-size: 16px;
+      color: var(--color-dark);
+      margin-top: 12px;
+    }
+    .arch-grid {
+      display: grid;
+      grid-template-columns: 65fr 35fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .arch-svg-wrap { width: 100%; }
+    .arch-text-col {
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+    }
+    .arch-card-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--color-cyan);
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+    .arch-card-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-black);
+      margin-bottom: 8px;
+    }
+    .arch-card-body {
+      font-size: 14px;
+      color: var(--color-dark);
+      line-height: 1.8;
+    }
+
+    /* ===== SECTION 3 · 数字冲击 ===== */
+    #numbers {
+      background: var(--color-black);
+      padding: 96px 0;
+    }
+    .numbers-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+      text-align: center;
+    }
+    .number-item {
+      padding: 40px 24px;
+      border-right: 1px solid var(--color-gray3);
+    }
+    .number-item:last-child { border-right: none; }
+    .number-big {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 96px;
+      font-weight: 800;
+      line-height: 1;
+      color: var(--color-white);
+      letter-spacing: -2px;
+    }
+    .number-big.orange { color: var(--color-orange); }
+    .number-label {
+      font-size: 16px;
+      color: var(--color-gray1);
+      margin-top: 12px;
+      letter-spacing: 1px;
+    }
+    .numbers-sub {
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--color-gray2);
+      text-align: center;
+      margin-top: 40px;
+      letter-spacing: 0.5px;
+    }
+
+    /* ===== SECTION 4 · 飞轮逻辑 ===== */
+    #flywheel {
+      background: var(--color-white);
+      padding: 96px 0;
+      color: var(--color-black);
+    }
+    .flywheel-header { margin-bottom: 64px; }
+    .flywheel-svg-wrap {
+      width: 100%;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+
+    /* ===== SECTION 5 · 接入协作工具 ===== */
+    #integrations {
+      background: var(--color-black);
+      padding: 96px 0;
+    }
+    .integrations-header {
+      margin-bottom: 64px;
+      text-align: center;
+    }
+    .integrations-header .section-h2 {
+      color: var(--color-white);
+    }
+    .integrations-header .section-sub {
+      color: var(--color-gray1);
+    }
+    .integrations-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+    }
+    .integration-name {
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-bottom: 16px;
+    }
+    .integration-placeholder {
+      height: 160px;
+      background: var(--color-gray4);
+      border: 1px solid var(--color-gray3);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--color-gray1);
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+    }
+
+    /* ===== SECTION 6 · 两个版本 ===== */
+    #versions {
+      background: var(--color-white);
+      padding: 96px 0;
+      color: var(--color-black);
+    }
+    .versions-header { margin-bottom: 64px; }
+    .versions-grid {
+      display: grid;
+      grid-template-columns: 55fr 45fr;
+      gap: 48px;
+      align-items: stretch;
+    }
+    .version-tag {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 2px;
+      color: var(--color-cyan);
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+    .version-title {
+      font-size: 40px;
+      font-weight: 700;
+      letter-spacing: -1px;
+      margin-bottom: 32px;
+      color: var(--color-black);
+    }
+    .version-list {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+    }
+    .version-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--color-dark);
+    }
+    .version-item::before {
+      content: '';
+      display: block;
+      flex-shrink: 0;
+      width: 2px;
+      height: 20px;
+      background: var(--color-cyan);
+      margin-top: 3px;
+    }
+    .version-dark {
+      background: var(--color-black);
+      padding: 40px;
+    }
+    .version-dark .version-title { color: var(--color-white); }
+    .version-dark .version-item { color: rgba(255,255,255,0.75); }
+
+    /* ===== SECTION 7 · 三步开始 + CTA ===== */
+    #steps {
+      background: var(--color-black);
+      padding: 96px 0;
+    }
+    .steps-header { margin-bottom: 64px; }
+    .steps-header .section-h2 { color: var(--color-white); }
+    .steps-header .section-sub { color: var(--color-gray1); }
+    .steps-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+    .step-item {
+      padding: 32px 48px 32px 0;
+      border-right: 1px solid var(--color-gray3);
+    }
+    .step-item:last-child { border-right: none; padding-right: 0; }
+    .step-num {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 80px;
+      font-weight: 800;
+      color: var(--color-gray3);
+      line-height: 1;
+      letter-spacing: -2px;
+    }
+    .step-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--color-white);
+      margin-top: 12px;
+      margin-bottom: 8px;
+    }
+    .step-desc {
+      font-size: 14px;
+      color: var(--color-gray1);
+      line-height: 1.7;
+    }
+    .cta-block {
+      margin-top: 80px;
+      border-top: 1px solid var(--color-gray3);
+      padding-top: 64px;
+      text-align: center;
+    }
+    .cta-title {
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--color-white);
+      letter-spacing: -0.5px;
+    }
+    .cta-sub {
+      font-size: 16px;
+      color: var(--color-gray1);
+      margin-top: 12px;
+    }
+    .btn-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--color-black);
+      border: 1.5px solid var(--color-white);
+      color: var(--color-white);
+      font-family: var(--font-sans);
+      font-size: 16px;
+      font-weight: 600;
+      padding: 16px 48px;
+      cursor: pointer;
+      margin-top: 36px;
+      letter-spacing: 0.5px;
+      transition: background 200ms;
+    }
+    .btn-cta:hover { background: var(--color-gray3); }
+
+    /* ===== FOOTER ===== */
+    footer {
+      background: var(--color-black);
+      border-top: 1px solid var(--color-gray3);
+      padding: 64px var(--section-pad-x) 40px;
+      scroll-snap-align: none;
+    }
+    .footer-inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+    .footer-top {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--color-gray3);
+    }
+    .footer-brand p {
+      font-size: 13px;
+      color: var(--color-gray1);
+      line-height: 1.8;
+      margin-top: 20px;
+      max-width: 260px;
+    }
+    .footer-col-title {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--color-gray1);
+      font-family: var(--font-mono);
+      margin-bottom: 20px;
+    }
+    .footer-col ul { display: flex; flex-direction: column; gap: 12px; }
+    .footer-col a {
+      font-size: 13px;
+      color: rgba(255,255,255,0.65);
+      transition: color 200ms;
+      display: flex;
+      flex-direction: column;
+    }
+    .footer-col a:hover { color: var(--color-cyan); }
+    .footer-col a span {
+      font-size: 11px;
+      color: var(--color-gray2);
+      font-family: var(--font-mono);
+      letter-spacing: 1px;
+      margin-top: 2px;
+    }
+    .footer-bottom {
+      padding-top: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .footer-copy {
+      font-size: 12px;
+      color: var(--color-gray2);
+      font-family: var(--font-mono);
+      letter-spacing: 0.5px;
+    }
+    .footer-icp {
+      font-size: 12px;
+      color: var(--color-gray2);
+      font-family: var(--font-mono);
+    }
+
+    /* ===== 响应式 ===== */
+    @media (max-width: 1024px) {
+      :root { --section-pad-x: 40px; }
+      .arch-grid { grid-template-columns: 1fr; gap: 48px; }
+      .versions-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+    }
+    @media (max-width: 768px) {
+      :root { --section-pad-x: 24px; }
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      .hero-h1 { font-size: clamp(36px, 8vw, 56px); }
+      .numbers-grid { grid-template-columns: 1fr; }
+      .number-item { border-right: none; border-bottom: 1px solid var(--color-gray3); }
+      .number-item:last-child { border-bottom: none; }
+      .integrations-grid { grid-template-columns: 1fr; }
+      .steps-grid { grid-template-columns: 1fr; }
+      .step-item { border-right: none; border-bottom: 1px solid var(--color-gray3); padding-right: 0; padding-bottom: 32px; margin-bottom: 32px; }
+      .step-item:last-child { border-bottom: none; margin-bottom: 0; }
+      .footer-top { grid-template-columns: 1fr; }
+    }
+    .experts-row::-webkit-scrollbar { display: none; }
+    /* 专家照片自动滚动 */
+    .experts-auto-track {
+      display: flex;
+      gap: 20px;
+      width: max-content;
+      animation: experts-scroll-left 36s linear infinite;
+    }
+    .experts-auto-track:hover { animation-play-state: paused; }
+    @keyframes experts-scroll-left {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+  </style>
+  <link rel="stylesheet" href="./components/site-shell.css" />
+</head>
+<body>
+
+  <!-- ===== NAV ===== -->
+  <div data-site-header></div>
+
+  <!-- ===== SECTION 1 · HERO ===== -->
+  <section id="hero">
+    <div class="hero-inner">
+      <p class="hero-tag reveal">FRONTIS HORIZON · 衔远大观</p>
+      <div class="hero-rule reveal reveal-d1"></div>
+      <h1 class="hero-h1 reveal reveal-d2">
+        给企业里的每一个人<br>
+        打造专属 AI 分身
+      </h1>
+      <p class="hero-en reveal reveal-d3">The Second Me</p>
+      <p class="hero-desc reveal reveal-d4">企业级 AI 专家生产力平台 · 73 专家 Agent · 19 大业务场景</p>
+      <a href="#" class="btn-hero reveal reveal-d5">申请演示</a>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 2 · 三层架构 ===== -->
+  <section id="arch">
+    <div class="section-inner">
+      <div class="arch-header reveal">
+        <h2 class="section-h2">三层架构，一体进化</h2>
+        <p class="section-sub">ME · WE · MA 构成自我强化的 AI 生产力飞轮</p>
+      </div>
+      <div class="arch-grid">
+        <div class="arch-svg-wrap reveal reveal-d1">
+          <svg viewBox="0 0 640 480" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;">
+            <defs>
+              <marker id="arrow-up" markerWidth="6" markerHeight="6" refX="3" refY="6" orient="auto">
+                <path d="M 0 6 L 3 0 L 6 6" fill="none" stroke="#00C1D4" stroke-width="1.5"/>
+              </marker>
+            </defs>
+
+            <!-- MA 底层（黑色背景，y=320，高120） -->
+            <rect x="0" y="320" width="640" height="120" fill="#000000"/>
+            <text x="32" y="368" font-size="20" font-weight="800" fill="#ffffff" font-family="Space Grotesk,sans-serif">MA</text>
+            <text x="32" y="390" font-size="13" fill="#00C1D4" font-family="monospace" letter-spacing="2">进化引擎 · EVOLUTION ENGINE</text>
+            <text x="32" y="412" font-size="12" fill="#888888" font-family="sans-serif">数据沉淀 · 经验复用 · 持续进化，越用越强</text>
+            <text x="590" y="385" font-size="11" fill="#555555" font-family="monospace" text-anchor="end">持续进化↑</text>
+
+            <!-- WE 中层（深灰背景，y=180，高120） -->
+            <rect x="0" y="180" width="640" height="120" fill="#0D0D0D"/>
+            <rect x="0" y="180" width="3" height="120" fill="#00C1D4"/>
+            <text x="32" y="228" font-size="20" font-weight="800" fill="#ffffff" font-family="Space Grotesk,sans-serif">WE</text>
+            <text x="32" y="250" font-size="13" fill="#00C1D4" font-family="monospace" letter-spacing="2">专家网络 · EXPERT NETWORK</text>
+            <text x="32" y="272" font-size="12" fill="#888888" font-family="sans-serif">73 专家 Agent · 206 Skill · 19 大业务场景</text>
+            <text x="590" y="245" font-size="11" fill="#555555" font-family="monospace" text-anchor="end">开箱即用↑</text>
+
+            <!-- ME 顶层（白色背景+青色边框，y=40，高120） -->
+            <rect x="0" y="40" width="640" height="120" fill="#ffffff" stroke="#00C1D4" stroke-width="2"/>
+            <text x="32" y="88" font-size="20" font-weight="800" fill="#000000" font-family="Space Grotesk,sans-serif">ME</text>
+            <text x="32" y="110" font-size="13" fill="#00C1D4" font-family="monospace" letter-spacing="2">数字分身 · THE SECOND ME</text>
+            <text x="32" y="132" font-size="12" fill="#3D4145" font-family="sans-serif">每个员工的第二个自己 · 接入飞书/企微/钉钉</text>
+            <text x="590" y="105" font-size="11" fill="#555555" font-family="monospace" text-anchor="end">人人有分身↑</text>
+
+            <!-- 层间连接虚线 -->
+            <line x1="520" y1="160" x2="520" y2="180" stroke="#00C1D4" stroke-width="1.5" stroke-dasharray="3 3"/>
+            <line x1="520" y1="300" x2="520" y2="320" stroke="#00C1D4" stroke-width="1.5" stroke-dasharray="3 3"/>
+
+
+          </svg>
+        </div>
+
+        <div class="arch-text-col">
+          <div class="arch-card reveal reveal-d1">
+            <p class="arch-card-tag">ME · 数字分身</p>
+            <h3 class="arch-card-title">每人一个 AI 分身</h3>
+            <p class="arch-card-body">接入飞书、企微、钉钉，无需额外学习，每位员工都拥有自己的专属 AI 工作伙伴。</p>
+          </div>
+          <div class="arch-card reveal reveal-d2">
+            <p class="arch-card-tag">WE · 专家网络</p>
+            <h3 class="arch-card-title">73 个专家 Agent</h3>
+            <p class="arch-card-body">覆盖企业所有核心场景，一键调度专家团，处理复杂跨域任务。</p>
+          </div>
+          <div class="arch-card reveal reveal-d3">
+            <p class="arch-card-tag">MA · 进化引擎</p>
+            <h3 class="arch-card-title">越用越强</h3>
+            <p class="arch-card-body">每次使用都在沉淀企业知识，经验持续复用，系统越用越聪明，越强越用。</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 3 · 数字冲击 ===== -->
+  <section id="numbers">
+    <div class="section-inner">
+      <div class="numbers-grid">
+        <div class="number-item reveal">
+          <div class="number-big">73</div>
+          <div class="number-label">专家 Agent</div>
+        </div>
+        <div class="number-item reveal reveal-d1">
+          <div class="number-big orange">206</div>
+          <div class="number-label">Skill 技能</div>
+        </div>
+        <div class="number-item reveal reveal-d2">
+          <div class="number-big">19</div>
+          <div class="number-label">大业务场景</div>
+        </div>
+      </div>
+
+      <!-- 专家图片展示区（自动向左慢速滚动） -->
+      <div class="experts-scroll-wrap" style="margin-top:48px;overflow:hidden;position:relative;">
+        <div style="position:absolute;left:0;top:0;bottom:0;width:80px;background:linear-gradient(to right,#000000,transparent);z-index:2;pointer-events:none;"></div>
+        <div style="position:absolute;right:0;top:0;bottom:0;width:80px;background:linear-gradient(to left,#000000,transparent);z-index:2;pointer-events:none;"></div>
+        <div class="experts-auto-track reveal reveal-d3">
+          <!-- 原始8张 -->
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #01</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #02</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #03</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #04</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #05</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #06</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #07</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #08</span>
+          </div>
+          <!-- 复制一遍，确保无缝循环 -->
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #01</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #02</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #03</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #04</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #05</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #06</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #07</span>
+          </div>
+          <div class="expert-slot" style="flex:0 0 120px;text-align:center;">
+            <div style="width:120px;height:200px;border:1.5px solid #00C1D4;background:rgba(0,193,212,0.05);display:flex;align-items:center;justify-content:center;margin-bottom:8px;">
+              <span style="color:#00C1D4;font-size:11px;font-family:monospace;text-align:center;padding:8px;line-height:1.5;">[ 专家照片<br/>120×200 ]</span>
+            </div>
+            <span style="color:#888;font-size:11px;font-family:monospace;">Agent #08</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="numbers-sub reveal reveal-d3">
+        产（工程/制造/医疗）17 · 供（供应链/采购）20 · 销（电商/营销/门店）26 · 通（跨业务线）10
+      </p>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 4 · 飞轮逻辑 ===== -->
+  <section id="flywheel">
+    <div class="section-inner">
+      <div class="flywheel-header reveal">
+        <h2 class="section-h2">越用越强的 AI 飞轮</h2>
+        <p class="section-sub">不是工具，是会自我进化的生产力引擎</p>
+      </div>
+      <div class="flywheel-svg-wrap reveal reveal-d1">
+        <svg viewBox="-60 0 720 440" xmlns="http://www.w3.org/2000/svg" width="100%" style="display:block;">
+          <defs>
+            <marker id="arrow-fly" markerWidth="8" markerHeight="8" refX="5" refY="4" orient="auto">
+              <path d="M 0 1 L 6 4 L 0 7 Z" fill="#3D4145"/>
+            </marker>
+          </defs>
+
+          <!-- 背景椭圆轨迹（虚线参考） -->
+          <ellipse cx="300" cy="210" rx="200" ry="155" fill="none" stroke="#E8EAED" stroke-width="1" stroke-dasharray="4 4"/>
+
+          <!-- 连接弧线（顺时针） -->
+          <path d="M 320 62 Q 450 80 493 172" fill="none" stroke="#3D4145" stroke-width="1.5" marker-end="url(#arrow-fly)"/>
+          <path d="M 498 198 Q 510 290 438 346" fill="none" stroke="#3D4145" stroke-width="1.5" marker-end="url(#arrow-fly)"/>
+          <path d="M 412 362 Q 300 390 188 362" fill="none" stroke="#3D4145" stroke-width="1.5" marker-end="url(#arrow-fly)"/>
+          <path d="M 162 340 Q 90 290 102 198" fill="none" stroke="#3D4145" stroke-width="1.5" marker-end="url(#arrow-fly)"/>
+          <path d="M 107 162 Q 150 80 280 58" fill="none" stroke="#3D4145" stroke-width="1.5" marker-end="url(#arrow-fly)"/>
+
+          <!-- 节点1：员工使用 ME（top） -->
+          <circle cx="300" cy="55" r="9" fill="#00C1D4"/>
+          <text x="300" y="36" text-anchor="middle" font-size="15" fill="#000000" font-family="PingFang SC,Microsoft YaHei,sans-serif">员工使用 ME</text>
+
+          <!-- 节点2：ME 调度专家团（right） -->
+          <circle cx="500" cy="185" r="9" fill="#00C1D4"/>
+          <text x="518" y="189" text-anchor="start" font-size="15" fill="#000000" font-family="PingFang SC,Microsoft YaHei,sans-serif">ME 调度专家团</text>
+
+          <!-- 节点3：专家团完成任务（bottom-right） -->
+          <circle cx="430" cy="355" r="9" fill="#00C1D4"/>
+          <text x="430" y="380" text-anchor="middle" font-size="15" fill="#000000" font-family="PingFang SC,Microsoft YaHei,sans-serif">专家团完成任务</text>
+
+          <!-- 节点4：进化引擎沉淀经验（bottom-left） -->
+          <circle cx="170" cy="355" r="9" fill="#00C1D4"/>
+          <text x="170" y="380" text-anchor="middle" font-size="15" fill="#000000" font-family="PingFang SC,Microsoft YaHei,sans-serif">进化引擎沉淀经验</text>
+
+          <!-- 节点5：专家团越来越强（left） -->
+          <circle cx="100" cy="185" r="9" fill="#00C1D4"/>
+          <text x="78" y="189" text-anchor="end" font-size="15" fill="#000000" font-family="PingFang SC,Microsoft YaHei,sans-serif">专家团越来越强</text>
+
+          <!-- 中心文字 -->
+          <text x="300" y="202" text-anchor="middle" font-size="40" font-weight="800" fill="#000000" font-family="Space Grotesk,sans-serif">飞轮</text>
+          <text x="300" y="226" text-anchor="middle" font-size="17" fill="#00C1D4" font-family="monospace" letter-spacing="2">Flywheel</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 5 · 接入协作工具 ===== -->
+  <section id="integrations">
+    <div class="section-inner">
+      <div class="integrations-header reveal">
+        <h2 class="section-h2">接入你的协作工具</h2>
+        <p class="section-sub">飞书 · 企业微信 · 钉钉，原生接入，不改变任何工作习惯</p>
+      </div>
+      <div class="integrations-grid">
+        <div class="integration-card reveal">
+          <p class="integration-name">飞书</p>
+          <div class="integration-placeholder">[待提供：平台截图]</div>
+        </div>
+        <div class="integration-card reveal reveal-d1">
+          <p class="integration-name">企业微信</p>
+          <div class="integration-placeholder">[待提供：平台截图]</div>
+        </div>
+        <div class="integration-card reveal reveal-d2">
+          <p class="integration-name">钉钉</p>
+          <div class="integration-placeholder">[待提供：平台截图]</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 6 · 两个版本 ===== -->
+  <section id="versions">
+    <div class="section-inner">
+      <div class="versions-header reveal">
+        <h2 class="section-h2">从快速上手到私有部署</h2>
+      </div>
+      <div class="versions-grid">
+        <div class="version-cloud reveal reveal-d1">
+          <p class="version-tag">CLOUD · 开箱即用</p>
+          <h3 class="version-title">公有云版</h3>
+          <ul class="version-list">
+            <li class="version-item">注册即用，无需等待</li>
+            <li class="version-item">按积分消费，灵活计量</li>
+            <li class="version-item">无需 IT 部署，零运维成本</li>
+            <li class="version-item">每月持续更新，功能不断迭代</li>
+          </ul>
+        </div>
+        <div class="version-dark reveal reveal-d2">
+          <p class="version-tag">PRIVATE · 企业自主</p>
+          <h3 class="version-title">私有云版</h3>
+          <ul class="version-list">
+            <li class="version-item">独立部署，数据不出域</li>
+            <li class="version-item">从公有云无缝迁移</li>
+            <li class="version-item">无切换成本，历史数据完整保留</li>
+            <li class="version-item">FDE 团队全程陪跑</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== SECTION 7 · 三步开始 + CTA ===== -->
+  <section id="steps">
+    <div class="section-inner">
+      <div class="steps-header reveal">
+        <h2 class="section-h2">三步开始</h2>
+        <p class="section-sub">从体验到私有化部署，最短两周落地</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-item reveal">
+          <div class="step-num">01</div>
+          <h3 class="step-title">注册公有云账号</h3>
+          <p class="step-desc">立即体验全部 73 个专家 Agent，感受 AI 专家生产力</p>
+        </div>
+        <div class="step-item reveal reveal-d1">
+          <div class="step-num">02</div>
+          <h3 class="step-title">定制化交付</h3>
+          <p class="step-desc">FDE 团队全程陪跑，按企业实际场景深度定制</p>
+        </div>
+        <div class="step-item reveal reveal-d2">
+          <div class="step-num">03</div>
+          <h3 class="step-title">私有化部署</h3>
+          <p class="step-desc">从公有云无缝迁移，数据主权完整掌握在企业手中</p>
+        </div>
+      </div>
+
+      <div class="cta-block reveal reveal-d3">
+        <h2 class="cta-title">准备好了吗？</h2>
+        <p class="cta-sub">申请演示，看 Horizon 如何改变你的企业</p>
+        <a href="#" class="btn-cta">申请演示</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FOOTER ===== -->
+  <div data-site-footer></div>
+<script src="./components/site-shell.js"></script>
+
+  <!-- ===== JS：IntersectionObserver ===== -->
+  <script>
+    // 板块整体 + 子元素依次入场
+    const sectionObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        const section = entry.target;
+        section.classList.add('visible');
+        const children = section.querySelectorAll('.animate-in');
+        children.forEach((child, i) => {
+          setTimeout(() => child.classList.add('visible'), i * 100);
+        });
+        sectionObserver.unobserve(section);
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('section').forEach(s => {
+      s.classList.add('section-enter');
+      sectionObserver.observe(s);
+    });
+
+    // 原有 .reveal 子元素动效（进入 section 时依次加 animate-in）
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (!entry.isIntersecting) return;
+        entry.target.classList.add('animate-in');
+        revealObserver.unobserve(entry.target);
+      });
+    }, { threshold: 0.15 });
+
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+</script>
+
+</body>
+</html>

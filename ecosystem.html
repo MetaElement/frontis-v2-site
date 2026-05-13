@@ -1,0 +1,756 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>生态合作 · Frontis AI 衔远科技</title>
+  <style>
+    :root {
+      --quantum-black: #000000;
+      --threshold-cyan: #00C1D4;
+      --pure-white: #FFFFFF;
+      --level-gray: #3D4145;
+      --energy-gray: #F0F2F4;
+      --energy-orange: #FA5F26;
+      --font-en: 'SF Pro Display', 'Helvetica Neue', Arial, sans-serif;
+      --font-mono: 'SF Mono', 'Fira Code', monospace;
+      --font-cn: 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+      --ease-threshold: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 16px; scroll-behavior: smooth; }
+    body { font-family: var(--font-cn); background: var(--quantum-black); color: var(--pure-white); -webkit-font-smoothing: antialiased; }
+    a { text-decoration: none; color: inherit; }
+    img { display: block; max-width: 100%; }
+
+    .animate-in { opacity: 0; transform: translateX(-20px); transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1), transform 600ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .animate-in.visible { opacity: 1; transform: translateX(0); }
+    .section-enter { opacity: 0; transform: translateY(60px); transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1), transform 700ms cubic-bezier(0.22, 1, 0.36, 1); }
+    .section-enter.visible { opacity: 1; transform: translateY(0); }
+
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center;
+      padding: 0 48px; height: 64px;
+      background: rgba(0,0,0,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(255,255,255,0.06);
+    }
+    .nav-links { display: flex; align-items: center; gap: 0; margin-left: auto; list-style: none; }
+    .nav-links > li > a {
+      display: block; padding: 0 20px; height: 64px; line-height: 64px;
+      font-size: 14px; color: rgba(255,255,255,0.7); transition: color 200ms;
+    }
+    .nav-links > li > a:hover { color: var(--pure-white); }
+    .nav-links > li > a.active { color: var(--threshold-cyan); }
+    .nav-dropdown { position: relative; }
+    .nav-dropdown .dropdown-menu {
+      display: none; position: absolute; top: 64px; left: 0;
+      background: rgba(10,10,10,0.96); backdrop-filter: blur(12px);
+      border: 1px solid rgba(255,255,255,0.08); min-width: 220px; padding: 8px 0;
+    }
+    .nav-dropdown:hover .dropdown-menu { display: block; }
+    .dropdown-menu a { display: block; padding: 10px 20px; font-size: 14px; color: rgba(255,255,255,0.65); transition: color 200ms, background 200ms; }
+    .dropdown-menu a:hover { color: var(--pure-white); background: rgba(255,255,255,0.04); }
+    .btn-nav {
+      display: inline-flex; align-items: center; justify-content: center;
+      padding: 9px 20px; margin-left: 16px;
+      background: transparent;
+      border: 1.5px solid var(--threshold-cyan); color: var(--threshold-cyan);
+      font-family: var(--font-en); font-size: 13px; font-weight: 600;
+      letter-spacing: 0.3px; white-space: nowrap;
+      transition: background 200ms, color 200ms;
+      text-decoration: none; cursor: pointer;
+    }
+    .btn-nav:hover { background: var(--threshold-cyan); color: var(--quantum-black); }
+
+    .tag { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 2px; color: var(--threshold-cyan); text-transform: uppercase; }
+    .threshold-line { width: 48px; height: 2px; background: var(--threshold-cyan); margin: 16px 0 24px; }
+    .section-label { font-family: var(--font-mono); font-size: 11px; font-weight: 600; letter-spacing: 2.5px; color: rgba(255,255,255,0.3); text-transform: uppercase; margin-bottom: 16px; }
+
+    /* Hero */
+    #hero {
+      min-height: 100vh; display: flex; align-items: center;
+      padding: 120px 80px 80px; background: var(--quantum-black);
+      position: relative; overflow: hidden;
+    }
+    #hero::before {
+      content: ''; position: absolute; top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(0,193,212,0.06) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    .hero-content { position: relative; z-index: 1; max-width: 720px; }
+    #hero h1 { font-family: var(--font-en); font-size: clamp(40px, 5vw, 64px); font-weight: 700; line-height: 1.1; letter-spacing: -1.5px; margin-bottom: 20px; }
+    #hero h1 em { font-style: normal; color: var(--threshold-cyan); }
+    #hero .subtitle { font-size: 18px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 36px; max-width: 540px; }
+    .hero-checklist { display: flex; flex-direction: column; gap: 12px; margin-bottom: 48px; }
+    .hero-check { display: flex; align-items: center; gap: 12px; font-size: 15px; color: rgba(255,255,255,0.8); }
+    .hero-check::before { content: '✓'; color: var(--threshold-cyan); font-weight: 700; font-size: 14px; flex-shrink: 0; }
+    .hero-cta {
+      display: inline-flex; align-items: center; justify-content: center;
+      background: var(--threshold-cyan); color: var(--quantum-black);
+      padding: 16px 48px; font-size: 15px; font-weight: 700;
+      transition: opacity 200ms;
+    }
+    .hero-cta:hover { opacity: 0.88; }
+    .hero-right {
+      position: absolute; right: 80px; top: 50%; transform: translateY(-50%);
+      display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+    }
+    .hero-stat { border: 1px solid rgba(255,255,255,0.08); padding: 28px 24px; min-width: 160px; }
+    .hero-stat-num { font-family: var(--font-en); font-size: 36px; font-weight: 700; color: var(--threshold-cyan); line-height: 1; margin-bottom: 8px; }
+    .hero-stat-label { font-size: 13px; color: rgba(255,255,255,0.5); line-height: 1.5; }
+
+    /* Market */
+    #market { background: var(--pure-white); padding: 96px 80px; }
+    #market .market-header { max-width: 600px; margin-bottom: 64px; }
+    #market h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--quantum-black); margin-bottom: 16px; line-height: 1.15; }
+    .market-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid #E8EAED; margin-bottom: 48px; }
+    .market-stat { padding: 36px 28px; border-right: 1px solid #E8EAED; }
+    .market-stat:last-child { border-right: none; }
+    .market-stat-num { font-family: var(--font-en); font-size: 42px; font-weight: 700; color: var(--quantum-black); line-height: 1; margin-bottom: 6px; }
+    .market-stat-num span { font-size: 20px; color: var(--threshold-cyan); }
+    .market-stat-label { font-size: 13px; color: #888; line-height: 1.6; }
+    .market-stat-sub { font-size: 11px; color: #bbb; margin-top: 4px; }
+    .market-body { font-size: 15px; color: var(--level-gray); line-height: 1.9; max-width: 760px; margin-bottom: 40px; }
+    .btn-outline-dark {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1.5px solid var(--quantum-black); color: var(--quantum-black);
+      padding: 14px 40px; font-size: 14px; font-weight: 600;
+      transition: background 200ms, color 200ms;
+    }
+    .btn-outline-dark:hover { background: var(--quantum-black); color: var(--pure-white); }
+
+    /* Pain */
+    #pain { background: var(--quantum-black); padding: 96px 80px; }
+    #pain h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); margin-bottom: 12px; }
+    #pain .section-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 56px; }
+    .pain-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+    .pain-card { background: var(--quantum-black); padding: 32px 24px; transition: background 200ms; }
+    .pain-card:hover { background: rgba(0,193,212,0.04); }
+    .pain-num { font-family: var(--font-mono); font-size: 11px; color: var(--threshold-cyan); letter-spacing: 1.5px; margin-bottom: 20px; }
+    .pain-title { font-size: 16px; font-weight: 700; color: var(--pure-white); margin-bottom: 12px; line-height: 1.4; }
+    .pain-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.8; }
+
+    /* Tech */
+    #tech { background: #050607; padding: 96px 80px; }
+    #tech h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); margin-bottom: 8px; }
+    #tech .tech-tag-cyan { font-size: 14px; color: var(--threshold-cyan); margin-bottom: 8px; font-family: var(--font-mono); font-weight: 600; letter-spacing: 1px; }
+    #tech .section-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 56px; }
+    .tech-two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 64px; }
+    .tech-features { display: flex; flex-direction: column; gap: 2px; }
+    .tech-feature { border-bottom: 1px solid rgba(255,255,255,0.06); padding: 24px 0; }
+    .tech-feature:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
+    .tech-feature-title { font-size: 15px; font-weight: 700; color: var(--pure-white); margin-bottom: 8px; display: flex; align-items: center; gap: 10px; }
+    .tech-feature-title::before { content: '◆'; color: var(--threshold-cyan); font-size: 8px; flex-shrink: 0; }
+    .tech-feature-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.8; padding-left: 18px; }
+    .tech-products { display: flex; flex-direction: column; gap: 16px; }
+    .tech-product-card { border: 1px solid rgba(255,255,255,0.08); padding: 28px; transition: border-color 200ms; }
+    .tech-product-card:hover { border-color: var(--threshold-cyan); }
+    .tech-product-name { font-family: var(--font-en); font-size: 16px; font-weight: 700; color: var(--pure-white); margin-bottom: 6px; }
+    .tech-product-sub { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 12px; }
+    .tech-product-tags { display: flex; flex-wrap: wrap; gap: 8px; }
+    .tech-product-tag { font-size: 11px; font-family: var(--font-mono); color: var(--threshold-cyan); border: 1px solid rgba(0,193,212,0.3); padding: 3px 10px; }
+    .btn-outline-cyan {
+      display: inline-flex; align-items: center; justify-content: center;
+      border: 1.5px solid var(--threshold-cyan); color: var(--threshold-cyan);
+      padding: 13px 36px; font-size: 13px; font-weight: 600; margin-top: 40px;
+      transition: background 200ms, color 200ms;
+    }
+    .btn-outline-cyan:hover { background: var(--threshold-cyan); color: var(--quantum-black); }
+
+    /* Revenue */
+    #revenue { background: var(--pure-white); padding: 96px 80px; }
+    #revenue h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--quantum-black); margin-bottom: 8px; }
+    #revenue .section-sub-dark { font-size: 16px; color: #888; margin-bottom: 56px; }
+    .revenue-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; border: 1px solid #E8EAED; }
+    .revenue-card { padding: 40px 36px; border-right: 1px solid #E8EAED; position: relative; overflow: hidden; }
+    .revenue-card:last-child { border-right: none; }
+    .revenue-card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px; background: var(--threshold-cyan); transform: scaleX(0); transform-origin: left; transition: transform 300ms var(--ease-threshold); }
+    .revenue-card:hover::before { transform: scaleX(1); }
+    .revenue-num { font-family: var(--font-en); font-size: 48px; font-weight: 700; color: var(--threshold-cyan); line-height: 1; margin-bottom: 12px; }
+    .revenue-type { font-size: 18px; font-weight: 700; color: var(--quantum-black); margin-bottom: 8px; }
+    .revenue-tag { font-size: 12px; font-family: var(--font-mono); color: var(--threshold-cyan); letter-spacing: 1px; margin-bottom: 16px; }
+    .revenue-desc { font-size: 14px; color: #666; line-height: 1.8; }
+    .revenue-highlight { font-size: 13px; color: var(--energy-orange); font-weight: 600; margin-top: 12px; }
+
+    /* Support */
+    #support { background: var(--quantum-black); padding: 96px 80px; }
+    #support h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); margin-bottom: 8px; }
+    #support .section-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 56px; }
+    .support-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+    .support-card { background: var(--quantum-black); padding: 36px 32px; transition: background 200ms; }
+    .support-card:hover { background: rgba(0,193,212,0.03); }
+    .support-icon { font-size: 24px; margin-bottom: 16px; color: var(--threshold-cyan); }
+    .support-title { font-size: 17px; font-weight: 700; color: var(--pure-white); margin-bottom: 8px; }
+    .support-subtitle { font-size: 12px; font-family: var(--font-mono); color: var(--threshold-cyan); letter-spacing: 1px; margin-bottom: 12px; }
+    .support-desc { font-size: 13px; color: rgba(255,255,255,0.45); line-height: 1.8; }
+
+    /* Pricing */
+    #pricing { background: var(--pure-white); padding: 96px 80px; }
+    #pricing h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--quantum-black); margin-bottom: 8px; }
+    #pricing .section-sub-dark { font-size: 16px; color: #888; margin-bottom: 8px; }
+    .pricing-badge { display: inline-block; font-size: 12px; font-family: var(--font-mono); color: var(--energy-orange); border: 1px solid var(--energy-orange); padding: 3px 12px; margin-bottom: 48px; }
+    .pricing-table { width: 100%; border-collapse: collapse; border: 1px solid #E8EAED; }
+    .pricing-table th { background: var(--quantum-black); color: var(--pure-white); padding: 16px 24px; font-size: 13px; font-weight: 600; font-family: var(--font-mono); letter-spacing: 0.5px; text-align: left; border-right: 1px solid rgba(255,255,255,0.08); }
+    .pricing-table th:last-child { border-right: none; }
+    .pricing-table td { padding: 20px 24px; font-size: 14px; border-right: 1px solid #E8EAED; border-bottom: 1px solid #E8EAED; color: var(--quantum-black); vertical-align: top; }
+    .pricing-table td:last-child { border-right: none; }
+    .pricing-table tr:last-child td { border-bottom: none; }
+    .pricing-table tr:hover td { background: #FAFBFC; }
+    .city-type { font-weight: 700; font-size: 14px; color: var(--quantum-black); }
+    .city-example { font-size: 12px; color: #888; margin-top: 4px; font-family: var(--font-mono); }
+    .price-num { font-family: var(--font-en); font-size: 22px; font-weight: 700; color: var(--quantum-black); }
+    .price-unit { font-size: 12px; color: #888; margin-top: 2px; }
+    .price-highlight { color: var(--threshold-cyan); }
+    .pricing-notes { margin-top: 24px; display: flex; flex-direction: column; gap: 8px; }
+    .pricing-note { font-size: 13px; color: #888; display: flex; align-items: flex-start; gap: 8px; }
+    .pricing-note::before { content: '*'; color: var(--threshold-cyan); flex-shrink: 0; font-weight: 700; }
+
+    /* Flow */
+    #flow { background: var(--quantum-black); padding: 96px 80px; }
+    #flow h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); margin-bottom: 56px; }
+    .flow-steps { display: grid; grid-template-columns: repeat(6, 1fr); gap: 0; }
+    .flow-step { padding: 28px 20px; border-left: 1px solid rgba(255,255,255,0.06); }
+    .flow-step:first-child { border-left: none; }
+    .flow-step-num { font-family: var(--font-mono); font-size: 10px; color: var(--threshold-cyan); letter-spacing: 2px; margin-bottom: 20px; }
+    .flow-step-icon { font-size: 22px; margin-bottom: 16px; color: rgba(255,255,255,0.3); }
+    .flow-step-title { font-size: 14px; font-weight: 700; color: var(--pure-white); margin-bottom: 8px; }
+    .flow-step-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.7; }
+
+    /* Cases */
+    #cases { background: #050607; padding: 96px 80px; }
+    #cases h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); margin-bottom: 8px; }
+    #cases .section-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 56px; }
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
+    .case-card { background: #050607; padding: 36px 32px; transition: background 200ms; }
+    .case-card:hover { background: rgba(0,193,212,0.03); }
+    .case-city { font-family: var(--font-mono); font-size: 11px; color: var(--threshold-cyan); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
+    .case-metric { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); line-height: 1; margin-bottom: 6px; }
+    .case-metric span { font-size: 18px; color: var(--threshold-cyan); }
+    .case-metric-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
+    .case-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 20px; }
+    .case-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; }
+
+    /* Apply */
+    #apply { background: var(--pure-white); padding: 96px 80px; }
+    .apply-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+    .apply-left h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--quantum-black); margin-bottom: 12px; line-height: 1.15; }
+    .apply-left h2 em { font-style: normal; color: var(--threshold-cyan); }
+    .apply-left .apply-desc { font-size: 15px; color: #666; line-height: 1.8; margin-bottom: 32px; margin-top: 16px; }
+    .apply-contact { border: 1px solid #E8EAED; padding: 24px 28px; }
+    .apply-contact-label { font-size: 11px; font-family: var(--font-mono); color: #999; letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 12px; }
+    .apply-contact-name { font-size: 16px; font-weight: 700; color: var(--quantum-black); margin-bottom: 6px; }
+    .apply-contact-phone { font-family: var(--font-mono); font-size: 20px; color: var(--threshold-cyan); font-weight: 600; }
+    .apply-form { display: flex; flex-direction: column; gap: 16px; }
+    .form-field { display: flex; flex-direction: column; gap: 8px; }
+    .form-field label { font-size: 12px; font-weight: 600; color: var(--level-gray); font-family: var(--font-mono); letter-spacing: 0.5px; text-transform: uppercase; }
+    .form-field input, .form-field select {
+      height: 48px; padding: 0 16px;
+      border: 1px solid #E8EAED; background: var(--pure-white); color: var(--quantum-black);
+      font-size: 14px; font-family: var(--font-cn); outline: none;
+      transition: border-color 200ms; -webkit-appearance: none; appearance: none;
+    }
+    .form-field input:focus, .form-field select:focus { border-color: var(--threshold-cyan); }
+    .form-field select { background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%23999' stroke-width='1.5' fill='none'/%3E%3C/svg%3E"); background-repeat: no-repeat; background-position: right 16px center; padding-right: 40px; }
+    .form-submit {
+      height: 52px; background: var(--threshold-cyan); color: var(--quantum-black);
+      border: none; font-size: 15px; font-weight: 700; cursor: pointer;
+      transition: opacity 200ms; font-family: var(--font-cn); margin-top: 8px;
+    }
+    .form-submit:hover { opacity: 0.88; }
+    .form-note { font-size: 12px; color: #999; text-align: center; margin-top: 8px; }
+
+    /* Footer */
+    footer { background: var(--quantum-black); padding: 64px 80px 32px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr 1fr; gap: 48px; margin-bottom: 48px; }
+    .footer-brand p { font-size: 14px; color: rgba(255,255,255,0.4); margin-top: 20px; line-height: 1.7; }
+    .footer-col h4 { font-size: 12px; font-family: var(--font-mono); color: rgba(255,255,255,0.3); letter-spacing: 1.5px; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 14px; color: rgba(255,255,255,0.55); margin-bottom: 10px; transition: color 200ms; }
+    .footer-col a:hover { color: var(--pure-white); }
+    .footer-bottom { display: flex; justify-content: space-between; padding-top: 24px; border-top: 1px solid rgba(255,255,255,0.06); }
+    .footer-bottom p { font-size: 12px; color: rgba(255,255,255,0.25); font-family: var(--font-mono); }
+
+    @media (max-width: 1200px) {
+      .pain-grid { grid-template-columns: repeat(3, 1fr); }
+      .flow-steps { grid-template-columns: repeat(3, 1fr); }
+      .hero-right { display: none; }
+      .tech-two-col { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 768px) {
+      nav { padding: 0 24px; }
+      .nav-links { display: none; }
+      #hero, #market, #pain, #tech, #revenue, #support, #pricing, #flow, #cases, #apply { padding: 80px 24px; }
+      .market-stats { grid-template-columns: repeat(2, 1fr); }
+      .pain-grid, .support-grid, .cases-grid { grid-template-columns: 1fr; }
+      .revenue-grid { grid-template-columns: 1fr; }
+      .flow-steps { grid-template-columns: repeat(2, 1fr); }
+      .apply-inner { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+  <link rel="stylesheet" href="./components/site-shell.css" />
+</head>
+<body>
+
+<div data-site-header></div>
+
+<!-- Screen 1 · Hero -->
+<section id="hero">
+  <div class="hero-content">
+    <span class="tag animate-in">城市生态合作伙伴计划</span>
+    <div class="threshold-line animate-in" style="transition-delay:60ms;"></div>
+    <h1 class="animate-in" style="transition-delay:120ms;">
+      共建 AI 原生时代<br>共享<em>万亿</em>市场红利
+    </h1>
+    <p class="subtitle animate-in" style="transition-delay:200ms;">
+      衔远科技全国城市生态合作伙伴计划正式启动
+    </p>
+    <div class="hero-checklist animate-in" style="transition-delay:280ms;">
+      <div class="hero-check">独家区域授权 · 一城一席</div>
+      <div class="hero-check">总部全链路赋能 · 零技术门槛</div>
+      <div class="hero-check">一次布局 · 长期稳定收益</div>
+    </div>
+    <a href="#apply" class="hero-cta animate-in" style="transition-delay:360ms;">立即申请成为合作伙伴</a>
+  </div>
+  <div class="hero-right animate-in" style="transition-delay:200ms;">
+    <div class="hero-stat">
+      <div class="hero-stat-num">73</div>
+      <div class="hero-stat-label">专家 Agent<br>覆盖全业务</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">19</div>
+      <div class="hero-stat-label">大业务场景<br>深度落地</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">206</div>
+      <div class="hero-stat-label">核心技能<br>持续迭代</div>
+    </div>
+    <div class="hero-stat">
+      <div class="hero-stat-num">L4</div>
+      <div class="hero-stat-label">AI 自动驾驶<br>企业级能力</div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 2 · 市场数据 -->
+<section id="market">
+  <div class="market-header animate-in">
+    <div class="section-label" style="color:#999;">MARKET OPPORTUNITY</div>
+    <h2>AI 正在重构所有行业<br>区域市场迎来历史性机遇</h2>
+  </div>
+  <div class="market-stats animate-in" style="transition-delay:80ms;">
+    <div class="market-stat">
+      <div class="market-stat-num">1.2<span>万亿</span></div>
+      <div class="market-stat-label">2026年中国企业级AI市场规模</div>
+      <div class="market-stat-sub">年均增速 >40%</div>
+    </div>
+    <div class="market-stat">
+      <div class="market-stat-num">90<span>%</span></div>
+      <div class="market-stat-label">企业正在进行或计划进行AI转型</div>
+      <div class="market-stat-sub">但真正落地不足 12%</div>
+    </div>
+    <div class="market-stat">
+      <div class="market-stat-num">85<span>%</span></div>
+      <div class="market-stat-label">企业缺乏专业的AI技术与落地能力</div>
+      <div class="market-stat-sub">预算持续向 AI 迁移</div>
+    </div>
+    <div class="market-stat">
+      <div class="market-stat-num">3.7<span>亿</span></div>
+      <div class="market-stat-label">企业员工需要AI技能提升</div>
+      <div class="market-stat-sub">AI 替代窗口期已开启</div>
+    </div>
+  </div>
+  <p class="market-body animate-in" style="transition-delay:160ms;">
+    通用AI只能解决基础效率问题，无法深度融入业务流程。衔远的Agent 3.0技术，将AI从「工具」升级为「会自主进化的专家团队」，这才是企业真正需要的AI能力。
+  </p>
+  <a href="#apply" class="btn-outline-dark animate-in" style="transition-delay:200ms;">了解合作详情 →</a>
+</section>
+
+<!-- Screen 3 · 痛点 -->
+<section id="pain">
+  <div class="animate-in">
+    <div class="section-label">PAIN POINTS</div>
+    <h2>你是否也面临这些困境？</h2>
+    <p class="section-sub">传统代理商、渠道商的共同挑战</p>
+  </div>
+  <div class="pain-grid animate-in" style="transition-delay:80ms;">
+    <div class="pain-card">
+      <div class="pain-num">01</div>
+      <div class="pain-title">传统生意难做</div>
+      <div class="pain-desc">利润持续下滑，竞争日益激烈，找不到新的增长曲线</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">02</div>
+      <div class="pain-title">产品同质化严重</div>
+      <div class="pain-desc">缺乏核心技术壁垒，只能靠低价竞争，越做越累</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">03</div>
+      <div class="pain-title">客户需求升级</div>
+      <div class="pain-desc">企业客户对AI转型需求迫切，但你没有对应的产品和技术能力</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">04</div>
+      <div class="pain-title">传统渠道松散</div>
+      <div class="pain-desc">仅靠区域限制，无总部赋能，单打独斗难以做大</div>
+    </div>
+    <div class="pain-card">
+      <div class="pain-num">05</div>
+      <div class="pain-title">收益模式单一</div>
+      <div class="pain-desc">一锤子买卖，没有长期稳定的后续收益</div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 4 · 技术壁垒 -->
+<section id="tech">
+  <div class="animate-in">
+    <div class="tech-tag-cyan">AGENT 3.0 ERA</div>
+    <h2>Agent 3.0时代<br>技术壁垒决定市场竞争力</h2>
+    <p class="section-sub">衔远独有的 Agent 3.0 技术，构建真正的企业级 AI 自动驾驶能力</p>
+  </div>
+  <div class="tech-two-col animate-in" style="transition-delay:80ms;">
+    <div class="tech-features">
+      <div class="tech-feature">
+        <div class="tech-feature-title">持续自进化</div>
+        <div class="tech-feature-desc">从"能干活"到"越用越聪明"，打造能持续进化的AI系统</div>
+      </div>
+      <div class="tech-feature">
+        <div class="tech-feature-title">通专融合底层架构</div>
+        <div class="tech-feature-desc">通用大模型能力+行业专家经验深度融合，打造真正懂业务的AI专家</div>
+      </div>
+      <div class="tech-feature">
+        <div class="tech-feature-title">两大核心能力</div>
+        <div class="tech-feature-desc">自进化能力+强协同能力，多AI专家跨专业并行协作</div>
+      </div>
+      <div class="tech-feature">
+        <div class="tech-feature-title">自研Frontis OS技术底座</div>
+        <div class="tech-feature-desc">提供统一的专家开发、部署、运营和进化管理能力</div>
+      </div>
+      <a href="#apply" class="btn-outline-cyan">查看产品详情 →</a>
+    </div>
+    <div class="tech-products">
+      <div class="tech-product-card">
+        <div class="tech-product-name">衔远大观 Frontis AI</div>
+        <div class="tech-product-sub">专家级智能体进化平台，聚焦企业高价值决策场景</div>
+        <div class="tech-product-tags">
+          <span class="tech-product-tag">Agent 3.0</span>
+          <span class="tech-product-tag">Frontis OS</span>
+          <span class="tech-product-tag">企业级</span>
+        </div>
+      </div>
+      <div class="tech-product-card">
+        <div class="tech-product-name">领衔者 Leadeep AI</div>
+        <div class="tech-product-sub">面向企业一号位的AI决策助手</div>
+        <div class="tech-product-tags">
+          <span class="tech-product-tag">战略决策</span>
+          <span class="tech-product-tag">竞情分析</span>
+          <span class="tech-product-tag">组织洞察</span>
+        </div>
+      </div>
+      <div class="tech-product-card">
+        <div class="tech-product-name">行业解决方案</div>
+        <div class="tech-product-sub">覆盖供应链、金融、制造、能源等多个行业</div>
+        <div class="tech-product-tags">
+          <span class="tech-product-tag">供应链</span>
+          <span class="tech-product-tag">金融</span>
+          <span class="tech-product-tag">制造</span>
+          <span class="tech-product-tag">能源</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 5 · 三重收益 -->
+<section id="revenue">
+  <div class="animate-in">
+    <div class="section-label" style="color:#999;">REVENUE MODEL</div>
+    <h2>一次布局 三重收益 长期稳定回报</h2>
+    <p class="section-sub-dark">不同于传统代理的一次性提成，衔远合伙人享有持续复利的商业回报</p>
+  </div>
+  <div class="revenue-grid animate-in" style="transition-delay:80ms;">
+    <div class="revenue-card">
+      <div class="revenue-num">高比例</div>
+      <div class="revenue-type">产品服务收益</div>
+      <div class="revenue-tag">SOFTWARE LICENSE</div>
+      <div class="revenue-desc">标准化产品销售、定制化项目交付，享受行业领先的服务收益比例，开单即有丰厚回报</div>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-num">高额</div>
+      <div class="revenue-type">项目合作收益</div>
+      <div class="revenue-tag">PROJECT REVENUE</div>
+      <div class="revenue-desc">本地政企大单、百万级私有云定制项目，总部专家团队全程陪跑，共享高额项目收益</div>
+    </div>
+    <div class="revenue-card">
+      <div class="revenue-num">永续</div>
+      <div class="revenue-type">服务分成收益</div>
+      <div class="revenue-tag">PERPETUAL SHARING</div>
+      <div class="revenue-desc">客户每年续费、增购、升级，均享受固定比例永续分成，一次开发客户，长期锁定收益</div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 6 · 六大赋能 -->
+<section id="support">
+  <div class="animate-in">
+    <div class="section-label">FULL SUPPORT</div>
+    <h2>你只管开拓市场<br>剩下的全交给我们</h2>
+    <p class="section-sub">总部全链路赋能，零技术门槛启动 AI 事业</p>
+  </div>
+  <div class="support-grid animate-in" style="transition-delay:80ms;">
+    <div class="support-card">
+      <div class="support-icon">◈</div>
+      <div class="support-title">品牌赋能</div>
+      <div class="support-subtitle">BRAND SUPPORT</div>
+      <div class="support-desc">国家级媒体背书、顶级资本加持、全套品牌VI、宣传物料、标杆案例全授权</div>
+    </div>
+    <div class="support-card">
+      <div class="support-icon">◈</div>
+      <div class="support-title">流量赋能</div>
+      <div class="support-subtitle">TRAFFIC SUPPORT</div>
+      <div class="support-desc">全国线上广告全域投放，授权区域精准客户线索100%全量分配</div>
+    </div>
+    <div class="support-card">
+      <div class="support-icon">◈</div>
+      <div class="support-title">运营赋能</div>
+      <div class="support-subtitle">OPERATIONS SUPPORT</div>
+      <div class="support-desc">全套销售体系、话术模板、谈单技巧全输出，一对一专属运营经理带教</div>
+    </div>
+    <div class="support-card">
+      <div class="support-icon">◈</div>
+      <div class="support-title">技术赋能</div>
+      <div class="support-subtitle">TECH SUPPORT</div>
+      <div class="support-desc">全链路技术研发、产品迭代全兜底，定制化方案、项目交付全由总部负责</div>
+    </div>
+    <div class="support-card">
+      <div class="support-icon">◈</div>
+      <div class="support-title">培训赋能</div>
+      <div class="support-subtitle">TRAINING SUPPORT</div>
+      <div class="support-desc">定期开展产品、技术、销售、管理培训，帮助合作伙伴快速搭建团队</div>
+    </div>
+    <div class="support-card">
+      <div class="support-icon">◈</div>
+      <div class="support-title">资质赋能</div>
+      <div class="support-subtitle">CREDENTIAL SUPPORT</div>
+      <div class="support-desc">官方合规资质、软件著作权、行业认证全共享，助力本地政企项目投标</div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 7 · 费用表 -->
+<section id="pricing">
+  <div class="animate-in">
+    <div class="section-label" style="color:#999;">PARTNERSHIP TIERS</div>
+    <h2>全国统一合作标准<br>一城一席 独家授权</h2>
+    <p class="section-sub-dark">按城市等级差异化定价 · 保障每位合伙人的区域独享权益</p>
+    <div class="pricing-badge">一城一席 · 先到先得</div>
+  </div>
+  <table class="pricing-table animate-in" style="transition-delay:80ms;">
+    <thead>
+      <tr>
+        <th>城市级别</th>
+        <th>核心市场特征</th>
+        <th>合作费用</th>
+        <th>区域独家权益</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><div class="city-type">一线城市</div></td>
+        <td><div class="city-example">全国经济/科技中心，企业密度极高</div></td>
+        <td><div class="price-num price-highlight">200万元</div></td>
+        <td>区域内独家经营权，所有客户线索全量分配</td>
+      </tr>
+      <tr>
+        <td><div class="city-type">新一线城市</div></td>
+        <td><div class="city-example">区域经济中心，AI转型需求迫切</div></td>
+        <td><div class="price-num price-highlight">150万元</div></td>
+        <td>区域内独家经营权，所有客户线索全量分配</td>
+      </tr>
+      <tr>
+        <td><div class="city-type">二线城市</div></td>
+        <td><div class="city-example">省会/经济强市，AI市场快速增长</div></td>
+        <td><div class="price-num price-highlight">100万元</div></td>
+        <td>区域内独家经营权，所有客户线索全量分配</td>
+      </tr>
+      <tr>
+        <td><div class="city-type">三线城市</div></td>
+        <td><div class="city-example">地级市，经济发展较好</div></td>
+        <td><div class="price-num">50万元</div></td>
+        <td>区域内独家经营权，所有客户线索全量分配</td>
+      </tr>
+      <tr>
+        <td><div class="city-type">四线城市</div></td>
+        <td><div class="city-example">普通地级市，AI市场培育期</div></td>
+        <td><div class="price-num">30万元</div></td>
+        <td>区域内独家经营权，所有客户线索全量分配</td>
+      </tr>
+      <tr>
+        <td><div class="city-type">五线城市</div></td>
+        <td><div class="city-example">经济欠发达地级市</div></td>
+        <td><div class="price-num">20万元</div></td>
+        <td>区域内独家经营权，所有客户线索全量分配</td>
+      </tr>
+    </tbody>
+  </table>
+  <div class="pricing-notes animate-in" style="transition-delay:160ms;">
+    <div class="pricing-note">合作费用包含品牌授权费、技术服务费、培训服务费，合同期3年</div>
+    <div class="pricing-note">合作保证金为合作费用的15%，合同到期无违约全额无息退还</div>
+    <div class="pricing-note">经济强县按对应地级市标准执行，具体可咨询专属顾问</div>
+  </div>
+</section>
+
+<!-- Screen 8 · 合作流程 -->
+<section id="flow">
+  <div class="animate-in">
+    <div class="section-label">PARTNERSHIP PROCESS</div>
+    <h2>简单 6 步<br>快速成为衔远科技城市生态合作伙伴</h2>
+  </div>
+  <div class="flow-steps animate-in" style="transition-delay:80ms;">
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 01</div>
+      <div class="flow-step-icon">◎</div>
+      <div class="flow-step-title">在线申请</div>
+      <div class="flow-step-desc">填写下方表单，提交合作申请</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 02</div>
+      <div class="flow-step-icon">◎</div>
+      <div class="flow-step-title">审核</div>
+      <div class="flow-step-desc">总部1个工作日内完成审核</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 03</div>
+      <div class="flow-step-icon">◎</div>
+      <div class="flow-step-title">商务洽谈</div>
+      <div class="flow-step-desc">专属顾问一对一沟通合作细节</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 04</div>
+      <div class="flow-step-icon">◎</div>
+      <div class="flow-step-title">实地考察</div>
+      <div class="flow-step-desc">邀请前往北京总部参观考察</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 05</div>
+      <div class="flow-step-icon">◎</div>
+      <div class="flow-step-title">签约授权</div>
+      <div class="flow-step-desc">签订合作协议，颁发授权证书</div>
+    </div>
+    <div class="flow-step">
+      <div class="flow-step-num">STEP 06</div>
+      <div class="flow-step-icon">◎</div>
+      <div class="flow-step-title">启动运营</div>
+      <div class="flow-step-desc">总部赋能支持，启动本地业务</div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 9 · 合作案例 -->
+<section id="cases">
+  <div class="animate-in">
+    <div class="section-label">PARTNER CASES</div>
+    <h2>携手衔远 共筑 AI 未来</h2>
+    <p class="section-sub">真实伙伴，真实成果</p>
+  </div>
+  <div class="cases-grid animate-in" style="transition-delay:80ms;">
+    <div class="case-card">
+      <div class="case-city">HANGZHOU · 杭州</div>
+      <div class="case-metric">500<span>万</span></div>
+      <div class="case-metric-label">合作伙伴：某系统集成商</div>
+      <div class="case-divider"></div>
+      <div class="case-desc"><strong>3个月签约12家客户，合同超500万</strong></div>
+    </div>
+    <div class="case-card">
+      <div class="case-city">CHENGDU · 成都</div>
+      <div class="case-metric">2<span>× 营收</span></div>
+      <div class="case-metric-label">合作伙伴：某传统企业主</div>
+      <div class="case-divider"></div>
+      <div class="case-desc">原有业务成功转型AI，<strong>半年内实现营收翻倍</strong></div>
+    </div>
+    <div class="case-card">
+      <div class="case-city">SHENZHEN · 深圳</div>
+      <div class="case-metric">30<span>+</span></div>
+      <div class="case-metric-label">合作伙伴：某创业团队</div>
+      <div class="case-divider"></div>
+      <div class="case-desc"><strong>专注金融AI解决方案，服务客户30+</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 10 · 申请表单 -->
+<section id="apply">
+  <div class="apply-inner">
+    <div class="apply-left animate-in">
+      <div class="section-label" style="color:#999;">JOIN US NOW</div>
+      <h2>立即申请成为<br><em>城市生态合作伙伴</em></h2>
+      <p class="apply-desc">全国已有37个城市名额被锁定，每个城市仅设1个独家合作伙伴。提交申请后专属顾问与您联系。</p>
+      <div class="apply-contact">
+        <div class="apply-contact-label">直接咨询</div>
+        <div class="apply-contact-name">孙先生</div>
+        <div class="apply-contact-phone">13002158589</div>
+      </div>
+    </div>
+    <div class="apply-form animate-in" style="transition-delay:100ms;">
+      <div class="form-field">
+        <label>姓名 *</label>
+        <input type="text" placeholder="请输入您的姓名">
+      </div>
+      <div class="form-field">
+        <label>联系电话 *</label>
+        <input type="tel" placeholder="请输入您的手机号码">
+      </div>
+      <div class="form-field">
+        <label>意向城市 *</label>
+        <select>
+          <option value="" disabled selected>请选择意向城市</option>
+          <option>北京</option>
+          <option>上海</option>
+          <option>广州</option>
+          <option>武汉</option>
+          <option>南京</option>
+          <option>重庆</option>
+          <option>西安</option>
+          <option>苏州</option>
+          <option>天津</option>
+          <option>其他城市</option>
+        </select>
+      </div>
+      <button class="form-submit">立即提交申请 锁定独家名额</button>
+      <p class="form-note">我们将严格保护您的信息安全，仅用于合作对接，绝不泄露给任何第三方</p>
+    </div>
+  </div>
+</section>
+
+<div data-site-footer></div>
+<script src="./components/site-shell.js"></script>
+
+<script>
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (!entry.isIntersecting) return;
+    entry.target.classList.add('visible');
+    entry.target.querySelectorAll('.animate-in').forEach((el, i) => {
+      const base = parseInt(el.style.transitionDelay) || 0;
+      setTimeout(() => el.classList.add('visible'), base || i * 80);
+    });
+    observer.unobserve(entry.target);
+  });
+}, { threshold: 0.1 });
+
+document.querySelectorAll('section').forEach(s => {
+  s.classList.add('section-enter');
+  observer.observe(s);
+});
+
+document.body.style.opacity = '0';
+window.addEventListener('DOMContentLoaded', () => {
+  document.body.style.transition = 'opacity 300ms ease';
+  document.body.style.opacity = '1';
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,1526 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leadeep AI · 领衔者 — Frontis AI 衔远科技</title>
+  <meta name="description" content="为企业老板配备永不下班的 AI 数字分身，随时为你出谋划策、找订单。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+
+  <style>
+    /* ─────────────────────────────────────────
+       CSS 变量 & Reset
+    ───────────────────────────────────────── */
+    :root {
+      --quantum-black:   #000000;
+      --threshold-cyan:  #00C1D4;
+      --pure-white:      #FFFFFF;
+      --level-gray:      #3D4145;
+      --energy-gray:     #F0F2F4;
+      --energy-orange:   #FA5F26;
+      --font-en:         'Space Grotesk', sans-serif;
+      --font-mono:       'JetBrains Mono', monospace;
+      --font-cn:         -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --ease-threshold:  cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-exit:       cubic-bezier(0.55, 0, 1, 0.45);
+    }
+
+    *, *::before, *::after {
+      margin: 0; padding: 0;
+      box-sizing: border-box;
+      border-radius: 0 !important;
+      box-shadow: none !important;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-cn);
+      background: var(--pure-white);
+      color: var(--quantum-black);
+      overflow-x: hidden;
+      line-height: 1.6;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { text-decoration: none; color: inherit; }
+    button { cursor: pointer; font-family: inherit; border: none; background: none; }
+
+    /* ─────────────────────────────────────────
+       动效
+    ───────────────────────────────────────── */
+    @keyframes threshold-pulse {
+      0%   { box-shadow: 0 0 8px  2px rgba(0,193,212,0.4) !important; }
+      50%  { box-shadow: 0 0 18px 5px rgba(0,193,212,0.75) !important; }
+      100% { box-shadow: 0 0 8px  2px rgba(0,193,212,0.4) !important; }
+    }
+
+    @keyframes nav-slide-down {
+      from { opacity:0; transform: translateY(-12px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    @keyframes hero-fade-up {
+      from { opacity:0; transform: translateY(20px); }
+      to   { opacity:1; transform: translateY(0); }
+    }
+
+    @keyframes threshold-line-expand {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    /* 滚动进入 - 从左切入 */
+    .animate-in {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .section-enter {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-enter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section {
+      min-height: 100vh;
+    }
+
+    /* 延迟变体 */
+    .animate-in.delay-1.visible { transition-delay: 80ms; }
+    .animate-in.delay-2.visible { transition-delay: 160ms; }
+    .animate-in.delay-3.visible { transition-delay: 240ms; }
+    .animate-in.delay-4.visible { transition-delay: 320ms; }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    /* ─────────────────────────────────────────
+       按钮
+    ───────────────────────────────────────── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 28px;
+      background: var(--quantum-black);
+      color: var(--pure-white);
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1.5px solid var(--quantum-black);
+      transition: background 200ms var(--ease-threshold),
+                  color 200ms var(--ease-threshold),
+                  border-color 200ms var(--ease-threshold);
+      cursor: pointer;
+    }
+    .btn-primary:hover {
+      background: var(--threshold-cyan);
+      border-color: var(--threshold-cyan);
+      color: var(--quantum-black);
+    }
+
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 28px;
+      background: transparent;
+      color: var(--pure-white);
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1.5px solid var(--pure-white);
+      transition: color 200ms var(--ease-threshold),
+                  border-color 200ms var(--ease-threshold);
+      cursor: pointer;
+    }
+    .btn-secondary:hover {
+      color: var(--threshold-cyan);
+      border-color: var(--threshold-cyan);
+    }
+
+    /* 浅色背景下的次级按钮 */
+    .btn-secondary-dark {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 28px;
+      background: transparent;
+      color: var(--quantum-black);
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1.5px solid var(--quantum-black);
+      transition: color 200ms var(--ease-threshold),
+                  border-color 200ms var(--ease-threshold);
+      cursor: pointer;
+    }
+    .btn-secondary-dark:hover {
+      color: var(--threshold-cyan);
+      border-color: var(--threshold-cyan);
+    }
+
+    /* 反转主CTA（深色背景中白底黑字） */
+    .btn-primary-inverted {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 13px 28px;
+      background: var(--pure-white);
+      color: var(--quantum-black);
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      border: 1.5px solid var(--pure-white);
+      transition: background 200ms var(--ease-threshold),
+                  color 200ms var(--ease-threshold);
+      cursor: pointer;
+    }
+    .btn-primary-inverted:hover {
+      background: var(--threshold-cyan);
+      border-color: var(--threshold-cyan);
+      color: var(--quantum-black);
+    }
+
+    /* 小标签 */
+    .tag {
+      display: inline-block;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 500;
+      color: var(--threshold-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      border: 1px solid var(--threshold-cyan);
+      padding: 3px 10px;
+      margin-bottom: 20px;
+    }
+
+    /* 节标题通用 */
+    .section-heading {
+      font-family: var(--font-en);
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--quantum-black);
+    }
+    .section-heading-white {
+      font-family: var(--font-en);
+      font-size: 36px;
+      font-weight: 700;
+      line-height: 1.15;
+      color: var(--pure-white);
+    }
+
+    /* ═══════════════════════════════════════════
+       NAV
+    ═══════════════════════════════════════════ */
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: var(--quantum-black);
+      border-bottom: 1px solid #1a1a1a;
+      height: 60px;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      animation: nav-slide-down 500ms var(--ease-threshold) both;
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      gap: 0;
+    }
+
+    .nav-logo {
+      flex-shrink: 0;
+      margin-right: 48px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      margin-left: auto;
+      list-style: none;
+    }
+
+    .nav-links > li {
+      position: relative;
+    }
+
+    .nav-links > li > a,
+    .nav-links > li > button {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 500;
+      color: #c8cdd3;
+      letter-spacing: 0.3px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      padding: 0;
+      background: none;
+      border: none;
+      cursor: pointer;
+      position: relative;
+      transition: color 200ms var(--ease-threshold);
+    }
+
+    .nav-links > li > a::after,
+    .nav-links > li > button::after {
+      content: '';
+      position: absolute;
+      bottom: -4px; left: 0;
+      width: 0; height: 1px;
+      background: var(--threshold-cyan);
+      transition: width 200ms var(--ease-threshold);
+    }
+    .nav-links > li > a:hover,
+    .nav-links > li > button:hover { color: var(--pure-white); }
+    .nav-links > li > a:hover::after,
+    .nav-links > li > button:hover::after { width: 100%; }
+
+    /* 当前页高亮 */
+    .nav-links > li.active > a,
+    .nav-links > li.active > button { color: var(--threshold-cyan); }
+
+    /* 下拉菜单 */
+    .dropdown-menu {
+      display: none;
+      position: absolute;
+      top: calc(100% + 16px);
+      left: 0;
+      background: var(--quantum-black);
+      border: 1px solid #2a2a2a;
+      min-width: 200px;
+      z-index: 200;
+      padding: 8px 0;
+    }
+    .nav-links > li:hover .dropdown-menu {
+      display: block;
+      animation: nav-slide-down 200ms var(--ease-threshold) both;
+    }
+
+    .dropdown-menu a {
+      display: block;
+      padding: 10px 20px;
+      font-family: var(--font-en);
+      font-size: 13px;
+      color: #8A8F96;
+      transition: color 160ms var(--ease-threshold),
+                  background 160ms var(--ease-threshold);
+    }
+    .dropdown-menu a:hover {
+      color: var(--pure-white);
+      background: #111;
+    }
+    .dropdown-menu .active-link {
+      color: var(--threshold-cyan);
+    }
+
+    .nav-cta {
+      flex-shrink: 0;
+      margin-left: 16px;
+    }
+    .nav-cta a {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 9px 20px;
+      background: transparent;
+      color: var(--threshold-cyan);
+      border: 1.5px solid var(--threshold-cyan);
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.3px;
+      transition: background 200ms var(--ease-threshold), color 200ms var(--ease-threshold);
+    }
+    .nav-cta a:hover { background: var(--threshold-cyan); color: var(--quantum-black); }
+
+    /* ═══════════════════════════════════════════
+       SCREEN 1 · HERO
+    ═══════════════════════════════════════════ */
+    .hero {
+      background: var(--quantum-black);
+      min-height: 100vh;
+      padding-top: 60px; /* nav height */
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* 临界线 */
+    .threshold-line {
+      position: absolute;
+      top: calc(60px + 20vh);  /* nav + 约20%处 */
+      left: 0;
+      width: 100%;
+      height: 3px;
+      background: var(--threshold-cyan);
+      animation:
+        threshold-line-expand 800ms 300ms var(--ease-threshold) both,
+        threshold-pulse 2.5s 1.1s ease-in-out infinite;
+      z-index: 1;
+    }
+
+    .hero-body {
+      flex: 1;
+      display: flex;
+      align-items: center;
+      padding: 0 48px;
+      padding-top: calc(20vh + 40px);
+      padding-bottom: 80px;
+      position: relative;
+      z-index: 2;
+      gap: 60px;
+    }
+
+    /* 左侧60% */
+    .hero-left {
+      flex: 0 0 60%;
+      max-width: 60%;
+    }
+
+    .hero-product-name {
+      font-family: var(--font-en);
+      font-size: 56px;
+      font-weight: 700;
+      color: var(--pure-white);
+      line-height: 1.05;
+      letter-spacing: -1px;
+      margin-bottom: 8px;
+      animation: hero-fade-up 600ms 600ms var(--ease-threshold) both;
+    }
+
+    .hero-product-cn {
+      font-family: var(--font-cn);
+      font-size: 28px;
+      font-weight: 700;
+      color: var(--pure-white);
+      margin-bottom: 24px;
+      animation: hero-fade-up 600ms 700ms var(--ease-threshold) both;
+    }
+
+    .hero-subtitle {
+      font-family: var(--font-cn);
+      font-size: 18px;
+      color: #8A8F96;
+      line-height: 1.65;
+      max-width: 520px;
+      margin-bottom: 40px;
+      animation: hero-fade-up 600ms 800ms var(--ease-threshold) both;
+    }
+
+    .hero-tag {
+      animation: hero-fade-up 600ms 450ms var(--ease-threshold) both;
+    }
+
+    .hero-cta-group {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      animation: hero-fade-up 600ms 950ms var(--ease-threshold) both;
+    }
+
+    /* 右侧40% */
+    .hero-right {
+      flex: 0 0 40%;
+      max-width: 40%;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      animation: hero-fade-up 600ms 700ms var(--ease-threshold) both;
+    }
+
+    /* B类占位通用 */
+    .img-placeholder {
+      background: #0a0a0a;
+      border: 1px solid var(--threshold-cyan);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #8A8F96;
+      font-size: 12px;
+      font-family: var(--font-mono);
+      text-align: center;
+      padding: 16px;
+      line-height: 1.5;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCREEN 2 · 三大产品形态
+    ═══════════════════════════════════════════ */
+    .products-section {
+      background: var(--pure-white);
+      padding: 96px 48px;
+    }
+
+    .products-header {
+      margin-bottom: 64px;
+    }
+
+    .products-header .section-heading { margin-bottom: 8px; }
+
+    .products-grid {
+      display: grid;
+      grid-template-columns: 1fr 1px 1fr 1px 1fr;
+      gap: 0;
+    }
+
+    .products-divider {
+      background: var(--threshold-cyan);
+      width: 1px;
+      align-self: stretch;
+    }
+
+    .product-card {
+      padding: 0 40px;
+      display: flex;
+      flex-direction: column;
+    }
+    .product-card:first-child { padding-left: 0; }
+    .product-card:last-child  { padding-right: 0; }
+
+    .product-card-img {
+      margin-bottom: 28px;
+    }
+
+    .product-card-name {
+      font-family: var(--font-en);
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--quantum-black);
+      margin-bottom: 12px;
+      letter-spacing: -0.2px;
+    }
+    .product-card-name-cn {
+      font-family: var(--font-cn);
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--level-gray);
+      margin-bottom: 12px;
+    }
+
+    .product-card-desc {
+      font-family: var(--font-cn);
+      font-size: 14px;
+      color: var(--level-gray);
+      line-height: 1.7;
+    }
+
+    /* A类SVG容器 — 人物+AI光环 */
+    .svg-avatar-container {
+      width: 100%;
+      height: 150px;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCREEN 3 · 三大安全承诺
+    ═══════════════════════════════════════════ */
+    .security-section {
+      background: var(--quantum-black);
+      padding: 96px 48px;
+    }
+
+    .security-header {
+      margin-bottom: 64px;
+    }
+
+    .security-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 0;
+    }
+
+    .security-card {
+      padding: 0 40px;
+      border-left: 2px solid var(--threshold-cyan);
+    }
+    .security-card:first-child {
+      padding-left: 32px;
+    }
+
+    .security-icon {
+      margin-bottom: 24px;
+    }
+
+    .security-title {
+      font-family: var(--font-en);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--pure-white);
+      margin-bottom: 6px;
+    }
+    .security-title-cn {
+      font-family: var(--font-cn);
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--pure-white);
+      margin-bottom: 14px;
+    }
+
+    .security-desc {
+      font-family: var(--font-cn);
+      font-size: 14px;
+      color: #8A8F96;
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCREEN 4 · 使用场景
+    ═══════════════════════════════════════════ */
+    .scenarios-section {
+      background: var(--pure-white);
+      padding: 96px 48px;
+    }
+
+    .scenarios-header {
+      margin-bottom: 64px;
+    }
+
+    .scenarios-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .scenario-card {
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scenario-svg-wrap {
+      margin-bottom: 24px;
+    }
+
+    .scenario-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--threshold-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .scenario-name {
+      font-family: var(--font-cn);
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--quantum-black);
+      margin-bottom: 12px;
+      line-height: 1.4;
+    }
+
+    .scenario-desc {
+      font-family: var(--font-cn);
+      font-size: 14px;
+      color: var(--level-gray);
+      line-height: 1.7;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCREEN 5 · 硬件规格
+    ═══════════════════════════════════════════ */
+    .specs-section {
+      background: var(--quantum-black);
+      padding: 96px 48px;
+      display: flex;
+      gap: 80px;
+      align-items: flex-start;
+    }
+
+    .specs-left {
+      flex: 0 0 40%;
+      max-width: 40%;
+    }
+
+    .specs-right {
+      flex: 1;
+    }
+
+    .specs-list {
+      list-style: none;
+      margin-top: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 0;
+    }
+
+    .spec-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid #1a1a1a;
+    }
+    .spec-row:first-child { border-top: 1px solid #1a1a1a; }
+
+    .spec-dot {
+      flex-shrink: 0;
+      width: 6px;
+      height: 6px;
+      background: var(--threshold-cyan);
+      margin-top: 7px;
+    }
+
+    .spec-label {
+      flex: 0 0 60px;
+      font-family: var(--font-cn);
+      font-size: 13px;
+      color: #8A8F96;
+    }
+
+    .spec-value {
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--pure-white);
+      line-height: 1.5;
+    }
+    .spec-value.cn {
+      font-family: var(--font-cn);
+    }
+
+    .specs-cta-group {
+      display: flex;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    /* ═══════════════════════════════════════════
+       SCREEN 6 · CTA双栏
+    ═══════════════════════════════════════════ */
+    .cta-section {
+      background: var(--pure-white);
+      padding: 96px 48px;
+    }
+
+    .cta-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 2px;
+    }
+
+    /* 左栏：黑色背景 */
+    .cta-card-left {
+      background: var(--quantum-black);
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cta-card-left .cta-title {
+      font-family: var(--font-cn);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--pure-white);
+      margin-bottom: 10px;
+    }
+
+    .cta-card-left .cta-sub {
+      font-family: var(--font-cn);
+      font-size: 14px;
+      color: #8A8F96;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .cta-price {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      color: var(--threshold-cyan);
+      letter-spacing: 1px;
+      margin-bottom: 28px;
+    }
+
+    /* 右栏：余能灰背景 */
+    .cta-card-right {
+      background: var(--energy-gray);
+      padding: 56px 48px;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+    }
+
+    .cta-card-right .cta-title {
+      font-family: var(--font-cn);
+      font-size: 26px;
+      font-weight: 700;
+      color: var(--quantum-black);
+      margin-bottom: 10px;
+    }
+
+    .cta-card-right .cta-sub {
+      font-family: var(--font-cn);
+      font-size: 14px;
+      color: var(--level-gray);
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .cta-btn-group {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    /* ═══════════════════════════════════════════
+       FOOTER
+    ═══════════════════════════════════════════ */
+    .footer {
+      background: var(--quantum-black);
+      border-top: 1px solid #1a1a1a;
+      padding: 64px 48px 40px;
+      scroll-snap-align: none;
+    }
+
+    .footer-top {
+      display: grid;
+      grid-template-columns: 220px 1fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid #1a1a1a;
+    }
+
+    .footer-brand p {
+      font-family: var(--font-cn);
+      font-size: 12px;
+      color: #5a5f65;
+      margin-top: 16px;
+      line-height: 1.6;
+    }
+
+    .footer-col-title {
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--pure-white);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer-col ul li a {
+      font-family: var(--font-cn);
+      font-size: 13px;
+      color: #5a5f65;
+      transition: color 160ms var(--ease-threshold);
+    }
+    .footer-col ul li a:hover { color: var(--threshold-cyan); }
+
+    .footer-bottom {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-top: 28px;
+    }
+
+    .footer-copy {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #3a3f45;
+      letter-spacing: 0.5px;
+    }
+
+    .footer-icp {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: #3a3f45;
+    }
+
+    /* ═══════════════════════════════════════════
+       公用间距辅助
+    ═══════════════════════════════════════════ */
+    .section-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--threshold-cyan);
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .divider-line {
+      width: 40px;
+      height: 2px;
+      background: var(--threshold-cyan);
+      margin-top: 16px;
+      margin-bottom: 48px;
+    }
+
+    /* ═══════════════════════════════════════════
+       响应式（基础断点）
+    ═══════════════════════════════════════════ */
+    @media (max-width: 1024px) {
+      .hero-body { padding: 0 32px; padding-top: calc(20vh + 40px); padding-bottom: 60px; }
+      .hero-left { flex: 0 0 55%; max-width: 55%; }
+      .hero-right { flex: 0 0 45%; max-width: 45%; }
+      .products-section,
+      .security-section,
+      .scenarios-section,
+      .cta-section,
+      .footer { padding-left: 32px; padding-right: 32px; }
+      .specs-section { padding-left: 32px; padding-right: 32px; }
+      .nav { padding: 0 32px; }
+    }
+
+    @media (max-width: 768px) {
+      .hero-body { flex-direction: column; padding-top: calc(20vh + 20px); gap: 32px; }
+      .hero-left, .hero-right { flex: 0 0 100%; max-width: 100%; }
+      .hero-product-name { font-size: 40px; }
+      .products-grid { grid-template-columns: 1fr; gap: 40px; }
+      .products-divider { display: none; }
+      .product-card { padding: 0; }
+      .security-grid { grid-template-columns: 1fr; gap: 40px; }
+      .security-card { margin-bottom: 8px; }
+      .scenarios-grid { grid-template-columns: 1fr; }
+      .specs-section { flex-direction: column; }
+      .specs-left, .specs-right { max-width: 100%; flex: none; }
+      .cta-grid { grid-template-columns: 1fr; }
+      .footer-top { grid-template-columns: 1fr 1fr; gap: 32px; }
+      .footer-brand { grid-column: 1 / -1; }
+      .nav-links { display: none; }
+    }
+  </style>
+  <link rel="stylesheet" href="./components/site-shell.css" />
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════════
+     NAV
+═══════════════════════════════════════════ -->
+<div data-site-header></div>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 1 · HERO
+═══════════════════════════════════════════ -->
+<section class="hero" id="hero">
+  <!-- 临界线 -->
+  <div class="threshold-line" id="threshold-line"></div>
+
+  <div class="hero-body">
+    <!-- 左侧 60% -->
+    <div class="hero-left">
+      <div class="tag hero-tag">面向企业领导者 · 一把手</div>
+
+      <h1 class="hero-product-name">Leadeep AI</h1>
+      <div class="hero-product-cn">领衔者</div>
+      <div style="display:inline-block;margin-top:12px;padding:4px 12px;border-left:3px solid #FA5F26;color:#FA5F26;font-size:13px;font-family:'JetBrains Mono',monospace;letter-spacing:2px;">DECISION AI · 决策级</div>
+
+      <p class="hero-subtitle">
+        为企业老板配备永不下班的 AI 数字分身<br>
+        随时为你出谋划策、找订单
+      </p>
+
+      <div class="hero-cta-group">
+        <a href="#" class="btn-primary">申请体验 →</a>
+        <a href="#products" class="btn-secondary">了解详情 →</a>
+      </div>
+    </div>
+
+    <!-- 右侧 40% · B类占位 -->
+    <div class="hero-right">
+      <div class="img-placeholder" style="width:100%;height:360px;">
+        [待提供：随身录音卡片硬件 + 手持使用场景图<br>
+        800×600px · 产品团队]
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 2 · 三大产品形态
+═══════════════════════════════════════════ -->
+<section class="products-section" id="products">
+  <div class="products-header animate-in">
+    <div class="section-label">产品形态 · PRODUCT FORMS</div>
+    <h2 class="section-heading">三种形态，一个智能分身</h2>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="products-grid">
+
+    <!-- 左：随身录音卡片 -->
+    <div class="product-card animate-in delay-1">
+      <div class="product-card-img">
+        <!-- B类占位 -->
+        <div class="img-placeholder" style="width:100%;height:150px;">
+          [待提供：录音卡片实物图<br>480×320px · 产品团队]
+        </div>
+      </div>
+      <div class="product-card-name">随身录音卡片</div>
+      <div class="product-card-desc">
+        信用卡大小，随身携带。会议、拜访、电话全程录音，自动上传分析。
+      </div>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="products-divider"></div>
+
+    <!-- 中：Leadeep App -->
+    <div class="product-card animate-in delay-2">
+      <div class="product-card-img">
+        <!-- B类占位 -->
+        <div class="img-placeholder" style="width:100%;height:150px;">
+          [待提供：App 主界面截图<br>320×560px · 产品团队]
+        </div>
+      </div>
+      <div class="product-card-name">Leadeep App</div>
+      <div class="product-card-desc">
+        AI 秘书随时待命，语音指令直接执行，一句话触发专家分析。
+      </div>
+    </div>
+
+    <!-- 分隔线 -->
+    <div class="products-divider"></div>
+
+    <!-- 右：AI 数字分身 -->
+    <div class="product-card animate-in delay-3">
+      <div class="product-card-img">
+        <!-- A类SVG：人物轮廓+AI光环，跃迁青线条，量子黑底 -->
+        <!-- // 此处可替图 -->
+        <div class="svg-avatar-container">
+          <svg width="260" height="150" viewBox="0 0 260 150" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- 量子黑底 -->
+            <rect width="260" height="150" fill="#000000"/>
+
+            <!-- 外层光环 1 -->
+            <ellipse cx="130" cy="75" rx="90" ry="62" stroke="#00C1D4" stroke-width="0.8" stroke-dasharray="4 3" opacity="0.35"/>
+            <!-- 外层光环 2 -->
+            <ellipse cx="130" cy="75" rx="72" ry="50" stroke="#00C1D4" stroke-width="1" stroke-dasharray="6 4" opacity="0.55"/>
+            <!-- 内层光环 -->
+            <ellipse cx="130" cy="75" rx="54" ry="38" stroke="#00C1D4" stroke-width="1.2" opacity="0.8"/>
+
+            <!-- 人物头部 -->
+            <circle cx="130" cy="52" r="14" stroke="#00C1D4" stroke-width="1.5"/>
+            <!-- 人物躯干 -->
+            <path d="M108 100 C108 82 122 74 130 74 C138 74 152 82 152 100" stroke="#00C1D4" stroke-width="1.5" stroke-linecap="square"/>
+            <!-- 肩部横线 -->
+            <line x1="112" y1="92" x2="148" y2="92" stroke="#00C1D4" stroke-width="0.8" opacity="0.5"/>
+
+            <!-- AI 节点 左上 -->
+            <circle cx="52" cy="40" r="3" fill="#00C1D4" opacity="0.9"/>
+            <line x1="52" y1="40" x2="90" y2="58" stroke="#00C1D4" stroke-width="0.6" opacity="0.5"/>
+
+            <!-- AI 节点 右上 -->
+            <circle cx="208" cy="38" r="3" fill="#00C1D4" opacity="0.9"/>
+            <line x1="208" y1="38" x2="170" y2="56" stroke="#00C1D4" stroke-width="0.6" opacity="0.5"/>
+
+            <!-- AI 节点 左下 -->
+            <circle cx="44" cy="108" r="2.5" fill="#00C1D4" opacity="0.7"/>
+            <line x1="44" y1="108" x2="100" y2="90" stroke="#00C1D4" stroke-width="0.6" opacity="0.4"/>
+
+            <!-- AI 节点 右下 -->
+            <circle cx="216" cy="110" r="2.5" fill="#00C1D4" opacity="0.7"/>
+            <line x1="216" y1="110" x2="160" y2="90" stroke="#00C1D4" stroke-width="0.6" opacity="0.4"/>
+
+            <!-- 中央AI标识 -->
+            <text x="118" y="134" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" letter-spacing="3" opacity="0.8">A I  ∞</text>
+          </svg>
+        </div>
+      </div>
+      <div class="product-card-name">AI 数字分身</div>
+      <div class="product-card-desc">
+        持续学习你的决策风格，越用越懂你，形成专属 AI 秘书。
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 3 · 三大安全承诺
+═══════════════════════════════════════════ -->
+<section class="security-section">
+  <div class="security-header animate-in">
+    <div class="section-label" style="color:var(--threshold-cyan);">安全承诺 · SECURITY PROMISE</div>
+    <h2 class="section-heading-white">数据安全，是你的专属资产</h2>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="security-grid">
+
+    <!-- 硬件加密 -->
+    <!-- // 此处可替图 -->
+    <div class="security-card animate-in delay-1">
+      <div class="security-icon">
+        <!-- A类SVG：锁+芯片（外圈方框+内圈锁孔） -->
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 外圈芯片方框 -->
+          <rect x="2" y="2" width="36" height="36" stroke="#00C1D4" stroke-width="1.5"/>
+          <!-- 芯片引脚 左侧 -->
+          <line x1="2" y1="11" x2="0" y2="11" stroke="#00C1D4" stroke-width="1.2"/>
+          <line x1="2" y1="17" x2="0" y2="17" stroke="#00C1D4" stroke-width="1.2"/>
+          <line x1="2" y1="23" x2="0" y2="23" stroke="#00C1D4" stroke-width="1.2"/>
+          <line x1="2" y1="29" x2="0" y2="29" stroke="#00C1D4" stroke-width="1.2"/>
+          <!-- 芯片引脚 右侧 -->
+          <line x1="38" y1="11" x2="40" y2="11" stroke="#00C1D4" stroke-width="1.2"/>
+          <line x1="38" y1="17" x2="40" y2="17" stroke="#00C1D4" stroke-width="1.2"/>
+          <line x1="38" y1="23" x2="40" y2="23" stroke="#00C1D4" stroke-width="1.2"/>
+          <line x1="38" y1="29" x2="40" y2="29" stroke="#00C1D4" stroke-width="1.2"/>
+          <!-- 锁身（矩形） -->
+          <rect x="13" y="20" width="14" height="11" stroke="#00C1D4" stroke-width="1.4"/>
+          <!-- 锁梁（U形） -->
+          <path d="M15 20 L15 15 Q20 9 25 15 L25 20" stroke="#00C1D4" stroke-width="1.4" fill="none"/>
+          <!-- 锁孔 -->
+          <circle cx="20" cy="25" r="2" stroke="#00C1D4" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="security-title">Hardware Encryption</div>
+      <div class="security-title-cn">硬件级加密</div>
+      <p class="security-desc">
+        录音数据在设备端完成加密，传输过程端到端保护，无任何明文外泄风险。
+      </p>
+    </div>
+
+    <!-- 数据金库 -->
+    <!-- // 此处可替图 -->
+    <div class="security-card animate-in delay-2">
+      <div class="security-icon">
+        <!-- A类SVG：保险箱（矩形+把手+转盘） -->
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 箱体 -->
+          <rect x="3" y="5" width="30" height="30" stroke="#00C1D4" stroke-width="1.5"/>
+          <!-- 把手 -->
+          <rect x="33" y="14" width="5" height="12" stroke="#00C1D4" stroke-width="1.2"/>
+          <!-- 转盘外圈 -->
+          <circle cx="18" cy="20" r="8" stroke="#00C1D4" stroke-width="1.3"/>
+          <!-- 转盘刻度线 -->
+          <line x1="18" y1="12" x2="18" y2="14" stroke="#00C1D4" stroke-width="1"/>
+          <line x1="18" y1="26" x2="18" y2="28" stroke="#00C1D4" stroke-width="1"/>
+          <line x1="10" y1="20" x2="12" y2="20" stroke="#00C1D4" stroke-width="1"/>
+          <line x1="24" y1="20" x2="26" y2="20" stroke="#00C1D4" stroke-width="1"/>
+          <!-- 转盘指针 -->
+          <line x1="18" y1="20" x2="23" y2="16" stroke="#00C1D4" stroke-width="1.2"/>
+          <!-- 转盘中心 -->
+          <circle cx="18" cy="20" r="2" fill="#00C1D4"/>
+          <!-- 铰链 -->
+          <circle cx="3" cy="12" r="1.5" fill="#00C1D4"/>
+          <circle cx="3" cy="28" r="1.5" fill="#00C1D4"/>
+        </svg>
+      </div>
+      <div class="security-title">Data Sovereignty</div>
+      <div class="security-title-cn">数据主权独享</div>
+      <p class="security-desc">
+        你的对话、录音、分析结果仅属于你，不用于模型训练，不对第三方开放。
+      </p>
+    </div>
+
+    <!-- 权限独享 -->
+    <!-- // 此处可替图 -->
+    <div class="security-card animate-in delay-3">
+      <div class="security-icon">
+        <!-- A类SVG：盾牌+钥匙 -->
+        <svg width="40" height="40" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 盾形轮廓 -->
+          <path d="M20 3 L35 9 L35 22 Q35 33 20 38 Q5 33 5 22 L5 9 Z" stroke="#00C1D4" stroke-width="1.5" fill="none"/>
+          <!-- 盾牌内横线装饰 -->
+          <line x1="10" y1="14" x2="30" y2="14" stroke="#00C1D4" stroke-width="0.8" opacity="0.4"/>
+          <!-- 钥匙头（圆） -->
+          <circle cx="20" cy="19" r="5" stroke="#00C1D4" stroke-width="1.3"/>
+          <!-- 钥匙孔 -->
+          <circle cx="20" cy="19" r="1.8" stroke="#00C1D4" stroke-width="1"/>
+          <!-- 钥匙柄 -->
+          <line x1="20" y1="24" x2="20" y2="32" stroke="#00C1D4" stroke-width="1.4"/>
+          <!-- 钥匙齿 -->
+          <line x1="20" y1="27" x2="23" y2="27" stroke="#00C1D4" stroke-width="1.2"/>
+          <line x1="20" y1="30" x2="23" y2="30" stroke="#00C1D4" stroke-width="1.2"/>
+        </svg>
+      </div>
+      <div class="security-title">Private Deployment</div>
+      <div class="security-title-cn">企业私有部署</div>
+      <p class="security-desc">
+        支持私有云和本地化部署，数据不出企业网络，满足最严格的合规要求。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 4 · 使用场景
+═══════════════════════════════════════════ -->
+<section class="scenarios-section">
+  <div class="scenarios-header animate-in">
+    <div class="section-label">使用场景 · USE CASES</div>
+    <h2 class="section-heading">三大核心场景，覆盖决策链路</h2>
+    <div class="divider-line"></div>
+  </div>
+
+  <div class="scenarios-grid">
+
+    <!-- 会议→决策 -->
+    <!-- // 此处可替图 -->
+    <div class="scenario-card animate-in delay-1">
+      <div class="scenario-svg-wrap">
+        <!-- A类SVG：麦克风+箭头+对话框，量子黑底 -->
+        <svg width="100%" height="260" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet">
+          <rect width="400" height="200" fill="#000000"/>
+
+          <!-- 麦克风头部 -->
+          <rect x="74" y="60" width="32" height="50" stroke="#00C1D4" stroke-width="2.5"/>
+          <!-- 麦克风底座横线 -->
+          <path d="M60 122 Q90 140 122 122" stroke="#00C1D4" stroke-width="2.5" fill="none"/>
+          <line x1="90" y1="140" x2="90" y2="155" stroke="#00C1D4" stroke-width="2.5"/>
+          <line x1="76" y1="155" x2="104" y2="155" stroke="#00C1D4" stroke-width="2.5"/>
+          <!-- 麦克风音波 -->
+          <path d="M54 90 Q46 100 54 110" stroke="#00C1D4" stroke-width="1.8" opacity="0.5" fill="none"/>
+          <path d="M48 84 Q36 100 48 116" stroke="#00C1D4" stroke-width="1.5" opacity="0.3" fill="none"/>
+          <path d="M126 90 Q134 100 126 110" stroke="#00C1D4" stroke-width="1.8" opacity="0.5" fill="none"/>
+          <path d="M132 84 Q144 100 132 116" stroke="#00C1D4" stroke-width="1.5" opacity="0.3" fill="none"/>
+
+          <!-- 向右箭头 -->
+          <line x1="168" y1="100" x2="224" y2="100" stroke="#00C1D4" stroke-width="2.5"/>
+          <polyline points="216,92 226,100 216,108" stroke="#00C1D4" stroke-width="2.5" fill="none"/>
+
+          <!-- 对话框（矩形+小三角） -->
+          <rect x="242" y="62" width="110" height="72" stroke="#00C1D4" stroke-width="2.5"/>
+          <!-- 小三角（气泡尾部） -->
+          <polygon points="260,134 276,134 268,148" stroke="#00C1D4" stroke-width="2" fill="none"/>
+          <!-- 对话内容线条 -->
+          <line x1="256" y1="82" x2="336" y2="82" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <line x1="256" y1="94" x2="316" y2="94" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <line x1="256" y1="106" x2="326" y2="106" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <line x1="256" y1="118" x2="300" y2="118" stroke="#00C1D4" stroke-width="1.5" opacity="0.3"/>
+
+          <!-- 底部标识 -->
+          <text x="20" y="188" font-family="'JetBrains Mono',monospace" font-size="11" fill="#00C1D4" letter-spacing="2" opacity="0.6">MEETING → DECISION</text>
+        </svg>
+      </div>
+      <div class="scenario-label" style="color:#FA5F26;">场景 01</div>
+      <div class="scenario-name">会议录音 → 智能决策</div>
+      <p class="scenario-desc">
+        每次会议自动生成结构化纪要、风险提示、行动清单，无需人工整理。
+      </p>
+    </div>
+
+    <!-- 跟进→拓客 -->
+    <!-- // 此处可替图 -->
+    <div class="scenario-card animate-in delay-2">
+      <div class="scenario-svg-wrap">
+        <!-- A类SVG：三个人物圆圈+连线网络图，量子黑底 -->
+        <svg width="100%" height="260" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet">
+          <rect width="400" height="200" fill="#000000"/>
+
+          <!-- 中心节点 -->
+          <circle cx="200" cy="100" r="22" stroke="#00C1D4" stroke-width="1.8"/>
+          <!-- 中心人物头 -->
+          <circle cx="200" cy="91" r="7" stroke="#00C1D4" stroke-width="2"/>
+          <path d="M186 112 Q186 104 200 104 Q214 104 214 112" stroke="#00C1D4" stroke-width="2" fill="none"/>
+
+          <!-- 左上节点 -->
+          <circle cx="94" cy="64" r="16" stroke="#00C1D4" stroke-width="2.2" opacity="0.8"/>
+          <circle cx="94" cy="57" r="5.5" stroke="#00C1D4" stroke-width="1.8" opacity="0.8"/>
+          <path d="M84 76 Q84 70 94 70 Q104 70 104 76" stroke="#00C1D4" stroke-width="1.8" fill="none" opacity="0.8"/>
+          <!-- 连线 左上→中心 -->
+          <line x1="108" y1="73" x2="180" y2="90" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <!-- 左上外延节点 -->
+          <circle cx="52" cy="36" r="5" stroke="#00C1D4" stroke-width="1.8" opacity="0.4"/>
+          <line x1="52" y1="36" x2="80" y2="54" stroke="#00C1D4" stroke-width="1.2" opacity="0.3"/>
+
+          <!-- 右上节点 -->
+          <circle cx="306" cy="64" r="16" stroke="#00C1D4" stroke-width="2.2" opacity="0.8"/>
+          <circle cx="306" cy="57" r="5.5" stroke="#00C1D4" stroke-width="1.8" opacity="0.8"/>
+          <path d="M296 76 Q296 70 306 70 Q316 70 316 76" stroke="#00C1D4" stroke-width="1.8" fill="none" opacity="0.8"/>
+          <!-- 连线 右上→中心 -->
+          <line x1="292" y1="73" x2="220" y2="90" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <!-- 右上外延节点 -->
+          <circle cx="348" cy="36" r="5" stroke="#00C1D4" stroke-width="1.8" opacity="0.4"/>
+          <line x1="348" y1="36" x2="320" y2="54" stroke="#00C1D4" stroke-width="1.2" opacity="0.3"/>
+
+          <!-- 下方节点 -->
+          <circle cx="200" cy="158" r="16" stroke="#00C1D4" stroke-width="2.2" opacity="0.8"/>
+          <circle cx="200" cy="151" r="5.5" stroke="#00C1D4" stroke-width="1.8" opacity="0.8"/>
+          <path d="M190 170 Q190 164 200 164 Q210 164 210 170" stroke="#00C1D4" stroke-width="1.8" fill="none" opacity="0.8"/>
+          <!-- 连线 中心→下方 -->
+          <line x1="200" y1="122" x2="200" y2="142" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+
+          <!-- 数据流动点 -->
+          <circle cx="144" cy="81" r="2" fill="#00C1D4" opacity="0.9"/>
+          <circle cx="256" cy="81" r="2" fill="#00C1D4" opacity="0.9"/>
+
+          <text x="20" y="190" font-family="'JetBrains Mono',monospace" font-size="11" fill="#00C1D4" letter-spacing="2" opacity="0.6">FOLLOW-UP → EXPANSION</text>
+        </svg>
+      </div>
+      <div class="scenario-label">场景 02</div>
+      <div class="scenario-name">客户跟进 → 精准拓客</div>
+      <p class="scenario-desc">
+        AI 分析客户行为，自动推荐下一步动作，找到隐藏销售机会。
+      </p>
+    </div>
+
+    <!-- 情报→研判 -->
+    <!-- // 此处可替图 -->
+    <div class="scenario-card animate-in delay-3">
+      <div class="scenario-svg-wrap">
+        <!-- A类SVG：雷达波纹（同心半圆弧）+右侧节点，量子黑底 -->
+        <svg width="100%" height="260" viewBox="0 0 400 200" fill="none" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMinYMid meet">
+          <rect width="400" height="200" fill="#000000"/>
+
+          <!-- 雷达原点 -->
+          <circle cx="110" cy="130" r="4" fill="#00C1D4"/>
+
+          <!-- 雷达波纹 同心半圆弧 向外 -->
+          <path d="M110 130 A30 30 0 0 1 140 100" stroke="#00C1D4" stroke-width="2" fill="none" opacity="0.9"/>
+          <path d="M110 130 A30 30 0 0 0 80 100" stroke="#00C1D4" stroke-width="2" fill="none" opacity="0.9"/>
+          <path d="M110 130 A60 60 0 0 1 170 130" stroke="#00C1D4" stroke-width="1.8" fill="none" opacity="0.7"/>
+          <path d="M110 130 A60 60 0 0 0 50 130" stroke="#00C1D4" stroke-width="1.8" fill="none" opacity="0.7"/>
+          <path d="M110 130 A90 90 0 0 1 200 130" stroke="#00C1D4" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <path d="M110 130 A90 90 0 0 0 20 130" stroke="#00C1D4" stroke-width="1.5" fill="none" opacity="0.5"/>
+          <path d="M110 130 A120 120 0 0 1 230 130" stroke="#00C1D4" stroke-width="1.2" fill="none" opacity="0.3"/>
+          <path d="M110 130 A50 50 0 0 1 160 80" stroke="#00C1D4" stroke-width="1.5" fill="none" opacity="0.6"/>
+
+          <!-- 水平基线 -->
+          <line x1="10" y1="130" x2="240" y2="130" stroke="#00C1D4" stroke-width="1.2" opacity="0.3"/>
+
+          <!-- 信号射线 -->
+          <line x1="110" y1="130" x2="220" y2="68" stroke="#00C1D4" stroke-width="1.5" opacity="0.6"/>
+
+          <!-- 右侧节点网络 -->
+          <!-- 节点1 -->
+          <rect x="248" y="54" width="8" height="8" stroke="#00C1D4" stroke-width="2"/>
+          <line x1="252" y1="62" x2="252" y2="78" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <!-- 节点2 -->
+          <rect x="248" y="80" width="8" height="8" stroke="#00C1D4" stroke-width="2"/>
+          <line x1="252" y1="88" x2="252" y2="108" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <!-- 节点3 -->
+          <rect x="248" y="110" width="8" height="8" stroke="#00C1D4" stroke-width="2"/>
+          <line x1="256" y1="114" x2="282" y2="114" stroke="#00C1D4" stroke-width="1.5" opacity="0.5"/>
+          <!-- 节点4 扩展 -->
+          <rect x="284" y="78" width="6" height="6" stroke="#00C1D4" stroke-width="1.8" opacity="0.7"/>
+          <rect x="284" y="108" width="6" height="6" stroke="#00C1D4" stroke-width="1.8" opacity="0.7"/>
+          <rect x="316" y="92" width="6" height="6" stroke="#00C1D4" stroke-width="1.8" opacity="0.5"/>
+          <!-- 横向连线 -->
+          <line x1="256" y1="84" x2="282" y2="81" stroke="#00C1D4" stroke-width="1.2" opacity="0.5"/>
+          <line x1="290" y1="81" x2="314" y2="94" stroke="#00C1D4" stroke-width="1.2" opacity="0.4"/>
+          <line x1="290" y1="111" x2="314" y2="97" stroke="#00C1D4" stroke-width="1.2" opacity="0.4"/>
+
+          <!-- 左侧雷达扫描线 -->
+          <line x1="110" y1="130" x2="170" y2="60" stroke="#00C1D4" stroke-width="1.8" opacity="0.4" stroke-dasharray="2 4"/>
+
+          <text x="20" y="188" font-family="'JetBrains Mono',monospace" font-size="11" fill="#00C1D4" letter-spacing="2" opacity="0.6">INTELLIGENCE → STRATEGY</text>
+        </svg>
+      </div>
+      <div class="scenario-label">场景 03</div>
+      <div class="scenario-name">市场情报 → 战略研判</div>
+      <p class="scenario-desc">
+        持续追踪行业动态，AI 主动推送关键信号，帮你看清下一步方向。
+      </p>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 5 · 硬件规格
+═══════════════════════════════════════════ -->
+<section class="specs-section">
+
+  <!-- 左侧40% · B类占位 -->
+  <div class="specs-left animate-in">
+    <div class="img-placeholder" style="width:100%;height:240px;">
+      [待提供：录音卡片多角度产品图<br>
+      640×400px，白底或深色背景 · 产品团队]
+    </div>
+  </div>
+
+  <!-- 右侧60% -->
+  <div class="specs-right animate-in delay-2">
+    <div class="tag">硬件参数</div>
+    <h2 class="section-heading-white">随身录音卡片<br>规格参数</h2>
+
+    <ul class="specs-list">
+      <li class="spec-row">
+        <span class="spec-dot"></span>
+        <span class="spec-label">尺寸</span>
+        <span class="spec-value cn">信用卡大小（85×54×4mm）</span>
+      </li>
+      <li class="spec-row">
+        <span class="spec-dot"></span>
+        <span class="spec-label">续航</span>
+        <span class="spec-value cn">待机 30 天 / 连续录音 8 小时</span>
+      </li>
+      <li class="spec-row">
+        <span class="spec-dot"></span>
+        <span class="spec-label">存储</span>
+        <span class="spec-value">32GB 本地加密存储</span>
+      </li>
+      <li class="spec-row">
+        <span class="spec-dot"></span>
+        <span class="spec-label">连接</span>
+        <span class="spec-value">Bluetooth 5.2 + WiFi 双模传输</span>
+      </li>
+      <li class="spec-row">
+        <span class="spec-dot"></span>
+        <span class="spec-label">兼容</span>
+        <span class="spec-value">iOS 14+ / Android 10+</span>
+      </li>
+      <li class="spec-row">
+        <span class="spec-dot"></span>
+        <span class="spec-label">价格</span>
+        <span class="spec-value" style="color:var(--threshold-cyan);font-family:var(--font-mono);">[待确认]</span>
+      </li>
+    </ul>
+
+    <div class="specs-cta-group">
+      <a href="#" class="btn-primary-inverted">立即购买 →</a>
+      <a href="#" class="btn-secondary">下载 App →</a>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     SCREEN 6 · 购买/下载 CTA
+═══════════════════════════════════════════ -->
+<section class="cta-section">
+  <div class="cta-grid">
+
+    <!-- 左栏：黑色背景，白底黑字CTA -->
+    <div class="cta-card-left animate-in">
+      <div class="tag" style="border-color:var(--threshold-cyan);color:var(--threshold-cyan);">硬件设备</div>
+      <div class="cta-title">立即购买硬件</div>
+      <p class="cta-sub">随身录音卡片，随时捕捉商机</p>
+      <div class="cta-price">价格：[待确认]</div>
+      <a href="#" class="btn-primary-inverted">立即购买 →</a>
+    </div>
+
+    <!-- 右栏：余能灰背景 -->
+    <div class="cta-card-right animate-in delay-2">
+      <div class="tag" style="border-color:var(--quantum-black);color:var(--quantum-black);">移动 App</div>
+      <div class="cta-title">免费下载 App</div>
+      <p class="cta-sub">iOS &amp; Android 双端，无需硬件也可体验 AI 决策助手</p>
+      <div class="cta-btn-group">
+        <a href="#" class="btn-primary">App Store →</a>
+        <a href="#" class="btn-secondary-dark">Google Play →</a>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ═══════════════════════════════════════════
+     FOOTER
+═══════════════════════════════════════════ -->
+<div data-site-footer></div>
+<script src="./components/site-shell.js"></script>
+
+
+<!-- ═══════════════════════════════════════════
+     JavaScript
+═══════════════════════════════════════════ -->
+<script>
+  /* ── IntersectionObserver 标准写法 ── */
+  // 板块整体 + 子元素依次入场
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const section = entry.target;
+      section.classList.add('visible');
+      const children = section.querySelectorAll('.animate-in');
+      children.forEach((child, i) => {
+        setTimeout(() => child.classList.add('visible'), i * 100);
+      });
+      sectionObserver.unobserve(section);
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('section').forEach(s => {
+    s.classList.add('section-enter');
+    sectionObserver.observe(s);
+  });
+
+
+  /* ── 导航下拉菜单（键盘 & 触摸兼容） ── */
+  document.querySelectorAll('.nav-links > li').forEach(li => {
+    const btn = li.querySelector('button');
+    const menu = li.querySelector('.dropdown-menu');
+    if (!btn || !menu) return;
+
+    // 阻止移动端 hover 失效
+    btn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      const isOpen = menu.style.display === 'block';
+      // 先关闭所有
+      document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
+      menu.style.display = isOpen ? '' : 'block';
+    });
+  });
+
+  // 点击空白关闭
+  document.addEventListener('click', () => {
+    document.querySelectorAll('.dropdown-menu').forEach(m => m.style.display = '');
+  });
+
+
+  /* ── 导航栏滚动后加描边 ── */
+  const nav = document.getElementById('main-nav') || document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    if (window.scrollY > 10) {
+      nav.style.borderBottomColor = '#2a2a2a';
+    } else {
+      nav.style.borderBottomColor = '#1a1a1a';
+    }
+  }, { passive: true });
+
+
+  /* ── 页面加载：Hero 文字依次飞入（CSS animation already handles it） ── */
+  // 临界线已通过 CSS animation 处理，无需额外 JS
+
+
+  /* ── 移动端动效缩短30%（媒体查询补充） ── */
+  const mq = window.matchMedia('(max-width: 768px)');
+  function applyMobileAnim(e) {
+    if (e.matches) {
+      document.documentElement.style.setProperty('--anim-duration-scale', '0.7');
+    }
+  }
+  mq.addEventListener('change', applyMobileAnim);
+  applyMobileAnim(mq);
+
+</script>
+
+</body>
+</html>

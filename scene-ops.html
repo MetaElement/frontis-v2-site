@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>运营 AI 专家团 · Frontis AI 衔远科技</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --quantum-black: #000000;
+      --threshold-cyan: #00C1D4;
+      --pure-white: #FFFFFF;
+      --level-gray: #3D4145;
+      --energy-gray: #F0F2F4;
+      --energy-orange: #FA5F26;
+      --font-en: 'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-cn: -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --ease-threshold: cubic-bezier(0.22, 1, 0.36, 1);
+      --ease-exit: cubic-bezier(0.55, 0, 1, 0.45);
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html {
+      scroll-behavior: smooth;
+    }
+    body {
+      font-family: var(--font-cn);
+      background: var(--pure-white);
+      color: var(--quantum-black);
+      overflow-x: hidden;
+    }
+    a { text-decoration: none; color: inherit; }
+
+    .animate-in {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 600ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+    .animate-in.delay-1 { transition-delay: 80ms; }
+    .animate-in.delay-2 { transition-delay: 160ms; }
+    .animate-in.delay-3 { transition-delay: 240ms; }
+    .section-enter {
+      opacity: 0;
+      transform: translateY(60px);
+      transition: opacity 700ms cubic-bezier(0.22, 1, 0.36, 1),
+                  transform 700ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+    .section-enter.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    section {
+      min-height: 100vh;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+    }
+
+    @keyframes threshold-pulse {
+      0%   { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
+      50%  { box-shadow: 0 0 16px 4px rgba(0,193,212,0.7); }
+      100% { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
+    }
+    @keyframes nav-drop {
+      from { opacity: 0; transform: translateY(-12px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes hero-fade {
+      from { opacity: 0; transform: translateX(-32px); }
+      to   { opacity: 1; transform: translateX(0); }
+    }
+    @keyframes line-expand {
+      from { width: 0; }
+      to   { width: 100%; }
+    }
+
+    /* ════ 导航 ════ */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 64px; background: var(--quantum-black);
+      display: flex; align-items: center; padding: 0 48px;
+      z-index: 1000;
+      animation: nav-drop 400ms var(--ease-threshold) both;
+    }
+    .nav-logo { flex-shrink: 0; }
+    .nav-links { display: flex; align-items: center; margin-left: auto; }
+    .nav-item { position: relative; }
+    .nav-link {
+      display: block; padding: 0 16px; height: 64px; line-height: 64px;
+      color: #8A8F96; font-family: var(--font-cn); font-size: 14px; white-space: nowrap;
+      transition: color 200ms var(--ease-threshold);
+    }
+    .nav-link:hover { color: var(--pure-white); }
+    .nav-link::after {
+      content: ''; position: absolute; bottom: 0; left: 16px;
+      width: 0; height: 1px; background: var(--threshold-cyan);
+      transition: width 200ms var(--ease-threshold);
+    }
+    .nav-link:hover::after { width: calc(100% - 32px); }
+    .nav-item:hover .nav-dropdown { display: block; }
+    .nav-dropdown {
+      display: none; position: absolute; top: 64px; left: 0;
+      background: var(--quantum-black); border: 1px solid var(--level-gray);
+      min-width: 180px; z-index: 999;
+    }
+    .nav-dropdown a {
+      display: block; padding: 12px 20px; color: #8A8F96;
+      font-size: 13px; font-family: var(--font-cn);
+      transition: color 150ms, background 150ms;
+    }
+    .nav-dropdown a:hover { color: var(--pure-white); background: #111; }
+    .nav-dropdown .dropdown-divider { height: 1px; background: var(--level-gray); margin: 4px 0; }
+    .nav-cta {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      background: transparent;
+      color: var(--threshold-cyan);
+      border: 1.5px solid var(--threshold-cyan);
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 9px 20px;
+      cursor: pointer;
+      transition: background 200ms, color 200ms, border-color 200ms;
+      white-space: nowrap;
+    }
+    .nav-cta:hover {
+      background: var(--threshold-cyan);
+      color: var(--quantum-black);
+    }
+
+    /* ════ Hero ════ */
+    .hero {
+      background: var(--quantum-black); min-height: 100vh;
+      padding-top: 64px; display: flex; flex-direction: column;
+    }
+    .threshold-line {
+      width: 100%; height: 3px; background: var(--threshold-cyan);
+      animation: threshold-pulse 3s ease-in-out infinite, line-expand 600ms 200ms var(--ease-threshold) both;
+    }
+    .hero-body {
+      flex: 1; display: flex; align-items: center;
+      padding: 80px 48px; gap: 48px;
+    }
+    .hero-text { width: 60%; flex-shrink: 0; }
+    .hero-tag {
+      display: inline-block; padding: 4px 12px;
+      border: 1px solid var(--threshold-cyan); color: var(--threshold-cyan);
+      font-size: 12px; font-family: var(--font-mono); letter-spacing: 2px;
+      margin-bottom: 24px;
+      animation: hero-fade 500ms 300ms var(--ease-threshold) both;
+    }
+    .hero-title {
+      font-family: var(--font-cn); font-size: 56px; font-weight: 700;
+      color: var(--pure-white); line-height: 1.15; margin-bottom: 20px;
+      animation: hero-fade 500ms 420ms var(--ease-threshold) both;
+    }
+    .hero-subtitle {
+      font-size: 16px; color: #8A8F96; line-height: 1.7;
+      max-width: 480px; margin-bottom: 36px;
+      animation: hero-fade 500ms 520ms var(--ease-threshold) both;
+    }
+    .hero-metric { animation: hero-fade 500ms 620ms var(--ease-threshold) both; }
+    .hero-metric-label {
+      font-size: 12px; color: #8A8F96; font-family: var(--font-mono);
+      letter-spacing: 1px; margin-bottom: 6px;
+    }
+    .hero-metric-value {
+      font-family: var(--font-en); font-size: 36px; font-weight: 700;
+      color: var(--energy-orange); letter-spacing: -0.5px;
+    }
+    .hero-visual {
+      width: 40%; display: flex; align-items: center;
+      justify-content: flex-end;
+      animation: hero-fade 600ms 500ms var(--ease-threshold) both;
+    }
+    .hero-svg-wrap {
+      width: 100%; max-width: 400px; height: 300px;
+      background: var(--quantum-black); border: 1px solid #1a1a1a; overflow: hidden;
+    }
+
+    /* ════ Screen 2 ════ */
+    .capabilities { background: var(--pure-white); padding: 96px 48px; }
+    .section-label {
+      font-size: 11px; font-family: var(--font-mono); color: var(--threshold-cyan);
+      letter-spacing: 3px; text-transform: uppercase; margin-bottom: 12px;
+    }
+    .section-title {
+      font-size: 36px; font-weight: 700; color: var(--quantum-black);
+      margin-bottom: 64px; font-family: var(--font-cn);
+    }
+    .cap-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; }
+    .cap-col { padding: 0 48px 0 24px; border-left: 2px solid var(--threshold-cyan); }
+    .cap-title {
+      font-size: 20px; font-weight: 700; color: var(--quantum-black);
+      margin-bottom: 16px; font-family: var(--font-cn);
+    }
+    .cap-desc { font-size: 14px; color: var(--level-gray); line-height: 1.8; margin-bottom: 24px; }
+    .cap-metric {
+      font-family: var(--font-en); font-size: 18px; font-weight: 700;
+      color: var(--quantum-black); letter-spacing: -0.3px;
+    }
+    .cap-metric-bar { width: 32px; height: 2px; background: var(--threshold-cyan); margin-top: 8px; }
+
+    /* ════ Screen 3 ════ */
+    .agent-screen { background: var(--quantum-black); padding: 96px 48px; }
+    .agent-inner { display: flex; gap: 64px; align-items: flex-start; }
+    .img-placeholder {
+      background: #000; border: 1px solid var(--threshold-cyan);
+      display: flex; align-items: center; justify-content: center;
+      color: var(--pure-white); font-size: 13px; font-family: sans-serif;
+      text-align: center; padding: 16px;
+    }
+    .agent-info { flex: 1; padding-top: 16px; }
+    .agent-info-label {
+      font-size: 11px; font-family: var(--font-mono); color: var(--threshold-cyan);
+      letter-spacing: 3px; margin-bottom: 24px;
+    }
+    .agent-stat { margin-bottom: 28px; }
+    .agent-stat-value {
+      font-family: var(--font-en); font-size: 32px; font-weight: 700;
+      color: var(--pure-white); line-height: 1.2; margin-bottom: 4px;
+    }
+    .agent-stat-desc { font-size: 13px; color: #8A8F96; font-family: var(--font-mono); }
+    .agent-stat-line { width: 24px; height: 1px; background: var(--threshold-cyan); margin: 10px 0; }
+
+    /* ════ Screen 4 ════ */
+    .cta-section { background: var(--pure-white); padding: 96px 48px; border-top: 1px solid var(--energy-gray); }
+    .cta-label { font-size: 11px; font-family: var(--font-mono); color: var(--threshold-cyan); letter-spacing: 3px; margin-bottom: 12px; }
+    .cta-title {
+      font-size: 40px; font-weight: 700; color: var(--quantum-black);
+      margin-bottom: 16px; font-family: var(--font-cn); max-width: 560px;
+    }
+    .cta-sub { font-size: 15px; color: var(--level-gray); margin-bottom: 48px; max-width: 440px; line-height: 1.7; }
+    .cta-buttons { display: flex; gap: 16px; }
+    .btn-primary {
+      padding: 14px 32px; background: var(--quantum-black); color: var(--pure-white);
+      font-size: 14px; font-weight: 600; font-family: var(--font-en);
+      border: none; cursor: pointer; border-radius: 0;
+      transition: background 200ms var(--ease-threshold);
+    }
+    .btn-primary:hover { background: var(--threshold-cyan); }
+    .btn-secondary {
+      padding: 14px 32px; background: var(--pure-white); color: var(--quantum-black);
+      font-size: 14px; font-weight: 600; font-family: var(--font-en);
+      border: 1px solid var(--quantum-black); cursor: pointer; border-radius: 0;
+      transition: border-color 200ms var(--ease-threshold), color 200ms;
+    }
+    .btn-secondary:hover { border-color: var(--threshold-cyan); color: var(--threshold-cyan); }
+
+    /* Footer */
+    footer {
+      background: var(--quantum-black);
+      padding: 64px 48px 32px;
+      border-top: 1px solid #1a1a1a;
+    }
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1fr;
+      gap: 40px 48px;
+      margin-bottom: 48px;
+    }
+    .footer-brand p { font-size: 13px; color: var(--level-gray); margin-top: 16px; line-height: 1.6; }
+    .footer-col h4 { font-size: 12px; font-family: var(--font-mono); color: #555; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 16px; }
+    .footer-col a { display: block; font-size: 14px; color: var(--level-gray); margin-bottom: 10px; font-family: var(--font-cn); transition: color 150ms; }
+    .footer-col a:hover { color: var(--threshold-cyan); }
+    .footer-bottom { border-top: 1px solid #1a1a1a; padding-top: 24px; display: flex; justify-content: space-between; align-items: center; }
+    .footer-bottom p { font-size: 12px; color: #555; }
+  </style>
+  <link rel="stylesheet" href="./components/site-shell.css" />
+</head>
+<body>
+
+<!-- 导航栏 -->
+<div data-site-header></div>
+
+<!-- ════ Screen 1 · Hero ════ -->
+<section class="hero">
+  <div class="threshold-line"></div>
+  <div class="hero-body">
+    <div class="hero-text">
+      <div class="hero-tag">通 · 运营与决策</div>
+      <h1 class="hero-title">运营 AI 专家团</h1>
+      <p class="hero-subtitle">从人才决策到经营洞察，CEO 一屏掌控全局，每项决策有据可依</p>
+      <div class="hero-metric">
+        <div class="hero-metric-label">// CORE METRIC</div>
+        <div class="hero-metric-value">面试效率提升 8x（4 小时→30 分钟）</div>
+      </div>
+    </div>
+
+    <!-- // 此处可替图 -->
+    <!-- A类SVG：仪表盘半圆（上半圆弧+刻度线+中间指针），指针指向右上方高位 -->
+    <div class="hero-visual">
+      <div class="hero-svg-wrap">
+        <svg width="100%" height="300" viewBox="0 0 400 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- 背景格线 -->
+          <line x1="0" y1="200" x2="400" y2="200" stroke="#111" stroke-width="1"/>
+          <line x1="200" y1="0" x2="200" y2="300" stroke="#111" stroke-width="1"/>
+
+          <!-- 外弧（半圆，上方） -->
+          <path d="M 60 200 A 140 140 0 0 1 340 200" stroke="#00C1D4" stroke-width="2" fill="none"/>
+
+          <!-- 中间弧 -->
+          <path d="M 90 200 A 110 110 0 0 1 310 200" stroke="#00C1D4" stroke-width="1" fill="none" opacity="0.4"/>
+
+          <!-- 内弧 -->
+          <path d="M 120 200 A 80 80 0 0 1 280 200" stroke="#00C1D4" stroke-width="1" fill="none" opacity="0.25"/>
+
+          <!-- 刻度线（外弧上均匀分布） -->
+          <!-- 0度 = 左端，180度 = 右端；刻度每20度一条 -->
+          <!-- 左端 -->
+          <line x1="60" y1="200" x2="48" y2="200" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
+          <!-- 20度 -->
+          <line x1="87" y1="152" x2="79" y2="143" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
+          <!-- 40度 -->
+          <line x1="133" y1="110" x2="127" y2="100" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
+          <!-- 60度 顶点 -->
+          <line x1="200" y1="60" x2="200" y2="48" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
+          <!-- 80度 -->
+          <line x1="267" y1="110" x2="273" y2="100" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
+          <!-- 100度 -->
+          <line x1="313" y1="152" x2="321" y2="143" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
+          <!-- 右端 -->
+          <line x1="340" y1="200" x2="352" y2="200" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
+
+          <!-- 指针（指向右上方约80度，即较高位置） -->
+          <!-- 指针从中心 200,200 指向 ~267,110 方向，长度约100 -->
+          <line x1="200" y1="200" x2="270" y2="112" stroke="#00C1D4" stroke-width="2.5"/>
+          <!-- 指针箭头 -->
+          <circle cx="270" cy="112" r="5" fill="#00C1D4"/>
+
+          <!-- 指针底座圆 -->
+          <circle cx="200" cy="200" r="10" stroke="#00C1D4" stroke-width="1.5" fill="#000"/>
+          <circle cx="200" cy="200" r="4" fill="#00C1D4"/>
+
+          <!-- 量程标注 -->
+          <text x="42" y="215" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" opacity="0.7">0</text>
+          <text x="186" y="40" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" opacity="0.8">MAX</text>
+          <text x="352" y="215" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" opacity="0.7">∞</text>
+
+          <!-- 当前值标注 -->
+          <text x="220" y="148" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" opacity="0.9">8x</text>
+
+          <!-- 底部数据行 -->
+          <text x="80" y="240" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" opacity="0.7">TALENT</text>
+          <text x="170" y="240" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" opacity="0.7">INSIGHT</text>
+          <text x="265" y="240" font-family="'JetBrains Mono',monospace" font-size="9" fill="#00C1D4" opacity="0.7">MEETING</text>
+
+          <!-- 小竖分隔 -->
+          <line x1="158" y1="228" x2="158" y2="248" stroke="#00C1D4" stroke-width="1" opacity="0.3"/>
+          <line x1="255" y1="228" x2="255" y2="248" stroke="#00C1D4" stroke-width="1" opacity="0.3"/>
+
+          <!-- 外框装饰 -->
+          <rect x="1" y="1" width="398" height="298" stroke="#1a1a1a" stroke-width="1" fill="none"/>
+          <rect x="8" y="8" width="36" height="20" stroke="#1a1a1a" stroke-width="1" fill="none"/>
+          <text x="12" y="21" font-family="'JetBrains Mono',monospace" font-size="8" fill="#3D4145">OPS</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Screen 2 · 核心能力 ════ -->
+<section class="capabilities">
+  <div class="section-label animate-in">// CORE CAPABILITIES</div>
+  <div class="section-title animate-in delay-1">三大核心能力</div>
+  <div class="cap-grid">
+    <div class="cap-col animate-in delay-1">
+      <div class="cap-title">人才决策</div>
+      <p class="cap-desc">AI 全程参与面试评估，结构化分析候选人匹配度，30 分钟完成 4 小时的人才评价</p>
+      <div class="cap-metric">面试 4 小时→30 分钟</div>
+      <div class="cap-metric-bar"></div>
+    </div>
+    <div class="cap-col animate-in delay-2">
+      <div class="cap-title">经营洞察</div>
+      <p class="cap-desc">实时整合多源经营数据，自动生成 CEO 驾驶舱，关键指标异动第一时间预警</p>
+      <div class="cap-metric">CEO 一屏掌控全局</div>
+      <div class="cap-metric-bar"></div>
+    </div>
+    <div class="cap-col animate-in delay-3">
+      <div class="cap-title">会议协同</div>
+      <p class="cap-desc">会议纪要自动生成，决策追踪、执行监督、结果复盘全流程 Agent 化管理</p>
+      <div class="cap-metric">会议效率提升 70%</div>
+      <div class="cap-metric-bar"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Screen 3 · Agent 占位 ════ -->
+<section class="agent-screen">
+  <div class="agent-inner">
+    <div class="agent-placeholder animate-in">
+      <div class="img-placeholder" style="width:640px;height:400px;">
+        [待提供：运营场景 Agent 界面截图，640×400px · 产品团队]
+      </div>
+    </div>
+    <div class="agent-info animate-in delay-2">
+      <div class="agent-info-label">// AGENT SPEC</div>
+      <div class="agent-stat">
+        <div class="agent-stat-value">10</div>
+        <div class="agent-stat-desc">运营专家 Agent</div>
+        <div class="agent-stat-line"></div>
+      </div>
+      <div class="agent-stat">
+        <div class="agent-stat-value">41</div>
+        <div class="agent-stat-desc">个 Skill 深度封装</div>
+        <div class="agent-stat-line"></div>
+      </div>
+      <div class="agent-stat">
+        <div class="agent-stat-value" style="font-size:20px;letter-spacing:0;">覆盖人才、会议、经营决策全场景</div>
+        <div class="agent-stat-line"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════ Screen 4 · CTA ════ -->
+<section class="cta-section">
+  <div class="cta-label animate-in">// GET STARTED</div>
+  <h2 class="cta-title animate-in delay-1">CEO 一屏掌控，每项决策有据可依</h2>
+  <p class="cta-sub animate-in delay-2">申请专属演示，30 分钟了解运营 AI 专家团如何让管理决策从经验驱动变为数据驱动</p>
+  <div class="cta-buttons animate-in delay-3">
+    <button class="btn-primary">申请演示</button>
+    <button class="btn-secondary">了解技术</button>
+  </div>
+</section>
+
+<!-- Footer -->
+<div data-site-footer></div>
+<script src="./components/site-shell.js"></script>
+
+<script>
+  // 板块整体 + 子元素依次入场
+  const sectionObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (!entry.isIntersecting) return;
+      const section = entry.target;
+      section.classList.add('visible');
+      const children = section.querySelectorAll('.animate-in');
+      children.forEach((child, i) => {
+        setTimeout(() => child.classList.add('visible'), i * 100);
+      });
+      sectionObserver.unobserve(section);
+    });
+  }, { threshold: 0.15 });
+
+  document.querySelectorAll('section').forEach(s => {
+    s.classList.add('section-enter');
+    sectionObserver.observe(s);
+  });
+
+</script>
+</body>
+</html>

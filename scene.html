@@ -1,0 +1,1262 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>场景 · 衔远科技 FRONTIS</title>
+  <!-- Google Fonts: Space Grotesk + JetBrains Mono -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ============================================================
+       CSS 变量 — 品牌 VI 规范（衔远科技 FRONTIS）
+    ============================================================ */
+    :root {
+      --quantum-black:   #000000;   /* 量子黑 */
+      --threshold-cyan:  #00C1D4;   /* 跃迁青 */
+      --pure-white:      #FFFFFF;   /* 纯白 */
+      --level-gray:      #3D4145;   /* 能级灰 */
+      --energy-gray:     #F0F2F4;   /* 余能灰 */
+      --energy-orange:   #FA5F26;   /* 能量橙 */
+      --font-en:   'Space Grotesk', sans-serif;
+      --font-mono: 'JetBrains Mono', monospace;
+      --font-cn:   -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --ease-threshold: cubic-bezier(0.22, 1, 0.36, 1);
+      --nav-height: 64px;
+    }
+
+    /* ============================================================
+       全局重置
+    ============================================================ */
+    *, *::before, *::after {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      border-radius: 0 !important;   /* VI 规范：禁止圆角 */
+      box-shadow: none !important;   /* VI 规范：禁止阴影 */
+      text-shadow: none !important;  /* VI 规范：禁止阴影 */
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: var(--font-cn);
+      background-color: var(--pure-white);
+      color: var(--level-gray);
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+      overflow-x: hidden;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    ul, ol {
+      list-style: none;
+    }
+
+    img {
+      display: block;
+      max-width: 100%;
+    }
+
+    /* ============================================================
+       动效规范：animate-in（translateX(-20px) → 0 + opacity 0→1）
+       由 IntersectionObserver 添加 .visible 触发
+    ============================================================ */
+    .animate-in {
+      opacity: 0;
+      transform: translateX(-20px);
+      transition: opacity 0.72s var(--ease-threshold),
+                  transform 0.72s var(--ease-threshold);
+    }
+
+    .animate-in.visible {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .delay-1 { transition-delay: 0.10s; }
+    .delay-2 { transition-delay: 0.20s; }
+    .delay-3 { transition-delay: 0.30s; }
+    .delay-4 { transition-delay: 0.42s; }
+    .delay-5 { transition-delay: 0.54s; }
+
+    /* ============================================================
+       图形语言 ① — The Edge 临界线（#00C1D4，水平，6px）
+    ============================================================ */
+    .edge-line {
+      display: block;
+      width: 100%;
+      height: 6px;
+      background-color: var(--threshold-cyan);
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       图形语言 ② — 2px 跃迁青左侧引导竖线
+    ============================================================ */
+    .vline-bar {
+      display: inline-block;
+      width: 2px;
+      background-color: var(--threshold-cyan);
+      flex-shrink: 0;
+      align-self: stretch;
+    }
+
+    /* ============================================================
+       图形语言 ③ — 能量节点圆点
+    ============================================================ */
+    .node-cyan {
+      display: inline-block;
+      width: 8px;
+      height: 8px;
+      background-color: var(--threshold-cyan);
+      flex-shrink: 0;
+    }
+
+    .node-orange {
+      display: inline-block;
+      width: 12px;
+      height: 12px;
+      background-color: var(--energy-orange);
+      flex-shrink: 0;
+    }
+
+    /* ============================================================
+       导航栏（浅色背景）
+    ============================================================ */
+    .nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: var(--nav-height);
+      background-color: var(--pure-white);
+      border-bottom: 1px solid var(--energy-gray);
+      z-index: 9999;
+      display: flex;
+      align-items: center;
+    }
+
+    .nav__inner {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 0 48px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .nav__logo img {
+      height: 30px;
+      width: auto;
+    }
+
+    .nav__menu {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      flex: 1;
+      justify-content: center;
+    }
+
+    /* 导航项 */
+    .nav__item {
+      position: relative;
+      font-family: var(--font-en);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--quantum-black);
+      cursor: pointer;
+      white-space: nowrap;
+      padding-bottom: 4px;
+      display: flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .nav__item > a {
+      color: inherit;
+    }
+
+    /* 当前页 active：跃迁青下划线 */
+    .nav__item--active::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 100%;
+      height: 2px;
+      background-color: var(--threshold-cyan);
+    }
+
+    .nav__item--active > a {
+      color: var(--quantum-black);
+    }
+
+    /* 下拉箭头 */
+    .nav__arrow {
+      font-size: 9px;
+      color: var(--level-gray);
+      transition: transform 0.2s;
+      pointer-events: none;
+    }
+
+    .nav__item--dropdown:hover .nav__arrow {
+      transform: rotate(180deg);
+    }
+
+    /* 下拉面板 */
+    .nav__dropdown {
+      display: none;
+      position: absolute;
+      top: calc(100% + 14px);
+      left: 0;
+      background-color: var(--pure-white);
+      border: 1px solid var(--energy-gray);
+      min-width: 172px;
+      z-index: 10000;
+    }
+
+    .nav__item--dropdown:hover .nav__dropdown {
+      display: block;
+    }
+
+    .nav__dropdown a {
+      display: block;
+      padding: 10px 16px;
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 400;
+      color: var(--quantum-black);
+      border-bottom: 1px solid #F0F2F4;
+      transition: background-color 0.15s;
+    }
+
+    .nav__dropdown a:last-child {
+      border-bottom: none;
+    }
+
+    .nav__dropdown a:hover {
+      background-color: var(--energy-gray);
+    }
+
+    /* 右侧 CTA 按钮 */
+    .nav__cta {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pure-white);
+      background-color: var(--quantum-black);
+      padding: 9px 22px;
+      border: 2px solid var(--quantum-black);
+      cursor: pointer;
+      letter-spacing: 0.03em;
+      transition: background-color 0.18s, color 0.18s;
+      white-space: nowrap;
+    }
+
+    .nav__cta:hover {
+      background-color: var(--pure-white);
+      color: var(--quantum-black);
+    }
+
+    /* ============================================================
+       第一屏：Hero（量子黑 + The Edge 临界线）
+    ============================================================ */
+    #hero {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      padding-top: var(--nav-height);
+    }
+
+    /* 上白区 */
+    .hero__upper {
+      flex: 1;
+      background-color: var(--pure-white);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+      padding: 72px 48px 64px;
+      text-align: center;
+    }
+
+    /* The Edge 临界线（Hero 区唯一一条） */
+    /* edge-line class 已全局定义 */
+
+    /* 下黑区 */
+    .hero__lower {
+      flex: 1;
+      background-color: var(--quantum-black);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+      padding: 60px 48px 80px;
+      text-align: center;
+    }
+
+    .hero__mono-label {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--threshold-cyan);
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 28px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* 大标题（量子黑背景下用纯白；上白区文字用量子黑） */
+    .hero__title {
+      font-family: var(--font-cn);
+      font-size: clamp(36px, 5.5vw, 76px);
+      font-weight: 700;
+      color: var(--quantum-black);
+      line-height: 1.15;
+      letter-spacing: -0.02em;
+    }
+
+    .hero__subtitle {
+      font-family: var(--font-cn);
+      font-size: clamp(14px, 1.4vw, 18px);
+      color: rgba(255, 255, 255, 0.72);
+      line-height: 2;
+      max-width: 560px;
+      margin-bottom: 44px;
+    }
+
+    .hero__subtitle span {
+      display: block;
+    }
+
+    /* 滚动提示 */
+    .hero__scroll {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .hero__scroll .node-cyan {
+      animation: blink 1.8s ease-in-out infinite;
+    }
+
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.25; }
+    }
+
+    .hero__scroll-text {
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: var(--threshold-cyan);
+      letter-spacing: 0.14em;
+    }
+
+    /* ============================================================
+       场景区通用：两栏布局
+    ============================================================ */
+    .scene-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+    }
+
+    .scene-inner {
+      max-width: 1280px;
+      width: 100%;
+      margin: 0 auto;
+      padding: 96px 48px;
+      display: flex;
+      align-items: center;
+      gap: 72px;
+    }
+
+    /* 镜像布局（右文左图）*/
+    .scene-inner--reverse {
+      flex-direction: row-reverse;
+    }
+
+    .scene-content {
+      flex: 6;
+      min-width: 0;
+    }
+
+    .scene-visual {
+      flex: 4;
+      min-width: 0;
+    }
+
+    /* 场景标签（单色行）*/
+    .scene-tag {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: var(--threshold-cyan);
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .scene-tag__sep {
+      color: var(--level-gray);
+      font-family: var(--font-en);
+    }
+
+    /* 大标题 */
+    .scene-title {
+      font-family: var(--font-cn);
+      font-size: clamp(26px, 3vw, 44px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    /* 副品牌 */
+    .scene-brand {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--threshold-cyan);
+      letter-spacing: 0.06em;
+      margin-bottom: 20px;
+    }
+
+    /* 一句话定位 */
+    .scene-tagline {
+      font-family: var(--font-cn);
+      font-size: 15px;
+      line-height: 1.75;
+      margin-bottom: 32px;
+    }
+
+    /* Agent 列表 */
+    .agent-list {
+      display: flex;
+      flex-direction: column;
+      gap: 18px;
+      margin-bottom: 36px;
+    }
+
+    .agent-item {
+      display: flex;
+      align-items: stretch;
+      gap: 14px;
+    }
+
+    /* 引导竖线（图形语言 ②） */
+    .agent-item__line {
+      width: 2px;
+      background-color: var(--threshold-cyan);
+      flex-shrink: 0;
+    }
+
+    .agent-item__body {
+      flex: 1;
+      padding: 2px 0;
+    }
+
+    .agent-item__name {
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--threshold-cyan);
+      margin-bottom: 3px;
+      letter-spacing: 0.02em;
+    }
+
+    .agent-item__desc {
+      font-family: var(--font-cn);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+
+    /* 按钮：黑色实底 */
+    .btn-primary {
+      display: inline-block;
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pure-white);
+      background-color: var(--quantum-black);
+      padding: 12px 28px;
+      border: 2px solid var(--quantum-black);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background-color 0.18s, color 0.18s;
+    }
+
+    .btn-primary:hover {
+      background-color: var(--pure-white);
+      color: var(--quantum-black);
+    }
+
+    /* 按钮：白色线框（深色背景） */
+    .btn-outline-white {
+      display: inline-block;
+      font-family: var(--font-en);
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--pure-white);
+      background-color: transparent;
+      padding: 12px 28px;
+      border: 2px solid var(--pure-white);
+      cursor: pointer;
+      letter-spacing: 0.05em;
+      transition: background-color 0.18s, color 0.18s;
+    }
+
+    .btn-outline-white:hover {
+      background-color: var(--pure-white);
+      color: var(--quantum-black);
+    }
+
+    /* 状态标签（橙色） */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 500;
+      color: var(--energy-orange);
+      border: 1px solid var(--energy-orange);
+      padding: 7px 14px;
+      letter-spacing: 0.06em;
+    }
+
+    /* 图片占位框 */
+    .visual-placeholder {
+      width: 100%;
+      height: 360px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      text-align: center;
+      line-height: 1.7;
+      border: 1px solid var(--threshold-cyan);
+    }
+
+    .visual-placeholder--dark {
+      background-color: var(--quantum-black);
+      color: var(--level-gray);
+    }
+
+    .visual-placeholder--darker {
+      background-color: var(--quantum-black);
+      color: var(--level-gray);
+    }
+
+    .visual-placeholder--light {
+      background-color: var(--quantum-black);
+      color: var(--level-gray);
+    }
+
+    /* ============================================================
+       第二屏：战略管理（纯白，可点击）
+    ============================================================ */
+    #strategy {
+      background-color: var(--pure-white);
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    #strategy:hover {
+      background-color: var(--energy-gray);
+    }
+
+    #strategy .scene-title    { color: var(--quantum-black); }
+    #strategy .scene-tagline  { color: var(--level-gray); }
+    #strategy .agent-item__desc { color: var(--level-gray); }
+
+    /* ============================================================
+       第三屏：生产研发（余能灰，锁定）
+    ============================================================ */
+    #production {
+      background-color: var(--energy-gray);
+      cursor: default;
+    }
+
+    #production .scene-title    { color: var(--quantum-black); }
+    #production .scene-tagline  { color: var(--level-gray); }
+    #production .agent-item__desc { color: var(--level-gray); }
+
+    /* ============================================================
+       第四屏：供应履约（量子黑，锁定）
+    ============================================================ */
+    #supply {
+      background-color: var(--quantum-black);
+      cursor: default;
+    }
+
+    #supply .scene-title    { color: var(--pure-white); }
+    #supply .scene-tagline  { color: rgba(255, 255, 255, 0.65); }
+    #supply .scene-tag__sep { color: rgba(255, 255, 255, 0.3); }
+    #supply .agent-item__desc { color: rgba(255, 255, 255, 0.7); }
+
+    /* ============================================================
+       第五屏：营销增长（纯白，锁定）
+    ============================================================ */
+    #marketing {
+      background-color: var(--pure-white);
+      cursor: default;
+    }
+
+    #marketing .scene-title    { color: var(--quantum-black); }
+    #marketing .scene-tagline  { color: var(--level-gray); }
+    #marketing .agent-item__desc { color: var(--level-gray); }
+
+    /* ============================================================
+       第六屏：底部 CTA（量子黑）
+    ============================================================ */
+    #cta-section {
+      min-height: 100vh;
+      background-color: var(--quantum-black);
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    /* The Edge 在顶部（第六屏唯一一条） */
+
+    .cta-body {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 80px 48px;
+      text-align: center;
+    }
+
+    /* 节点装饰行 */
+    .cta-nodes {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 48px;
+    }
+
+    .cta-nodes__seg {
+      width: 56px;
+      height: 1px;
+      background-color: var(--threshold-cyan);
+    }
+
+    .cta-title {
+      font-family: var(--font-cn);
+      font-size: clamp(28px, 4vw, 56px);
+      font-weight: 700;
+      color: var(--pure-white);
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .cta-subtitle {
+      font-family: var(--font-cn);
+      font-size: 16px;
+      color: rgba(255, 255, 255, 0.42);
+      margin-bottom: 48px;
+      letter-spacing: 0.04em;
+    }
+
+    /* ============================================================
+       Footer（深色背景）
+    ============================================================ */
+    .footer {
+      background-color: var(--quantum-black);
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      padding: 64px 48px 32px;
+    }
+
+    .footer__inner {
+      max-width: 1280px;
+      margin: 0 auto;
+    }
+
+    .footer__grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr 1.6fr;
+      gap: 48px;
+      margin-bottom: 48px;
+    }
+
+    .footer__logo {
+      height: 26px;
+      width: auto;
+      margin-bottom: 16px;
+    }
+
+    .footer__email {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.38);
+    }
+
+    .footer__col-title {
+      font-family: var(--font-en);
+      font-size: 10px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.3);
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+    }
+
+    .footer__links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__links a {
+      font-family: var(--font-cn);
+      font-size: 13px;
+      color: rgba(255, 255, 255, 0.55);
+      transition: color 0.18s;
+    }
+
+    .footer__links a:hover {
+      color: var(--pure-white);
+    }
+
+    /* 当前页高亮：跃迁青 */
+    .footer__links a.footer-active {
+      color: var(--threshold-cyan);
+    }
+
+    .footer__links a.footer-active:hover {
+      color: var(--threshold-cyan);
+    }
+
+    .footer__contact-links {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .footer__contact-item {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: rgba(255, 255, 255, 0.42);
+    }
+
+    .footer__bottom {
+      border-top: 1px solid rgba(255, 255, 255, 0.07);
+      padding-top: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .footer__copyright,
+    .footer__icp {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      color: rgba(255, 255, 255, 0.22);
+    }
+
+    /* ============================================================
+       响应式
+    ============================================================ */
+    @media (max-width: 1024px) {
+      .nav__inner { padding: 0 24px; }
+
+      .scene-inner {
+        flex-direction: column !important;
+        padding: 72px 24px;
+        gap: 40px;
+      }
+
+      .scene-content,
+      .scene-visual {
+        flex: none;
+        width: 100%;
+      }
+
+      .visual-placeholder { height: 240px; }
+
+      .footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .nav__menu { display: none; }
+
+      .hero__upper,
+      .hero__lower { padding: 48px 24px; }
+
+      .cta-body { padding: 60px 24px; }
+
+      .footer { padding: 48px 24px 24px; }
+
+      .footer__grid { grid-template-columns: 1fr; gap: 28px; }
+
+      .footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
+    }
+  </style>
+  <link rel="stylesheet" href="./components/site-shell.css" />
+</head>
+<body>
+
+<!-- ============================================================
+     导航栏（浅色背景）
+============================================================ -->
+<div data-site-header></div>
+
+
+<!-- ============================================================
+     第一屏：Hero（量子黑背景 + The Edge 临界线）
+============================================================ -->
+<section id="hero" aria-labelledby="hero-heading">
+
+  <!-- 上白区：大标题 -->
+  <div class="hero__upper">
+    <p class="hero__mono-label animate-in" aria-hidden="true">
+      <span class="node-cyan"></span>
+      FRONTIS · SCENE OVERVIEW
+    </p>
+    <h1 class="hero__title animate-in delay-1" id="hero-heading">
+      你的业务跑在哪里<br />AI 专家就在哪里
+    </h1>
+  </div>
+
+  <!-- The Edge 临界线（Hero 区唯一一条） -->
+  <div class="edge-line" role="separator" aria-hidden="true"></div>
+
+  <!-- 下黑区：副标题 + 滚动提示 -->
+  <div class="hero__lower">
+    <p class="hero__subtitle animate-in delay-2">
+      <span>覆盖战略 · 生产 · 供应链 · 营销全场景</span>
+      <span>每个场景背后都有一支深度定制的 AI 专家团</span>
+    </p>
+    <div class="hero__scroll animate-in delay-3" aria-hidden="true">
+      <span class="node-cyan"></span>
+      <p class="hero__scroll-text">SCROLL TO EXPLORE</p>
+    </div>
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     第二屏：战略管理专家团（纯白，可点击）
+============================================================ -->
+<section
+  id="strategy"
+  class="scene-section"
+  onclick="location.href='./scene-strategy.html'"
+  role="link"
+  tabindex="0"
+  aria-label="战略管理专家团，点击进入详情"
+  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();location.href='./scene-strategy.html';}"
+>
+  <div class="scene-inner">
+
+    <!-- 左：文字内容（flex:6，约60%） -->
+    <div class="scene-content">
+
+      <!-- 场景标签 -->
+      <div class="scene-tag animate-in">
+        <span class="node-cyan" aria-hidden="true"></span>
+        战略管理专家团
+        <span class="scene-tag__sep">·</span>
+        STRATEGIC MANAGEMENT
+      </div>
+
+      <!-- 大标题 -->
+      <h2 class="scene-title animate-in delay-1">战略管理专家团</h2>
+
+      <!-- 副品牌 -->
+      <p class="scene-brand animate-in delay-2">Leadeep AI · 领衔者</p>
+
+      <!-- 一句话定位 -->
+      <p class="scene-tagline animate-in delay-2">
+        为企业领导者配备 AI 专家军团，辅助战略决策、商机跟进与竞情洞察
+      </p>
+
+      <!-- Agent 列表（左侧2px跃迁青竖线引导） -->
+      <ul class="agent-list" aria-label="战略管理 Agent 能力列表">
+
+        <li class="agent-item animate-in delay-2">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">战略复盘专家</p>
+            <p class="agent-item__desc">自动提炼会议录音中的决策主线与跟进事项</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-3">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">商机跟进专家</p>
+            <p class="agent-item__desc">识别客户信号，自动生成跟进优先级与行动建议</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-4">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">竞情简报专家</p>
+            <p class="agent-item__desc">持续监控竞对动态，定期生成管理简报</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-5">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">高管周报专家</p>
+            <p class="agent-item__desc">口述关键判断，自动生成结构化管理简报</p>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- CTA 按钮（阻止冒泡，避免双重跳转） -->
+      <a
+        href="./scene-strategy.html"
+        class="btn-primary animate-in delay-5"
+        onclick="event.stopPropagation()"
+        tabindex="-1"
+        aria-hidden="true"
+      >
+        了解详情 →
+      </a>
+
+    </div>
+
+    <!-- 右：图片占位框（flex:4，约40%） -->
+    <div class="scene-visual animate-in delay-3">
+      <div
+        class="visual-placeholder visual-placeholder--dark"
+        aria-label="待提供：Leadeep AI Agent 界面截图"
+      >
+        [待提供：Leadeep AI Agent 界面截图]
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     第三屏：生产研发专家团（余能灰，锁定状态）
+============================================================ -->
+<section id="production" class="scene-section" aria-labelledby="production-heading">
+  <div class="scene-inner scene-inner--reverse">
+
+    <!-- 右（镜像后为右）：文字内容（flex:6） -->
+    <div class="scene-content">
+
+      <div class="scene-tag animate-in">
+        <span class="node-cyan" aria-hidden="true"></span>
+        生产研发专家团
+        <span class="scene-tag__sep">·</span>
+        R&amp;D PRODUCTION
+      </div>
+
+      <h2 class="scene-title animate-in delay-1" id="production-heading">生产研发专家团</h2>
+
+      <p class="scene-brand animate-in delay-2">小筑</p>
+
+      <p class="scene-tagline animate-in delay-2">（待填写）</p>
+
+      <ul class="agent-list" aria-label="生产研发 Agent 能力列表">
+
+        <li class="agent-item animate-in delay-2">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">[Agent 名称]</p>
+            <p class="agent-item__desc">它能做什么</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-3">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">[Agent 名称]</p>
+            <p class="agent-item__desc">它能做什么</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-4">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">[Agent 名称]</p>
+            <p class="agent-item__desc">它能做什么</p>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- 状态标签（能量橙，唯一峰值强调） -->
+      <div class="animate-in delay-5">
+        <span class="status-badge" role="status" aria-label="即将上线，敬请期待">
+          <span class="node-orange" aria-hidden="true"></span>
+          即将上线，敬请期待
+        </span>
+      </div>
+
+    </div>
+
+    <!-- 左（镜像后为左）：图片占位框（flex:4） -->
+    <div class="scene-visual animate-in delay-3">
+      <div
+        class="visual-placeholder visual-placeholder--dark"
+        aria-label="待提供：生产研发 Agent 界面截图"
+      >
+        [待提供：生产研发 Agent 界面截图]
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     第四屏：供应履约专家团（量子黑深色，锁定状态）
+============================================================ -->
+<section id="supply" class="scene-section" aria-labelledby="supply-heading">
+  <div class="scene-inner">
+
+    <!-- 左：文字内容（flex:6） -->
+    <div class="scene-content">
+
+      <div class="scene-tag animate-in">
+        <span class="node-cyan" aria-hidden="true"></span>
+        供应履约专家团
+        <span class="scene-tag__sep">·</span>
+        SUPPLY &amp; FULFILLMENT
+      </div>
+
+      <h2 class="scene-title animate-in delay-1" id="supply-heading">供应履约专家团</h2>
+
+      <p class="scene-brand animate-in delay-2">万千</p>
+
+      <p class="scene-tagline animate-in delay-2">（待填写）</p>
+
+      <ul class="agent-list" aria-label="供应履约 Agent 能力列表">
+
+        <li class="agent-item animate-in delay-3">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">[Agent 名称]</p>
+            <p class="agent-item__desc">它能做什么</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-4">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">[Agent 名称]</p>
+            <p class="agent-item__desc">它能做什么</p>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- 状态标签 -->
+      <div class="animate-in delay-5">
+        <span class="status-badge" role="status" aria-label="即将上线，敬请期待">
+          <span class="node-orange" aria-hidden="true"></span>
+          即将上线，敬请期待
+        </span>
+      </div>
+
+    </div>
+
+    <!-- 右：图片占位框（flex:4） -->
+    <div class="scene-visual animate-in delay-3">
+      <div
+        class="visual-placeholder visual-placeholder--darker"
+        aria-label="待提供：供应履约 Agent 界面截图"
+      >
+        [待提供：供应履约 Agent 界面截图]
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     第五屏：营销增长专家团（纯白，锁定状态）
+============================================================ -->
+<section id="marketing" class="scene-section" aria-labelledby="marketing-heading">
+  <div class="scene-inner scene-inner--reverse">
+
+    <!-- 右（镜像后为右）：文字内容（flex:6） -->
+    <div class="scene-content">
+
+      <div class="scene-tag animate-in">
+        <span class="node-cyan" aria-hidden="true"></span>
+        营销增长专家团
+        <span class="scene-tag__sep">·</span>
+        MARKETING GROWTH
+      </div>
+
+      <h2 class="scene-title animate-in delay-1" id="marketing-heading">营销增长专家团</h2>
+
+      <p class="scene-brand animate-in delay-2">（待填写）</p>
+
+      <p class="scene-tagline animate-in delay-2">（待填写）</p>
+
+      <ul class="agent-list" aria-label="营销增长 Agent 能力列表">
+
+        <li class="agent-item animate-in delay-3">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">[Agent 名称]</p>
+            <p class="agent-item__desc">它能做什么</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-4">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name">[Agent 名称]</p>
+            <p class="agent-item__desc">它能做什么</p>
+          </div>
+        </li>
+
+      </ul>
+
+      <!-- 状态标签 -->
+      <div class="animate-in delay-5">
+        <span class="status-badge" role="status" aria-label="即将上线，敬请期待">
+          <span class="node-orange" aria-hidden="true"></span>
+          即将上线，敬请期待
+        </span>
+      </div>
+
+    </div>
+
+    <!-- 左（镜像后为左）：图片占位框（flex:4） -->
+    <div class="scene-visual animate-in delay-3">
+      <div
+        class="visual-placeholder visual-placeholder--dark"
+        aria-label="待提供：营销增长 Agent 界面截图"
+      >
+        [待提供：营销增长 Agent 界面截图]
+      </div>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ============================================================
+     第六屏：底部 CTA（量子黑）
+============================================================ -->
+<section id="cta-section" aria-labelledby="cta-heading">
+
+  <!-- The Edge 临界线（顶部，本屏唯一一条） -->
+  <div class="edge-line" role="separator" aria-hidden="true"></div>
+
+  <div class="cta-body">
+
+    <!-- 节点装饰 -->
+    <div class="cta-nodes animate-in" aria-hidden="true">
+      <div class="cta-nodes__seg"></div>
+      <span class="node-cyan"></span>
+      <div class="cta-nodes__seg"></div>
+    </div>
+
+    <h2 class="cta-title animate-in delay-1" id="cta-heading">
+      更多行业专家团<br />持续上线中
+    </h2>
+
+    <p class="cta-subtitle animate-in delay-2">敬请期待</p>
+
+    <a href="#contact" class="btn-outline-white animate-in delay-3">
+      申请产品演示 →
+    </a>
+
+  </div>
+
+</section>
+
+
+<!-- ============================================================
+     Footer（深色背景）
+============================================================ -->
+<div data-site-footer></div>
+<script src="./components/site-shell.js"></script>
+
+
+<!-- ============================================================
+     JavaScript：IntersectionObserver 驱动 animate-in 动效
+============================================================ -->
+<script>
+(function () {
+  'use strict';
+
+  /* ── animate-in：进入视口时添加 .visible 类 ── */
+  var targets = document.querySelectorAll('.animate-in');
+
+  if ('IntersectionObserver' in window && targets.length) {
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (entry) {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            io.unobserve(entry.target); /* 触发后取消监听 */
+          }
+        });
+      },
+      {
+        threshold: 0.12,
+        rootMargin: '0px 0px -32px 0px'
+      }
+    );
+
+    targets.forEach(function (el) { io.observe(el); });
+  } else {
+    /* 降级处理：直接显示所有元素 */
+    targets.forEach(function (el) { el.classList.add('visible'); });
+  }
+
+  /* ── 导航下拉键盘可访问性 ── */
+  var dropdowns = document.querySelectorAll('.nav__item--dropdown');
+  dropdowns.forEach(function (item) {
+    item.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault();
+        var dd = item.querySelector('.nav__dropdown');
+        if (dd) {
+          var isOpen = dd.style.display === 'block';
+          dd.style.display = isOpen ? '' : 'block';
+        }
+      }
+      if (e.key === 'Escape') {
+        var dd = item.querySelector('.nav__dropdown');
+        if (dd) dd.style.display = '';
+      }
+    });
+  });
+
+})();
+</script>
+
+</body>
+</html>
