@@ -69,7 +69,7 @@
       '<div class="site-header__menu" role="navigation" aria-label="主导航">' +
       navItems.map(renderNavItem).join("") +
       "</div>" +
-      '<a class="site-header__cta" href="' + ctaHref() + '">申请试用</a>' +
+      '<a class="site-header__cta" href="' + ctaHref() + '">开启跃迁</a>' +
       "</div>" +
       "</header>";
   }
