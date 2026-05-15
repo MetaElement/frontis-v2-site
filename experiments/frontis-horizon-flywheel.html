@@ -112,8 +112,8 @@
 
     .concept-stage {
       display: grid;
-      grid-template-columns: minmax(340px, 0.86fr) minmax(560px, 1.14fr);
-      gap: clamp(34px, 5vw, 78px);
+      grid-template-columns: minmax(320px, 0.72fr) minmax(620px, 1.28fr);
+      gap: clamp(28px, 3.8vw, 56px);
       align-items: end;
       min-height: calc(100vh - 72px);
       padding-top: 36px;
@@ -733,8 +733,10 @@
       position: absolute;
       left: 50%;
       top: 46%;
-      display: grid;
-      place-items: center;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
       width: 245px;
       aspect-ratio: 1;
       border: 1px solid rgba(0, 193, 212, 0.34);
@@ -1955,29 +1957,80 @@
       position: absolute;
       inset: 0;
       overflow: hidden;
+      isolation: isolate;
     }
 
-    .tier-stage::before,
-    .tier-stage::after {
+    .logo-horizon-shell {
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      z-index: 1;
+      width: min(720px, calc(100% - 2px));
+      aspect-ratio: 1;
+      overflow: hidden;
+      border: 0;
+      border-radius: 50%;
+      background:
+        radial-gradient(circle at 50% 43%, rgba(0, 193, 212, 0.1), transparent 24%),
+        radial-gradient(ellipse at 50% 62%, rgba(0, 193, 212, 0.045), transparent 36%),
+        var(--pure-white);
+      box-shadow: none;
+      transform: translate(-50%, -50%) scale(0.985);
+      animation: logo-mark-reveal 980ms var(--ease-threshold) both;
+      pointer-events: none;
+    }
+
+    .logo-horizon-shell::before {
       content: "";
       position: absolute;
-      left: 0;
-      right: 0;
+      left: 10%;
+      right: 10%;
+      top: 60.2%;
+      height: 31%;
+      border: 0;
+      border-top: 0;
+      border-radius: 0 0 999px 999px / 0 0 100% 100%;
+      background: transparent;
+      opacity: 0;
+    }
+
+    .logo-horizon-shell::after {
+      content: "";
+      position: absolute;
+      left: 11%;
+      right: 11%;
+      top: 17%;
+      height: 43%;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 193, 212, 0.055);
+      border-bottom-color: transparent;
+      opacity: 0.56;
+    }
+
+    .logo-horizon-line {
+      position: absolute;
+      left: -7%;
+      right: -7%;
+      top: 59.4%;
+      height: 7px;
+      background: linear-gradient(90deg, transparent 0%, rgba(0, 193, 212, 0.16) 7%, var(--threshold-cyan) 20%, var(--threshold-cyan) 80%, rgba(0, 193, 212, 0.16) 93%, transparent 100%);
+      box-shadow:
+        0 0 18px rgba(0, 193, 212, 0.42),
+        0 1px 0 rgba(255, 255, 255, 0.72);
+      transform-origin: left center;
+      animation: horizon-scan 1120ms var(--ease-threshold) 220ms both;
+    }
+
+    .logo-horizon-line::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 50%;
+      width: 48%;
       height: 1px;
-      background: linear-gradient(90deg, var(--line-gray), rgba(0, 193, 212, 0.58), var(--line-gray));
-      transform-origin: left;
-      animation: edge-sweep 900ms var(--ease-threshold) both;
-      display: none;
-    }
-
-    .tier-stage::before {
-      top: 34px;
-      animation-delay: 180ms;
-    }
-
-    .tier-stage::after {
-      bottom: 34px;
-      animation-delay: 420ms;
+      background: linear-gradient(90deg, rgba(255, 255, 255, 0.86), transparent);
+      transform: translateY(-50%);
+      opacity: 0.68;
     }
 
     .tier-stack {
@@ -1985,293 +2038,943 @@
       left: 50%;
       top: 50%;
       z-index: 4;
-      display: grid;
-      width: min(680px, calc(100% - 24px));
+      width: min(690px, calc(100% - 6px));
+      height: min(690px, calc(100% - 6px));
       transform: translate(-50%, -50%);
       isolation: isolate;
     }
 
-    .tier-layer {
-      position: relative;
+    .horizon-caption {
+      position: absolute;
+      left: 50%;
+      top: 57.8%;
+      z-index: 8;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: max-content;
+      max-width: 92%;
+      padding: 8px 14px;
+      border: 1px solid rgba(0, 193, 212, 0.24);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      color: var(--threshold-cyan);
+      font-family: var(--font-en);
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 14px 28px rgba(0, 193, 212, 0.09);
+      backdrop-filter: blur(6px);
+      white-space: nowrap;
+    }
+
+    .horizon-caption strong {
+      color: var(--quantum-black);
+      font-family: var(--font-cn);
+      font-size: 12px;
+      font-weight: 520;
+      letter-spacing: 0;
+      text-transform: none;
+    }
+
+    .future-organization {
+      position: absolute;
+      left: 7%;
+      right: 7%;
+      top: 2.2%;
+      height: 56%;
+      opacity: 0;
+      transform: translateY(16px);
+      transition: opacity 820ms var(--ease-threshold), transform 920ms var(--ease-threshold);
+    }
+
+    .future-organization::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 51%;
+      width: 70%;
+      height: 104%;
+      border: 1px solid rgba(0, 193, 212, 0.14);
+      border-top-color: rgba(0, 193, 212, 0.34);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.72;
+      pointer-events: none;
+    }
+
+    .future-organization::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 52%;
+      width: 45%;
+      height: 68%;
+      border: 1px dashed rgba(0, 193, 212, 0.2);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      opacity: 0.78;
+      pointer-events: none;
+    }
+
+    .future-routes {
+      position: absolute;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      overflow: visible;
+      pointer-events: none;
+    }
+
+    .future-routes path {
+      fill: none;
+      stroke: rgba(0, 193, 212, 0.34);
+      stroke-width: 1.2;
+      stroke-linecap: round;
+      stroke-dasharray: 6 8;
+    }
+
+    .organism-core {
+      position: absolute;
+      left: 50%;
+      top: 54%;
+      z-index: 5;
       display: grid;
-      align-content: center;
-      min-height: 166px;
-      margin-top: -20px;
-      padding: 30px 38px 24px;
-      overflow: hidden;
-      border: 1px solid rgba(0, 193, 212, 0.2);
-      border-radius: 50% / 19%;
-      background: rgba(255, 255, 255, 0.88);
+      place-items: center;
+      width: 184px;
+      min-height: 84px;
+      padding: 15px 18px;
+      border: 1px solid rgba(0, 193, 212, 0.35);
+      border-radius: 50% / 36%;
+      background:
+        radial-gradient(circle at 50% 8%, rgba(0, 193, 212, 0.12), transparent 58%),
+        rgba(255, 255, 255, 0.92);
       color: var(--quantum-black);
       text-align: center;
       box-shadow:
-        0 18px 32px rgba(0, 0, 0, 0.04),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.58);
-      cursor: pointer;
-      opacity: 1;
-      transform: translateY(0) scale(1);
-      transition:
-        opacity 720ms var(--ease-threshold),
-        transform 820ms var(--ease-threshold),
-        border-color 420ms var(--ease-threshold),
-        box-shadow 420ms var(--ease-threshold);
+        0 18px 34px rgba(0, 193, 212, 0.1),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+      opacity: 0.22;
+      transform: translate(-50%, -50%) scale(0.96);
+      transition: opacity 760ms var(--ease-threshold), transform 860ms var(--ease-threshold);
+      backdrop-filter: blur(6px);
+      pointer-events: none;
     }
 
-    .tier-layer:first-child {
-      margin-top: 0;
-    }
-
-    .tier-layer::before {
+    .organism-core::before,
+    .organism-core::after {
       content: "";
       position: absolute;
-      left: -1px;
-      right: -1px;
-      top: -29px;
+      left: 50%;
+      top: 50%;
+      width: 132%;
+      height: 132%;
+      border: 1px solid rgba(0, 193, 212, 0.09);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+    }
+
+    .organism-core::after {
+      width: 156%;
+      height: 156%;
+      border-style: dashed;
+      opacity: 0.72;
+    }
+
+    .org-core-kicker {
+      display: block;
+      margin-bottom: 5px;
+      color: var(--threshold-cyan);
+      font-family: var(--font-en);
+      font-size: 10px;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .org-core-title {
+      display: block;
+      color: var(--quantum-black);
+      font-size: 18px;
+      line-height: 1.08;
+      font-weight: 680;
+      letter-spacing: 0;
+    }
+
+    .org-core-note {
+      display: block;
+      margin-top: 6px;
+      color: var(--text-soft);
+      font-size: 11px;
+      line-height: 1.3;
+    }
+
+    .future-node {
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      justify-items: center;
+      gap: 5px;
+      width: 112px;
+      padding: 0;
+      border: 0;
+      background: transparent;
+      color: var(--quantum-black);
+      text-align: center;
+      cursor: pointer;
+      opacity: 0.14;
+      transform: translateY(14px);
+      transition:
+        opacity 760ms var(--ease-threshold),
+        transform 860ms var(--ease-threshold),
+        color 420ms var(--ease-threshold);
+    }
+
+    .future-node::after {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: 32px;
+      z-index: -1;
+      width: 62px;
       height: 62px;
       border: 1px solid currentColor;
-      border-bottom: 0;
       border-radius: 50%;
+      transform: translate(-50%, -50%);
       opacity: 0.13;
-      background: rgba(255, 255, 255, 0.78);
-      pointer-events: none;
     }
 
-    .tier-layer::after {
-      content: "";
-      position: absolute;
-      left: 9%;
-      right: 9%;
-      bottom: 12px;
-      height: 1px;
-      background: linear-gradient(90deg, transparent, currentColor, transparent);
-      opacity: 0.1;
-      pointer-events: none;
+    .future-node-me {
+      left: 10%;
+      top: 41%;
+      color: var(--level-gray);
     }
-    .tier-symbol {
-      position: absolute;
-      left: 40px;
-      top: 50%;
-      z-index: 1;
-      width: 104px;
-      height: 104px;
-      transform: translateY(-50%);
-      color: currentColor;
-      opacity: 0.22;
-      pointer-events: none;
+
+    .future-node-we {
+      left: 50%;
+      top: 5.8%;
+      color: var(--threshold-cyan);
+      transform: translate(-50%, 14px);
     }
-    .tier-symbol svg {
+
+    .future-node-ma {
+      right: 10%;
+      top: 41%;
+      color: var(--energy-orange);
+    }
+
+    .future-icon,
+    .legacy-icon {
+      display: grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      border: 1px solid currentColor;
+      border-radius: 50%;
+      background: rgba(255, 255, 255, 0.72);
+      box-shadow:
+        0 18px 30px rgba(0, 0, 0, 0.055),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.72);
+      backdrop-filter: blur(4px);
+    }
+
+    .future-icon svg,
+    .legacy-icon svg {
       display: block;
-      width: 100%;
-      height: 100%;
+      width: 40px;
+      height: 40px;
       fill: none;
       stroke: currentColor;
-      stroke-width: 1.8;
+      stroke-width: 1.7;
       stroke-linecap: round;
       stroke-linejoin: round;
     }
 
-    .tier-ma {
-      z-index: 1;
-      color: var(--energy-orange);
-      border-color: rgba(250, 95, 38, 0.2);
-      background:
-        linear-gradient(180deg, rgba(250, 95, 38, 0.1), rgba(255, 255, 255, 0.9) 68%),
-        var(--pure-white);
-    }
-
-    .tier-we {
-      z-index: 2;
-      color: var(--threshold-cyan);
-      border-color: rgba(0, 193, 212, 0.22);
-      background:
-        linear-gradient(180deg, rgba(0, 193, 212, 0.11), rgba(255, 255, 255, 0.92) 68%),
-        var(--pure-white);
-    }
-    .tier-we .tier-symbol { opacity: 0.24; }
-
-    .tier-me {
-      z-index: 3;
-      color: var(--level-gray);
-      border-color: rgba(0, 0, 0, 0.16);
-      background:
-        linear-gradient(180deg, rgba(0, 0, 0, 0.055), rgba(255, 255, 255, 0.93) 68%),
-        var(--pure-white);
-    }
-    .tier-ma .tier-symbol { opacity: 0.23; }
-
-    .tier-layer:hover,
-    .tier-layer:focus-visible,
-    .tier-layer.is-active {
-      outline: 0;
-      border-color: currentColor;
-      box-shadow:
-        0 20px 38px rgba(0, 0, 0, 0.07),
-        0 0 0 1px rgba(255, 255, 255, 0.86),
-        0 0 24px rgba(0, 193, 212, 0.14);
-      transform: translateY(0) scale(1);
-    }
-
-    .tier-ma:hover,
-    .tier-ma:focus-visible,
-    .tier-ma.is-active {
-      box-shadow:
-        0 20px 38px rgba(0, 0, 0, 0.07),
-        0 0 0 1px rgba(255, 255, 255, 0.86),
-        0 0 24px rgba(250, 95, 38, 0.16);
-    }
-
-    .tier-me:hover,
-    .tier-me:focus-visible,
-    .tier-me.is-active {
-      box-shadow:
-        0 20px 38px rgba(0, 0, 0, 0.07),
-        0 0 0 1px rgba(255, 255, 255, 0.86),
-        0 0 22px rgba(0, 0, 0, 0.08);
-    }
-
-    .tier-index {
-      position: relative;
-      z-index: 2;
-      display: block;
-      margin-bottom: 8px;
-      color: var(--level-gray);
+    .future-code {
       font-family: var(--font-en);
-      font-size: 12px;
+      font-size: 17px;
       line-height: 1;
-      letter-spacing: 0.14em;
+      letter-spacing: 0.04em;
+      color: currentColor;
       text-transform: uppercase;
     }
 
-    .tier-layer strong {
-      position: relative;
-      z-index: 2;
-      display: block;
-      margin-bottom: 4px;
+    .future-title {
       color: var(--quantum-black);
-      font-size: 25px;
-      line-height: 1.16;
+      font-size: 14px;
+      line-height: 1.1;
       font-weight: 620;
       letter-spacing: 0;
     }
 
-    .tier-layer em {
-      position: relative;
-      z-index: 2;
-      display: block;
-      margin-bottom: 16px;
-      color: currentColor;
-      font-family: var(--font-en);
-      font-size: 12px;
-      line-height: 1.25;
-      letter-spacing: 0.1em;
-      text-transform: uppercase;
-      font-style: normal;
+    .future-note {
+      color: var(--text-soft);
+      font-size: 10px;
+      line-height: 1.35;
+      white-space: nowrap;
     }
 
-    .tier-chips {
-      position: relative;
-      z-index: 2;
-      display: grid;
-      grid-template-columns: repeat(5, minmax(0, 1fr));
-      gap: 8px;
-    }
-
-    .tier-chip {
-      display: grid;
-      place-items: center;
-      min-height: 42px;
-      padding: 8px 6px;
-      border: 1px solid rgba(217, 221, 225, 0.7);
-      border-radius: 8px;
-      color: var(--level-gray);
-      background: rgba(255, 255, 255, 0.78);
-      font-size: 12px;
-      line-height: 1.25;
-    }
-
-    .tier-loop {
+    .adaptive-ring {
       position: absolute;
-      top: 74px;
-      bottom: 64px;
-      width: 46px;
-      border: 1px solid rgba(0, 193, 212, 0.15);
-      opacity: 0.48;
-      display: none;
-      transition: opacity 720ms var(--ease-threshold), transform 820ms var(--ease-threshold);
+      inset: 0;
+      margin: 0;
+      padding: 0;
+      list-style: none;
       pointer-events: none;
     }
 
-    .tier-loop-left {
-      left: 0;
-      border-right: 0;
-      border-radius: 46px 0 0 46px;
-      transform: translateX(0);
-    }
-
-    .tier-loop-right {
-      right: 0;
-      border-left: 0;
-      border-radius: 0 46px 46px 0;
-      transform: translateX(0);
-    }
-
-    .tier-loop::before,
-    .tier-loop::after {
-      content: "";
+    .adaptive-ring li {
       position: absolute;
-      width: 7px;
-      height: 7px;
-      border: 2px solid var(--energy-orange);
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      color: rgba(0, 0, 0, 0.48);
+      font-size: 10px;
+      line-height: 1;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 740ms var(--ease-threshold), transform 820ms var(--ease-threshold);
+    }
+
+    .adaptive-ring li::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border: 1px solid var(--threshold-cyan);
       border-radius: 50%;
       background: var(--pure-white);
     }
 
-    .tier-loop-left::before {
-      left: -5px;
-      top: 26%;
-    }
+    .adaptive-ring li:nth-child(1) { left: 13%; top: 12%; }
+    .adaptive-ring li:nth-child(2) { right: 13%; top: 12%; }
+    .adaptive-ring li:nth-child(3) { right: 1%; top: 41%; }
+    .adaptive-ring li:nth-child(4) { right: 17%; bottom: -1%; }
+    .adaptive-ring li:nth-child(5) { left: 17%; bottom: -1%; }
+    .adaptive-ring li:nth-child(6) { left: 1%; top: 41%; }
 
-    .tier-loop-left::after {
-      left: -5px;
-      bottom: 24%;
-      border-color: var(--threshold-cyan);
-    }
-
-    .tier-loop-right::before {
-      right: -5px;
-      top: 26%;
-    }
-
-    .tier-loop-right::after {
-      right: -5px;
-      bottom: 24%;
-      border-color: var(--threshold-cyan);
-    }
-
-    .orbit-system[data-phase="input"] .tier-me,
-    .orbit-system[data-phase="dispatch"] .tier-me,
-    .orbit-system[data-phase="evolve"] .tier-me,
-    .orbit-system[data-phase="fusion"] .tier-me,
-    .orbit-system[data-phase="complete"] .tier-me {
+    .future-node:hover,
+    .future-node:focus-visible,
+    .future-node.is-active {
+      outline: 0;
       opacity: 1;
-      transform: translateY(0) scale(1);
+      transform: translateY(0) scale(1.04);
     }
 
-    .orbit-system[data-phase="dispatch"] .tier-we,
-    .orbit-system[data-phase="evolve"] .tier-we,
-    .orbit-system[data-phase="fusion"] .tier-we,
-    .orbit-system[data-phase="complete"] .tier-we {
-      opacity: 1;
-      transform: translateY(0) scale(1);
+    .future-node-we:hover,
+    .future-node-we:focus-visible,
+    .future-node-we.is-active {
+      transform: translate(-50%, 0) scale(1.04);
     }
 
-    .orbit-system[data-phase="evolve"] .tier-ma,
-    .orbit-system[data-phase="fusion"] .tier-ma,
-    .orbit-system[data-phase="complete"] .tier-ma,
-    .orbit-system[data-phase="fusion"] .tier-loop,
-    .orbit-system[data-phase="complete"] .tier-loop {
+    .future-node:hover .future-icon,
+    .future-node:focus-visible .future-icon,
+    .future-node.is-active .future-icon {
+      box-shadow:
+        0 18px 34px rgba(0, 0, 0, 0.07),
+        0 0 22px rgba(0, 193, 212, 0.18),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.8);
+    }
+
+    .organization-label {
+      position: absolute;
+      left: 50%;
+      width: max-content;
+      max-width: 82%;
+      transform: translateX(-50%);
+      font-family: var(--font-en);
+      font-size: 11px;
+      line-height: 1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      text-align: center;
+      white-space: nowrap;
+    }
+
+    .future-label {
+      top: 3%;
+      color: var(--threshold-cyan);
+    }
+
+    .legacy-label {
+      top: 64%;
+      color: rgba(0, 0, 0, 0.36);
+    }
+
+    .legacy-organization {
+      position: absolute;
+      left: 5.5%;
+      right: 5.5%;
+      top: 67%;
+      display: grid;
+      gap: 13px;
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
+      transition: opacity 900ms var(--ease-threshold), transform 960ms var(--ease-threshold);
+    }
+
+    .legacy-chain {
+      position: relative;
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, 1fr));
+      gap: 10px;
+      margin: 0;
+      padding: 0 0 12px;
+      list-style: none;
+    }
+
+    .legacy-chain::before {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      top: 18px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, rgba(0, 0, 0, 0.18), transparent);
+    }
+
+    .legacy-chain li {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      gap: 6px;
+      color: rgba(0, 0, 0, 0.46);
+      font-size: 9px;
+      line-height: 1.25;
+      text-align: center;
+    }
+
+    .legacy-chain li::before {
+      content: "";
+      z-index: 1;
+      width: 9px;
+      height: 9px;
+      border: 1px solid rgba(0, 193, 212, 0.32);
+      border-radius: 50%;
+      background: var(--pure-white);
+    }
+
+    .legacy-challenges {
+      display: grid;
+      grid-template-columns: repeat(6, minmax(0, auto));
+      justify-content: center;
+      gap: 8px;
+    }
+
+    .legacy-challenges span {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: 25px;
+      padding: 5px 8px;
+      border: 1px solid rgba(0, 0, 0, 0.09);
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.52);
+      color: rgba(0, 0, 0, 0.5);
+      font-size: 9px;
+      line-height: 1;
+      white-space: nowrap;
+    }
+
+    .legacy-challenges span::before {
+      content: "";
+      width: 5px;
+      height: 5px;
+      border: 1px solid rgba(0, 0, 0, 0.28);
+      border-radius: 50%;
+    }
+
+    .future-organization {
+      left: 7%;
+      right: 0;
+      top: 1.5%;
+      height: 58%;
+    }
+
+    .future-organization::before {
+      top: 52%;
+      width: 69%;
+      height: 96%;
+      border-color: rgba(0, 193, 212, 0.11);
+      border-top-color: rgba(0, 193, 212, 0.3);
+      opacity: 0.58;
+    }
+
+    .future-organization::after {
+      top: 54%;
+      width: 40%;
+      height: 61%;
+      opacity: 0.46;
+    }
+
+    .future-routes {
+      inset: 0 2% 0 11%;
+      width: 87%;
+      height: 100%;
+    }
+
+    .future-routes path {
+      stroke-width: 1.15;
+      stroke: rgba(0, 193, 212, 0.34);
+      stroke-dasharray: 7 9;
+      opacity: 0;
+      transition: opacity 720ms var(--ease-threshold), stroke-width 720ms var(--ease-threshold);
+    }
+
+    .future-routes .route-cycle {
+      stroke: rgba(255, 88, 43, 0.48);
+      stroke-width: 1.5;
+      stroke-dasharray: 4 7;
+    }
+
+    .future-side-note {
+      position: absolute;
+      z-index: 6;
+      width: 136px;
+      padding-left: 10px;
+      border-left: 2px solid rgba(0, 193, 212, 0.55);
+      color: rgba(0, 0, 0, 0.58);
+      opacity: 0;
+      transform: translateY(10px);
+      transition: opacity 760ms var(--ease-threshold), transform 860ms var(--ease-threshold);
+      pointer-events: none;
+    }
+
+    .future-side-note span {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--threshold-cyan);
+      font-family: var(--font-en);
+      font-size: 9px;
+      line-height: 1.1;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .future-side-note strong {
+      display: block;
+      color: var(--quantum-black);
+      font-size: 12px;
+      line-height: 1.25;
+      font-weight: 560;
+      letter-spacing: 0;
+    }
+
+    .future-side-note p {
+      margin: 8px 0 0;
+      font-size: 9px;
+      line-height: 1.5;
+    }
+
+    .side-note-we {
+      left: -5%;
+      top: 13%;
+      text-align: left;
+    }
+
+    .side-note-ma {
+      left: -5%;
+      top: 42%;
+    }
+
+    .side-note-me {
+      left: -5%;
+      top: 70%;
+    }
+
+    .ma-flywheel {
+      left: 50%;
+      top: 53%;
+      width: 132px;
+      min-height: 132px;
+      padding: 18px 16px;
+      border-radius: 50%;
+      border-color: rgba(255, 88, 43, 0.48);
+      background:
+        radial-gradient(circle at 50% 50%, rgba(0, 193, 212, 0.11), transparent 58%),
+        rgba(255, 255, 255, 0.94);
+      box-shadow:
+        0 20px 38px rgba(0, 193, 212, 0.12),
+        0 0 0 1px rgba(255, 88, 43, 0.08);
+      opacity: 0;
+    }
+
+    .ma-flywheel::before {
+      width: 154%;
+      height: 154%;
+      border-color: rgba(0, 193, 212, 0.18);
+      border-top-color: var(--threshold-cyan);
+      border-right-color: var(--energy-orange);
+      animation: flywheel-spin 10s linear infinite;
+    }
+
+    .ma-flywheel::after {
+      width: 118%;
+      height: 118%;
+      border-color: rgba(255, 88, 43, 0.22);
+      border-style: dashed;
+    }
+
+    .ma-flywheel .org-core-kicker {
+      color: var(--energy-orange);
+      font-size: 9px;
+      letter-spacing: 0.12em;
+    }
+
+    .ma-core-icon {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      margin: 0 auto 8px;
+      color: var(--energy-orange);
+    }
+
+    .ma-core-icon svg {
+      display: block;
+      width: 34px;
+      height: 34px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.7;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .ma-flywheel .org-core-title {
+      font-size: 18px;
+      line-height: 1.1;
+      font-weight: 650;
+    }
+
+    .ma-flywheel .org-core-note {
+      max-width: 96px;
+      margin-inline: auto;
+      font-size: 10px;
+      line-height: 1.35;
+    }
+
+    .future-node {
+      width: 96px;
+      gap: 6px;
+      opacity: 0;
+      transform: translate(-50%, 14px);
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0 !important;
+      background: transparent !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+      font: inherit;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .future-node:focus,
+    .future-node:active {
+      border: 0 !important;
+      background: transparent !important;
+      outline: 0 !important;
+      box-shadow: none !important;
+    }
+
+    .future-node::after {
+      display: none;
+    }
+
+    .future-icon {
+      width: 56px;
+      height: 56px;
+      background: rgba(255, 255, 255, 0.86);
+    }
+
+    .future-icon svg {
+      width: 31px;
+      height: 31px;
+      stroke-width: 1.65;
+    }
+
+    .future-icon .accent,
+    .ma-core-icon .accent {
+      stroke: var(--energy-orange);
+    }
+
+    .future-title {
+      max-width: 96px;
+      font-size: 10px;
+      line-height: 1.12;
+      font-weight: 560;
+      white-space: normal;
+    }
+
+    .future-code,
+    .future-note {
+      display: none;
+    }
+
+    .future-node-we {
+      color: var(--threshold-cyan);
+    }
+
+    .future-node-me {
+      color: var(--level-gray);
+    }
+
+    .expert-node .future-icon,
+    .expert-node:hover .future-icon,
+    .expert-node:focus-visible .future-icon,
+    .expert-node.is-active .future-icon {
+      width: 72px;
+      height: 42px;
+      border: 0;
+      border-radius: 0;
+      background: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none;
+    }
+
+    .expert-network-icon {
+      position: relative;
+      display: grid;
+      place-items: center;
+      color: currentColor;
+    }
+
+    .expert-network-icon svg {
+      display: block;
+      width: 48px;
+      height: 42px;
+      fill: none;
+      stroke: currentColor;
+      stroke-width: 1.65;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+      filter: drop-shadow(0 0 8px rgba(0, 193, 212, 0.12));
+    }
+
+    .expert-network-icon .accent {
+      stroke: var(--energy-orange);
+    }
+
+    .expert-person,
+    .net-line {
+      position: absolute;
+      display: block;
+    }
+
+    .expert-person {
+      width: 17px;
+      height: 19px;
+      border: 1.35px solid currentColor;
+      border-radius: 4px;
+      background: rgba(255, 255, 255, 0.92);
+    }
+
+    .expert-person::before {
+      content: "";
+      position: absolute;
+      left: 50%;
+      top: -6px;
+      width: 1px;
+      height: 6px;
+      background: currentColor;
+      border: 0;
+      border-radius: 0;
+      transform: translateX(-50%);
+    }
+
+    .expert-person::after {
+      content: "";
+      position: absolute;
+      left: 4px;
+      top: 7px;
+      width: 3px;
+      height: 3px;
+      border: 0;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 6px 0 0 currentColor;
+    }
+
+    .expert-person-a { left: 5px; top: 18px; }
+    .expert-person-b { left: 28px; top: 1px; }
+    .expert-person-c { right: 5px; top: 18px; }
+
+    .net-line {
+      display: none;
+      left: 18px;
+      top: 23px;
+      width: 36px;
+      height: 1px;
+      background: currentColor;
+      opacity: 0.34;
+      transform-origin: center;
+    }
+
+    .net-line-a { transform: rotate(-30deg); }
+    .net-line-b { transform: rotate(30deg); }
+    .net-line-c {
+      left: 20px;
+      top: 30px;
+      width: 32px;
+      opacity: 0.22;
+    }
+
+    .expert-node-1 { left: 23%; top: 43%; }
+    .expert-node-2 { left: 29%; top: 30%; }
+    .expert-node-3 { left: 37%; top: 20%; }
+    .expert-node-4 { left: 46%; top: 14%; }
+    .expert-node-5 { left: 56%; top: 14%; }
+    .expert-node-6 { left: 65%; top: 20%; }
+    .expert-node-7 { left: 73%; top: 30%; }
+    .expert-node-8 { left: 79%; top: 43%; }
+
+    .expert-node-1,
+    .route-we-1 { transition-delay: 120ms; }
+    .expert-node-2,
+    .route-we-2 { transition-delay: 240ms; }
+    .expert-node-3,
+    .route-we-3 { transition-delay: 360ms; }
+    .expert-node-4,
+    .route-we-4 { transition-delay: 480ms; }
+    .expert-node-5,
+    .route-we-5 { transition-delay: 600ms; }
+    .expert-node-6,
+    .route-we-6 { transition-delay: 720ms; }
+    .expert-node-7,
+    .route-we-7 { transition-delay: 840ms; }
+    .expert-node-8,
+    .route-we-8 { transition-delay: 960ms; }
+
+    .me-node-1 { left: 42%; top: 76%; transition-delay: 40ms; }
+    .me-node-2 { left: 60%; top: 76%; transition-delay: 180ms; }
+
+    .me-node .future-title {
+      max-width: 78px;
+      white-space: nowrap;
+    }
+
+    .future-node:hover,
+    .future-node:focus-visible,
+    .future-node.is-active,
+    .future-node-we:hover,
+    .future-node-we:focus-visible,
+    .future-node-we.is-active {
+      transform: translate(-50%, 0) scale(1.04);
+    }
+
+    .future-node.is-active .future-icon {
+      background: rgba(255, 255, 255, 0.96);
+      box-shadow:
+        0 18px 34px rgba(0, 193, 212, 0.13),
+        0 0 0 1px currentColor;
+    }
+
+    .legacy-sentence {
+      display: none;
+      margin: 0;
+      color: rgba(255, 255, 255, 0.72);
+      font-size: 11px;
+      line-height: 1.45;
+      text-align: center;
+    }
+
+    .tier-loop {
+      display: none;
+    }
+
+    .orbit-system[data-phase="input"] .future-organization,
+    .orbit-system[data-phase="dispatch"] .future-organization,
+    .orbit-system[data-phase="evolve"] .future-organization,
+    .orbit-system[data-phase="fusion"] .future-organization,
+    .orbit-system[data-phase="complete"] .future-organization,
+    .orbit-system[data-phase="input"] .future-node-me,
+    .orbit-system[data-phase="dispatch"] .future-node-me,
+    .orbit-system[data-phase="evolve"] .future-node-me,
+    .orbit-system[data-phase="fusion"] .future-node-me,
+    .orbit-system[data-phase="complete"] .future-node-me {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .orbit-system[data-phase="fusion"] .organism-core,
+    .orbit-system[data-phase="complete"] .organism-core {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .orbit-system[data-phase="fusion"] .adaptive-ring li,
+    .orbit-system[data-phase="complete"] .adaptive-ring li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .orbit-system[data-phase="fusion"] .adaptive-ring li:nth-child(1),
+    .orbit-system[data-phase="complete"] .adaptive-ring li:nth-child(1) {
+      transform: translateY(0);
+    }
+
+    .orbit-system[data-phase="dispatch"] .future-node-we,
+    .orbit-system[data-phase="evolve"] .future-node-we,
+    .orbit-system[data-phase="fusion"] .future-node-we,
+    .orbit-system[data-phase="complete"] .future-node-we {
+      opacity: 1;
+      transform: translate(-50%, 0);
+    }
+
+    .orbit-system[data-phase="evolve"] .future-node-ma,
+    .orbit-system[data-phase="fusion"] .future-node-ma,
+    .orbit-system[data-phase="complete"] .future-node-ma,
+    .orbit-system[data-phase="fusion"] .legacy-organization,
+    .orbit-system[data-phase="complete"] .legacy-organization {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .orbit-system[data-phase="input"] .future-node-me,
+    .orbit-system[data-phase="dispatch"] .future-node-me,
+    .orbit-system[data-phase="evolve"] .future-node-me,
+    .orbit-system[data-phase="fusion"] .future-node-me,
+    .orbit-system[data-phase="complete"] .future-node-me,
+    .orbit-system[data-phase="dispatch"] .future-node-we,
+    .orbit-system[data-phase="evolve"] .future-node-we,
+    .orbit-system[data-phase="fusion"] .future-node-we,
+    .orbit-system[data-phase="complete"] .future-node-we {
+      transform: translate(-50%, 0);
+    }
+
+    .orbit-system[data-phase="input"] .route-me,
+    .orbit-system[data-phase="dispatch"] .route-me,
+    .orbit-system[data-phase="evolve"] .route-me,
+    .orbit-system[data-phase="fusion"] .route-me,
+    .orbit-system[data-phase="complete"] .route-me,
+    .orbit-system[data-phase="dispatch"] .route-we,
+    .orbit-system[data-phase="evolve"] .route-we,
+    .orbit-system[data-phase="fusion"] .route-we,
+    .orbit-system[data-phase="complete"] .route-we,
+    .orbit-system[data-phase="evolve"] .route-cycle,
+    .orbit-system[data-phase="fusion"] .route-cycle,
+    .orbit-system[data-phase="complete"] .route-cycle {
+      opacity: 1;
+    }
+
+    .orbit-system[data-phase="evolve"] .ma-flywheel,
+    .orbit-system[data-phase="fusion"] .ma-flywheel,
+    .orbit-system[data-phase="complete"] .ma-flywheel {
+      opacity: 1;
+      transform: translate(-50%, -50%) scale(1);
+    }
+
+    .orbit-system[data-phase="input"] .side-note-me,
+    .orbit-system[data-phase="dispatch"] .side-note-me,
+    .orbit-system[data-phase="dispatch"] .side-note-we,
+    .orbit-system[data-phase="evolve"] .future-side-note,
+    .orbit-system[data-phase="fusion"] .future-side-note,
+    .orbit-system[data-phase="complete"] .future-side-note {
+      opacity: 1;
+      transform: translateY(0);
     }
 
     .venn-system .edge-line {
@@ -2781,6 +3484,40 @@
       }
     }
 
+    @keyframes logo-mark-reveal {
+      from {
+        opacity: 0;
+        transform: translate(-50%, -48%) scale(0.94);
+      }
+      to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(0.985);
+      }
+    }
+
+    @keyframes horizon-scan {
+      from {
+        opacity: 0;
+        transform: scaleX(0);
+      }
+      42% {
+        opacity: 1;
+      }
+      to {
+        opacity: 1;
+        transform: scaleX(1);
+      }
+    }
+
+    @keyframes flywheel-spin {
+      from {
+        transform: translate(-50%, -50%) rotate(0deg);
+      }
+      to {
+        transform: translate(-50%, -50%) rotate(360deg);
+      }
+    }
+
     @keyframes node-enter {
       from {
         opacity: 0;
@@ -2953,8 +3690,8 @@
         margin-top: -1px;
         padding: 26px 0 30px;
         border-color: rgba(0, 193, 212, 0.38);
-        background: var(--quantum-black);
-        color: var(--pure-white);
+        background: transparent;
+        color: var(--quantum-black);
       }
 
       .mobile-step-index {
@@ -2979,7 +3716,7 @@
       }
 
       .mobile-step:last-child p {
-        color: rgba(255, 255, 255, 0.7);
+        color: var(--text-soft);
       }
     }
 
@@ -3044,79 +3781,209 @@
         <div class="system-canvas orbit-system" id="systemCanvas" data-phase="input" data-scenario="strategy">
           <div class="orbit-stage">
             <div class="tier-stage">
+              <span class="logo-horizon-shell" aria-hidden="true">
+                <span class="logo-horizon-line"></span>
+              </span>
               <span class="tier-loop tier-loop-left" aria-hidden="true"></span>
               <span class="tier-loop tier-loop-right" aria-hidden="true"></span>
 
-              <section class="tier-stack" aria-label="Frontis Horizon 三层产品架构">
-                <button class="tier-layer tier-me" type="button" data-scenario="strategy" aria-pressed="true">
-                  <span class="tier-symbol" aria-hidden="true">
-                    <svg viewBox="0 0 96 96">
-                      <circle cx="42" cy="30" r="12"></circle>
-                      <path d="M20 74c4-17 13-26 22-26s18 9 22 26"></path>
-                      <circle cx="54" cy="35" r="12" opacity=".45"></circle>
-                      <path d="M36 78c4-16 12-25 20-25 9 0 17 9 21 25" opacity=".45"></path>
-                      <path d="M18 22c8-9 18-13 30-13 14 0 26 6 34 17" opacity=".4"></path>
-                      <path d="M78 70c-8 10-19 16-32 16-12 0-23-5-31-13" opacity=".4"></path>
-                    </svg>
-                  </span>
-                  <span class="tier-index">Tier 1 · ME</span>
-                  <strong>数字分身</strong>
-                  <em>Human-AI interaction layer</em>
-                  <span class="tier-chips">
-                    <span class="tier-chip">统一入口</span>
-                    <span class="tier-chip">长期记忆</span>
-                    <span class="tier-chip">意图理解</span>
-                    <span class="tier-chip">上下文管理</span>
-                    <span class="tier-chip">多端一致</span>
-                  </span>
-                </button>
+              <section class="tier-stack" aria-label="地平线前后的组织范式对照">
+                <span class="organization-label future-label">AI原生的组织</span>
+                <div class="future-organization" aria-label="面向未来的 AI 原生组织">
+                  <svg class="future-routes" viewBox="0 0 720 390" preserveAspectRatio="none" aria-hidden="true">
+                    <path class="route-me route-me-1" d="M330 302C340 270 350 242 360 214"></path>
+                    <path class="route-me route-me-2" d="M458 302C424 270 392 242 360 214"></path>
+                    <path class="route-we route-we-1" d="M360 214C310 198 234 174 166 160"></path>
+                    <path class="route-we route-we-2" d="M360 214C318 184 258 136 210 114"></path>
+                    <path class="route-we route-we-3" d="M360 214C332 170 300 104 268 78"></path>
+                    <path class="route-we route-we-4" d="M360 214C350 152 346 88 332 54"></path>
+                    <path class="route-we route-we-5" d="M360 214C374 152 382 88 404 54"></path>
+                    <path class="route-we route-we-6" d="M360 214C400 170 440 104 482 78"></path>
+                    <path class="route-we route-we-7" d="M360 214C426 184 486 136 536 114"></path>
+                    <path class="route-we route-we-8" d="M360 214C458 198 544 174 606 160"></path>
+                    <path class="route-cycle" d="M300 208C316 160 404 160 420 208C434 254 292 254 300 208"></path>
+                  </svg>
 
-                <button class="tier-layer tier-we" type="button" data-scenario="sales" aria-pressed="false">
-                  <span class="tier-symbol" aria-hidden="true">
-                    <svg viewBox="0 0 96 96">
-                      <circle cx="48" cy="48" r="10"></circle>
-                      <circle cx="22" cy="30" r="8"></circle>
-                      <circle cx="74" cy="30" r="8"></circle>
-                      <circle cx="25" cy="70" r="8"></circle>
-                      <circle cx="71" cy="70" r="8"></circle>
-                      <path d="M30 33l10 8M66 33l-10 8M33 67l8-10M63 67l-8-10"></path>
-                      <path d="M22 30c12-13 40-13 52 0M25 70c13 10 33 10 46 0" opacity=".45"></path>
-                    </svg>
-                  </span>
-                  <span class="tier-index">Tier 2 · WE</span>
-                  <strong>专家网络</strong>
-                  <em>Multi-agent expert network</em>
-                  <span class="tier-chips">
-                    <span class="tier-chip">专家调度</span>
-                    <span class="tier-chip">多专家协同</span>
-                    <span class="tier-chip">任务分派</span>
-                    <span class="tier-chip">审核复盘</span>
-                    <span class="tier-chip">业务闭环</span>
-                  </span>
-                </button>
+                  <aside class="future-side-note side-note-we">
+                    <span>WE · Expert Network</span>
+                    <strong>8 类 AI 专家团逐个协同</strong>
+                    <p>每个专家团由多名专家 Agent 形成网络，被 MA 持续评估和优化。</p>
+                  </aside>
 
-                <button class="tier-layer tier-ma" type="button" data-scenario="ops" aria-pressed="false">
-                  <span class="tier-symbol" aria-hidden="true">
-                    <svg viewBox="0 0 96 96">
-                      <path d="M74 35a29 29 0 0 0-52 8"></path>
-                      <path d="M74 35l2-14M74 35l-13-4"></path>
-                      <path d="M22 61a29 29 0 0 0 52-8"></path>
-                      <path d="M22 61l-2 14M22 61l13 4"></path>
-                      <circle cx="48" cy="48" r="12"></circle>
-                      <path d="M48 27v8M48 61v8M27 48h8M61 48h8M33 33l6 6M57 57l6 6M63 33l-6 6M39 57l-6 6" opacity=".55"></path>
-                    </svg>
-                  </span>
-                  <span class="tier-index">Tier 3 · MA</span>
-                  <strong>进化引擎</strong>
-                  <em>Self-evolving organizational intelligence</em>
-                  <span class="tier-chips">
-                    <span class="tier-chip">经验沉淀</span>
-                    <span class="tier-chip">专家评估</span>
-                    <span class="tier-chip">自动优化</span>
-                    <span class="tier-chip">知识反哺</span>
-                    <span class="tier-chip">持续进化</span>
-                  </span>
-                </button>
+                  <aside class="future-side-note side-note-ma">
+                    <span>MA · Evolution Engine</span>
+                    <strong>进化引擎最后显现</strong>
+                    <p>沉淀任务经验、评估专家质量，并反哺下一轮调度。</p>
+                  </aside>
+
+                  <aside class="future-side-note side-note-me">
+                    <span>ME · Digital Self</span>
+                    <strong>领导者和构建者的数字分身入口</strong>
+                    <p>领衔者定义方向，构建者把目标转译为可执行任务。</p>
+                  </aside>
+
+                  <div class="organism-core ma-flywheel" aria-hidden="true">
+                    <span class="ma-core-icon">
+                      <svg viewBox="0 0 96 96">
+                        <path d="M70 32a29 29 0 0 0-48 14"></path>
+                        <path d="M70 32l2-13M70 32l-13-3"></path>
+                        <path class="accent" d="M26 64a29 29 0 0 0 48-14"></path>
+                        <path class="accent" d="M26 64l-2 13M26 64l13 3"></path>
+                        <circle cx="48" cy="48" r="9"></circle>
+                        <path d="M48 27v7M48 62v7M27 48h7M62 48h7" opacity=".55"></path>
+                      </svg>
+                    </span>
+                    <span class="org-core-kicker">MA · Evolution Engine</span>
+                    <strong class="org-core-title">进化飞轮</strong>
+                    <span class="org-core-note">沉淀 · 评估 · 优化 · 反哺</span>
+                  </div>
+
+                  <button class="future-node future-node-we expert-node expert-node-1" type="button" data-scenario="strategy" aria-pressed="true">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <circle cx="44" cy="52" r="27"></circle>
+                        <circle cx="44" cy="52" r="15"></circle>
+                        <circle cx="44" cy="52" r="5"></circle>
+                        <path class="accent" d="M61 35l18-18"></path>
+                        <path class="accent" d="M73 17h10v10"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI战略专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-we expert-node expert-node-2" type="button" data-scenario="market" aria-pressed="false">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <circle cx="38" cy="42" r="21"></circle>
+                        <path d="M54 58l21 21"></path>
+                        <path class="accent" d="M26 49l9-9 8 6 13-16"></path>
+                        <path d="M60 28h16M60 38h10" opacity=".55"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI市场专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-we expert-node expert-node-3" type="button" data-scenario="rd" aria-pressed="false">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <rect x="27" y="25" width="42" height="42" rx="6"></rect>
+                        <path d="M20 33h7M20 43h7M20 53h7M20 63h7M69 33h7M69 43h7M69 53h7M69 63h7"></path>
+                        <path d="M35 17v8M45 17v8M55 17v8M65 17v8M35 67v8M45 67v8M55 67v8M65 67v8"></path>
+                        <path class="accent" d="M37 54l8-20 8 20M40 47h10M58 35v19"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI研发专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-we expert-node expert-node-4" type="button" data-scenario="production" aria-pressed="false">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <path d="M18 70h46"></path>
+                        <path d="M28 70V58h18v12"></path>
+                        <circle cx="34" cy="36" r="7"></circle>
+                        <circle cx="58" cy="24" r="7"></circle>
+                        <circle cx="72" cy="45" r="7"></circle>
+                        <path d="M39 34l14-8M62 29l7 11"></path>
+                        <path class="accent" d="M75 50c4 8 2 15-5 20"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI生产专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-we expert-node expert-node-5" type="button" data-scenario="supply" aria-pressed="false">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <circle cx="48" cy="22" r="8"></circle>
+                        <circle cx="24" cy="54" r="8"></circle>
+                        <circle cx="72" cy="54" r="8"></circle>
+                        <circle class="accent" cx="48" cy="76" r="8"></circle>
+                        <path d="M44 28L29 48M52 28l15 20M32 55h32M29 60l14 12M67 60L53 72"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI供应链专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-we expert-node expert-node-6" type="button" data-scenario="sales" aria-pressed="false">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <path d="M20 58l36-18 20-14v44L56 58 20 58z"></path>
+                        <path d="M20 58l8 20h13l-8-20"></path>
+                        <path class="accent" d="M78 35c6 3 9 8 9 13s-3 10-9 13"></path>
+                        <path d="M56 40v18"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI营销专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-we expert-node expert-node-7" type="button" data-scenario="service" aria-pressed="false">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <path d="M20 28h42a9 9 0 0 1 9 9v15a9 9 0 0 1-9 9H41L27 73V61h-7a9 9 0 0 1-9-9V37a9 9 0 0 1 9-9z"></path>
+                        <path d="M36 40h20M28 50h26"></path>
+                        <path class="accent" d="M61 65h13l10 8V43a7 7 0 0 0-7-7h-5"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI服务专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-we expert-node expert-node-8" type="button" data-scenario="ops" aria-pressed="false">
+                    <span class="future-icon expert-network-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <rect x="25" y="20" width="46" height="58" rx="6"></rect>
+                        <path d="M38 20a10 10 0 0 1 20 0"></path>
+                        <path d="M36 40h18M36 52h14M36 64h20"></path>
+                        <path class="accent" d="M61 39l5 5 11-13M61 61l5 5 11-13"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">AI运营专家团</strong>
+                  </button>
+
+                  <button class="future-node future-node-me me-node me-node-1" type="button" data-scenario="leader" aria-pressed="false">
+                    <span class="future-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <circle cx="48" cy="27" r="13"></circle>
+                        <path d="M22 78c4-22 14-34 26-34s22 12 26 34"></path>
+                        <path d="M42 47l6 12 6-12M42 47l-7 10M54 47l7 10"></path>
+                        <path class="accent" d="M36 59l12 13 12-13"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">领衔者 ME</strong>
+                  </button>
+
+                  <button class="future-node future-node-me me-node me-node-2" type="button" data-scenario="builder" aria-pressed="false">
+                    <span class="future-icon" aria-hidden="true">
+                      <svg viewBox="0 0 96 96">
+                        <circle cx="48" cy="30" r="12"></circle>
+                        <path d="M27 76c4-19 12-30 21-30s17 11 21 30"></path>
+                        <path d="M26 22c5-9 13-14 22-14s17 5 22 14" opacity=".48"></path>
+                        <path d="M19 30c5-14 16-22 29-22s24 8 29 22" opacity=".28"></path>
+                        <path class="accent" d="M31 58h34"></path>
+                      </svg>
+                    </span>
+                    <strong class="future-title">构建者 ME</strong>
+                  </button>
+                </div>
+
+                <span class="organization-label legacy-label">流程驱动的组织</span>
+                <div class="legacy-organization" aria-label="现有人类组织特征">
+                  <ol class="legacy-chain" aria-label="传统价值链分工">
+                    <li>市场洞察</li>
+                    <li>产品研发</li>
+                    <li>供应生产</li>
+                    <li>营销销售</li>
+                    <li>客户服务</li>
+                    <li>运营管理</li>
+                  </ol>
+                  <div class="legacy-challenges" aria-label="传统组织挑战">
+                    <span>数据孤岛</span>
+                    <span>经验依赖</span>
+                    <span>协同成本高</span>
+                    <span>反馈周期长</span>
+                    <span>创新响应慢</span>
+                    <span>能力难沉淀</span>
+                  </div>
+                  <p class="legacy-sentence">有流程、有分工、有经验，但智能没有在组织中持续流动。</p>
+                </div>
               </section>
             </div>
           </div>
@@ -3162,6 +4029,11 @@
           text: "ME 汇总管理者意图，调度战略、销售与运营专家，MA 将复盘结论沉淀为下一轮目标、任务和知识更新。",
           caption: "从战略判断到执行复盘，系统把一次会议变成可追踪、可复用、可继续进化的组织能力。"
         },
+        market: {
+          title: "市场洞察",
+          text: "ME 读取行业变化和客户反馈，调度市场专家团形成趋势判断、机会识别和竞品观察。",
+          caption: "市场判断不再停留在碎片信息里，而是沉淀为可复用、可校准的组织认知。"
+        },
         sales: {
           title: "销售跟进",
           text: "ME 读取客户阶段和历史沟通，调度销售、产品与运营专家，生成下一步行动、话术和风险提醒。",
@@ -3172,27 +4044,47 @@
           text: "ME 将业务目标转译成需求上下文，WE 专家补齐技术方案、交付拆解和评审要点，MA 沉淀最佳实践。",
           caption: "从需求澄清到方案评审，系统让研发知识在跨团队协作中复用，而不是散落在一次次对话里。"
         },
+        production: {
+          title: "生产协同",
+          text: "ME 汇总订单、产能和交付约束，调度生产专家团识别瓶颈、生成排产建议和风险预警。",
+          caption: "生产现场的异常、调整和复盘进入 MA，让交付能力在真实任务中持续进化。"
+        },
         supply: {
           title: "供应链预测",
           text: "ME 捕捉销售变化和库存压力，调度供应链、运营与财务专家，MA 记录预测偏差并优化下一轮模型。",
           caption: "预测不是一次性报表，而是围绕真实业务反馈持续校准的动态判断系统。"
         },
+        service: {
+          title: "服务闭环",
+          text: "ME 汇总客户问题和服务记录，调度服务专家团生成处理建议、风险升级和知识库更新。",
+          caption: "客户服务不再只是响应问题，而是把每次服务变成产品、运营和组织能力的反馈。"
+        },
         ops: {
           title: "运营编排",
           text: "ME 识别流程瓶颈，调度运营、销售与研发专家，把执行过程中的异常、复盘和改进建议沉淀到 MA。",
           caption: "运营动作被连接成闭环：任务执行、结果评估和流程优化不再彼此割裂。"
+        },
+        leader: {
+          title: "领衔者 ME",
+          text: "领衔者 ME 读取战略意图、组织目标和关键判断，调度专家团把方向转成可执行闭环。",
+          caption: "领导者不再只依赖会议推进，而是拥有一个持续记忆、持续调度、持续复盘的数字分身。"
+        },
+        builder: {
+          title: "构建者 ME",
+          text: "构建者 ME 连接需求、方案、执行和复盘，帮助一线构建者把任务沉淀成可复用能力。",
+          caption: "构建者的经验不再散落在项目里，而是在一次次任务中进入组织进化飞轮。"
         }
       };
 
       const phaseCopy = {
-        input: "上层 ME 数字分身首先显现，承接人的意图、记忆和上下文。",
-        dispatch: "中层 WE 专家网络进入系统，把需求分派给可协同的 AI 专家团。",
-        evolve: "底层 MA 进化引擎显现，开始沉淀经验、评估质量并优化下一轮协同。",
-        fusion: "三层形成闭环：人机入口、专家网络和进化引擎互相反哺。",
-        complete: "ME、WE、MA 三层合成为可持续进化的 AI 原生组织架构。"
+        input: "地平线之上，领衔者 ME 与构建者 ME 首先显现，承接人的意图、记忆和上下文。",
+        dispatch: "8 类 WE 专家团逐个进入未来组织视野，把需求连接到可协同的 AI 专家网络。",
+        evolve: "MA 进化引擎显现，沉淀经验、评估质量并优化下一轮协同。",
+        fusion: "流程驱动的组织仍在地平线以下，线上形成面向未来的 AI 原生组织。",
+        complete: "数字分身入口、专家团网络和进化引擎共同构成智能跃迁后的新视野。"
       };
 
-      const scenarioOrder = ["strategy", "sales", "ops"];
+      const scenarioOrder = ["strategy", "market", "rd", "production", "supply", "sales", "service", "ops"];
       const phases = ["input", "dispatch", "evolve", "fusion", "complete"];
       const phaseDurations = {
         input: 1800,
@@ -3206,7 +4098,7 @@
       const title = document.getElementById("scenarioTitle");
       const text = document.getElementById("scenarioText");
       const caption = document.getElementById("phaseCaption");
-      const buttons = Array.from(document.querySelectorAll("[data-scenario]"));
+      const buttons = Array.from(document.querySelectorAll(".future-node[data-scenario]"));
       const routes = Array.from(document.querySelectorAll("[data-route]"));
       const sinks = Array.from(document.querySelectorAll(".line-sink"));
 
@@ -3248,7 +4140,7 @@
       function setPhase(phase) {
         const scenario = scenarios[canvas.dataset.scenario] || scenarios.strategy;
         canvas.dataset.phase = phase;
-        caption.innerHTML = `<strong>System Formation</strong>${phaseCopy[phase]}<br>${scenario.caption}`;
+        caption.innerHTML = `<strong>Horizon Shift</strong>${phaseCopy[phase]}<br>${scenario.caption}`;
       }
 
       function step() {

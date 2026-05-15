@@ -5,6 +5,7 @@
   if (!page) page = "index";
 
   var navItems = [
+    { key: "index", label: "首页", href: "./index.html" },
     {
       key: "products",
       label: "产品",
@@ -16,7 +17,7 @@
       href: "./scene.html",
     },
     { key: "technology", label: "技术", href: "./technology.html" },
-    { key: "ecosystem", label: "生态合作", href: "./ecosystem.html" },
+    { key: "ecosystem", label: "生态", href: "./ecosystem.html" },
     { key: "about", label: "关于衔远", href: "./about.html" },
   ];
 
@@ -100,7 +101,7 @@
       '<div><div class="site-footer__title">公司</div><div class="site-footer__links">' +
       footerLink("./about.html", "关于衔远") +
       footerLink("./technology.html", "技术") +
-      footerLink("./ecosystem.html", "生态合作") +
+      footerLink("./ecosystem.html", "生态") +
       "</div></div>" +
       '<div><div class="site-footer__title">联系</div><div class="site-footer__contact">' +
       '<a href="mailto:cooperation@frontis.cn">商务合作</a>' +
@@ -109,7 +110,7 @@
       "</div></div>" +
       "</div>" +
       '<div class="site-footer__bottom">' +
-      "<span>© 2024 Frontis AI 衔远科技</span>" +
+      "<span>© 2026 衔远科技 FRONTIS AI</span>" +
       '<a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">京ICP备2022014486号-1</a>' +
       "</div>" +
       "</footer>";
