@@ -419,8 +419,9 @@ footer {
 .footer-bottom p { font-size:12px; color:#555; }
 </style>
   <link rel="stylesheet" href="./components/site-shell.css" />
+  <link rel="stylesheet" href="./components/frontis-page-normalize.css" />
 </head>
-<body>
+<body class="page-about">
 
 <!-- ── 导航（浅色背景黑色Logo）── -->
 <div data-site-header></div>
@@ -772,35 +773,11 @@ footer {
 </section>
 
 <!-- ── Screen 6 · 联系方式 ── -->
-<section id="contact">
-  <h2 class="animate-in">与我们联系</h2>
-  <div class="contact-list">
-    <div class="contact-row animate-in" style="transition-delay:40ms;">
-      <span class="contact-label">商务合作</span>
-      <a href="mailto:cooperation@frontis.cn" class="contact-email-link">cooperation@frontis.cn</a>
-    </div>
-    <div class="contact-row animate-in" style="transition-delay:80ms;">
-      <span class="contact-label">市场合作</span>
-      <a href="mailto:marketing@frontis.cn" class="contact-email-link">marketing@frontis.cn</a>
-    </div>
-    <div class="contact-row animate-in" style="transition-delay:120ms;">
-      <span class="contact-label">人才招聘</span>
-      <a href="mailto:hr@frontis.cn" class="contact-email-link">hr@frontis.cn</a>
-    </div>
-    <div class="contact-row animate-in" style="transition-delay:160ms;">
-      <span class="contact-label">媒体合作</span>
-      <a href="mailto:pr@frontis.cn" class="contact-email-link">pr@frontis.cn</a>
-    </div>
-    <div class="contact-row animate-in" style="transition-delay:200ms;">
-      <span class="contact-label">合作伙伴</span>
-      <a href="mailto:partner@frontis.cn" class="contact-email-link">partner@frontis.cn</a>
-    </div>
-  </div>
-</section>
+<section id="contact" data-site-cta></section>
 
 <!-- ── Footer ── -->
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260515-tech-contact-footer"></script>
+<script src="./components/site-shell.js?v=20260516-shared-cta2"></script>
 
 <script>
 // 板块整体 + 子元素依次入场

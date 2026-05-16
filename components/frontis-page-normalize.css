@@ -1,0 +1,287 @@
+/* Frontis detail-page normalization
+   Scope: horizon / scene / technology / ecosystem / about pages.
+   Content and animation rules remain owned by each page; this file normalizes
+   typography scale, brand color usage, section rhythm, and layout width. */
+
+:root {
+  --fx-black: #000000;
+  --fx-white: #FFFFFF;
+  --fx-cyan: #00C1D4;
+  --fx-orange: #FA5F26;
+  --fx-gray: #3D4145;
+  --fx-surface: #F0F2F4;
+  --fx-muted-on-dark: rgba(255, 255, 255, 0.62);
+  --fx-muted-on-light: rgba(0, 16, 19, 0.62);
+  --fx-line-light: rgba(0, 16, 19, 0.14);
+  --fx-line-dark: rgba(255, 255, 255, 0.14);
+  --fx-page-max: 1280px;
+  --fx-gutter: clamp(24px, 4vw, 64px);
+  --fx-section-y: clamp(88px, 8vw, 120px);
+  --fx-section-y-tight: clamp(72px, 6vw, 96px);
+  --fx-grid-gap: clamp(44px, 5vw, 80px);
+  --fx-hero-title: clamp(44px, 5.6vw, 76px);
+  --fx-section-title: clamp(32px, 3.6vw, 52px);
+  --fx-subhead: clamp(21px, 2vw, 30px);
+  --fx-card-title: clamp(17px, 1.35vw, 22px);
+  --fx-body-lg: clamp(16px, 1.35vw, 18px);
+  --fx-body: 15px;
+  --fx-body-sm: 13px;
+  --fx-label: 11px;
+  --fx-line-height: 1.7;
+  --fx-nav-safe: 80px;
+  --font-cn: 'Source Han Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  --font-en: 'Martian Grotesk', 'Space Grotesk', sans-serif;
+}
+
+html {
+  scroll-padding-top: var(--fx-nav-safe) !important;
+}
+
+body {
+  font-family: var(--font-cn) !important;
+  color: var(--fx-black);
+  line-height: var(--fx-line-height);
+  letter-spacing: 0 !important;
+  text-rendering: geometricPrecision;
+}
+
+* {
+  box-shadow: none !important;
+  text-shadow: none !important;
+}
+
+:is(h1, h2, h3, h4, h5, h6, p, li, a, button, input, textarea, select, label, td, th, span, div) {
+  letter-spacing: 0 !important;
+}
+
+section {
+  min-height: auto !important;
+  scroll-margin-top: var(--fx-nav-safe) !important;
+}
+
+.page-horizon :is(#layers, #me-detail, #we-detail, #ma-detail, #flywheel, #versions, #cta),
+.page-technology :is(#hero, #chain, #why, #fusion, #evolve, #windtunnel, #cta),
+.page-ecosystem :is(#hero, #market, #pain, #flow, #cases, #apply),
+.page-about :is(#brand, #team, #join, #contact),
+.page-scene :is(.scene-section, #cta-section) {
+  padding-top: var(--fx-section-y) !important;
+  padding-bottom: var(--fx-section-y) !important;
+}
+
+.page-horizon :is(.hero-content, .hero-bottom, .layers-inner, .detail-inner, .flywheel-inner, .flywheel-static, .versions-inner, .cta-inner),
+.page-scene :is(.nav__inner, .scene-inner, .hero__upper, .hero__lower, .cta-body),
+.page-technology :is(#hero, #chain, #why, #fusion, #evolve, #windtunnel, #cta),
+.page-ecosystem :is(#hero, #market, #pain, #flow, #cases, #apply),
+.page-about :is(#brand, #team, #join, #contact, #clients .section-header) {
+  padding-left: var(--fx-gutter) !important;
+  padding-right: var(--fx-gutter) !important;
+}
+
+.page-horizon :is(.hero-content, .hero-bottom, .layers-inner, .detail-inner, .flywheel-inner, .flywheel-static, .versions-inner, .cta-inner),
+.page-scene :is(.nav__inner, .scene-inner, .cta-body),
+.page-technology :is(#hero, #chain, #why, #fusion, #evolve, #windtunnel, #cta) > :not(.edge-line),
+.page-ecosystem :is(#hero, #market, #pain, #flow, #cases, #apply) > :not(.threshold-line),
+.page-about :is(.founder-layout, .join-inner, .contact-list, #clients .section-header) {
+  max-width: var(--fx-page-max) !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+}
+
+.page-horizon :is(.hero-content, .layers-inner, .detail-inner, .flywheel-static, .cta-inner),
+.page-scene :is(.scene-inner),
+.page-technology :is(.two-col, .six-ten, .tech-two-col),
+.page-ecosystem :is(.apply-inner),
+.page-about :is(#brand, .founder-layout, .join-inner) {
+  gap: var(--fx-grid-gap) !important;
+}
+
+.page-horizon #hero,
+.page-ecosystem #hero,
+.page-about #brand,
+.page-scene #hero,
+.page-technology #hero {
+  min-height: calc(100svh - 64px) !important;
+}
+
+:is(.page-horizon .hero-main-title, .page-scene .hero__title, .page-technology h1.hero-title, .page-ecosystem #hero h1, .page-about #brand h1) {
+  font-family: var(--font-cn) !important;
+  font-size: var(--fx-hero-title) !important;
+  font-weight: 800 !important;
+  line-height: 1.08 !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+
+:is(.page-horizon .h2, .page-horizon .detail-title, .page-horizon .flywheel-big-text, .page-horizon .cta-headline, .page-technology h2, .page-technology .section-title, .page-technology #chain .chain-headline, .page-technology #why .left-headline, .page-technology #fusion .left-title, .page-technology #evolve .section-headline, .page-technology #windtunnel .left-title, .page-ecosystem #market h2, .page-ecosystem #pain h2, .page-ecosystem #flow h2, .page-ecosystem #cases h2, .page-ecosystem #apply h2, .page-about #team h2, .page-about #clients h2, .page-about .join-title, .page-about #contact h2, .page-scene .scene-title, .page-scene .cta-title) {
+  font-family: var(--font-cn) !important;
+  font-size: var(--fx-section-title) !important;
+  font-weight: 800 !important;
+  line-height: 1.14 !important;
+  letter-spacing: 0 !important;
+  text-wrap: balance;
+}
+
+:is(.page-horizon .layer-item-title, .page-horizon .feature-title, .page-horizon .version-name, .page-technology h3, .page-technology .compare-col h3, .page-ecosystem .pain-title, .page-ecosystem .flow-step-title, .page-about .founder-name, .page-about .culture-zh, .page-about .pos-title, .page-about .benefit-name, .page-scene .agent-item__name) {
+  font-family: var(--font-cn) !important;
+  font-size: var(--fx-card-title) !important;
+  line-height: 1.34 !important;
+  letter-spacing: 0 !important;
+}
+
+:is(.page-horizon .hero-tagline, .page-horizon .detail-subtitle, .page-horizon .flywheel-desc, .page-horizon .versions-sub, .page-horizon .cta-sub, .page-scene .hero__subtitle, .page-scene .scene-tagline, .page-technology .subtitle, .page-technology #why .left-sub, .page-technology #fusion .left-text .lead, .page-technology #windtunnel .left-text .lead, .page-technology #evolve .section-sub, .page-ecosystem #hero .subtitle, .page-ecosystem .market-body, .page-about .guide-text, .page-about .founder-desc, .page-about #clients .sub, .page-about .join-desc) {
+  font-size: var(--fx-body-lg) !important;
+  line-height: 1.78 !important;
+}
+
+:is(.page-horizon .body-sm, .page-horizon .feature-desc, .page-horizon .version-for, .page-horizon .version-value, .page-scene .agent-item__desc, .page-technology p, .page-technology td, .page-ecosystem .pain-desc, .page-ecosystem .flow-step-desc, .page-about .team-bg-text, .page-about .culture-desc, .page-about .benefit-sub) {
+  font-size: var(--fx-body) !important;
+  line-height: 1.72 !important;
+}
+
+:is(.page-horizon .kicker, .page-horizon .en-label, .page-horizon .detail-label, .page-horizon .form-title, .page-scene .hero__mono-label, .page-scene .scene-tag, .page-scene .scene-card-status, .page-technology .tag, .page-technology .slogan-en, .page-ecosystem .tag, .page-ecosystem .section-label, .page-about .tag, .page-about .team-bg-label, .page-about .join-col-label, .page-about .contact-label) {
+  font-size: var(--fx-label) !important;
+  line-height: 1.35 !important;
+  letter-spacing: 0 !important;
+}
+
+.page-horizon :is(#hero, #flywheel, #cta),
+.page-scene :is(.hero__lower, #supply, #cta-section),
+.page-technology :is(#chain, #fusion, #windtunnel),
+.page-ecosystem :is(#hero, #pain, #flow, #apply),
+.page-about :is(#team, #join, #contact) {
+  color: var(--fx-white) !important;
+}
+
+.page-horizon :is(#layers, #me-detail, #we-detail, #ma-detail, #versions),
+.page-scene :is(.hero__upper, #strategy, #production, #marketing),
+.page-technology :is(#hero, #why, #evolve, #cta),
+.page-ecosystem :is(#market, #cases),
+.page-about :is(#brand, #clients) {
+  color: var(--fx-black) !important;
+}
+
+:is(.page-horizon .hero-main-title, .page-horizon .hero-sub-title, .page-horizon .flywheel-big-text span, .page-technology h1 .highlight, .page-technology h2 .em, .page-technology .left-headline .em, .page-technology .chain-headline .em, .page-technology .lead .em, .page-ecosystem #hero h1 em, .page-ecosystem .apply-left h2 em, .page-about .culture-line, .page-about .join-title em) {
+  color: currentColor !important;
+}
+
+:is(span[style*="color:var(--threshold-cyan)"], span[style*="color: var(--threshold-cyan)"], span[style*="color:var(--cyan)"], span[style*="color: var(--cyan)"]) {
+  color: inherit !important;
+}
+
+:is(.tag, .kicker, .en-label, .slogan-en, .section-label, .detail-label, .scene-tag, .hero__mono-label, .pain-num, .flow-step-num, .case-city, .form-title, .contact-email-link, .founder-role) {
+  color: var(--fx-cyan) !important;
+}
+
+:is(.page-horizon .hero-sub-title, .page-horizon .hero-tagline, .page-horizon .flywheel-desc, .page-horizon .cta-sub, .page-scene .hero__subtitle, .page-technology .section-black p, .page-technology #chain .chain-sub, .page-technology #fusion .left-text p, .page-technology #windtunnel .left-text p, .page-ecosystem #hero .subtitle, .page-ecosystem #pain .section-sub, .page-about .founder-desc) {
+  color: var(--fx-muted-on-dark) !important;
+}
+
+:is(.page-horizon .body-lg, .page-horizon .body-sm, .page-horizon .detail-subtitle, .page-horizon .feature-desc, .page-horizon .versions-sub, .page-scene .scene-tagline, .page-scene .agent-item__desc, .page-technology .subtitle, .page-technology #why .left-sub, .page-technology #evolve .section-sub, .page-ecosystem .market-body, .page-ecosystem .market-stat-label, .page-about .guide-text, .page-about #clients .sub, .page-about .team-bg-text) {
+  color: var(--fx-muted-on-light) !important;
+}
+
+.page-ecosystem #hero::before,
+.page-about .logo-track-wrap::before,
+.page-about .logo-track-wrap::after {
+  background: transparent !important;
+}
+
+:is(.btn-primary, .btn-secondary, .btn-outline, .btn-outline-dark, .hero-cta, .version-cta, .form-submit, .join-cta-row a, .btn-outline-white) {
+  min-height: 48px !important;
+  padding: 13px 28px !important;
+  border-radius: 0 !important;
+  font-family: var(--font-cn) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0 !important;
+}
+
+:is(.page-technology #hero, .page-technology #why, .page-technology #evolve, .page-technology #cta, .page-ecosystem #market, .page-ecosystem #cases, .page-about #brand, .page-about #clients) :is(.btn-primary, .hero-cta, .form-submit) {
+  background: var(--fx-black) !important;
+  color: var(--fx-white) !important;
+  border: 1px solid var(--fx-black) !important;
+}
+
+:is(.page-horizon #hero, .page-horizon #flywheel, .page-horizon #cta, .page-scene #cta-section, .page-technology #chain, .page-technology #fusion, .page-technology #windtunnel, .page-ecosystem #hero, .page-ecosystem #pain, .page-ecosystem #flow, .page-ecosystem #apply, .page-about #team, .page-about #join, .page-about #contact) :is(.btn-primary, .hero-cta, .form-submit) {
+  background: var(--fx-white) !important;
+  color: var(--fx-black) !important;
+  border: 1px solid var(--fx-white) !important;
+}
+
+:is(.market-stats, .pain-grid, .flow-steps, .cases-grid, .versions-grid, .agent-list, .benefits-grid, .scene-inner, .detail-inner, .flywheel-static, .cta-inner, .apply-inner, .founder-layout, .join-inner) {
+  border-color: var(--fx-line-light) !important;
+}
+
+:is(.hero-stat, .market-stat, .pain-card, .version-card, .expert-card, .benefit-card, .logo-cell, .case-card, .apply-form, .contact-row, .mockup-frame, .scene-visual, .visual-placeholder, .compare-col, .flow-step) {
+  border-radius: 0 !important;
+}
+
+.page-horizon :is(.versions-grid, .expert-grid, .ma-metric-row),
+.page-technology :is(.tech-two-col, .two-col, .six-ten),
+.page-ecosystem :is(.market-stats, .pain-grid, .cases-grid),
+.page-about :is(.benefits-grid) {
+  gap: 0 !important;
+}
+
+.page-technology :is(#evolve [style*="grid-template-columns:1fr 1.05fr 1fr"], #evolve [style*="grid-template-columns:repeat(3,1fr)"]) {
+  max-width: var(--fx-page-max) !important;
+}
+
+@media (max-width: 1024px) {
+  :root {
+    --fx-section-y: 88px;
+    --fx-grid-gap: 48px;
+  }
+
+  .page-horizon :is(.hero-content, .layers-inner, .detail-inner, .detail-inner.reverse, .flywheel-static, .versions-grid, .cta-inner),
+  .page-scene :is(.scene-inner, .scene-inner--reverse),
+  .page-technology :is(.two-col, .six-ten, .tech-two-col),
+  .page-ecosystem :is(.apply-inner),
+  .page-about :is(#brand, .founder-layout, .join-inner) {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+@media (max-width: 768px) {
+  :root {
+    --fx-gutter: 24px;
+    --fx-section-y: 72px;
+    --fx-hero-title: clamp(38px, 11vw, 52px);
+    --fx-section-title: clamp(28px, 8vw, 38px);
+  }
+
+  .page-horizon #hero,
+  .page-ecosystem #hero,
+  .page-about #brand,
+  .page-scene #hero,
+  .page-technology #hero {
+    min-height: auto !important;
+  }
+
+  .page-horizon .hero-main-title {
+    white-space: normal !important;
+  }
+
+  .page-ecosystem :is(.market-stats, .pain-grid, .flow-steps, .cases-grid),
+  .page-about .benefits-grid {
+    grid-template-columns: 1fr !important;
+  }
+
+  .page-technology .chain-table {
+    display: block !important;
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .page-technology .chain-table tbody {
+    display: table !important;
+    min-width: 640px !important;
+    width: 100% !important;
+  }
+
+  .page-technology .chain-table td {
+    padding: 14px 12px !important;
+    font-size: 12px !important;
+  }
+}

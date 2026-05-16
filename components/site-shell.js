@@ -45,9 +45,10 @@
 
   function ctaHref() {
     if (page === "index") return "#contact";
-    if (page === "ecosystem") return "./ecosystem.html#apply";
-    if (page === "about") return "./about.html#contact";
-    if (page === "technology") return "./technology.html#cta";
+    if (page === "horizon" || page === "technology") return "#cta";
+    if (page === "scene") return "#cta-section";
+    if (page === "ecosystem") return "#apply";
+    if (page === "about") return "#contact";
     if (page === "scene-strategy") return "./scene-strategy.html#contact";
     return "./index.html#contact";
   }
@@ -116,6 +117,43 @@
       "</footer>";
   }
 
+  function renderSharedCta(target) {
+    var id = target && target.id ? target.id : "contact";
+    var labelId = id + "-heading";
+
+    return '<section id="' + id + '" class="site-cta" aria-labelledby="' + labelId + '">' +
+      '<div class="site-cta__inner">' +
+      '<div class="site-cta__header">' +
+      '<div class="site-cta__headline">' +
+      '<span class="site-cta__kicker">开启跃迁</span>' +
+      '<h2 id="' + labelId + '" class="site-cta__title">即刻开启智能跃迁</h2>' +
+      '</div>' +
+      '<p class="site-cta__copy">从一个高价值业务场景开始，把 ME、WE、MA 带入真实组织现场，确认最先落地、可复用、可持续进化的 AI 原生路径。</p>' +
+      '</div>' +
+      '<div class="site-cta__grid site-cta__grid--form">' +
+      '<form class="site-cta__form" data-site-cta-form novalidate>' +
+      '<div class="site-cta__form-head"><strong>预约沟通</strong><span>我们会确认场景、试点路径与下一步安排。</span></div>' +
+      '<div class="site-cta__fields">' +
+      '<label><span>姓名</span><input name="name" autocomplete="name" placeholder="请输入姓名" required></label>' +
+      '<label><span>公司</span><input name="company" autocomplete="organization" placeholder="请输入公司名称" required></label>' +
+      '<label><span>手机</span><input name="phone" autocomplete="tel" inputmode="tel" placeholder="请输入手机号码" required></label>' +
+      '<label><span>邮箱</span><input name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="请输入邮箱地址"></label>' +
+      '</div>' +
+      '<fieldset class="site-cta__radios">' +
+      '<legend>优先沟通方向</legend>' +
+      '<label><input type="radio" name="interest" value="trial" checked><span>企业试用 / 产品演示</span></label>' +
+      '<label><input type="radio" name="interest" value="private"><span>私有化 / 行业场景</span></label>' +
+      '<label><input type="radio" name="interest" value="strategy"><span>战略诊断 / ROI 评估</span></label>' +
+      '</fieldset>' +
+      '<label class="site-cta__message"><span>留言</span><textarea name="message" autocomplete="off" placeholder="可以描述行业、关键场景、当前 AI 试点阶段或希望优先解决的问题。"></textarea></label>' +
+      '<button class="site-cta__submit" type="submit">提交并预约沟通</button>' +
+      '<p class="site-cta__note">演示预约通常在 1 个工作日内完成，支持私有化部署方案评估。</p>' +
+      '</form>' +
+      '</div>' +
+      '</div>' +
+      '</section>';
+  }
+
   var headerTarget = document.querySelector("[data-site-header]");
   if (headerTarget) {
     headerTarget.outerHTML = renderHeader();
@@ -125,6 +163,20 @@
   if (footerTarget) {
     footerTarget.outerHTML = renderFooter();
   }
+
+  document.querySelectorAll("[data-site-cta]").forEach(function (target) {
+    target.outerHTML = renderSharedCta(target);
+  });
+
+  document.querySelectorAll("[data-site-cta-form]").forEach(function (form) {
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+      var button = form.querySelector(".site-cta__submit");
+      if (!button) return;
+      button.textContent = "已提交，我们会尽快联系你";
+      button.disabled = true;
+    });
+  });
 
   document.querySelectorAll(".site-header__item").forEach(function (item) {
     item.addEventListener("keydown", function (event) {

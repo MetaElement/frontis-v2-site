@@ -816,8 +816,9 @@
     }
   </style>
   <link rel="stylesheet" href="./components/site-shell.css" />
+  <link rel="stylesheet" href="./components/frontis-page-normalize.css" />
 </head>
-<body>
+<body class="page-scene">
 
 <!-- ============================================================
      导航栏（浅色背景）
@@ -1168,40 +1169,14 @@
 <!-- ============================================================
      第六屏：底部 CTA（量子黑）
 ============================================================ -->
-<section id="cta-section" aria-labelledby="cta-heading">
-
-  <!-- The Edge 临界线（顶部，本屏唯一一条） -->
-  <div class="edge-line" role="separator" aria-hidden="true"></div>
-
-  <div class="cta-body">
-
-    <!-- 节点装饰 -->
-    <div class="cta-nodes animate-in" aria-hidden="true">
-      <div class="cta-nodes__seg"></div>
-      <span class="node-cyan"></span>
-      <div class="cta-nodes__seg"></div>
-    </div>
-
-    <h2 class="cta-title animate-in delay-1" id="cta-heading">
-      更多行业专家团<br />持续上线中
-    </h2>
-
-    <p class="cta-subtitle animate-in delay-2">敬请期待</p>
-
-    <a href="#contact" class="btn-outline-white animate-in delay-3">
-      申请产品演示 →
-    </a>
-
-  </div>
-
-</section>
+<section id="cta-section" data-site-cta></section>
 
 
 <!-- ============================================================
      Footer（深色背景）
 ============================================================ -->
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260515-tech-contact-footer"></script>
+<script src="./components/site-shell.js?v=20260516-shared-cta2"></script>
 
 
 <!-- ============================================================

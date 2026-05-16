@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Frontis Horizon Product Map</title>
+  <style>
+    @font-face {
+      font-family: "Source Han Sans CN";
+      src: url("./assets/SourceHanSansCN-Regular.otf") format("opentype");
+      font-weight: 400;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Source Han Sans CN";
+      src: url("./assets/SourceHanSansCN-Bold.otf") format("opentype");
+      font-weight: 700;
+      font-style: normal;
+    }
+
+    @font-face {
+      font-family: "Source Han Sans CN";
+      src: url("./assets/SourceHanSansCN-Heavy.otf") format("opentype");
+      font-weight: 900;
+      font-style: normal;
+    }
+
+    :root {
+      --cy: #00C1D4;
+      --or: #FA5F26;
+      --bk: #0A0A0A;
+      --wh: #FFFFFF;
+      --g1: #F0F2F4;
+      --g2: #3D4145;
+      --mg: #8C8C8C;
+      --fg: #4C5456;
+      --bd: #D0D3D8;
+      --e8: #E8E8E8;
+      --dot: #E0E0E0;
+      --font-cn: "Source Han Sans CN", "PingFang SC", "Microsoft YaHei", sans-serif;
+      --font-en: Arial, "Helvetica Neue", system-ui, sans-serif;
+      --font-mono: "SF Mono", Consolas, Monaco, monospace;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html,
+    body {
+      margin: 0;
+      width: 100%;
+      min-height: 100%;
+      background: #d9d9d9;
+      font-family: var(--font-cn);
+      color: var(--bk);
+    }
+
+    .canvas {
+      position: relative;
+      width: 1920px;
+      height: 1080px;
+      overflow: hidden;
+      background: var(--wh);
+    }
+
+    .top-rule {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 8px;
+      background: var(--bk);
+    }
+
+    .top-accent {
+      position: absolute;
+      top: 8px;
+      left: 80px;
+      width: 220px;
+      height: 8px;
+      background: var(--cy);
+    }
+
+    .brand {
+      position: absolute;
+      top: 48px;
+      left: 80px;
+      width: 188px;
+      height: auto;
+    }
+
+    .meta {
+      position: absolute;
+      top: 58px;
+      right: 80px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      color: var(--mg);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .meta-mark {
+      width: 56px;
+      height: 3px;
+      background: var(--cy);
+    }
+
+    .title-block {
+      position: absolute;
+      top: 128px;
+      left: 80px;
+      width: 380px;
+    }
+
+    .kicker {
+      margin: 0 0 18px;
+      font-family: var(--font-mono);
+      font-size: 14px;
+      color: var(--cy);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 0;
+      font-size: 52px;
+      line-height: 1.06;
+      font-weight: 900;
+      letter-spacing: 0;
+      color: var(--bk);
+    }
+
+    .subtitle {
+      margin: 22px 0 0;
+      padding-left: 18px;
+      border-left: 4px solid var(--cy);
+      font-size: 24px;
+      line-height: 1.52;
+      color: var(--fg);
+      font-weight: 400;
+    }
+
+    .subtitle strong {
+      color: var(--bk);
+      font-weight: 700;
+    }
+
+    .left-rail {
+      position: absolute;
+      top: 390px;
+      left: 80px;
+      width: 380px;
+      height: 664px;
+      border-left: 2px solid var(--e8);
+    }
+
+    .rail-item {
+      position: absolute;
+      left: 0;
+      display: grid;
+      grid-template-columns: 20px 1fr;
+      column-gap: 18px;
+      align-items: start;
+      width: 360px;
+    }
+
+    .rail-tick {
+      width: 20px;
+      height: 3px;
+      margin-top: 14px;
+      background: var(--bk);
+    }
+
+    .rail-item.is-accent .rail-tick {
+      background: var(--cy);
+    }
+
+    .rail-item.is-engine .rail-tick {
+      background: var(--or);
+    }
+
+    .rail-en {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 15px;
+      line-height: 1;
+      color: var(--mg);
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .rail-cn {
+      margin: 8px 0 0;
+      font-size: 27px;
+      line-height: 1.1;
+      font-weight: 900;
+      color: var(--bk);
+    }
+
+    .rail-note {
+      margin: 8px 0 0;
+      font-size: 15px;
+      line-height: 1.35;
+      color: var(--fg);
+    }
+
+    .dot-grid {
+      position: absolute;
+      display: grid;
+      grid-template-columns: repeat(8, 3px);
+      gap: 12px;
+    }
+
+    .dot-grid span {
+      width: 3px;
+      height: 3px;
+      border-radius: 50%;
+      background: var(--dot);
+      display: block;
+    }
+
+    .dot-grid.top {
+      top: 110px;
+      right: 82px;
+    }
+
+    .dot-grid.bottom {
+      left: 362px;
+      bottom: 58px;
+      grid-template-columns: repeat(6, 3px);
+    }
+
+    .stage {
+      position: absolute;
+      top: 108px;
+      left: 520px;
+      width: 1320px;
+      height: 916px;
+    }
+
+    .horizon-line {
+      position: absolute;
+      top: 122px;
+      left: 0;
+      width: 1320px;
+      height: 3px;
+      background: var(--cy);
+    }
+
+    .horizon-caption {
+      position: absolute;
+      top: 88px;
+      left: 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--mg);
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
+    .channel-row {
+      position: absolute;
+      top: 0;
+      left: 0;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 18px;
+      width: 1320px;
+      height: 94px;
+    }
+
+    .channel {
+      border: 1px solid var(--bd);
+      border-top: 4px solid var(--bk);
+      background: var(--wh);
+      padding: 20px 24px;
+      display: flex;
+      align-items: center;
+      gap: 16px;
+    }
+
+    .channel:nth-child(2),
+    .channel:nth-child(4) {
+      border-top-color: var(--cy);
+    }
+
+    .mini-icon {
+      position: relative;
+      width: 34px;
+      height: 34px;
+      flex: 0 0 34px;
+      border: 2px solid var(--bk);
+    }
+
+    .mini-icon::after {
+      content: "";
+      position: absolute;
+      right: -7px;
+      bottom: 7px;
+      width: 14px;
+      height: 3px;
+      background: var(--cy);
+    }
+
+    .channel-title {
+      margin: 0;
+      font-size: 25px;
+      line-height: 1.1;
+      font-weight: 900;
+      color: var(--bk);
+    }
+
+    .channel-sub {
+      margin: 8px 0 0;
+      font-size: 15px;
+      line-height: 1;
+      color: var(--fg);
+    }
+
+    .layer {
+      position: absolute;
+      left: 0;
+      width: 1320px;
+      border: 1px solid var(--e8);
+      background: var(--wh);
+    }
+
+    .layer.me {
+      top: 160px;
+      height: 168px;
+      border-top: 4px solid var(--cy);
+    }
+
+    .layer.we {
+      top: 362px;
+      height: 258px;
+      border-color: var(--bk);
+      border-top: 4px solid var(--cy);
+      background: var(--bk);
+      color: var(--wh);
+    }
+
+    .layer.ma {
+      top: 652px;
+      height: 164px;
+      border-color: var(--bk);
+      border-top: 4px solid var(--or);
+      background: var(--g2);
+      color: var(--wh);
+    }
+
+    .layer.data {
+      top: 840px;
+      height: 92px;
+      border-top: 4px solid var(--bk);
+      background: var(--g1);
+    }
+
+    .layer-head {
+      position: absolute;
+      left: 30px;
+      top: 26px;
+      width: 276px;
+    }
+
+    .layer-code {
+      margin: 0 0 8px;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: var(--mg);
+      text-transform: uppercase;
+    }
+
+    .we .layer-code,
+    .ma .layer-code {
+      color: #BFC4C8;
+    }
+
+    .layer-title {
+      margin: 0;
+      font-size: 34px;
+      line-height: 1.1;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .layer-desc {
+      margin: 12px 0 0;
+      font-size: 16px;
+      line-height: 1.5;
+      color: var(--fg);
+    }
+
+    .we .layer-desc,
+    .ma .layer-desc {
+      color: var(--g1);
+    }
+
+    .cap-grid {
+      position: absolute;
+      left: 340px;
+      top: 24px;
+      right: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .cap-card {
+      min-height: 120px;
+      border: 1px solid var(--e8);
+      border-top: 3px solid var(--bk);
+      padding: 18px 18px 16px;
+      background: var(--wh);
+    }
+
+    .cap-card.is-cyan {
+      border-top-color: var(--cy);
+    }
+
+    .card-num {
+      font-family: var(--font-mono);
+      font-size: 12px;
+      color: var(--cy);
+      letter-spacing: 0.1em;
+    }
+
+    .card-title {
+      margin: 10px 0 0;
+      font-size: 23px;
+      line-height: 1.15;
+      font-weight: 900;
+    }
+
+    .card-note {
+      margin: 10px 0 0;
+      font-size: 14px;
+      line-height: 1.42;
+      color: var(--fg);
+    }
+
+    .expert-grid {
+      position: absolute;
+      left: 340px;
+      top: 28px;
+      right: 28px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+    }
+
+    .expert-card {
+      min-height: 92px;
+      border: 1px solid #555B60;
+      border-top: 3px solid var(--cy);
+      padding: 16px 18px;
+      background: var(--g2);
+    }
+
+    .expert-card.is-orange {
+      border-top-color: var(--or);
+    }
+
+    .expert-title {
+      margin: 0;
+      font-size: 22px;
+      line-height: 1.15;
+      font-weight: 900;
+      color: var(--wh);
+    }
+
+    .expert-note {
+      margin: 9px 0 0;
+      font-size: 13px;
+      line-height: 1.34;
+      color: #D7DADC;
+    }
+
+    .engine-grid {
+      position: absolute;
+      left: 340px;
+      top: 26px;
+      display: grid;
+      grid-template-columns: repeat(3, 190px) 1fr;
+      gap: 18px;
+      width: 950px;
+    }
+
+    .engine-step {
+      border: 1px solid #656B70;
+      border-top: 3px solid var(--or);
+      padding: 17px 18px 15px;
+      background: var(--bk);
+    }
+
+    .engine-step:nth-child(2) {
+      border-top-color: var(--cy);
+    }
+
+    .engine-step:nth-child(3) {
+      border-top-color: var(--cy);
+    }
+
+    .engine-num {
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--or);
+    }
+
+    .engine-title {
+      margin: 10px 0 0;
+      font-size: 26px;
+      line-height: 1.1;
+      font-weight: 900;
+      color: var(--wh);
+    }
+
+    .engine-note {
+      margin: 8px 0 0;
+      font-size: 13px;
+      line-height: 1.35;
+      color: #D7DADC;
+    }
+
+    .loop-card {
+      border-left: 4px solid var(--cy);
+      padding: 12px 0 0 20px;
+    }
+
+    .loop-title {
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 13px;
+      letter-spacing: 0.1em;
+      color: var(--cy);
+      text-transform: uppercase;
+    }
+
+    .loop-line {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 18px;
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--wh);
+    }
+
+    .loop-arrow {
+      width: 28px;
+      height: 2px;
+      background: var(--or);
+      display: inline-block;
+    }
+
+    .data-title {
+      position: absolute;
+      top: 24px;
+      left: 30px;
+      margin: 0;
+      font-size: 25px;
+      font-weight: 900;
+      line-height: 1.1;
+    }
+
+    .data-sub {
+      position: absolute;
+      top: 58px;
+      left: 30px;
+      width: 260px;
+      margin: 0;
+      font-family: var(--font-mono);
+      font-size: 12px;
+      line-height: 1.35;
+      letter-spacing: 0.08em;
+      color: var(--mg);
+      text-transform: uppercase;
+    }
+
+    .source-grid {
+      position: absolute;
+      left: 340px;
+      top: 22px;
+      right: 28px;
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 14px;
+    }
+
+    .source {
+      height: 48px;
+      border: 1px solid var(--bd);
+      background: var(--wh);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--fg);
+    }
+
+    .flow-line {
+      position: absolute;
+      right: 38px;
+      width: 3px;
+      background: var(--cy);
+    }
+
+    .flow-line.one {
+      top: 330px;
+      height: 32px;
+    }
+
+    .flow-line.two {
+      top: 622px;
+      height: 30px;
+    }
+
+    .flow-line.three {
+      top: 818px;
+      height: 30px;
+    }
+
+    .flow-label {
+      display: none;
+    }
+
+    .flow-label.one {
+      top: 214px;
+    }
+
+    .flow-label.two {
+      top: 476px;
+      color: #C7CDD1;
+    }
+
+    .footer {
+      position: absolute;
+      left: 520px;
+      right: 80px;
+      bottom: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-family: var(--font-mono);
+      font-size: 10px;
+      color: #B3B6BA;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+  <main class="canvas" aria-label="衔远大观 Frontis Horizon 产品介绍示意图">
+    <div class="top-rule"></div>
+    <div class="top-accent"></div>
+    <img class="brand" src="./assets/logo-horizontal-light.svg" alt="Frontis 衔远科技">
+    <div class="meta">
+      <span class="meta-mark"></span>
+      <span>Product Architecture</span>
+      <span>2026</span>
+    </div>
+
+    <div class="dot-grid top" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <div class="dot-grid bottom" aria-hidden="true">
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+      <span></span><span></span><span></span><span></span><span></span><span></span>
+    </div>
+
+    <section class="title-block">
+      <p class="kicker">Frontis Horizon</p>
+      <h1>衔远大观<br>产品介绍示意图</h1>
+      <p class="subtitle"><strong>ME → WE → MA</strong>：从个人分身，到专家网络，再到组织进化。</p>
+    </section>
+
+    <aside class="left-rail">
+      <div class="rail-item is-accent" style="top: 0;">
+        <span class="rail-tick"></span>
+        <div>
+          <p class="rail-en">ENTRY</p>
+          <p class="rail-cn">操作入口</p>
+          <p class="rail-note">统一触达个人 ME</p>
+        </div>
+      </div>
+      <div class="rail-item is-accent" style="top: 105px;">
+        <span class="rail-tick"></span>
+        <div>
+          <p class="rail-en">ME · CIP</p>
+          <p class="rail-cn">数字分身</p>
+          <p class="rail-note">记住你，调度专家，代表你</p>
+        </div>
+      </div>
+      <div class="rail-item" style="top: 260px;">
+        <span class="rail-tick"></span>
+        <div>
+          <p class="rail-en">WE · EXP</p>
+          <p class="rail-cn">专家网络</p>
+          <p class="rail-note">行业专家团协同执行</p>
+        </div>
+      </div>
+      <div class="rail-item is-engine" style="top: 470px;">
+        <span class="rail-tick"></span>
+        <div>
+          <p class="rail-en">MA · EOS</p>
+          <p class="rail-cn">进化引擎</p>
+          <p class="rail-note">沉淀、评估、优化</p>
+        </div>
+      </div>
+      <div class="rail-item" style="top: 590px;">
+        <span class="rail-tick"></span>
+        <div>
+          <p class="rail-en">GROUND</p>
+          <p class="rail-cn">业务现场</p>
+          <p class="rail-note">企业数据与真实流程</p>
+        </div>
+      </div>
+    </aside>
+
+    <section class="stage">
+      <div class="horizon-caption">Horizon is the expanding boundary of organizational intelligence</div>
+      <div class="horizon-line"></div>
+
+      <div class="channel-row">
+        <div class="channel">
+          <span class="mini-icon"></span>
+          <div>
+            <p class="channel-title">Frontis Horizon</p>
+            <p class="channel-sub">大观产品工作台</p>
+          </div>
+        </div>
+        <div class="channel">
+          <span class="mini-icon"></span>
+          <div>
+            <p class="channel-title">飞书 · 企微</p>
+            <p class="channel-sub">协同办公入口</p>
+          </div>
+        </div>
+        <div class="channel">
+          <span class="mini-icon"></span>
+          <div>
+            <p class="channel-title">Leadeep</p>
+            <p class="channel-sub">领导者决策入口</p>
+          </div>
+        </div>
+        <div class="channel">
+          <span class="mini-icon"></span>
+          <div>
+            <p class="channel-title">Web · Mobile</p>
+            <p class="channel-sub">全端一致体验</p>
+          </div>
+        </div>
+      </div>
+
+      <article class="layer me">
+        <div class="layer-head">
+          <p class="layer-code">ME · The Second Me</p>
+          <h2 class="layer-title">每个人的<br>AI 数字分身</h2>
+          <p class="layer-desc">企业级 AI 原生组织的最自然入口，由 ME 统一理解需求并路由专家。</p>
+        </div>
+        <div class="cap-grid">
+          <div class="cap-card is-cyan">
+            <div class="card-num">01</div>
+            <h3 class="card-title">长期记忆</h3>
+            <p class="card-note">跨会话积累工作背景、偏好与表达方式。</p>
+          </div>
+          <div class="cap-card">
+            <div class="card-num">02</div>
+            <h3 class="card-title">专家调度</h3>
+            <p class="card-note">用户只说需求，ME 判断该调哪个专家。</p>
+          </div>
+          <div class="cap-card">
+            <div class="card-num">03</div>
+            <h3 class="card-title">多端一致</h3>
+            <p class="card-note">飞书、Leadeep、Horizon 同一人设记忆。</p>
+          </div>
+          <div class="cap-card is-cyan">
+            <div class="card-num">04</div>
+            <h3 class="card-title">分身进化</h3>
+            <p class="card-note">由 MA 支撑，越用越懂你，越用越聪明。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="layer we">
+        <div class="layer-head">
+          <p class="layer-code">WE · AI Expert Corps</p>
+          <h2 class="layer-title">企业级<br>AI 专家网络</h2>
+          <p class="layer-desc">由 ME 统一调度的专家协作网络，专家团定义权与运营权长在业务线。</p>
+        </div>
+        <div class="expert-grid">
+          <div class="expert-card is-orange">
+            <h3 class="expert-title">领衔者</h3>
+            <p class="expert-note">房产经纪全流程：获客、带看、谈判、签约。</p>
+          </div>
+          <div class="expert-card">
+            <h3 class="expert-title">万千</h3>
+            <p class="expert-note">供应链：采购、库存、物流、协同。</p>
+          </div>
+          <div class="expert-card">
+            <h3 class="expert-title">小筑</h3>
+            <p class="expert-note">建筑：图纸分析、成本测算、项目管理。</p>
+          </div>
+          <div class="expert-card is-orange">
+            <h3 class="expert-title">衔远内部</h3>
+            <p class="expert-note">产品、运营、销售、HR 等内部职能 Agent。</p>
+          </div>
+          <div class="expert-card">
+            <h3 class="expert-title">战略复盘</h3>
+            <p class="expert-note">面向管理者的决策推演与复盘协同。</p>
+          </div>
+          <div class="expert-card">
+            <h3 class="expert-title">销售增长</h3>
+            <p class="expert-note">客户研究、跟进建议、商机推进与话术沉淀。</p>
+          </div>
+          <div class="expert-card">
+            <h3 class="expert-title">供应链预测</h3>
+            <p class="expert-note">需求、库存、采购与履约协同优化。</p>
+          </div>
+          <div class="expert-card">
+            <h3 class="expert-title">研发协同</h3>
+            <p class="expert-note">需求澄清、方案生成、知识复用与交付评审。</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="layer ma">
+        <div class="layer-head">
+          <p class="layer-code">MA · Meta Agent Engine</p>
+          <h2 class="layer-title">组织越用<br>越聪明</h2>
+          <p class="layer-desc">进化引擎是大观底层驱动力，也是区别于普通工具的核心壁垒。</p>
+        </div>
+        <div class="engine-grid">
+          <div class="engine-step">
+            <div class="engine-num">01</div>
+            <h3 class="engine-title">沉淀</h3>
+            <p class="engine-note">自动沉淀任务经验，形成私有化知识资产。</p>
+          </div>
+          <div class="engine-step">
+            <div class="engine-num">02</div>
+            <h3 class="engine-title">评估</h3>
+            <p class="engine-note">持续评估专家 Agent 的表现质量。</p>
+          </div>
+          <div class="engine-step">
+            <div class="engine-num">03</div>
+            <h3 class="engine-title">优化</h3>
+            <p class="engine-note">基于评估自动优化，无需人工介入。</p>
+          </div>
+          <div class="loop-card">
+            <p class="loop-title">Evolution Flywheel</p>
+            <div class="loop-line">
+              <span>使用</span><span class="loop-arrow"></span><span>沉淀</span><span class="loop-arrow"></span><span>进化</span><span class="loop-arrow"></span><span>再使用</span>
+            </div>
+          </div>
+        </div>
+      </article>
+
+      <article class="layer data">
+        <h2 class="data-title">企业业务现场与数据资产</h2>
+        <p class="data-sub">Public cloud to private · zero migration</p>
+        <div class="source-grid">
+          <div class="source">组织架构</div>
+          <div class="source">知识库</div>
+          <div class="source">CRM / ERP</div>
+          <div class="source">协作消息</div>
+          <div class="source">业务文档</div>
+          <div class="source">任务日志</div>
+        </div>
+      </article>
+
+      <div class="flow-line one"></div>
+      <div class="flow-line two"></div>
+      <div class="flow-line three"></div>
+      <div class="flow-label one">ME routes work</div>
+      <div class="flow-label two">MA compounds learning</div>
+    </section>
+
+    <footer class="footer">
+      <span>CONFIDENTIAL · FRONTIS HORIZON · AI-NATIVE ORGANIZATION</span>
+      <span>ME → WE → MA</span>
+    </footer>
+  </main>
+</body>
+</html>
