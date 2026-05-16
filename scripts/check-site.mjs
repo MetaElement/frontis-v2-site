@@ -22,6 +22,7 @@ const requiredAssets = [
   "assets/logo-dark.svg",
   "components/site-shell.css",
   "components/site-shell.js",
+  "api/cta.js",
 ];
 const errors = [];
 

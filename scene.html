@@ -3,7 +3,10 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>衔远科技 Frontis AI - 打造可持续进化的AI生产力</title>
+  <meta name="theme-color" content="#FFFFFF" />
+  <title>场景 · 衔远科技 FRONTIS</title>
+  <meta name="description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理、生产研发、供应履约、营销增长等高价值业务现场。" />
+  <link rel="icon" href="./assets/logo-dark.svg" type="image/svg+xml" />
   <!-- Google Fonts: Space Grotesk + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -20,11 +23,18 @@
       --level-gray:      #3D4145;   /* 能级灰 */
       --energy-gray:     #F0F2F4;   /* 余能灰 */
       --energy-orange:   #FA5F26;   /* 能量橙 */
-      --font-en:   'Space Grotesk', sans-serif;
+      --font-en:   'Martian Grotesk', 'Space Grotesk', sans-serif;
       --font-mono: 'JetBrains Mono', monospace;
-      --font-cn:   -apple-system, 'PingFang SC', 'Microsoft YaHei', sans-serif;
-      --ease-threshold: cubic-bezier(0.22, 1, 0.36, 1);
+      --font-cn:   'Source Han Sans', 'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif;
+      --ease-threshold: cubic-bezier(0.16, 1, 0.3, 1);
       --nav-height: 64px;
+      --type-hero: 72px;
+      --type-section: 56px;
+      --type-subhead: 28px;
+      --type-card-title: 22px;
+      --type-body: 16px;
+      --type-caption: 13px;
+      --section-offset: 96px;
     }
 
     /* ============================================================
@@ -35,21 +45,26 @@
       margin: 0;
       padding: 0;
       border-radius: 0 !important;   /* VI 规范：禁止圆角 */
-      box-shadow: none !important;   /* VI 规范：禁止阴影 */
-      text-shadow: none !important;  /* VI 规范：禁止阴影 */
     }
 
     html {
       scroll-behavior: smooth;
+      scroll-padding-top: var(--section-offset);
+      -webkit-font-smoothing: antialiased;
+      color-scheme: light;
     }
 
     body {
       font-family: var(--font-cn);
       background-color: var(--pure-white);
-      color: var(--level-gray);
+      color: var(--quantum-black);
+      font-size: 16px;
+      line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       -moz-osx-font-smoothing: grayscale;
       overflow-x: hidden;
+      text-rendering: geometricPrecision;
+      -webkit-tap-highlight-color: rgba(0, 193, 212, 0.18);
     }
 
     a {
@@ -66,20 +81,27 @@
       max-width: 100%;
     }
 
+    section { scroll-margin-top: var(--section-offset); }
+
+    :is(a, button, input, textarea, [tabindex]):focus-visible {
+      outline: 2px solid var(--threshold-cyan);
+      outline-offset: 4px;
+    }
+
     /* ============================================================
        动效规范：animate-in（translateX(-20px) → 0 + opacity 0→1）
        由 IntersectionObserver 添加 .visible 触发
     ============================================================ */
     .animate-in {
       opacity: 0;
-      transform: translateX(-20px);
-      transition: opacity 0.72s var(--ease-threshold),
-                  transform 0.72s var(--ease-threshold);
+      transform: translateY(18px);
+      transition: opacity 900ms var(--ease-threshold),
+                  transform 900ms var(--ease-threshold);
     }
 
     .animate-in.visible {
       opacity: 1;
-      transform: translateX(0);
+      transform: translateY(0);
     }
 
     .delay-1 { transition-delay: 0.10s; }
@@ -87,6 +109,8 @@
     .delay-3 { transition-delay: 0.30s; }
     .delay-4 { transition-delay: 0.42s; }
     .delay-5 { transition-delay: 0.54s; }
+    .delay-6 { transition-delay: 0.66s; }
+    .delay-7 { transition-delay: 0.78s; }
 
     /* ============================================================
        图形语言 ① — The Edge 临界线（#00C1D4，水平，6px）
@@ -97,6 +121,10 @@
       height: 6px;
       background-color: var(--threshold-cyan);
       flex-shrink: 0;
+      box-shadow:
+        0 6px 32px 12px rgba(0, 193, 212, 0.30),
+        0 18px 96px 30px rgba(0, 193, 212, 0.12);
+      clip-path: inset(0 -200px -160px -200px);
     }
 
     /* ============================================================
@@ -298,13 +326,38 @@
     /* 下黑区 */
     .hero__lower {
       flex: 1;
-      background-color: var(--quantum-black);
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(180deg, rgba(0, 193, 212, 0.16) 0%, rgba(0, 16, 19, 0.82) 18%, var(--quantum-black) 72%),
+        var(--quantum-black);
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: flex-start;
       padding: 60px 48px 80px;
       text-align: center;
+    }
+
+    .hero__lower::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        repeating-linear-gradient(
+          180deg,
+          rgba(255, 255, 255, 0.08) 0,
+          rgba(255, 255, 255, 0.08) 1px,
+          transparent 1px,
+          transparent 44px
+        );
+      opacity: 0.34;
+      pointer-events: none;
+    }
+
+    .hero__lower > * {
+      position: relative;
+      z-index: 1;
     }
 
     .hero__mono-label {
@@ -322,19 +375,20 @@
     /* 大标题（量子黑背景下用纯白；上白区文字用量子黑） */
     .hero__title {
       font-family: var(--font-cn);
-      font-size: clamp(36px, 5.5vw, 76px);
+      font-size: clamp(44px, 6.4vw, var(--type-hero));
       font-weight: 700;
       color: var(--quantum-black);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
+      line-height: 1.08;
+      letter-spacing: 0;
     }
 
     .hero__subtitle {
       font-family: var(--font-cn);
-      font-size: clamp(14px, 1.4vw, 18px);
+      font-size: var(--type-body);
       color: rgba(255, 255, 255, 0.72);
       line-height: 2;
-      max-width: 560px;
+      letter-spacing: 0;
+      max-width: 680px;
       margin-bottom: 44px;
     }
 
@@ -373,16 +427,17 @@
       min-height: 100vh;
       display: flex;
       align-items: center;
+      border-top: 1px solid rgba(0, 16, 19, 0.08);
     }
 
     .scene-inner {
-      max-width: 1280px;
+      max-width: 1240px;
       width: 100%;
       margin: 0 auto;
-      padding: 96px 48px;
+      padding: 112px 48px;
       display: flex;
       align-items: center;
-      gap: 72px;
+      gap: clamp(48px, 7vw, 96px);
     }
 
     /* 镜像布局（右文左图）*/
@@ -391,13 +446,14 @@
     }
 
     .scene-content {
-      flex: 6;
+      flex: 0 1 52%;
       min-width: 0;
     }
 
     .scene-visual {
-      flex: 4;
+      flex: 0 1 48%;
       min-width: 0;
+      position: relative;
     }
 
     /* 场景标签（单色行）*/
@@ -410,7 +466,7 @@
       color: var(--threshold-cyan);
       letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 18px;
+      margin-bottom: 24px;
     }
 
     .scene-tag__sep {
@@ -421,42 +477,49 @@
     /* 大标题 */
     .scene-title {
       font-family: var(--font-cn);
-      font-size: clamp(26px, 3vw, 44px);
+      font-size: clamp(38px, 5vw, var(--type-section));
       font-weight: 700;
-      line-height: 1.2;
-      margin-bottom: 10px;
+      line-height: 1.08;
+      letter-spacing: 0;
+      margin-bottom: 16px;
     }
 
     /* 副品牌 */
     .scene-brand {
       font-family: var(--font-en);
-      font-size: 13px;
+      font-size: var(--type-caption);
       font-weight: 500;
       color: var(--threshold-cyan);
       letter-spacing: 0.06em;
-      margin-bottom: 20px;
+      margin-bottom: 18px;
     }
 
     /* 一句话定位 */
     .scene-tagline {
       font-family: var(--font-cn);
-      font-size: 15px;
-      line-height: 1.75;
-      margin-bottom: 32px;
+      font-size: var(--type-body);
+      line-height: 1.72;
+      letter-spacing: 0;
+      max-width: 620px;
+      margin-bottom: 36px;
     }
 
     /* Agent 列表 */
     .agent-list {
-      display: flex;
-      flex-direction: column;
-      gap: 18px;
-      margin-bottom: 36px;
+      display: grid;
+      gap: 0;
+      margin-bottom: 40px;
+      border-top: 1px solid rgba(0, 16, 19, 0.12);
     }
 
     .agent-item {
-      display: flex;
-      align-items: stretch;
-      gap: 14px;
+      display: grid;
+      grid-template-columns: 2px 1fr;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(0, 16, 19, 0.12);
+      cursor: pointer;
+      transition: transform 220ms var(--ease-threshold), opacity 220ms var(--ease-threshold);
     }
 
     /* 引导竖线（图形语言 ②） */
@@ -464,6 +527,9 @@
       width: 2px;
       background-color: var(--threshold-cyan);
       flex-shrink: 0;
+      transform-origin: top center;
+      transform: scaleY(0.72);
+      transition: transform 220ms var(--ease-threshold), background-color 220ms var(--ease-threshold);
     }
 
     .agent-item__body {
@@ -472,23 +538,45 @@
     }
 
     .agent-item__name {
-      font-family: var(--font-en);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--threshold-cyan);
-      margin-bottom: 3px;
-      letter-spacing: 0.02em;
+      font-family: var(--font-cn);
+      font-size: 17px;
+      font-weight: 700;
+      color: var(--quantum-black);
+      margin-bottom: 6px;
+      letter-spacing: 0;
     }
 
     .agent-item__desc {
       font-family: var(--font-cn);
       font-size: 14px;
       line-height: 1.65;
+      letter-spacing: 0;
+    }
+
+    .agent-item:hover,
+    .agent-item:focus-visible,
+    .agent-item.is-active {
+      transform: translateX(6px);
+    }
+
+    .agent-item:hover .agent-item__line,
+    .agent-item:focus-visible .agent-item__line,
+    .agent-item.is-active .agent-item__line {
+      transform: scaleY(1);
+      background-color: var(--energy-orange);
+    }
+
+    .agent-item:hover .agent-item__name,
+    .agent-item:focus-visible .agent-item__name,
+    .agent-item.is-active .agent-item__name {
+      color: var(--threshold-cyan);
     }
 
     /* 按钮：黑色实底 */
     .btn-primary {
-      display: inline-block;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       font-family: var(--font-en);
       font-size: 13px;
       font-weight: 600;
@@ -497,7 +585,7 @@
       padding: 12px 28px;
       border: 2px solid var(--quantum-black);
       cursor: pointer;
-      letter-spacing: 0.05em;
+      letter-spacing: 0.08em;
       transition: background-color 0.18s, color 0.18s;
     }
 
@@ -570,17 +658,60 @@
       color: var(--level-gray);
     }
 
+    .scene-visual::before {
+      content: '';
+      position: absolute;
+      left: -18px;
+      top: -18px;
+      width: 54px;
+      height: 54px;
+      border-left: 2px solid var(--threshold-cyan);
+      border-top: 2px solid var(--threshold-cyan);
+      opacity: 0.9;
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .scene-visual::after {
+      content: '';
+      position: absolute;
+      right: 20px;
+      top: -6px;
+      width: 10px;
+      height: 10px;
+      background: var(--energy-orange);
+      pointer-events: none;
+      z-index: 2;
+    }
+
+    .scene-visual img {
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      height: auto;
+      object-fit: contain;
+      background:
+        linear-gradient(180deg, rgba(0, 193, 212, 0.08), transparent 34%),
+        #F6F8FA;
+      border: 1px solid rgba(0, 16, 19, 0.18);
+      transition: opacity 260ms var(--ease-threshold), filter 260ms var(--ease-threshold);
+      filter: saturate(0.96) contrast(1.03);
+    }
+
+    .scene-visual-caption {
+      margin-top: 12px;
+      color: rgba(0, 16, 19, 0.46);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+
     /* ============================================================
        第二屏：战略管理（纯白，可点击）
     ============================================================ */
     #strategy {
       background-color: var(--pure-white);
-      cursor: pointer;
       transition: background-color 0.2s;
-    }
-
-    #strategy:hover {
-      background-color: var(--energy-gray);
     }
 
     #strategy .scene-title    { color: var(--quantum-black); }
@@ -608,9 +739,20 @@
     }
 
     #supply .scene-title    { color: var(--pure-white); }
-    #supply .scene-tagline  { color: rgba(255, 255, 255, 0.65); }
+    #supply .scene-tagline  { color: rgba(255, 255, 255, 0.76); }
     #supply .scene-tag__sep { color: rgba(255, 255, 255, 0.3); }
-    #supply .agent-item__desc { color: rgba(255, 255, 255, 0.7); }
+    #supply .scene-brand { color: var(--threshold-cyan); }
+    #supply .agent-list,
+    #supply .agent-item { border-color: rgba(255, 255, 255, 0.14); }
+    #supply .agent-item__name { color: var(--pure-white); }
+    #supply .agent-item__desc { color: rgba(255, 255, 255, 0.74); }
+    #supply .scene-visual img {
+      border-color: rgba(255, 255, 255, 0.18);
+      background:
+        linear-gradient(180deg, rgba(0, 193, 212, 0.12), transparent 36%),
+        var(--quantum-black);
+    }
+    #supply .scene-visual-caption { color: rgba(255, 255, 255, 0.42); }
 
     /* ============================================================
        第五屏：营销增长（纯白，锁定）
@@ -792,6 +934,11 @@
         width: 100%;
       }
 
+      .scene-visual::before {
+        left: -12px;
+        top: -12px;
+      }
+
       .visual-placeholder { height: 240px; }
 
       .footer__grid {
@@ -805,6 +952,22 @@
 
       .hero__upper,
       .hero__lower { padding: 48px 24px; }
+
+      .hero__title {
+        font-size: 42px;
+      }
+
+      .hero__subtitle {
+        font-size: 15px;
+      }
+
+      .scene-title {
+        font-size: 36px;
+      }
+
+      .agent-item {
+        transform: none !important;
+      }
 
       .cta-body { padding: 60px 24px; }
 
@@ -848,8 +1011,8 @@
   <!-- 下黑区：副标题 + 滚动提示 -->
   <div class="hero__lower">
     <p class="hero__subtitle animate-in delay-2">
-      <span>覆盖战略 · 生产 · 供应链 · 营销全场景</span>
-      <span>每个场景背后都有一支深度定制的 AI 专家团</span>
+      <span>覆盖战略管理 · 生产研发 · 供应履约 · 营销增长四大业务现场</span>
+      <span>每个场景背后都有一支可交付、可复用、可进化的 AI 专家团</span>
     </p>
     <div class="hero__scroll animate-in delay-3" aria-hidden="true">
       <span class="node-cyan"></span>
@@ -866,15 +1029,10 @@
 <section
   id="strategy"
   class="scene-section"
-  onclick="location.href='./scene-strategy.html'"
-  role="link"
-  tabindex="0"
-  aria-label="战略管理专家团，点击进入详情"
-  onkeydown="if(event.key==='Enter'||event.key===' '){event.preventDefault();location.href='./scene-strategy.html';}"
+  aria-labelledby="strategy-heading"
 >
   <div class="scene-inner">
 
-    <!-- 左：文字内容（flex:6，约60%） -->
     <div class="scene-content">
 
       <!-- 场景标签 -->
@@ -886,14 +1044,14 @@
       </div>
 
       <!-- 大标题 -->
-      <h2 class="scene-title animate-in delay-1">战略管理专家团</h2>
+      <h2 class="scene-title animate-in delay-1" id="strategy-heading">战略管理专家团</h2>
 
       <!-- 副品牌 -->
       <p class="scene-brand animate-in delay-2">Leadeep AI · 领衔者</p>
 
       <!-- 一句话定位 -->
       <p class="scene-tagline animate-in delay-2">
-        为企业领导者配备 AI 专家军团，辅助战略决策、商机跟进与竞情洞察
+        面向领导者的 AI 决策专家团，沉淀认知，辅助决策。
       </p>
 
       <!-- Agent 列表（左侧2px跃迁青竖线引导） -->
@@ -902,32 +1060,16 @@
         <li class="agent-item animate-in delay-2">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">战略复盘专家</p>
-            <p class="agent-item__desc">自动提炼会议录音中的决策主线与跟进事项</p>
+            <p class="agent-item__name" data-agent-image="录音分析专家团">录音分析专家团</p>
+            <p class="agent-item__desc">AI 战略专家、AI 财务专家、AI 法务专家、AI 心理分析师、AI 项目管理专家等，多维度深度分析录音内容。</p>
           </div>
         </li>
 
         <li class="agent-item animate-in delay-3">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">商机跟进专家</p>
-            <p class="agent-item__desc">识别客户信号，自动生成跟进优先级与行动建议</p>
-          </div>
-        </li>
-
-        <li class="agent-item animate-in delay-4">
-          <div class="agent-item__line" aria-hidden="true"></div>
-          <div class="agent-item__body">
-            <p class="agent-item__name">竞情简报专家</p>
-            <p class="agent-item__desc">持续监控竞对动态，定期生成管理简报</p>
-          </div>
-        </li>
-
-        <li class="agent-item animate-in delay-5">
-          <div class="agent-item__line" aria-hidden="true"></div>
-          <div class="agent-item__body">
-            <p class="agent-item__name">高管周报专家</p>
-            <p class="agent-item__desc">口述关键判断，自动生成结构化管理简报</p>
+            <p class="agent-item__name" data-agent-image="问策AI专家团">问策 AI 专家团</p>
+            <p class="agent-item__desc">覆盖 AI 战略、销售、市场、商务、解决方案与投融资专家，支持企业经营决策全场景。</p>
           </div>
         </li>
 
@@ -937,24 +1079,16 @@
       <a
         href="./scene-strategy.html"
         class="btn-primary animate-in delay-5"
-        onclick="event.stopPropagation()"
-        tabindex="-1"
-        aria-hidden="true"
       >
         了解详情 →
       </a>
 
     </div>
 
-    <!-- 右：图片占位框（flex:4，约40%） -->
-    <div class="scene-visual animate-in delay-3">
-      <div
-        class="visual-placeholder visual-placeholder--dark"
-        aria-label="待提供：Leadeep AI Agent 界面截图"
-      >
-        [待提供：Leadeep AI Agent 界面截图]
-      </div>
-    </div>
+    <figure class="scene-visual animate-in delay-3">
+      <img src="./assets/scene-agents/leadeep-recording.png" data-default-image="录音分析专家团" alt="战略管理专家团 Agent 界面" loading="lazy" />
+      <figcaption class="scene-visual-caption">LEADEEP AI · DECISION INTELLIGENCE</figcaption>
+    </figure>
 
   </div>
 </section>
@@ -980,31 +1114,49 @@
 
       <p class="scene-brand animate-in delay-2">小筑</p>
 
-      <p class="scene-tagline animate-in delay-2">（待填写）</p>
+      <p class="scene-tagline animate-in delay-2">
+        打造建筑企业专属 AI 专家团，为企业增收、为决策赋能、为办公提效，持续构建高质量数据集。
+      </p>
 
       <ul class="agent-list" aria-label="生产研发 Agent 能力列表">
 
         <li class="agent-item animate-in delay-2">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">[Agent 名称]</p>
-            <p class="agent-item__desc">它能做什么</p>
+            <p class="agent-item__name" data-agent-image="进度管理专家">进度管理专家</p>
+            <p class="agent-item__desc">自动编制项目进度计划，实时监控执行情况，智能预警延期风险。</p>
           </div>
         </li>
 
         <li class="agent-item animate-in delay-3">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">[Agent 名称]</p>
-            <p class="agent-item__desc">它能做什么</p>
+            <p class="agent-item__name" data-agent-image="现场单据采集专家">现场单据采集专家</p>
+            <p class="agent-item__desc">通过语音交互、图片识别自动生成各类现场单据，减轻一线填报负担。</p>
           </div>
         </li>
 
         <li class="agent-item animate-in delay-4">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">[Agent 名称]</p>
-            <p class="agent-item__desc">它能做什么</p>
+            <p class="agent-item__name" data-agent-image="方案编制审核专家">方案编制审核专家</p>
+            <p class="agent-item__desc">一键输出技术方案并自动审核，提升方案编制与审批效率。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-5">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-image="图纸识别及生成专家">图纸识别及生成专家</p>
+            <p class="agent-item__desc">提取图纸关键信息，生成深化内容，让图纸知识真正进入现场执行。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-6">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-image="项目管理决策专家">项目管理决策专家</p>
+            <p class="agent-item__desc">抓取和分析项目生产经营数据，为企业管理者与项目经理提供决策建议。</p>
           </div>
         </li>
 
@@ -1012,23 +1164,18 @@
 
       <!-- 状态标签（能量橙，唯一峰值强调） -->
       <div class="animate-in delay-5">
-        <span class="status-badge" role="status" aria-label="即将上线，敬请期待">
+        <span class="status-badge" role="status" aria-label="能力持续扩展中">
           <span class="node-orange" aria-hidden="true"></span>
-          即将上线，敬请期待
+          能力持续扩展中
         </span>
       </div>
 
     </div>
 
-    <!-- 左（镜像后为左）：图片占位框（flex:4） -->
-    <div class="scene-visual animate-in delay-3">
-      <div
-        class="visual-placeholder visual-placeholder--dark"
-        aria-label="待提供：生产研发 Agent 界面截图"
-      >
-        [待提供：生产研发 Agent 界面截图]
-      </div>
-    </div>
+    <figure class="scene-visual animate-in delay-3">
+      <img src="./assets/scene-agents/schedule-management.png" data-default-image="进度管理专家" alt="生产研发专家团 Agent 界面" loading="lazy" />
+      <figcaption class="scene-visual-caption">XIAOZHU · PROJECT INTELLIGENCE</figcaption>
+    </figure>
 
   </div>
 </section>
@@ -1054,23 +1201,57 @@
 
       <p class="scene-brand animate-in delay-2">万千</p>
 
-      <p class="scene-tagline animate-in delay-2">（待填写）</p>
+      <p class="scene-tagline animate-in delay-2">
+        为大宗商品采销团队配备 AI 专家军团，覆盖行情研判、成本测算与物流决策。
+      </p>
 
       <ul class="agent-list" aria-label="供应履约 Agent 能力列表">
 
         <li class="agent-item animate-in delay-3">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">[Agent 名称]</p>
-            <p class="agent-item__desc">它能做什么</p>
+            <p class="agent-item__name" data-agent-image="铁矿石套保专家">铁矿石套保专家</p>
+            <p class="agent-item__desc">实时生成多空判断与动态套保策略，附因子归因说明。</p>
           </div>
         </li>
 
         <li class="agent-item animate-in delay-4">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">[Agent 名称]</p>
-            <p class="agent-item__desc">它能做什么</p>
+            <p class="agent-item__name" data-agent-image="铁矿石套保专家">大豆采购专家</p>
+            <p class="agent-item__desc">一键输出 CBOT 买入建议、套保方案与最优物流安排。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-5">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-image="进口成本测算专家">进口成本测算专家</p>
+            <p class="agent-item__desc">秒级模拟 CNF / FOB 全链路到岸完全成本。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-6">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-image="期现一体化专家">期现一体化专家</p>
+            <p class="agent-item__desc">打通盘前研判、盘中辅助与盘后核算全周期决策。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-7">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-image="港口物流专家">港口物流专家</p>
+            <p class="agent-item__desc">预测主要港口拥堵时长与 C3 / C5 航线运价走势。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-7">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-image="行情日报专家">行情日报专家</p>
+            <p class="agent-item__desc">每日自动生成大宗商品市场研判简报与风险预警。</p>
           </div>
         </li>
 
@@ -1078,23 +1259,18 @@
 
       <!-- 状态标签 -->
       <div class="animate-in delay-5">
-        <span class="status-badge" role="status" aria-label="即将上线，敬请期待">
+        <span class="status-badge" role="status" aria-label="能力持续扩展中">
           <span class="node-orange" aria-hidden="true"></span>
-          即将上线，敬请期待
+          能力持续扩展中
         </span>
       </div>
 
     </div>
 
-    <!-- 右：图片占位框（flex:4） -->
-    <div class="scene-visual animate-in delay-3">
-      <div
-        class="visual-placeholder visual-placeholder--darker"
-        aria-label="待提供：供应履约 Agent 界面截图"
-      >
-        [待提供：供应履约 Agent 界面截图]
-      </div>
-    </div>
+    <figure class="scene-visual animate-in delay-3">
+      <img src="./assets/scene-agents/port-logistics.png" data-default-image="铁矿石套保专家" alt="供应履约专家团 Agent 界面" loading="lazy" />
+      <figcaption class="scene-visual-caption">WANQIAN · COMMODITY DECISION LOOP</figcaption>
+    </figure>
 
   </div>
 </section>
@@ -1118,25 +1294,35 @@
 
       <h2 class="scene-title animate-in delay-1" id="marketing-heading">营销增长专家团</h2>
 
-      <p class="scene-brand animate-in delay-2">（待填写）</p>
+      <p class="scene-brand animate-in delay-2">Growth AI</p>
 
-      <p class="scene-tagline animate-in delay-2">（待填写）</p>
+      <p class="scene-tagline animate-in delay-2">
+        为企业营销增长部门提供基于用户全链路经营的智能解决方案。
+      </p>
 
       <ul class="agent-list" aria-label="营销增长 Agent 能力列表">
 
         <li class="agent-item animate-in delay-3">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">[Agent 名称]</p>
-            <p class="agent-item__desc">它能做什么</p>
+            <p class="agent-item__name" data-agent-image="AI销冠专家">AI 销冠专家</p>
+            <p class="agent-item__desc">复制销冠能力，持续提升团队成单率。</p>
           </div>
         </li>
 
         <li class="agent-item animate-in delay-4">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name">[Agent 名称]</p>
-            <p class="agent-item__desc">它能做什么</p>
+            <p class="agent-item__name" data-agent-image="AI私域运营专家">AI 私域运营专家</p>
+            <p class="agent-item__desc">实现千人千面自动化运营，提升复购与生命周期价值。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-5">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-image="AI金牌客服专家">AI 金牌客服专家</p>
+            <p class="agent-item__desc">7×24 全渠道智能接待，帮助服务团队降本增效。</p>
           </div>
         </li>
 
@@ -1144,23 +1330,18 @@
 
       <!-- 状态标签 -->
       <div class="animate-in delay-5">
-        <span class="status-badge" role="status" aria-label="即将上线，敬请期待">
+        <span class="status-badge" role="status" aria-label="能力持续扩展中">
           <span class="node-orange" aria-hidden="true"></span>
-          即将上线，敬请期待
+          能力持续扩展中
         </span>
       </div>
 
     </div>
 
-    <!-- 左（镜像后为左）：图片占位框（flex:4） -->
-    <div class="scene-visual animate-in delay-3">
-      <div
-        class="visual-placeholder visual-placeholder--dark"
-        aria-label="待提供：营销增长 Agent 界面截图"
-      >
-        [待提供：营销增长 Agent 界面截图]
-      </div>
-    </div>
+    <figure class="scene-visual animate-in delay-3">
+      <img src="./assets/scene-agents/sales-champion.png" data-default-image="AI销冠专家" alt="营销增长专家团 Agent 界面" loading="lazy" />
+      <figcaption class="scene-visual-caption">GROWTH AI · CUSTOMER OPERATING LOOP</figcaption>
+    </figure>
 
   </div>
 </section>
@@ -1176,7 +1357,7 @@
      Footer（深色背景）
 ============================================================ -->
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260516-shared-cta2"></script>
+<script src="./components/site-shell.js?v=20260516-cta-copy"></script>
 
 
 <!-- ============================================================
@@ -1227,6 +1408,64 @@
         var dd = item.querySelector('.nav__dropdown');
         if (dd) dd.style.display = '';
       }
+    });
+  });
+
+  /* ── 场景专家图：跟随能力项切换，保持页面轻量 ── */
+  var agentImages = {
+    '录音分析专家团': './assets/scene-agents/leadeep-recording.png',
+    '问策AI专家团': './assets/scene-agents/leadeep-advisory.jpg',
+    '进度管理专家': './assets/scene-agents/schedule-management.png',
+    '现场单据采集专家': './assets/scene-agents/field-documents.png',
+    '方案编制审核专家': './assets/scene-agents/plan-review.jpg',
+    '图纸识别及生成专家': './assets/scene-agents/drawing-generation.png',
+    '项目管理决策专家': './assets/scene-agents/project-decision.png',
+    '铁矿石套保专家': './assets/scene-agents/port-logistics.png',
+    '进口成本测算专家': './assets/scene-agents/import-cost.png',
+    '期现一体化专家': './assets/scene-agents/import-cost.png',
+    '港口物流专家': './assets/scene-agents/market-daily.png',
+    '行情日报专家': './assets/scene-agents/market-daily.png',
+    'AI销冠专家': './assets/scene-agents/sales-champion.png',
+    'AI私域运营专家': './assets/scene-agents/private-operations.png',
+    'AI金牌客服专家': './assets/scene-agents/customer-service.png'
+  };
+
+  function activateAgent(section, item, img, imageName) {
+    if (!imageName || !agentImages[imageName]) return;
+    section.querySelectorAll('.agent-item.is-active').forEach(function (activeItem) {
+      activeItem.classList.remove('is-active');
+    });
+    item.classList.add('is-active');
+    if (img.getAttribute('src') === agentImages[imageName]) return;
+    img.style.opacity = '0';
+    window.setTimeout(function () {
+      img.src = agentImages[imageName];
+      img.style.opacity = '1';
+    }, 90);
+  }
+
+  document.querySelectorAll('.scene-section').forEach(function (section) {
+    var img = section.querySelector('.scene-visual img');
+    if (!img) return;
+
+    var defaultImage = img.dataset.defaultImage;
+    if (defaultImage && agentImages[defaultImage]) {
+      img.src = agentImages[defaultImage];
+    }
+
+    var agentItems = Array.prototype.slice.call(section.querySelectorAll('.agent-item'));
+    agentItems.forEach(function (item, index) {
+      var nameEl = item.querySelector('.agent-item__name');
+      if (!nameEl) return;
+      var imageName = nameEl.dataset.agentImage;
+      item.setAttribute('tabindex', '0');
+      item.addEventListener('mouseenter', function () {
+        activateAgent(section, item, img, imageName);
+      });
+      item.addEventListener('focus', function () {
+        activateAgent(section, item, img, imageName);
+      });
+      if (index === 0) item.classList.add('is-active');
     });
   });
 

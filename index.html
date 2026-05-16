@@ -326,14 +326,19 @@
       height: 6px;
       background: var(--threshold-cyan);
       z-index: 10;
-      --hero-slide-duration: 8200ms;
+      --hero-line-duration: 1600ms;
       transform-origin: left center;
       transform: scaleX(0);
       transition: none;
+      box-shadow:
+        0 6px 32px 12px rgba(0, 193, 212, 0.38),
+        0 16px 90px 32px rgba(0, 193, 212, 0.18),
+        0 32px 160px 56px rgba(0, 193, 212, 0.08);
+      clip-path: inset(0 -200px -200px -200px);
     }
     .threshold-line.line-drawn {
       transform: scaleX(1);
-      transition: transform var(--hero-slide-duration) linear;
+      transition: transform var(--hero-line-duration) cubic-bezier(0.8, 0, 0.98, 1);
     }
 
     /* 下半区：量子黑 + 横线纹理（第七轮：60vh） */
@@ -344,7 +349,7 @@
       right: 0;
       bottom: 0;
       background:
-        linear-gradient(180deg, rgba(0, 193, 212, 0.18) 0%, rgba(0, 16, 19, 0.88) 18%, var(--quantum-black) 72%),
+        linear-gradient(180deg, rgba(0, 193, 212, 0.16) 0%, rgba(0, 16, 19, 0.82) 18%, var(--quantum-black) 72%),
         var(--quantum-black);
       z-index: 1;
       overflow: hidden;
@@ -3781,6 +3786,7 @@
     }
 
     #products .fx-section-inner,
+    #scenes-preview .fx-section-inner,
     #technology .fx-section-inner {
       box-sizing: border-box;
       width: 100% !important;
@@ -3804,33 +3810,26 @@
     }
 
     .fx-kicker {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 22px;
-      color: #8C8C8C;
-      font-size: 13px;
-      font-weight: 750;
-      letter-spacing: 0;
+      display: inline-block;
+      margin-bottom: 12px;
+      color: var(--threshold-cyan);
+      font-family: var(--font-en);
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 3px;
+      line-height: 1;
+      text-transform: uppercase;
     }
 
     .fx-kicker::before {
-      content: "";
-      width: 22px;
-      height: 22px;
-      border: 2px solid currentColor;
-      border-radius: 50%;
-    }
-
-    #products .fx-kicker,
-    #technology .fx-kicker {
-      color: rgba(255, 255, 255, 0.48);
+      content: none;
+      display: none;
     }
 
     .fx-section-title {
       margin: 0;
       color: currentColor;
-      font-size: var(--type-section);
+      font-size: 40px;
       font-weight: 750;
       line-height: 1.08;
       letter-spacing: 0;
@@ -3855,19 +3854,36 @@
     .fx-line-link {
       display: inline-flex;
       align-items: center;
-      gap: 16px;
-      margin-top: 40px;
+      justify-content: space-between;
+      gap: 24px;
+      min-width: 248px;
+      min-height: 72px;
+      margin-top: 44px;
+      padding: 0 24px;
+      border: 1px solid rgba(255, 255, 255, 0.72);
       color: var(--pure-white);
       font-size: 15px;
       font-weight: 700;
+      text-decoration: none;
+      transition:
+        border-color 220ms var(--ease-threshold),
+        background 220ms var(--ease-threshold),
+        color 220ms var(--ease-threshold);
     }
 
     .fx-line-link::after {
       content: "";
       width: 64px;
       height: 2px;
+      flex: 0 0 64px;
       background: var(--threshold-cyan);
       transition: transform 220ms var(--ease-threshold);
+    }
+
+    .fx-line-link:hover,
+    .fx-line-link:focus-visible {
+      border-color: var(--threshold-cyan);
+      background: rgba(0, 193, 212, 0.08);
     }
 
     .fx-line-link:hover::after {
@@ -3877,6 +3893,15 @@
     .fx-line-link--dark,
     #contact .fx-line-link {
       color: var(--quantum-black);
+      border-color: rgba(0, 16, 19, 0.72);
+    }
+
+    .fx-line-link--dark:hover,
+    .fx-line-link--dark:focus-visible,
+    #contact .fx-line-link:hover,
+    #contact .fx-line-link:focus-visible {
+      border-color: var(--threshold-cyan);
+      background: rgba(0, 193, 212, 0.045);
     }
 
     .fx-product-grid {
@@ -3890,8 +3915,8 @@
 
     .fx-product-system {
       display: grid;
-      grid-template-columns: 220px minmax(0, 1fr);
-      gap: 40px;
+      grid-template-columns: minmax(0, 1fr);
+      gap: 0;
       align-items: center;
       margin-top: 76px;
     }
@@ -4346,6 +4371,83 @@
       border-color: var(--quantum-black) !important;
     }
 
+    #products .fx-line-link,
+    #products .horizon-showcase-cta .btn-primary,
+    #scenes-preview .fx-line-link,
+    #scenes-preview .scenes-preview-cta .btn-primary,
+    #technology .fx-line-link,
+    #technology .btn-secondary-dark {
+      display: inline-flex !important;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      width: min(100%, 220px);
+      min-height: 58px;
+      min-width: 0;
+      margin-top: 44px;
+      padding: 0 24px !important;
+      border: 1px solid transparent !important;
+      border-radius: 0;
+      font-family: "Space Grotesk", var(--font-cn);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1;
+      letter-spacing: 0;
+      text-decoration: none;
+      transition:
+        border-color 180ms var(--ease-threshold),
+        background 180ms var(--ease-threshold),
+        color 180ms var(--ease-threshold);
+    }
+
+    #products .fx-line-link,
+    #technology .fx-line-link,
+    #technology .btn-secondary-dark {
+      border-color: var(--pure-white) !important;
+      background: transparent !important;
+      color: var(--pure-white) !important;
+    }
+
+    #products .horizon-showcase-cta .btn-primary,
+    #scenes-preview .fx-line-link,
+    #scenes-preview .scenes-preview-cta .btn-primary {
+      border-color: var(--quantum-black) !important;
+      background: var(--quantum-black) !important;
+      color: var(--pure-white) !important;
+    }
+
+    #products .fx-line-link::after,
+    #products .horizon-showcase-cta .btn-primary::after,
+    #scenes-preview .fx-line-link::after,
+    #scenes-preview .scenes-preview-cta .btn-primary::after,
+    #technology .fx-line-link::after,
+    #technology .btn-secondary-dark::after {
+      content: none !important;
+      display: none !important;
+    }
+
+    #products .fx-line-link:hover,
+    #products .fx-line-link:focus-visible,
+    #technology .fx-line-link:hover,
+    #technology .fx-line-link:focus-visible,
+    #technology .btn-secondary-dark:hover,
+    #technology .btn-secondary-dark:focus-visible {
+      border-color: var(--threshold-cyan) !important;
+      background: transparent !important;
+      color: var(--threshold-cyan) !important;
+    }
+
+    #products .horizon-showcase-cta .btn-primary:hover,
+    #products .horizon-showcase-cta .btn-primary:focus-visible,
+    #scenes-preview .fx-line-link:hover,
+    #scenes-preview .fx-line-link:focus-visible,
+    #scenes-preview .scenes-preview-cta .btn-primary:hover,
+    #scenes-preview .scenes-preview-cta .btn-primary:focus-visible {
+      border-color: var(--threshold-cyan) !important;
+      background: var(--threshold-cyan) !important;
+      color: var(--quantum-black) !important;
+    }
+
     @media (max-width: 1024px) {
       .fx-section-inner {
         width: min(100% - 56px, 900px);
@@ -4353,6 +4455,7 @@
       }
 
       #products .fx-section-inner,
+      #scenes-preview .fx-section-inner,
       #technology .fx-section-inner {
         width: 100% !important;
         max-width: none !important;
@@ -4363,6 +4466,10 @@
       .fx-proof {
         grid-template-columns: 1fr;
         gap: 34px;
+      }
+
+      .fx-section-title {
+        font-size: 32px;
       }
 
       .fx-contact-grid {
@@ -4415,6 +4522,7 @@
       }
 
       #products .fx-section-inner,
+      #scenes-preview .fx-section-inner,
       #technology .fx-section-inner {
         width: 100% !important;
         max-width: none !important;
@@ -4422,7 +4530,12 @@
       }
 
       .fx-section-title {
-        font-size: 34px;
+        font-size: 28px;
+      }
+
+      .fx-kicker {
+        font-size: 11px;
+        letter-spacing: 2.4px;
       }
 
       .fx-section-copy {
@@ -4434,6 +4547,11 @@
       .fx-scenario-grid,
       .fx-contact-grid {
         margin-top: 44px;
+      }
+
+      .fx-line-link {
+        width: min(100%, 320px);
+        min-width: 0;
       }
 
       .fx-product-system {
@@ -4614,22 +4732,12 @@
 <section id="products" aria-label="产品介绍">
   <div class="fx-redesign fx-section-inner fx-product animate-in">
     <div class="fx-section-head">
-      <span class="fx-kicker">产品架构</span>
+      <span class="fx-kicker">FRONTIS HORIZON</span>
       <h2 class="fx-section-title">衔远大观</h2>
-      <p class="fx-section-copy">一个入口，一张专家网络，一个持续进化的组织智能层。</p>
+      <p class="fx-section-copy">让每个人都有 数字分身 和 专家网络，越用越聪明。</p>
     </div>
 
     <div class="fx-product-system">
-      <div class="fx-flywheel fx-flywheel--evolution" role="img" aria-label="ME 理解目标，WE 调度专家，MA 沉淀反馈，形成持续进化飞轮">
-        <svg class="fx-flywheel-orbit" viewBox="0 0 320 320" aria-hidden="true">
-          <circle class="fx-flywheel-ring" cx="160" cy="160" r="116"></circle>
-          <circle class="fx-flywheel-progress" cx="160" cy="160" r="116"></circle>
-        </svg>
-        <span class="fx-flywheel-core"><strong>AI</strong><em>进化</em></span>
-        <span class="fx-flywheel-node fx-flywheel-node--me"><strong>ME</strong><em>理解目标</em></span>
-        <span class="fx-flywheel-node fx-flywheel-node--we"><strong>WE</strong><em>调度专家</em></span>
-        <span class="fx-flywheel-node fx-flywheel-node--ma"><strong>MA</strong><em>反馈进化</em></span>
-      </div>
       <div class="fx-product-grid" aria-label="衔远大观 ME WE MA 三层架构">
         <div class="fx-product-layer">
           <span>01</span>
@@ -4651,7 +4759,7 @@
       </div>
     </div>
 
-    <a href="./horizon.html" class="fx-line-link">了解产品架构</a>
+    <a href="./horizon.html" class="fx-line-link">了解衔远大观 →</a>
   </div>
   <div class="product-single" id="productSingle">
 
@@ -4809,23 +4917,21 @@
 ============================================= -->
 <section id="scenes-preview" aria-label="场景导流">
   <div class="fx-redesign fx-section-inner fx-scenes animate-in">
-    <div class="fx-section-head fx-section-head--split">
-      <div>
-        <span class="fx-kicker">应用场景</span>
-        <h2 class="fx-section-title">从关键决策开始</h2>
-      </div>
+    <div class="fx-section-head">
+      <span class="fx-kicker">场景 SCENARIOS</span>
+      <h2 class="fx-section-title">从关键决策开始</h2>
       <p class="fx-section-copy">先进入最高价值的业务现场，再扩展为全组织的 AI 自动驾驶。</p>
     </div>
 
     <div class="fx-scenario-grid" aria-label="高价值场景入口">
       <a href="./scene-strategy.html" class="fx-scenario-item">
         <span>01</span>
-        <strong>战略决策</strong>
-        <em>复盘 · 竞情 · 高管周报</em>
+        <strong>战略管理</strong>
+        <em>会议 · 人才 · OKR复盘</em>
       </a>
       <a href="./scene-research.html" class="fx-scenario-item">
         <span>02</span>
-        <strong>产品创新</strong>
+        <strong>研发生产</strong>
         <em>规划 · 风险 · 知识沉淀</em>
       </a>
       <a href="./scene-supply.html" class="fx-scenario-item">
@@ -4835,12 +4941,12 @@
       </a>
       <a href="./scene-sales.html" class="fx-scenario-item">
         <span>04</span>
-        <strong>销售增长</strong>
+        <strong>营销增长</strong>
         <em>商机 · 方案 · 客户洞察</em>
       </a>
     </div>
 
-    <a href="./scene.html" class="fx-line-link fx-line-link--dark">查看全部场景</a>
+    <a href="./scene.html" class="fx-line-link fx-line-link--dark">查看全部场景 →</a>
   </div>
 
   <div class="scenes-preview-inner">
@@ -5100,12 +5206,10 @@
 ============================================= -->
 <section id="technology" aria-label="核心技术">
   <div class="fx-redesign fx-section-inner fx-tech animate-in">
-    <div class="fx-section-head fx-section-head--split">
-      <div>
-        <span class="fx-kicker">核心技术</span>
-        <h2 class="fx-section-title">通专融合，将通用大模型转化为企业可复用的专家能力</h2>
-      </div>
-      <p class="fx-section-copy">通专融合建立判断，数字风洞推演结果，Meta-Agent 调度专家并沉淀进化信号。</p>
+    <div class="fx-section-head">
+      <span class="fx-kicker">技术 TECHNOLOGY</span>
+      <h2 class="fx-section-title">通专融合 涌现专家级AI生产力</h2>
+      <p class="fx-section-copy">把通用大模型变成行业专家</p>
     </div>
 
     <div class="fx-tech-flow" aria-label="核心技术路径">
@@ -5118,7 +5222,7 @@
       <div class="fx-tech-node fx-tech-node--peak"><span>LOOP</span><strong>持续进化</strong></div>
     </div>
 
-    <a href="./technology.html" class="fx-line-link">深入了解技术架构</a>
+    <a href="./technology.html" class="fx-line-link">深入了解技术架构 →</a>
   </div>
 
   <div class="tech-section-head animate-in">
@@ -5209,7 +5313,7 @@
      Footer
 ============================================= -->
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260516-shared-cta2"></script>
+<script src="./components/site-shell.js?v=20260516-cta-copy"></script>
 
 
 <!-- =============================================
@@ -5250,8 +5354,9 @@
     var slideIndex    = 0;
     var slideTimer;
     var slideDelay    = 8200;
+    var lineDrawDelay = 1600;
     if (thresholdLine) {
-      thresholdLine.style.setProperty('--hero-slide-duration', slideDelay + 'ms');
+      thresholdLine.style.setProperty('--hero-line-duration', lineDrawDelay + 'ms');
     }
     var heroSlides    = [
       {

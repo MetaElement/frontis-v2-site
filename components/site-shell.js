@@ -89,19 +89,19 @@
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
       footerLink("./horizon.html", "衔远大观") +
-      footerLink("./leadeep.html", "Leadeep AI") +
       "</div></div>" +
       '<div><div class="site-footer__title">场景</div><div class="site-footer__links">' +
       footerLink("./scene.html", "场景总览") +
-      footerLink("./scene-strategy.html", "战略管理专家团") +
-      footerLink("./scene-supply.html", "供应链") +
-      footerLink("./scene-sales.html", "销售") +
-      footerLink("./scene-ops.html", "运营") +
-      footerLink("./scene-research.html", "研发") +
+      footerLink("./scene-strategy.html", "战略管理") +
+      footerLink("./scene-research.html", "生产研发") +
+      footerLink("./scene-supply.html", "供应链运营") +
+      footerLink("./scene-sales.html", "营销增长") +
+      "</div></div>" +
+      '<div><div class="site-footer__title">技术</div><div class="site-footer__links">' +
+      footerLink("./technology.html", "技术架构") +
       "</div></div>" +
       '<div><div class="site-footer__title">公司</div><div class="site-footer__links">' +
       footerLink("./about.html", "关于衔远") +
-      footerLink("./technology.html", "技术") +
       footerLink("./ecosystem.html", "生态") +
       "</div></div>" +
       '<div><div class="site-footer__title">联系</div><div class="site-footer__contact">' +
@@ -125,33 +125,94 @@
       '<div class="site-cta__inner">' +
       '<div class="site-cta__header">' +
       '<div class="site-cta__headline">' +
-      '<span class="site-cta__kicker">开启跃迁</span>' +
+      '<span class="site-cta__kicker">联系我们 CONTACT FRONTIS</span>' +
       '<h2 id="' + labelId + '" class="site-cta__title">即刻开启智能跃迁</h2>' +
       '</div>' +
-      '<p class="site-cta__copy">从一个高价值业务场景开始，把 ME、WE、MA 带入真实组织现场，确认最先落地、可复用、可持续进化的 AI 原生路径。</p>' +
+      '<p class="site-cta__copy">申请产品体验，率先迈入AI原生时代</p>' +
       '</div>' +
       '<div class="site-cta__grid site-cta__grid--form">' +
       '<form class="site-cta__form" data-site-cta-form novalidate>' +
-      '<div class="site-cta__form-head"><strong>预约沟通</strong><span>我们会确认场景、试点路径与下一步安排。</span></div>' +
+      '<div class="site-cta__form-head"><strong>申请产品演示</strong><span>我们会确认场景、试点路径与下一步安排。</span></div>' +
       '<div class="site-cta__fields">' +
-      '<label><span>姓名</span><input name="name" autocomplete="name" placeholder="请输入姓名" required></label>' +
+      '<label><span>姓名</span><input name="name" autocomplete="name" placeholder="请输入您的姓名" required></label>' +
       '<label><span>公司</span><input name="company" autocomplete="organization" placeholder="请输入公司名称" required></label>' +
       '<label><span>手机</span><input name="phone" autocomplete="tel" inputmode="tel" placeholder="请输入手机号码" required></label>' +
       '<label><span>邮箱</span><input name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" placeholder="请输入邮箱地址"></label>' +
       '</div>' +
       '<fieldset class="site-cta__radios">' +
-      '<legend>优先沟通方向</legend>' +
-      '<label><input type="radio" name="interest" value="trial" checked><span>企业试用 / 产品演示</span></label>' +
-      '<label><input type="radio" name="interest" value="private"><span>私有化 / 行业场景</span></label>' +
-      '<label><input type="radio" name="interest" value="strategy"><span>战略诊断 / ROI 评估</span></label>' +
+      '<legend>我更感兴趣：</legend>' +
+      '<label><input type="radio" name="interest" value="horizon"><span>Frontis Horizon（企业级）</span></label>' +
+      '<label><input type="radio" name="interest" value="leadeep"><span>Leadeep AI（个人 / 老板）</span></label>' +
+      '<label><input type="radio" name="interest" value="ecosystem"><span>城市生态合作</span></label>' +
+      '<label><input type="radio" name="interest" value="other"><span>其他</span></label>' +
       '</fieldset>' +
-      '<label class="site-cta__message"><span>留言</span><textarea name="message" autocomplete="off" placeholder="可以描述行业、关键场景、当前 AI 试点阶段或希望优先解决的问题。"></textarea></label>' +
-      '<button class="site-cta__submit" type="submit">提交并预约沟通</button>' +
-      '<p class="site-cta__note">演示预约通常在 1 个工作日内完成，支持私有化部署方案评估。</p>' +
+      '<label class="site-cta__trap" aria-hidden="true" tabindex="-1"><span>Website</span><input name="website" autocomplete="off" tabindex="-1"></label>' +
+      '<label class="site-cta__message"><span>留言</span><textarea name="message" autocomplete="off" placeholder="请描述您的需求或问题（选填）"></textarea></label>' +
+      '<button class="site-cta__submit" type="submit">立即提交</button>' +
+      '<p class="site-cta__note" data-site-cta-status role="status" aria-live="polite">我们会在 1 个工作日内联系你，确认演示时间与试点路径。</p>' +
       '</form>' +
+      '<aside class="site-cta__contact" aria-label="联系我们">' +
+      '<div class="site-cta__contact-title">联系我们</div>' +
+      '<div class="site-cta__contact-item"><span>商务合作</span><a href="mailto:cooperation@frontis.cn">cooperation@frontis.cn</a></div>' +
+      '<div class="site-cta__contact-divider"></div>' +
+      '<div class="site-cta__contact-item"><span>市场合作</span><a href="mailto:marketing@frontis.cn">marketing@frontis.cn</a></div>' +
+      '<div class="site-cta__contact-divider"></div>' +
+      '<div class="site-cta__contact-item"><span>人才招聘</span><a href="mailto:hr@frontis.cn">hr@frontis.cn</a></div>' +
+      '</aside>' +
       '</div>' +
       '</div>' +
       '</section>';
+  }
+
+  function getCtaEndpoint() {
+    if (window.FRONTIS_CTA_ENDPOINT && typeof window.FRONTIS_CTA_ENDPOINT === "string") {
+      return window.FRONTIS_CTA_ENDPOINT.trim();
+    }
+
+    var endpointMeta = document.querySelector('meta[name="frontis-cta-endpoint"]');
+    if (endpointMeta && endpointMeta.content) return endpointMeta.content.trim();
+
+    if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+      return "/api/cta";
+    }
+
+    return "";
+  }
+
+  function setCtaStatus(form, type, message) {
+    var status = form.querySelector("[data-site-cta-status]");
+    if (!status) return;
+    status.textContent = message;
+    status.classList.remove("is-success", "is-error", "is-pending");
+    if (type) status.classList.add("is-" + type);
+  }
+
+  function normalizeCtaForm(form) {
+    var data = new FormData(form);
+    return {
+      name: (data.get("name") || "").toString().trim(),
+      company: (data.get("company") || "").toString().trim(),
+      phone: (data.get("phone") || "").toString().trim(),
+      email: (data.get("email") || "").toString().trim(),
+      interest: (data.get("interest") || "").toString().trim(),
+      message: (data.get("message") || "").toString().trim(),
+      website: (data.get("website") || "").toString().trim(),
+      sourcePage: window.location.href || pageHref,
+      pageTitle: document.title,
+      submittedAt: new Date().toISOString(),
+    };
+  }
+
+  function validateCtaPayload(payload) {
+    if (!payload.name || !payload.company || !payload.phone) {
+      return "请补充姓名、公司和手机号码。";
+    }
+
+    if (payload.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) {
+      return "请填写有效的邮箱地址，或暂时留空。";
+    }
+
+    return "";
   }
 
   var headerTarget = document.querySelector("[data-site-header]");
@@ -169,12 +230,56 @@
   });
 
   document.querySelectorAll("[data-site-cta-form]").forEach(function (form) {
-    form.addEventListener("submit", function (event) {
+    form.addEventListener("submit", async function (event) {
       event.preventDefault();
       var button = form.querySelector(".site-cta__submit");
       if (!button) return;
-      button.textContent = "已提交，我们会尽快联系你";
+
+      var originalText = button.getAttribute("data-original-text") || button.textContent;
+      button.setAttribute("data-original-text", originalText);
+
+      var payload = normalizeCtaForm(form);
+      var validationMessage = validateCtaPayload(payload);
+      if (validationMessage) {
+        setCtaStatus(form, "error", validationMessage);
+        return;
+      }
+
+      var endpoint = getCtaEndpoint();
+      if (!endpoint) {
+        setCtaStatus(form, "error", "当前为本地文件预览，尚未配置提交服务。请部署 API 后再测试提交。");
+        return;
+      }
+
+      button.textContent = "正在提交...";
       button.disabled = true;
+      setCtaStatus(form, "pending", "正在提交预约信息，请稍候。");
+
+      try {
+        var response = await fetch(endpoint, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            Accept: "application/json",
+          },
+          body: JSON.stringify(payload),
+        });
+        var result = await response.json().catch(function () {
+          return {};
+        });
+
+        if (!response.ok || result.ok === false) {
+          throw new Error(result.message || "提交失败，请稍后重试。");
+        }
+
+        form.reset();
+        button.textContent = "已提交，我们会尽快联系你";
+        setCtaStatus(form, "success", "预约信息已发送，我们会在 1 个工作日内联系你。");
+      } catch (error) {
+        button.textContent = originalText;
+        button.disabled = false;
+        setCtaStatus(form, "error", error && error.message ? error.message : "提交失败，请稍后重试。");
+      }
     });
   });
 
