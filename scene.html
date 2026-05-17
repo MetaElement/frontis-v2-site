@@ -382,6 +382,14 @@
       letter-spacing: 0;
     }
 
+    .hero__title-accent {
+      color: var(--threshold-cyan);
+    }
+
+    .hero__title-hot {
+      color: var(--energy-orange);
+    }
+
     .hero__subtitle {
       font-family: var(--font-cn);
       font-size: var(--type-body);
@@ -756,19 +764,6 @@
       overflow: hidden;
     }
 
-    .scene-visual--stack .scene-visual-stack::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      right: 0;
-      top: 52%;
-      height: 2px;
-      background: var(--threshold-cyan);
-      z-index: 3;
-      opacity: 0.9;
-      pointer-events: none;
-    }
-
     .scene-visual--stack img {
       display: block;
       width: 100%;
@@ -1110,11 +1105,6 @@
         height: 430px;
       }
 
-      .scene-visual--stack .scene-visual-stack::before {
-        top: 52%;
-        bottom: auto;
-      }
-
       .scene-visual-single .scene-visual-main {
         width: 92%;
         height: 92%;
@@ -1181,7 +1171,7 @@
       .footer__bottom { flex-direction: column; gap: 8px; text-align: center; }
     }
   </style>
-  <link rel="stylesheet" href="./components/site-shell.css" />
+  <link rel="stylesheet" href="./components/site-shell.css?v=20260517-mobile-menu" />
   <link rel="stylesheet" href="./components/frontis-page-normalize.css" />
 </head>
 <body class="page-scene">
@@ -1204,7 +1194,7 @@
       FRONTIS · SCENE OVERVIEW
     </p>
     <h1 class="hero__title animate-in delay-1" id="hero-heading">
-      你的业务跑在哪里<br />AI 专家就在哪里
+      能想象即将到来的景象吗？<br />你的<span class="hero__title-accent">数字分身</span>正在带领<span class="hero__title-accent">AI专家团</span><span class="hero__title-hot">7x24</span>小时持续工作中
     </h1>
   </div>
 
@@ -1600,7 +1590,7 @@
      Footer（深色背景）
 ============================================================ -->
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260517-publish-final"></script>
+<script src="./components/site-shell.js?v=20260517-mobile-menu"></script>
 
 
 <!-- ============================================================

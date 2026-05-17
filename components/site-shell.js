@@ -67,6 +67,16 @@
       navItems.map(renderNavItem).join("") +
       "</div>" +
       '<a class="site-header__cta" href="' + ctaHref() + '" data-leap-cta data-hover="即刻体验"><span class="leap-cta__label">开启跃迁</span></a>' +
+      '<button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-mobile-menu">' +
+      '<span class="site-header__toggle-text">目录</span>' +
+      '<span class="site-header__toggle-icon" aria-hidden="true"><span></span><span></span></span>' +
+      "</button>" +
+      "</div>" +
+      '<div id="site-mobile-menu" class="site-header__mobile-panel" hidden>' +
+      '<div class="site-header__mobile-menu" role="navigation" aria-label="移动端主导航">' +
+      navItems.map(renderNavItem).join("") +
+      '<a class="site-header__mobile-cta" href="' + ctaHref() + '">开启跃迁</a>' +
+      "</div>" +
       "</div>" +
       "</header>";
   }
@@ -213,6 +223,43 @@
   var headerTarget = document.querySelector("[data-site-header]");
   if (headerTarget) {
     headerTarget.outerHTML = renderHeader();
+  }
+
+  var header = document.querySelector(".site-header");
+  var menuToggle = document.querySelector(".site-header__toggle");
+  var mobilePanel = document.querySelector(".site-header__mobile-panel");
+
+  function setMobileMenu(open) {
+    if (!header || !menuToggle || !mobilePanel) return;
+    header.classList.toggle("is-menu-open", open);
+    menuToggle.setAttribute("aria-expanded", open ? "true" : "false");
+    mobilePanel.hidden = !open;
+  }
+
+  if (menuToggle && mobilePanel) {
+    menuToggle.addEventListener("click", function () {
+      setMobileMenu(menuToggle.getAttribute("aria-expanded") !== "true");
+    });
+
+    mobilePanel.querySelectorAll("a").forEach(function (link) {
+      link.addEventListener("click", function () {
+        setMobileMenu(false);
+      });
+    });
+
+    document.addEventListener("keydown", function (event) {
+      if (event.key === "Escape") setMobileMenu(false);
+    });
+
+    document.addEventListener("click", function (event) {
+      if (!header || !header.classList.contains("is-menu-open")) return;
+      if (header.contains(event.target)) return;
+      setMobileMenu(false);
+    });
+
+    window.addEventListener("resize", function () {
+      if (window.innerWidth > 768) setMobileMenu(false);
+    });
   }
 
   var footerTarget = document.querySelector("[data-site-footer]");
