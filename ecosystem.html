@@ -145,18 +145,18 @@
     .flow-step-desc { font-size: 12px; color: rgba(255,255,255,0.4); line-height: 1.7; }
 
     /* Cases */
-    #cases { background: #050607; padding: 96px 80px; }
-    #cases h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); margin-bottom: 8px; }
-    #cases .section-sub { font-size: 16px; color: rgba(255,255,255,0.5); margin-bottom: 56px; }
-    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.06); }
-    .case-card { background: #050607; padding: 36px 32px; transition: background 200ms; }
-    .case-card:hover { background: rgba(0,193,212,0.03); }
+    #cases { background: var(--pure-white); padding: 96px 80px; }
+    #cases h2 { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--quantum-black); margin-bottom: 8px; }
+    #cases .section-sub { font-size: 16px; color: rgba(0,0,0,0.48); margin-bottom: 56px; }
+    .cases-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: rgba(0,0,0,0.12); border: 1px solid rgba(0,0,0,0.12); }
+    .case-card { background: var(--pure-white); padding: 36px 32px; transition: background 200ms; }
+    .case-card:hover { background: rgba(0,193,212,0.04); }
     .case-city { font-family: var(--font-mono); font-size: 11px; color: var(--threshold-cyan); letter-spacing: 2px; margin-bottom: 20px; text-transform: uppercase; }
-    .case-metric { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--pure-white); line-height: 1; margin-bottom: 6px; }
+    .case-metric { font-family: var(--font-en); font-size: 40px; font-weight: 700; color: var(--quantum-black); line-height: 1; margin-bottom: 6px; }
     .case-metric span { font-size: 18px; color: var(--threshold-cyan); }
-    .case-metric-label { font-size: 13px; color: rgba(255,255,255,0.5); margin-bottom: 20px; }
-    .case-divider { height: 1px; background: rgba(255,255,255,0.06); margin-bottom: 20px; }
-    .case-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.8; }
+    .case-metric-label { font-size: 13px; color: rgba(0,0,0,0.5); margin-bottom: 20px; }
+    .case-divider { height: 1px; background: rgba(0,0,0,0.12); margin-bottom: 20px; }
+    .case-desc { font-size: 14px; color: rgba(0,0,0,0.62); line-height: 1.8; }
 
     /* Apply */
     #apply { background: var(--pure-white); padding: 96px 80px; }
@@ -215,6 +215,31 @@
   </style>
   <link rel="stylesheet" href="./components/site-shell.css" />
   <link rel="stylesheet" href="./components/frontis-page-normalize.css" />
+  <style>
+    .page-ecosystem #hero {
+      justify-content: flex-start;
+    }
+
+    .page-ecosystem #hero > .hero-content {
+      width: 100% !important;
+      max-width: none !important;
+      margin-left: 0 !important;
+      margin-right: 0 !important;
+      text-align: left;
+    }
+
+    .page-ecosystem #hero h1,
+    .page-ecosystem #hero .subtitle,
+    .page-ecosystem #hero .hero-checklist {
+      max-width: 900px;
+    }
+
+    @media (min-width: 1201px) {
+      .page-ecosystem #hero > .hero-content {
+        padding-right: 420px;
+      }
+    }
+  </style>
 </head>
 <body class="page-ecosystem">
 
@@ -328,7 +353,39 @@
   </div>
 </section>
 
-<!-- Screen 4 · 合作流程 -->
+<!-- Screen 4 · 合作案例 -->
+<section id="cases">
+  <div class="animate-in">
+    <div class="section-label">PARTNER CASES</div>
+    <h2>携手衔远 共筑 AI 未来</h2>
+    <p class="section-sub">真实伙伴，真实成果</p>
+  </div>
+  <div class="cases-grid animate-in" style="transition-delay:80ms;">
+    <div class="case-card">
+      <div class="case-city">HANGZHOU · 杭州</div>
+      <div class="case-metric">500<span>万</span></div>
+      <div class="case-metric-label">合作伙伴：某系统集成商</div>
+      <div class="case-divider"></div>
+      <div class="case-desc"><strong>3个月签约12家客户，合同超500万</strong></div>
+    </div>
+    <div class="case-card">
+      <div class="case-city">CHENGDU · 成都</div>
+      <div class="case-metric">2<span>× 营收</span></div>
+      <div class="case-metric-label">合作伙伴：某传统企业主</div>
+      <div class="case-divider"></div>
+      <div class="case-desc">原有业务成功转型AI，<strong>半年内实现营收翻倍</strong></div>
+    </div>
+    <div class="case-card">
+      <div class="case-city">SHENZHEN · 深圳</div>
+      <div class="case-metric">30<span>+</span></div>
+      <div class="case-metric-label">合作伙伴：某创业团队</div>
+      <div class="case-divider"></div>
+      <div class="case-desc"><strong>专注金融AI解决方案，服务客户30+</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- Screen 5 · 合作流程 -->
 <section id="flow">
   <div class="animate-in">
     <div class="section-label">PARTNERSHIP PROCESS</div>
@@ -374,43 +431,11 @@
   </div>
 </section>
 
-<!-- Screen 5 · 合作案例 -->
-<section id="cases">
-  <div class="animate-in">
-    <div class="section-label">PARTNER CASES</div>
-    <h2>携手衔远 共筑 AI 未来</h2>
-    <p class="section-sub">真实伙伴，真实成果</p>
-  </div>
-  <div class="cases-grid animate-in" style="transition-delay:80ms;">
-    <div class="case-card">
-      <div class="case-city">HANGZHOU · 杭州</div>
-      <div class="case-metric">500<span>万</span></div>
-      <div class="case-metric-label">合作伙伴：某系统集成商</div>
-      <div class="case-divider"></div>
-      <div class="case-desc"><strong>3个月签约12家客户，合同超500万</strong></div>
-    </div>
-    <div class="case-card">
-      <div class="case-city">CHENGDU · 成都</div>
-      <div class="case-metric">2<span>× 营收</span></div>
-      <div class="case-metric-label">合作伙伴：某传统企业主</div>
-      <div class="case-divider"></div>
-      <div class="case-desc">原有业务成功转型AI，<strong>半年内实现营收翻倍</strong></div>
-    </div>
-    <div class="case-card">
-      <div class="case-city">SHENZHEN · 深圳</div>
-      <div class="case-metric">30<span>+</span></div>
-      <div class="case-metric-label">合作伙伴：某创业团队</div>
-      <div class="case-divider"></div>
-      <div class="case-desc"><strong>专注金融AI解决方案，服务客户30+</strong></div>
-    </div>
-  </div>
-</section>
-
 <!-- Screen 6 · 申请表单 -->
 <section id="apply" data-site-cta></section>
 
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260516-cta-copy"></script>
+<script src="./components/site-shell.js?v=20260517-footer-tech-subgroup"></script>
 
 <script>
 const observer = new IntersectionObserver((entries) => {

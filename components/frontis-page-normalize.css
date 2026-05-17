@@ -18,6 +18,7 @@
   --fx-gutter: clamp(24px, 4vw, 64px);
   --fx-section-y: clamp(88px, 8vw, 120px);
   --fx-section-y-tight: clamp(72px, 6vw, 96px);
+  --fx-section-y-airy: clamp(104px, 9vw, 144px);
   --fx-grid-gap: clamp(44px, 5vw, 80px);
   --fx-hero-title: clamp(44px, 5.6vw, 76px);
   --fx-section-title: clamp(32px, 3.6vw, 52px);
@@ -227,9 +228,89 @@ section {
   max-width: var(--fx-page-max) !important;
 }
 
+/* Page rhythm: avoid rapid black/white flips by giving narrative sections
+   distinct vertical weights instead of one uniform section height. */
+.page-horizon :is(#layers, #me-detail, #we-detail, #ma-detail, #flywheel, #versions) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+  padding-top: var(--fx-section-y-airy) !important;
+  padding-bottom: var(--fx-section-y-airy) !important;
+}
+
+.page-horizon #layers {
+  min-height: clamp(720px, 76svh, 860px) !important;
+}
+
+.page-horizon #me-detail {
+  min-height: clamp(800px, 84svh, 940px) !important;
+}
+
+.page-horizon #we-detail {
+  min-height: clamp(900px, 94svh, 1040px) !important;
+}
+
+.page-horizon #ma-detail {
+  min-height: clamp(840px, 88svh, 980px) !important;
+}
+
+.page-horizon #flywheel {
+  min-height: clamp(820px, 86svh, 960px) !important;
+}
+
+.page-horizon #versions {
+  min-height: clamp(760px, 80svh, 900px) !important;
+}
+
+.page-technology :is(#chain, #why, #fusion, #evolve, #windtunnel) {
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
+.page-technology #chain {
+  min-height: clamp(900px, 94svh, 1040px) !important;
+}
+
+.page-technology #chain > .animate-in,
+.page-technology #chain > .chain-headline,
+.page-technology #chain > .chain-sub {
+  align-self: flex-start !important;
+  margin-left: 0 !important;
+  margin-right: auto !important;
+}
+
+.page-technology #chain .chain-sub {
+  text-align: left !important;
+}
+
+.page-technology #why {
+  min-height: clamp(740px, 76svh, 860px) !important;
+}
+
+.page-technology #fusion {
+  min-height: clamp(780px, 82svh, 920px) !important;
+}
+
+.page-technology #evolve {
+  min-height: clamp(980px, 104svh, 1120px) !important;
+}
+
+.page-technology #windtunnel {
+  min-height: clamp(760px, 78svh, 880px) !important;
+}
+
+.page-technology #cta {
+  min-height: clamp(520px, 58svh, 640px) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: center !important;
+}
+
 @media (max-width: 1024px) {
   :root {
     --fx-section-y: 88px;
+    --fx-section-y-airy: 96px;
     --fx-grid-gap: 48px;
   }
 
@@ -255,6 +336,12 @@ section {
   .page-about #brand,
   .page-scene #hero,
   .page-technology #hero {
+    min-height: auto !important;
+  }
+
+  .page-horizon :is(#layers, #me-detail, #we-detail, #ma-detail, #flywheel, #versions),
+  .page-technology :is(#chain, #why, #fusion, #evolve, #windtunnel, #cta) {
+    display: block !important;
     min-height: auto !important;
   }
 

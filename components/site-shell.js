@@ -48,7 +48,7 @@
     if (page === "horizon" || page === "technology") return "#cta";
     if (page === "scene") return "#cta-section";
     if (page === "ecosystem") return "#apply";
-    if (page === "about") return "#contact";
+    if (page === "about") return "./index.html#contact";
     if (page === "scene-strategy") return "./scene-strategy.html#contact";
     return "./index.html#contact";
   }
@@ -89,16 +89,16 @@
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
       footerLink("./horizon.html", "衔远大观") +
-      "</div></div>" +
+      "</div>" +
+      '<div class="site-footer__subgroup"><div class="site-footer__title">技术</div><div class="site-footer__links">' +
+      footerLink("./technology.html", "技术架构") +
+      "</div></div></div>" +
       '<div><div class="site-footer__title">场景</div><div class="site-footer__links">' +
       footerLink("./scene.html", "场景总览") +
       footerLink("./scene-strategy.html", "战略管理") +
       footerLink("./scene-research.html", "生产研发") +
       footerLink("./scene-supply.html", "供应链运营") +
       footerLink("./scene-sales.html", "营销增长") +
-      "</div></div>" +
-      '<div><div class="site-footer__title">技术</div><div class="site-footer__links">' +
-      footerLink("./technology.html", "技术架构") +
       "</div></div>" +
       '<div><div class="site-footer__title">公司</div><div class="site-footer__links">' +
       footerLink("./about.html", "关于衔远") +

@@ -148,7 +148,7 @@ footer.site-footer {
 
 .site-footer__grid {
   display: grid;
-  grid-template-columns: 2fr 0.9fr 1.25fr 0.9fr 0.9fr 1.1fr;
+  grid-template-columns: 2fr 1fr 1.35fr 1fr 1.1fr;
   gap: 36px;
   margin-bottom: 48px;
 }
@@ -180,6 +180,10 @@ footer.site-footer {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
+
+.site-footer__subgroup {
+  margin-top: 28px;
 }
 
 .site-footer__links a,

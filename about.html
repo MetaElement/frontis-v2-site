@@ -31,9 +31,9 @@ body {
   overflow-x: hidden;
 }
 @keyframes threshold-pulse {
-  0%   { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
-  50%  { box-shadow: 0 0 16px 4px rgba(0,193,212,0.7); }
-  100% { box-shadow: 0 0 8px 2px rgba(0,193,212,0.4); }
+  0%   { transform: scaleX(0.72); opacity: 0.55; }
+  50%  { transform: scaleX(1); opacity: 1; }
+  100% { transform: scaleX(0.72); opacity: 0.55; }
 }
 
 /* ── 动效升级：轨道归位感 ── */
@@ -110,6 +110,7 @@ nav {
 .threshold-line {
   width:48px; height:2px; background:var(--threshold-cyan);
   animation: threshold-pulse 2.5s ease-in-out infinite;
+  transform-origin: left center;
   margin: 24px 0;
 }
 
@@ -130,38 +131,254 @@ section { padding: 96px 64px; }
 }
 .btn-primary:hover { background:var(--threshold-cyan); color:var(--quantum-black); border-color:var(--threshold-cyan); }
 
-/* ── Screen 1 · 跃迁首屏（两栏布局）── */
+/* ── Screen 1 · 公司理念 / Brand House ── */
 #brand {
-  padding-top: 140px;
-  padding-bottom: 96px;
-  padding-left: 64px;
-  padding-right: 64px;
+  padding: 132px 64px 88px;
   background: var(--pure-white);
-  display: grid;
-  grid-template-columns: 60fr 40fr;
-  gap: 80px;
-  align-items: center;
+  display: block;
   min-height: 100vh;
 }
-.brand-left {}
+.brand-left { max-width: 780px; }
 .brand-right {
   display: flex;
   align-items: center;
   justify-content: center;
+  min-width: 0;
 }
 #brand h1 {
-  font-family:var(--font-en); font-size:56px; font-weight:700;
-  color:var(--quantum-black); line-height:1.1; margin-bottom:8px;
+  font-family:var(--font-en); font-size:clamp(56px, 7vw, 112px); font-weight:700;
+  color:var(--quantum-black); line-height:1.02; margin-bottom:16px;
 }
 #brand .sub-h1 {
-  font-size:22px; color:var(--level-gray); font-weight:400; margin-bottom:40px;
+  font-size:clamp(22px, 2.4vw, 34px);
+  color:var(--level-gray);
+  font-weight:600;
+  line-height:1.35;
+  margin-bottom:36px;
 }
 .guide-block {
-  display:flex; gap:24px; max-width:720px; margin-top:32px;
+  display:flex; gap:24px; max-width:740px; margin-top:28px;
 }
 .guide-line { width:2px; background:var(--threshold-cyan); flex-shrink:0; }
-.guide-text { font-size:17px; color:var(--level-gray); line-height:1.9; }
+.guide-text { font-size:16px; color:var(--level-gray); line-height:1.9; }
+.guide-text p + p { margin-top:14px; }
 .guide-text em { color:var(--quantum-black); font-style:normal; font-weight:600; }
+.brand-proof-row {
+  margin-top: 36px;
+  display: grid;
+  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
+  gap: 40px;
+  align-items: stretch;
+  max-width: 1160px;
+}
+.brand-house-grid {
+  margin-top: 0;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  grid-template-rows: repeat(2, minmax(0, 1fr));
+  border: 1px solid #DDE2E6;
+  max-width: none;
+}
+.brand-house-item {
+  min-height: 104px;
+  padding: 20px 22px;
+  border-right: 1px solid #DDE2E6;
+  border-bottom: 1px solid #DDE2E6;
+}
+.brand-house-item:nth-child(2n) { border-right: none; }
+.brand-house-item:nth-last-child(-n + 2) { border-bottom: none; }
+.brand-house-key {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--threshold-cyan);
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.brand-house-value {
+  display: block;
+  font-size: 17px;
+  line-height: 1.55;
+  font-weight: 700;
+  color: var(--quantum-black);
+}
+.brand-threshold-card {
+  position: relative;
+  width: 100%;
+  max-width: none;
+  min-height: 420px;
+  border: 1px solid #DDE2E6;
+  background: var(--pure-white);
+  overflow: hidden;
+  padding: 34px;
+}
+.brand-threshold-card::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  height: 2px;
+  background: var(--threshold-cyan);
+  z-index: 2;
+}
+.brand-threshold-card::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 50%;
+  background:
+    repeating-linear-gradient(
+      to bottom,
+      rgba(61,65,69,0.14) 0,
+      rgba(61,65,69,0.14) 1px,
+      transparent 1px,
+      transparent 22px
+    );
+  opacity: 0.8;
+}
+.threshold-stage {
+  position: absolute;
+  left: 34px;
+  right: 34px;
+  z-index: 3;
+  padding-left: 20px;
+  border-left: 2px solid var(--threshold-cyan);
+}
+.threshold-stage--after { top: 44px; }
+.threshold-stage--before {
+  bottom: 44px;
+  border-left-color: #3D4145;
+}
+.stage-eyebrow {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: #8A8F96;
+  text-transform: uppercase;
+  margin-bottom: 12px;
+}
+.threshold-stage--after .stage-eyebrow { color: var(--threshold-cyan); }
+.stage-title {
+  display: block;
+  font-size: clamp(28px, 3.2vw, 42px);
+  line-height: 1.08;
+  font-weight: 800;
+  color: var(--quantum-black);
+  margin-bottom: 12px;
+}
+.stage-copy {
+  max-width: 330px;
+  font-size: 14px;
+  line-height: 1.8;
+  color: var(--level-gray);
+}
+.brand-edge-label {
+  position: absolute;
+  left: 34px;
+  top: calc(50% - 20px);
+  z-index: 4;
+  display: grid;
+  grid-template-columns: 10px auto;
+  column-gap: 12px;
+  align-items: center;
+  background: var(--pure-white);
+  padding: 6px 14px 6px 0;
+}
+.brand-edge-label i {
+  width: 10px;
+  height: 10px;
+  background: var(--energy-orange);
+}
+.brand-edge-label span {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--quantum-black);
+  text-transform: uppercase;
+}
+.brand-edge-label strong {
+  grid-column: 2;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--level-gray);
+  font-weight: 600;
+}
+.brand-signal {
+  position: absolute;
+  right: 34px;
+  top: calc(50% + 38px);
+  z-index: 3;
+  width: 156px;
+  padding: 18px 18px 20px;
+  background: var(--quantum-black);
+  color: var(--pure-white);
+}
+.brand-signal span {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--threshold-cyan);
+  text-transform: uppercase;
+  margin-bottom: 10px;
+}
+.brand-signal strong {
+  display: block;
+  font-size: 21px;
+  line-height: 1.25;
+  font-weight: 800;
+}
+
+@media (max-width: 980px) {
+  #brand {
+    padding: 112px 40px 76px;
+  }
+  .brand-left { max-width: none; }
+  .brand-proof-row {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+  .brand-threshold-card {
+    max-width: none;
+    min-height: 440px;
+  }
+}
+
+@media (max-width: 760px) {
+  #brand {
+    padding: 96px 24px 64px;
+  }
+  #brand h1 { font-size: 52px; }
+  #brand .sub-h1 { font-size: 22px; }
+  .guide-block { gap: 16px; }
+  .guide-text { font-size: 15px; }
+  .brand-house-grid { grid-template-columns: 1fr; }
+  .brand-house-item,
+  .brand-house-item:nth-child(2n),
+  .brand-house-item:nth-last-child(-n + 2) {
+    border-right: none;
+    border-bottom: 1px solid #DDE2E6;
+  }
+  .brand-house-item:last-child { border-bottom: none; }
+  .brand-threshold-card {
+    min-height: 390px;
+    padding: 24px;
+  }
+  .threshold-stage {
+    left: 24px;
+    right: 24px;
+  }
+  .brand-edge-label { left: 24px; }
+  .brand-signal {
+    right: 24px;
+    width: 136px;
+  }
+}
 
 /* ── Screen 2 · 创始人 ── */
 #team { background:var(--quantum-black); padding:96px 64px; }
@@ -171,30 +388,49 @@ section { padding: 96px 64px; }
 }
 .founder-layout {
   display: grid;
-  grid-template-columns: 280px 1fr;
-  gap: 80px;
-  align-items: start;
-  max-width: 960px;
-}
-.founder-photo .img-placeholder {
-  width: 240px; height: 300px;
-  background: #0D0D0D;
-  border: 1px solid #00C1D4;
-  display: flex; align-items: center; justify-content: center;
-  color: #8A8F96; font-size: 11px; font-family: sans-serif;
-  text-align: center; padding: 16px; line-height: 1.5;
+  grid-template-columns: minmax(0, 0.95fr) minmax(380px, 1.05fr);
+  gap: 64px;
+  align-items: center;
+  max-width: 1120px;
 }
 .founder-name {
   font-family: var(--font-en);
   font-size: 48px; font-weight: 700;
   color: var(--pure-white); margin-bottom: 4px;
 }
-.founder-role { font-size: 16px; color: var(--threshold-cyan); margin-bottom: 24px; }
+.founder-role {
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--threshold-cyan);
+  margin-bottom: 24px;
+}
 .threshold-line-small { width: 48px; height: 2px; background: var(--threshold-cyan); margin-bottom: 24px; }
 .founder-desc { font-size: 16px; color: #C8CACF; line-height: 1.9; margin-bottom: 40px; }
-.team-bg { border-left: 2px solid #1A1A1A; padding-left: 20px; }
-.team-bg-label { font-family: var(--font-en); font-size: 11px; letter-spacing: 2px; color: #555; text-transform: uppercase; display: block; margin-bottom: 8px; }
-.team-bg-text { font-size: 14px; color: #8A8F96; line-height: 1.7; }
+.founder-figure {
+  justify-self: end;
+  width: 100%;
+  max-width: 620px;
+}
+.founder-figure-img {
+  display: block;
+  width: 100%;
+  height: auto;
+  background: #050607;
+}
+
+@media (max-width: 760px) {
+  #team {
+    padding: 72px 24px;
+  }
+  .founder-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .founder-figure {
+    justify-self: stretch;
+    max-width: none;
+  }
+}
 
 /* ── 服务客户 logo墙 ── */
 #clients { background: var(--pure-white); padding: 96px 0; overflow: hidden; }
@@ -227,23 +463,35 @@ section { padding: 96px 64px; }
 }
 .logo-track.row1 { animation: scroll-left  32s linear infinite; }
 .logo-track.row2 { animation: scroll-right 28s linear infinite; }
-.logo-track.row3 { animation: scroll-left  36s linear infinite; }
 @keyframes scroll-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
 @keyframes scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .logo-track-wrap:hover .logo-track { animation-play-state: paused; }
 .logo-cell {
-  width: 180px; height: 80px;
+  width: 220px; height: 92px;
   display: flex; align-items: center; justify-content: center;
   border: 1px solid #E8EAED;
   margin: 8px;
   flex-shrink: 0;
   background: var(--pure-white);
   transition: border-color 200ms;
+  padding: 20px 28px;
+  overflow: hidden;
 }
 .logo-cell:hover { border-color: var(--threshold-cyan); }
-.logo-cell span {
-  font-family: var(--font-en); font-size: 13px; font-weight: 700;
-  color: #B0B5BC; letter-spacing: 1px; text-transform: uppercase;
+.logo-cell img {
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 132px;
+  max-height: 38px;
+  object-fit: contain;
+  opacity: 0.72;
+  filter: grayscale(1);
+  transition: opacity 200ms, filter 200ms;
+}
+.logo-cell:hover img {
+  opacity: 0.94;
+  filter: grayscale(0);
 }
 
 /* ── 加入我们 ── */
@@ -288,12 +536,12 @@ section { padding: 96px 64px; }
 }
 /* 企业文化横条 */
 .join-culture {
-  display: flex; gap: 0; margin-bottom: 64px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 64px;
   border-top: 1px solid rgba(255,255,255,0.08);
   border-bottom: 1px solid rgba(255,255,255,0.08);
 }
 .culture-item {
-  flex: 1; padding: 28px 32px;
+  padding: 28px 32px;
   border-right: 1px solid rgba(255,255,255,0.08);
 }
 .culture-item:last-child { border-right: none; }
@@ -304,6 +552,123 @@ section { padding: 96px 64px; }
 }
 .culture-zh { font-size: 18px; font-weight: 700; color: var(--pure-white); margin-bottom: 6px; }
 .culture-desc { font-size: 13px; color: #666; line-height: 1.7; }
+/* π 型人才 */
+.pi-talent {
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(360px, 1fr);
+  gap: 64px;
+  align-items: start;
+  padding: 56px 0 64px;
+  margin-bottom: 64px;
+  border-top: 1px solid rgba(255,255,255,0.08);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+}
+.pi-talent-label {
+  font-family: var(--font-en); font-size: 11px; font-weight: 700;
+  letter-spacing: 2.5px; color: var(--threshold-cyan); text-transform: uppercase;
+  margin-bottom: 14px;
+}
+.pi-talent-title {
+  font-size: 36px; font-weight: 800; color: var(--pure-white);
+  letter-spacing: -0.5px; margin-bottom: 18px;
+}
+.pi-talent-desc,
+.pi-talent-tagline {
+  font-size: 14px; color: #8A8F96; line-height: 1.9; max-width: 560px;
+}
+.pi-talent-tagline {
+  color: var(--pure-white);
+  margin-top: 20px;
+  padding-left: 18px;
+  border-left: 2px solid var(--threshold-cyan);
+}
+.pi-diagram {
+  min-height: 360px;
+  border: 1px solid rgba(255,255,255,0.14);
+  background: #050607;
+  padding: 28px;
+  position: relative;
+  overflow: hidden;
+}
+.pi-diagram::before,
+.pi-diagram::after {
+  content: '';
+  position: absolute;
+  left: 28px; right: 28px;
+  height: 1px;
+  background: rgba(255,255,255,0.08);
+}
+.pi-diagram::before { top: 92px; }
+.pi-diagram::after { bottom: 96px; }
+.pi-diagram-kicker {
+  font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
+  color: var(--threshold-cyan); text-transform: uppercase;
+}
+.pi-diagram-stage {
+  position: relative;
+  height: 210px;
+  margin: 28px 0 22px;
+}
+.pi-beam {
+  position: absolute;
+  left: 12%;
+  right: 12%;
+  top: 8px;
+  height: 34px;
+  border: 1px solid var(--threshold-cyan);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--threshold-cyan);
+  font-size: 12px; font-weight: 700; letter-spacing: 1px;
+}
+.pi-leg {
+  position: absolute;
+  top: 58px;
+  bottom: 0;
+  width: 26%;
+  border: 1px solid rgba(255,255,255,0.16);
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 18px;
+}
+.pi-leg-left { left: 17%; }
+.pi-leg-right { right: 17%; }
+.pi-leg-label {
+  font-size: 22px; font-weight: 800; color: var(--pure-white);
+  margin-bottom: 8px;
+}
+.pi-leg-sub {
+  font-family: var(--font-mono); font-size: 10px; line-height: 1.8;
+  color: #7B8086; text-transform: uppercase;
+}
+.pi-core {
+  position: absolute;
+  left: 50%; top: 52%;
+  transform: translate(-50%, -50%);
+  width: 82px; height: 82px;
+  border: 1px solid rgba(0,193,212,0.55);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--threshold-cyan);
+  font-family: var(--font-en); font-size: 56px; font-weight: 800;
+  background: #050607;
+}
+.pi-diagram-bottom {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.pi-diagram-bottom span {
+  padding: 14px 12px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  font-size: 12px; color: #AEB4BA; text-align: center;
+}
+.pi-diagram-bottom span:last-child { border-right: none; }
+.pi-diagram-caption {
+  margin-top: 18px;
+  font-family: var(--font-mono); font-size: 11px; letter-spacing: 1.5px;
+  color: #7B8086; text-transform: uppercase;
+}
 /* 左右双栏 */
 .join-two-col {
   display: grid; grid-template-columns: 1fr 1fr; gap: 0;
@@ -325,12 +690,31 @@ section { padding: 96px 64px; }
 .positions-list { display: flex; flex-direction: column; }
 .position-item {
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  padding: 18px 0;
-  cursor: pointer;
+  padding: 0;
   transition: border-bottom-color 200ms;
 }
 .position-item:first-child { border-top: 1px solid rgba(255,255,255,0.06); }
 .position-item:hover { border-bottom-color: var(--threshold-cyan); }
+.position-item[open] { border-bottom-color: rgba(0,193,212,0.45); }
+.position-item summary {
+  display: block;
+  list-style: none;
+  cursor: pointer;
+  padding: 18px 0;
+  padding-right: 28px;
+  position: relative;
+}
+.position-item summary::-webkit-details-marker { display: none; }
+.position-item summary::after {
+  content: '+';
+  position: absolute;
+  right: 0;
+  top: 18px;
+  font-family: var(--font-mono);
+  font-size: 16px;
+  color: var(--threshold-cyan);
+}
+.position-item[open] summary::after { content: '-'; }
 .pos-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; }
 .pos-title { font-size: 15px; font-weight: 700; color: var(--pure-white); }
 .pos-meta { font-size: 11px; color: #555; font-family: var(--font-mono); white-space: nowrap; padding-top: 2px; }
@@ -339,6 +723,47 @@ section { padding: 96px 64px; }
   color: var(--threshold-cyan); border: 1px solid rgba(0,193,212,0.4);
   padding: 2px 8px; margin-top: 8px; letter-spacing: 0.5px;
 }
+.pos-detail {
+  padding: 0 0 24px;
+  color: #8A8F96;
+}
+.pos-detail-section + .pos-detail-section { margin-top: 24px; }
+.pos-lead {
+  font-size: 14px; font-weight: 700; color: var(--pure-white);
+  margin-bottom: 10px;
+}
+.pos-intro {
+  font-size: 13px; line-height: 1.8; color: #8A8F96; margin: 0 0 12px;
+}
+.pos-subhead {
+  font-family: var(--font-en); font-size: 11px; font-weight: 700;
+  letter-spacing: 1.8px; color: var(--threshold-cyan); text-transform: uppercase;
+  margin: 18px 0 10px;
+}
+.pos-bullets {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: grid;
+  gap: 10px;
+}
+.pos-bullets li {
+  position: relative;
+  padding-left: 14px;
+  font-size: 12px;
+  line-height: 1.75;
+  color: #777;
+}
+.pos-bullets li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0.78em;
+  width: 4px;
+  height: 4px;
+  background: var(--threshold-cyan);
+}
+.pos-bullets strong { color: #DDE2E6; font-weight: 700; }
 .join-cta-row { margin-top: 32px; }
 .join-cta-row a {
   display: inline-flex; align-items: center; justify-content: center;
@@ -358,22 +783,69 @@ section { padding: 96px 64px; }
   transition: border-color 200ms;
 }
 .benefit-card:hover { border-color: var(--threshold-cyan); }
-.benefit-img-placeholder {
-  width: 100%; height: 100px;
-  background: rgba(255,255,255,0.04);
+.benefit-icon {
+  height: 86px;
   border-bottom: 1px solid rgba(255,255,255,0.06);
-  display: flex; flex-direction: column;
-  align-items: center; justify-content: center;
-  gap: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
-.benefit-img-placeholder .ph-icon { font-size: 20px; color: #333; }
-.benefit-img-placeholder .ph-label {
-  font-size: 10px; font-family: var(--font-mono);
-  color: #444; letter-spacing: 0.5px; text-align: center; line-height: 1.5; padding: 0 8px;
+.benefit-icon svg {
+  width: 34px;
+  height: 34px;
+  stroke: var(--threshold-cyan);
+  fill: none;
+  stroke-width: 1.5;
+  stroke-linecap: square;
+  stroke-linejoin: miter;
 }
 .benefit-info { padding: 14px 16px; }
 .benefit-name { font-size: 14px; font-weight: 700; color: var(--pure-white); margin-bottom: 4px; }
 .benefit-sub { font-size: 12px; color: #666; line-height: 1.6; }
+
+@media (max-width: 980px) {
+  .join-culture,
+  .pi-talent,
+  .join-two-col {
+    grid-template-columns: 1fr;
+  }
+  .culture-item,
+  .join-col-left {
+    border-right: none;
+  }
+  .culture-item {
+    border-bottom: 1px solid rgba(255,255,255,0.08);
+  }
+  .culture-item:last-child { border-bottom: none; }
+  .pi-talent { gap: 36px; }
+}
+
+@media (max-width: 760px) {
+  #clients .section-header,
+  .join-inner {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+  .logo-cell {
+    width: 180px;
+    height: 82px;
+  }
+  #join h2 { font-size: 38px; }
+  .pi-talent-title { font-size: 30px; }
+  .pi-diagram { padding: 20px; min-height: 320px; }
+  .pi-diagram::before,
+  .pi-diagram::after {
+    left: 20px;
+    right: 20px;
+  }
+  .pi-leg { width: 31%; padding: 14px; }
+  .pi-leg-left { left: 10%; }
+  .pi-leg-right { right: 10%; }
+  .pi-leg-label { font-size: 18px; }
+  .pi-core { width: 64px; height: 64px; font-size: 44px; }
+  .join-col { padding: 28px 24px; }
+  .benefits-grid { grid-template-columns: 1fr; }
+}
 
 /* ── Screen 6 · 联系方式 ── */
 #contact { background:var(--quantum-black); padding:96px 64px; }
@@ -426,96 +898,67 @@ footer {
 <!-- ── 导航（浅色背景黑色Logo）── -->
 <div data-site-header></div>
 
-<!-- ── Screen 1 · 跃迁首屏（左右两栏 60/40）── -->
+<!-- ── Screen 1 · 公司理念 / Brand House ── -->
 <section id="brand">
-  <!-- 左侧 60%：文字内容 -->
   <div class="brand-left">
-    <span class="tag animate-in">公司理念</span>
+    <span class="tag animate-in">BRAND HOUSE · 公司理念</span>
     <div class="threshold-line"></div>
     <h1 class="animate-in" style="transition-delay:80ms;">跃迁</h1>
-    <p class="sub-h1 animate-in" style="transition-delay:120ms;">不是转型，不是升级，不是进化</p>
+    <p class="sub-h1 animate-in" style="transition-delay:120ms;">让企业进入 AI「自动驾驶」时代</p>
     <div class="guide-block animate-in" style="transition-delay:200ms;">
       <div class="guide-line"></div>
       <div class="guide-text">
-        跃迁，是系统跨越临界点后进入全新状态的瞬间。<br>
-        电子吸收能量，从低能级跃迁至高能级——<br>
-        这个过程不是渐变，而是<em>「越过临界点，不可回头」</em>。<br><br>
-        Frontis AI 相信：企业导入 AI 的真正目标，<br>
-        不是流程自动化，不是降本增效，<br>
-        而是帮助组织和领导者跨过那条线，<br>
-        进入一个过去不可能存在的工作状态。<br><br>
-        这，就是我们命名<em>「衔远」</em>的原因。
+        <p><em>衔远是 AI 原生企业构建者。</em>我们提供企业级 AI 原生平台，陪伴企业从 +AI 工具跃迁到 AI 原生组织。</p>
+        <p>这不是买一套软件，也不是让员工学会使用 AI，而是让每个员工拥有 AI 数字分身，让企业拥有一支可复制、可进化的 AI 专家军团。</p>
+        <p>跃迁不是转型，不是升级，而是系统跨越临界点后进入全新状态。临界点之前，AI 是辅助工具；临界点之后，AI 成为组织能力，系统在每一次使用中持续学习，越用越聪明。</p>
+        <p>这也是企业客户迈向 AGI 时代的惊险一跃，更是衔远的使命所在。</p>
       </div>
     </div>
   </div>
 
-  <!-- 右侧 40%：量子跃迁 SVG 可视化 -->
-  <div class="brand-right">
-    <svg viewBox="0 0 500 600" xmlns="http://www.w3.org/2000/svg" width="500" height="600" style="max-width:100%;display:block;">
+  <div class="brand-proof-row">
+    <div class="brand-house-grid animate-in" style="transition-delay:280ms;" aria-label="衔远品牌屋核心内容">
+      <div class="brand-house-item">
+        <span class="brand-house-key">POSITION · 定位</span>
+        <span class="brand-house-value">AI 原生企业构建者</span>
+      </div>
+      <div class="brand-house-item">
+        <span class="brand-house-key">PLATFORM · 平台</span>
+        <span class="brand-house-value">可持续进化的企业级 AI 原生平台</span>
+      </div>
+      <div class="brand-house-item">
+        <span class="brand-house-key">ME · 员工</span>
+        <span class="brand-house-value">每个员工拥有 AI 数字分身</span>
+      </div>
+      <div class="brand-house-item">
+        <span class="brand-house-key">WE · 企业</span>
+        <span class="brand-house-value">拥有可复制、可进化的 AI 专家军团</span>
+      </div>
+    </div>
 
-      <!-- 右下角点阵网格背景装饰（5×5，间距20px） -->
-      <circle cx="320" cy="440" r="1" fill="#F0F2F4"/>
-      <circle cx="340" cy="440" r="1" fill="#F0F2F4"/>
-      <circle cx="360" cy="440" r="1" fill="#F0F2F4"/>
-      <circle cx="380" cy="440" r="1" fill="#F0F2F4"/>
-      <circle cx="400" cy="440" r="1" fill="#F0F2F4"/>
-      <circle cx="320" cy="460" r="1" fill="#F0F2F4"/>
-      <circle cx="340" cy="460" r="1" fill="#F0F2F4"/>
-      <circle cx="360" cy="460" r="1" fill="#F0F2F4"/>
-      <circle cx="380" cy="460" r="1" fill="#F0F2F4"/>
-      <circle cx="400" cy="460" r="1" fill="#F0F2F4"/>
-      <circle cx="320" cy="480" r="1" fill="#F0F2F4"/>
-      <circle cx="340" cy="480" r="1" fill="#F0F2F4"/>
-      <circle cx="360" cy="480" r="1" fill="#F0F2F4"/>
-      <circle cx="380" cy="480" r="1" fill="#F0F2F4"/>
-      <circle cx="400" cy="480" r="1" fill="#F0F2F4"/>
-      <circle cx="320" cy="500" r="1" fill="#F0F2F4"/>
-      <circle cx="340" cy="500" r="1" fill="#F0F2F4"/>
-      <circle cx="360" cy="500" r="1" fill="#F0F2F4"/>
-      <circle cx="380" cy="500" r="1" fill="#F0F2F4"/>
-      <circle cx="400" cy="500" r="1" fill="#F0F2F4"/>
-      <circle cx="320" cy="520" r="1" fill="#F0F2F4"/>
-      <circle cx="340" cy="520" r="1" fill="#F0F2F4"/>
-      <circle cx="360" cy="520" r="1" fill="#F0F2F4"/>
-      <circle cx="380" cy="520" r="1" fill="#F0F2F4"/>
-      <circle cx="400" cy="520" r="1" fill="#F0F2F4"/>
-
-      <!-- 高能级轨道（顶部偏右，y=160，比低能级短） -->
-      <line x1="120" y1="160" x2="420" y2="160" stroke="#3D4145" stroke-width="1.5"/>
-      <!-- 高能级标注 n=2 -->
-      <text x="60" y="164" font-family="'JetBrains Mono',monospace" font-size="11" fill="#8A8F96">n=2</text>
-
-      <!-- 低能级轨道（底部，y=340，延伸到左右边缘） -->
-      <line x1="20" y1="340" x2="460" y2="340" stroke="#3D4145" stroke-width="1.5"/>
-      <!-- 低能级标注 n=1 -->
-      <text x="60" y="358" font-family="'JetBrains Mono',monospace" font-size="11" fill="#8A8F96">n=1</text>
-
-      <!-- 跃迁路径虚线（从低能级电子位置垂直向上到高能级电子） -->
-      <line x1="200" y1="328" x2="200" y2="176" stroke="#00C1D4" stroke-width="1.5" stroke-dasharray="4 6"/>
-
-      <!-- 低能级上的电子（实心圆，12px，量子黑） -->
-      <circle cx="200" cy="340" r="12" fill="#000000"/>
-
-      <!-- 高能级上的电子光晕（透明青色圆环） -->
-      <circle cx="200" cy="160" r="44" fill="none" stroke="#00C1D4" stroke-width="1" opacity="0.18"/>
-      <circle cx="200" cy="160" r="28" fill="none" stroke="#00C1D4" stroke-width="1" opacity="0.35"/>
-      <!-- 高能级上的电子（实心圆，16px，跃迁青） -->
-      <circle cx="200" cy="160" r="16" fill="#00C1D4"/>
-
-      <!-- 右侧能量箭头（↑）与 ΔE 标注 -->
-      <line x1="380" y1="330" x2="380" y2="175" stroke="#00C1D4" stroke-width="1.5"/>
-      <polyline points="373,188 380,170 387,188" fill="none" stroke="#00C1D4" stroke-width="1.5"/>
-      <text x="390" y="255" font-family="'JetBrains Mono',monospace" font-size="12" fill="#00C1D4">ΔE</text>
-      <text x="390" y="271" font-family="'JetBrains Mono',monospace" font-size="10" fill="#00C1D4">input</text>
-
-      <!-- 分隔细横线（将图形区与标注区分开） -->
-      <line x1="20" y1="420" x2="480" y2="420" stroke="#F0F2F4" stroke-width="1"/>
-
-      <!-- 底部标注文字 -->
-      <text x="20" y="447" font-family="'JetBrains Mono',monospace" font-size="14" font-weight="700" letter-spacing="3" fill="#000000">QUANTUM LEAP</text>
-      <text x="20" y="470" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="12" fill="#3D4145">不连续 · 不可回头 · 越过临界</text>
-      <text x="20" y="490" font-family="'PingFang SC','Microsoft YaHei',sans-serif" font-size="11" fill="#00C1D4">这不是进化，是跃迁</text>
-    </svg>
+    <div class="brand-right">
+      <div class="brand-threshold-card animate-in" style="transition-delay:340ms;" role="img" aria-label="企业从旧范式跨越临界线进入 AI 原生组织的示意">
+        <div class="threshold-stage threshold-stage--after">
+          <span class="stage-eyebrow">AFTER · AI-NATIVE</span>
+          <span class="stage-title">AI 原生组织</span>
+          <p class="stage-copy">员工拥有数字分身，企业拥有专家军团，系统在真实任务中持续进化。</p>
+        </div>
+        <div class="brand-edge-label">
+          <i aria-hidden="true"></i>
+          <span>THE EDGE</span>
+          <strong>向 AI 原生跃迁的临界线</strong>
+        </div>
+        <div class="brand-signal">
+          <span>AGI ERA</span>
+          <strong>向上跃迁<br>越用越聪明</strong>
+        </div>
+        <div class="threshold-stage threshold-stage--before">
+          <span class="stage-eyebrow">BEFORE · +AI</span>
+          <span class="stage-title">+AI 工具</span>
+          <p class="stage-copy">AI 停留在辅助层，知识仍由人脑承载，组织能力难以复制和持续进化。</p>
+        </div>
+      </div>
+    </div>
   </div>
 </section>
 
@@ -523,23 +966,22 @@ footer {
 <section id="team">
   <h2 class="animate-in">创始人</h2>
   <div class="founder-layout animate-in" style="transition-delay:80ms;">
-    <div class="founder-photo">
-      <div class="img-placeholder">[待提供：周伯文教授正式商务照 240×300px · 市场/PR团队]</div>
-    </div>
     <div class="founder-bio">
-      <div class="founder-name">周伯文</div>
-      <div class="founder-role">创始人 · 首席科学家</div>
+      <div class="founder-name">周伯文 教授</div>
+      <div class="founder-role">
+        上海人工智能实验室主任、首席科学家<br>
+        清华大学惠妍讲席教授<br>
+        IEEE/CAAI Fellow
+      </div>
       <div class="threshold-line-small"></div>
       <p class="founder-desc">
-        Transformer 奠基人之一，学术论文引用超过 28,000 次。<br>
-        曾任上海人工智能实验室主任、IBM 研究院院长，现为清华大学惠妍讲席教授。<br><br>
-        2021 年创立衔远科技，专注于将世界领先的 AI 研究能力转化为企业可用的生产力。
+        周伯文教授在2022年率先提出“通专融合”技术，致力于解决AI发展中大模型通用泛化与高度专业能力相互制约的全球性难题。<br>
+        衔远科技依托于“通专融合”技术打造了全栈企业级AI原生平台-衔远大观，成为产业落地AI原生组织和实现AGI的基础设施平台。
       </p>
-      <div class="team-bg animate-in" style="transition-delay:200ms;">
-        <span class="team-bg-label">团队背景</span>
-        <p class="team-bg-text">核心团队成员来自京东、阿里巴巴、中国电子云、清华大学等顶尖机构，兼具深厚技术积累与一线产业落地经验。</p>
-      </div>
     </div>
+    <figure class="founder-figure">
+      <img src="./assets/about-founder-fusion.png" alt="通专融合技术路线示意图" class="founder-figure-img" loading="lazy">
+    </figure>
   </div>
 </section>
 
@@ -552,61 +994,41 @@ footer {
   <!-- Row 1 -->
   <div class="logo-track-wrap" style="margin-bottom:0;">
     <div class="logo-track row1">
-      <div class="logo-cell"><span>建发集团</span></div>
-      <div class="logo-cell"><span>国家电网</span></div>
-      <div class="logo-cell"><span>中建集团</span></div>
-      <div class="logo-cell"><span>一汽集团</span></div>
-      <div class="logo-cell"><span>飞鹤乳业</span></div>
-      <div class="logo-cell"><span>中国电信</span></div>
-      <div class="logo-cell"><span>中远海运</span></div>
+      <div class="logo-cell"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy"></div>
       <!-- duplicate for seamless loop -->
-      <div class="logo-cell"><span>建发集团</span></div>
-      <div class="logo-cell"><span>国家电网</span></div>
-      <div class="logo-cell"><span>中建集团</span></div>
-      <div class="logo-cell"><span>一汽集团</span></div>
-      <div class="logo-cell"><span>飞鹤乳业</span></div>
-      <div class="logo-cell"><span>中国电信</span></div>
-      <div class="logo-cell"><span>中远海运</span></div>
+      <div class="logo-cell"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy"></div>
     </div>
   </div>
   <!-- Row 2 -->
-  <div class="logo-track-wrap" style="margin-bottom:0;">
-    <div class="logo-track row2">
-      <div class="logo-cell"><span>中国五矿</span></div>
-      <div class="logo-cell"><span>华润置地</span></div>
-      <div class="logo-cell"><span>招商局集团</span></div>
-      <div class="logo-cell"><span>中粮集团</span></div>
-      <div class="logo-cell"><span>保利发展</span></div>
-      <div class="logo-cell"><span>中信集团</span></div>
-      <div class="logo-cell"><span>国药控股</span></div>
-      <!-- duplicate -->
-      <div class="logo-cell"><span>中国五矿</span></div>
-      <div class="logo-cell"><span>华润置地</span></div>
-      <div class="logo-cell"><span>招商局集团</span></div>
-      <div class="logo-cell"><span>中粮集团</span></div>
-      <div class="logo-cell"><span>保利发展</span></div>
-      <div class="logo-cell"><span>中信集团</span></div>
-      <div class="logo-cell"><span>国药控股</span></div>
-    </div>
-  </div>
-  <!-- Row 3 -->
   <div class="logo-track-wrap">
-    <div class="logo-track row3">
-      <div class="logo-cell"><span>TCL科技</span></div>
-      <div class="logo-cell"><span>美的集团</span></div>
-      <div class="logo-cell"><span>格力电器</span></div>
-      <div class="logo-cell"><span>比亚迪</span></div>
-      <div class="logo-cell"><span>海尔集团</span></div>
-      <div class="logo-cell"><span>三一重工</span></div>
-      <div class="logo-cell"><span>中联重科</span></div>
+    <div class="logo-track row2">
+      <div class="logo-cell"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy"></div>
       <!-- duplicate -->
-      <div class="logo-cell"><span>TCL科技</span></div>
-      <div class="logo-cell"><span>美的集团</span></div>
-      <div class="logo-cell"><span>格力电器</span></div>
-      <div class="logo-cell"><span>比亚迪</span></div>
-      <div class="logo-cell"><span>海尔集团</span></div>
-      <div class="logo-cell"><span>三一重工</span></div>
-      <div class="logo-cell"><span>中联重科</span></div>
+      <div class="logo-cell"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy"></div>
     </div>
   </div>
 </section>
@@ -634,24 +1056,52 @@ footer {
     <!-- 企业文化横条 -->
     <div class="join-culture animate-in">
       <div class="culture-item">
-        <div class="culture-kw">MISSION</div>
-        <div class="culture-zh">使命驱动</div>
-        <div class="culture-desc">让企业跨越 AI 临界线，<br>真正进入自动驾驶时代</div>
+        <div class="culture-kw">CUSTOMER</div>
+        <div class="culture-zh">成就客户</div>
+        <div class="culture-desc">客户的成功，<br>才是我们的成功</div>
       </div>
       <div class="culture-item">
-        <div class="culture-kw">OWNERSHIP</div>
-        <div class="culture-zh">主人心态</div>
-        <div class="culture-desc">每个人都是公司的建设者，<br>你的判断直接影响产品走向</div>
+        <div class="culture-kw">OUTCOME</div>
+        <div class="culture-zh">结果导向</div>
+        <div class="culture-desc">以终为始，凭数据发言，<br>拿结果说话</div>
       </div>
       <div class="culture-item">
-        <div class="culture-kw">FRONTIER</div>
-        <div class="culture-zh">前沿探索</div>
-        <div class="culture-desc">与顶尖研究者共同定义<br>下一代 AI Agent 的边界</div>
+        <div class="culture-kw">NEVER SETTLE</div>
+        <div class="culture-zh">永不满足</div>
+        <div class="culture-desc">好奇驱动，进化不止，<br>永不自我设限</div>
       </div>
-      <div class="culture-item">
-        <div class="culture-kw">IMPACT</div>
-        <div class="culture-zh">真实落地</div>
-        <div class="culture-desc">不做 Demo，直接服务<br>头部企业的真实业务场景</div>
+    </div>
+
+    <!-- π 型人才模型 -->
+    <div class="pi-talent animate-in">
+      <div class="pi-talent-copy">
+        <div class="pi-talent-label">π Talent · 衔远人才模型</div>
+        <div class="pi-talent-title">π 型人才</div>
+        <p class="pi-talent-desc">
+          衔远率先用 π 锚定 AI 时代的人才标准：极致的硬核技能 × 全面的 AI 素养 × 人之为人的 ACP 元能力。我们不只是在招人，更是在定义什么样的人能在 AI 原生时代真正创造价值。
+        </p>
+        <p class="pi-talent-tagline">期待 AGI 时代的定义者——衔远，就是你的主场。</p>
+      </div>
+      <div class="pi-diagram" role="img" aria-label="π 型人才模型图示">
+        <div class="pi-diagram-kicker">PI TALENT OPERATING MODEL</div>
+        <div class="pi-diagram-stage">
+          <div class="pi-beam">ACP 元能力</div>
+          <div class="pi-leg pi-leg-left">
+            <div class="pi-leg-label">硬核技能</div>
+            <div class="pi-leg-sub">Algorithm / Engineering / System</div>
+          </div>
+          <div class="pi-leg pi-leg-right">
+            <div class="pi-leg-label">AI 素养</div>
+            <div class="pi-leg-sub">Agent / Business / AI Native</div>
+          </div>
+          <div class="pi-core">π</div>
+        </div>
+        <div class="pi-diagram-bottom">
+          <span>自主性</span>
+          <span>掌控力</span>
+          <span>审美与共情</span>
+        </div>
+        <div class="pi-diagram-caption">AI 原生时代创造者</div>
       </div>
     </div>
 
@@ -661,41 +1111,94 @@ footer {
       <div class="join-col join-col-left">
         <div class="join-col-label">开放职位 · Open Positions</div>
         <div class="positions-list">
-          <div class="position-item">
-            <div class="pos-header">
-              <span class="pos-title">算法工程师 · Agentic RL</span>
-              <span class="pos-meta">北京 · 全职</span>
+          <details class="position-item">
+            <summary>
+              <div class="pos-header">
+                <span class="pos-title">算法工程师</span>
+                <span class="pos-meta">北京 · 全职</span>
+              </div>
+              <div class="pos-tag">ALGORITHM</div>
+            </summary>
+            <div class="pos-detail">
+              <div class="pos-detail-section">
+                <div class="pos-lead">你的领地：让智能体真正学会思考与决策</div>
+                <p class="pos-intro">你的每一个模型，都将成为驱动真实业务运转的大脑。</p>
+                <div class="pos-subhead">Agentic RL</div>
+                <ul class="pos-bullets">
+                  <li><strong>设计进化引擎：</strong>研发支持大模型驱动智能体进化的强化学习平台，构建高效的环境交互、轨迹采样与分布式训练流水线。</li>
+                  <li><strong>攻克决策难题：</strong>深入特定垂直业务场景，将复杂业务逻辑抽象为决策过程，设计状态空间、动作空间与奖励函数。</li>
+                  <li><strong>突破数据边界：</strong>探索仿真环境、Sim-to-Real 与 Self-Play，在数据稀缺场景下实现能力突破。</li>
+                  <li><strong>锻造算法内核：</strong>优化 PPO、GRPO、DAPO 等算法，使其适配长链路推理与多步决策任务。</li>
+                </ul>
+                <div class="pos-subhead">Agent 架构</div>
+                <ul class="pos-bullets">
+                  <li><strong>突破架构极限：</strong>探索能够处理长上下文、复杂逻辑推理与自我纠错的智能体系统。</li>
+                  <li><strong>接管真实业务：</strong>将模糊业务目标转化为可执行的专家工作流和技能，解决长链路任务中的幻觉与执行偏差。</li>
+                  <li><strong>构建评估体系：</strong>通过数据驱动和经验学习持续优化智能体决策质量。</li>
+                  <li><strong>定义交互未来：</strong>推动智能体从问答助手向具备高自主性的数字专家演进。</li>
+                </ul>
+              </div>
+              <div class="pos-detail-section">
+                <div class="pos-lead">我们寻找的人：AI 时代的硬核算法人</div>
+                <p class="pos-intro">我们寻找计算机、数学等相关专业的顶尖大脑。你需要有极致的算法能力、AI 工程落地能力，以及将复杂问题抽象为数学目标的建模直觉。</p>
+              </div>
             </div>
-            <div class="pos-tag">ALGORITHM</div>
-          </div>
-          <div class="position-item">
-            <div class="pos-header">
-              <span class="pos-title">算法工程师 · Agent 架构</span>
-              <span class="pos-meta">北京 · 全职</span>
+          </details>
+
+          <details class="position-item">
+            <summary>
+              <div class="pos-header">
+                <span class="pos-title">全栈研发工程师</span>
+                <span class="pos-meta">北京 · 全职</span>
+              </div>
+              <div class="pos-tag">ENGINEERING</div>
+            </summary>
+            <div class="pos-detail">
+              <div class="pos-detail-section">
+                <div class="pos-lead">你的领地：用 AI 重塑业务场景的技术决策者</div>
+                <p class="pos-intro">我们要找的人不只是写代码的人，而是既懂 AI、又能理解业务架构，能端到端解决问题的人。</p>
+                <ul class="pos-bullets">
+                  <li><strong>AI Native 思维：</strong>尝试并熟练使用 Coding Agent 工具，能把模糊需求拆解为技术路径。</li>
+                  <li><strong>贯通前后端：</strong>熟悉 HTML / CSS / JavaScript / TypeScript，了解 React、Vue、Angular、Next.js 等框架，并理解后端框架与数据流。</li>
+                  <li><strong>端到端交付：</strong>能把一个完整业务流程从接口到数据层全部串起来。</li>
+                </ul>
+              </div>
+              <div class="pos-detail-section">
+                <div class="pos-lead">加分项：真正用 AI 写过代码的人</div>
+                <ul class="pos-bullets">
+                  <li>遇到不熟悉的问题，能找 AI 帮忙，并能判断、修改、验证最终方案。</li>
+                  <li>遇到 Bug，能组织好报错信息让 AI 帮你定位问题。</li>
+                  <li>不盲信 AI，有自己的验证意识；把 AI 当协作队友，而不只是搜索框。</li>
+                  <li>用过 Claude Code、Codex、OpenCode、Qoder、Cursor、Trae 等工具。</li>
+                </ul>
+              </div>
             </div>
-            <div class="pos-tag">ALGORITHM</div>
-          </div>
-          <div class="position-item">
-            <div class="pos-header">
-              <span class="pos-title">算法工程师 · 供应链方向</span>
-              <span class="pos-meta">厦门 / 上海 / 北京 · 全职</span>
+          </details>
+
+          <details class="position-item">
+            <summary>
+              <div class="pos-header">
+                <span class="pos-title">“π”计划 · 衔远大观研究院顶尖实习生</span>
+                <span class="pos-meta">北京 · 实习</span>
+              </div>
+              <div class="pos-tag">PI PROGRAM</div>
+            </summary>
+            <div class="pos-detail">
+              <div class="pos-detail-section">
+                <div class="pos-lead">你的领地：跨越实验室边界</div>
+                <p class="pos-intro">你的每一行代码，都将成为驱动真实商业运转的引擎。</p>
+                <ul class="pos-bullets">
+                  <li><strong>构筑 Agent 架构：</strong>落地具备长程记忆、复杂规划与自主反思的智能体底层系统。</li>
+                  <li><strong>突破商业极限挑战：</strong>面向复杂企业业务流，进行前沿算法预训练、RLHF 或高效微调，减少幻觉与逻辑断层。</li>
+                  <li><strong>接管真实世界：</strong>让算法像顶尖人类专家一样去思考、决策与执行。</li>
+                </ul>
+              </div>
+              <div class="pos-detail-section">
+                <div class="pos-lead">我们寻找的人：AI 时代的超级 π 型天才</div>
+                <p class="pos-intro">我们期待你在学术、竞赛、开源或实战项目中拥有独当一面的特质，并极度渴望把理论落到真实业务里。</p>
+              </div>
             </div>
-            <div class="pos-tag">ALGORITHM</div>
-          </div>
-          <div class="position-item">
-            <div class="pos-header">
-              <span class="pos-title">前端开发工程师</span>
-              <span class="pos-meta">北京 · 全职</span>
-            </div>
-            <div class="pos-tag">ENGINEERING</div>
-          </div>
-          <div class="position-item">
-            <div class="pos-header">
-              <span class="pos-title">后端开发工程师</span>
-              <span class="pos-meta">北京 · 全职</span>
-            </div>
-            <div class="pos-tag">ENGINEERING</div>
-          </div>
+          </details>
         </div>
         <div class="join-cta-row">
           <a href="mailto:hr@frontis.cn">投递简历 → hr@frontis.cn</a>
@@ -707,9 +1210,8 @@ footer {
         <div class="join-col-label">员工福利 · Benefits</div>
         <div class="benefits-grid">
           <div class="benefit-card">
-            <div class="benefit-img-placeholder">
-              <div class="ph-icon">◈</div>
-              <div class="ph-label">图片占位<br>期权激励场景</div>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M8 32h32"/><path d="M12 32V18h10v14"/><path d="M26 32V10h10v22"/><path d="M34 10l6 6"/></svg>
             </div>
             <div class="benefit-info">
               <div class="benefit-name">期权激励</div>
@@ -717,9 +1219,8 @@ footer {
             </div>
           </div>
           <div class="benefit-card">
-            <div class="benefit-img-placeholder">
-              <div class="ph-icon">◈</div>
-              <div class="ph-label">图片占位<br>医疗保障场景</div>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M24 8l14 6v9c0 9-5 14-14 17-9-3-14-8-14-17v-9l14-6z"/><path d="M24 17v12"/><path d="M18 23h12"/></svg>
             </div>
             <div class="benefit-info">
               <div class="benefit-name">补充医疗</div>
@@ -727,9 +1228,8 @@ footer {
             </div>
           </div>
           <div class="benefit-card">
-            <div class="benefit-img-placeholder">
-              <div class="ph-icon">◈</div>
-              <div class="ph-label">图片占位<br>办公室下午茶</div>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M12 18h22v10a10 10 0 0 1-10 10h-2a10 10 0 0 1-10-10V18z"/><path d="M34 21h4a4 4 0 0 1 0 8h-4"/><path d="M16 12v-4"/><path d="M24 12v-4"/></svg>
             </div>
             <div class="benefit-info">
               <div class="benefit-name">下午茶</div>
@@ -737,9 +1237,8 @@ footer {
             </div>
           </div>
           <div class="benefit-card">
-            <div class="benefit-img-placeholder">
-              <div class="ph-icon">◈</div>
-              <div class="ph-label">图片占位<br>培训学习场景</div>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M10 12h22a6 6 0 0 1 6 6v18H16a6 6 0 0 0-6 6V12z"/><path d="M16 18h14"/><path d="M16 24h10"/></svg>
             </div>
             <div class="benefit-info">
               <div class="benefit-name">培训赋能</div>
@@ -747,9 +1246,8 @@ footer {
             </div>
           </div>
           <div class="benefit-card">
-            <div class="benefit-img-placeholder">
-              <div class="ph-icon">◈</div>
-              <div class="ph-label">图片占位<br>团队活动场景</div>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M10 20h28v18H10z"/><path d="M14 20v-5h20v5"/><path d="M18 28h12"/><path d="M18 34h18"/></svg>
             </div>
             <div class="benefit-info">
               <div class="benefit-name">全面五险一金</div>
@@ -757,9 +1255,8 @@ footer {
             </div>
           </div>
           <div class="benefit-card">
-            <div class="benefit-img-placeholder">
-              <div class="ph-icon">◈</div>
-              <div class="ph-label">图片占位<br>年度体检场景</div>
+            <div class="benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 48 48"><path d="M12 14h24v26H12z"/><path d="M18 10v8"/><path d="M30 10v8"/><path d="M18 27h12"/><path d="M24 21v12"/></svg>
             </div>
             <div class="benefit-info">
               <div class="benefit-name">年度体检</div>
@@ -772,12 +1269,9 @@ footer {
   </div>
 </section>
 
-<!-- ── Screen 6 · 联系方式 ── -->
-<section id="contact" data-site-cta></section>
-
 <!-- ── Footer ── -->
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260516-cta-copy"></script>
+<script src="./components/site-shell.js?v=20260517-footer-tech-subgroup"></script>
 
 <script>
 // 板块整体 + 子元素依次入场

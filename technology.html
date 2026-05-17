@@ -345,6 +345,37 @@ footer {
 </style>
 <link rel="stylesheet" href="./components/site-shell.css" />
 <link rel="stylesheet" href="./components/frontis-page-normalize.css" />
+<style>
+  .page-technology #hero {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+  }
+
+  .page-technology #hero > :not(.edge-line):not(.threshold-line) {
+    width: 100% !important;
+  }
+
+  .page-technology #hero .threshold-line {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  .page-technology #chain {
+    align-items: flex-start !important;
+  }
+
+  .page-technology #chain > :not(.edge-line) {
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  .page-technology #chain .slogan-en,
+  .page-technology #chain .chain-headline,
+  .page-technology #chain .chain-sub {
+    text-align: left !important;
+  }
+</style>
 </head>
 <body class="page-technology">
 
@@ -376,7 +407,7 @@ footer {
 <!-- ── Screen 2 · 7层产业链 ── 一句话：L4 是唯一的能力转化层 ── -->
 <!-- ══════════════════════════════════════════════════════════════ -->
 <section id="chain" class="section-black">
-  <div class="animate-in">
+  <div class="animate-in" style="align-self:flex-start !important;margin-left:0 !important;margin-right:auto !important;text-align:left !important;">
     <span class="slogan-en" style="color:var(--threshold-cyan);">AI INDUSTRY · 7 LAYERS</span>
   </div>
   <h2 class="chain-headline animate-in" style="transition-delay:80ms;">
@@ -746,11 +777,22 @@ footer {
 <!-- ══════════════════════════════════════════════════════════════ -->
 <!-- ── Screen 7 · CTA ── -->
 <!-- ══════════════════════════════════════════════════════════════ -->
-<section id="cta" data-site-cta></section>
+<section id="cta" class="section-white">
+  <div class="animate-in">
+    <span class="slogan-en">GET IN TOUCH · 深入交流</span>
+    <h2>想深入了解技术架构？</h2>
+    <p>联系我们的技术团队，获取完整技术白皮书</p>
+    <a href="mailto:cooperation@frontis.cn" class="btn-primary">申请技术交流 →</a>
+    <a href="./horizon.html" class="btn-secondary">了解产品 →</a>
+    <div class="contact-email">
+      <strong>商务合作</strong>&nbsp;&nbsp;cooperation@frontis.cn
+    </div>
+  </div>
+</section>
 
 <!-- ── Footer ── -->
 <div data-site-footer></div>
-<script src="./components/site-shell.js?v=20260516-cta-copy"></script>
+<script src="./components/site-shell.js?v=20260517-footer-tech-subgroup"></script>
 
 <script>
 // 板块整体 + 子元素依次入场
