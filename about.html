@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>衔远科技 Frontis AI - 打造可持续进化的AI生产力</title>
+<link rel="icon" href="./assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -138,12 +139,20 @@ section { padding: 96px 64px; }
   display: block;
   min-height: 100vh;
 }
-.brand-left { max-width: 780px; }
+.brand-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 0.92fr) minmax(420px, 0.82fr);
+  gap: 56px;
+  align-items: start;
+  max-width: 1160px;
+}
+.brand-left { max-width: 660px; }
 .brand-right {
   display: flex;
   align-items: center;
-  justify-content: center;
+  justify-content: flex-end;
   min-width: 0;
+  padding-top: clamp(72px, 7vw, 104px);
 }
 #brand h1 {
   font-family:var(--font-en); font-size:clamp(56px, 7vw, 112px); font-weight:700;
@@ -163,51 +172,11 @@ section { padding: 96px 64px; }
 .guide-text { font-size:16px; color:var(--level-gray); line-height:1.9; }
 .guide-text p + p { margin-top:14px; }
 .guide-text em { color:var(--quantum-black); font-style:normal; font-weight:600; }
-.brand-proof-row {
-  margin-top: 36px;
-  display: grid;
-  grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1.05fr);
-  gap: 40px;
-  align-items: stretch;
-  max-width: 1160px;
-}
-.brand-house-grid {
-  margin-top: 0;
-  display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
-  grid-template-rows: repeat(2, minmax(0, 1fr));
-  border: 1px solid #DDE2E6;
-  max-width: none;
-}
-.brand-house-item {
-  min-height: 104px;
-  padding: 20px 22px;
-  border-right: 1px solid #DDE2E6;
-  border-bottom: 1px solid #DDE2E6;
-}
-.brand-house-item:nth-child(2n) { border-right: none; }
-.brand-house-item:nth-last-child(-n + 2) { border-bottom: none; }
-.brand-house-key {
-  display: block;
-  font-family: var(--font-mono);
-  font-size: 11px;
-  font-weight: 700;
-  color: var(--threshold-cyan);
-  text-transform: uppercase;
-  margin-bottom: 12px;
-}
-.brand-house-value {
-  display: block;
-  font-size: 17px;
-  line-height: 1.55;
-  font-weight: 700;
-  color: var(--quantum-black);
-}
 .brand-threshold-card {
   position: relative;
-  width: 100%;
-  max-width: none;
-  min-height: 420px;
+  width: min(100%, 520px);
+  max-width: 520px;
+  min-height: 640px;
   border: 1px solid #DDE2E6;
   background: var(--pure-white);
   overflow: hidden;
@@ -216,42 +185,129 @@ section { padding: 96px 64px; }
 .brand-threshold-card::before {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
+  inset: 0;
+  background:
+    repeating-linear-gradient(
+      to right,
+      rgba(61,65,69,0.08) 0,
+      rgba(61,65,69,0.08) 1px,
+      transparent 1px,
+      transparent 72px
+    ),
+    repeating-linear-gradient(
+      to bottom,
+      rgba(61,65,69,0.08) 0,
+      rgba(61,65,69,0.08) 1px,
+      transparent 1px,
+      transparent 44px
+    );
+  opacity: 0.72;
+  z-index: 0;
+}
+.brand-threshold-card::after {
+  content: '';
+  position: absolute;
+  left: 34px;
+  right: 34px;
   top: 50%;
   height: 2px;
   background: var(--threshold-cyan);
   z-index: 2;
 }
-.brand-threshold-card::after {
+.quantum-state {
+  position: absolute;
+  left: 52px;
+  right: 52px;
+  z-index: 3;
+}
+.quantum-state--after { top: 94px; }
+.quantum-state--before { top: 392px; }
+.quantum-line {
+  display: block;
+  height: 2px;
+  background: var(--level-gray);
+}
+.quantum-level {
+  position: absolute;
+  left: -2px;
+  top: 0;
+  transform: translateY(-50%);
+  font-family: var(--font-mono);
+  font-size: 13px;
+  color: #8A8F96;
+}
+.quantum-node {
+  position: absolute;
+  left: 48%;
+  top: 0;
+  transform: translate(-50%, -50%);
+  display: block;
+  z-index: 4;
+}
+.quantum-node--after {
+  width: 46px;
+  height: 46px;
+  background: var(--threshold-cyan);
+}
+.quantum-node--after::before,
+.quantum-node--after::after {
   content: '';
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 50%;
-  background:
-    repeating-linear-gradient(
-      to bottom,
-      rgba(61,65,69,0.14) 0,
-      rgba(61,65,69,0.14) 1px,
-      transparent 1px,
-      transparent 22px
-    );
-  opacity: 0.8;
+  inset: -22px;
+  border: 1px solid rgba(0,193,212,0.22);
 }
-.threshold-stage {
+.quantum-node--after::after { inset: -44px; }
+.quantum-node--before {
+  width: 34px;
+  height: 34px;
+  background: var(--quantum-black);
+}
+.quantum-leap-rail {
   position: absolute;
-  left: 34px;
-  right: 34px;
-  z-index: 3;
-  padding-left: 20px;
-  border-left: 2px solid var(--threshold-cyan);
+  left: calc(52px + 48%);
+  top: 94px;
+  height: 298px;
+  border-left: 2px dashed var(--threshold-cyan);
+  z-index: 2;
 }
-.threshold-stage--after { top: 44px; }
-.threshold-stage--before {
-  bottom: 44px;
-  border-left-color: #3D4145;
+.quantum-energy {
+  position: absolute;
+  right: 54px;
+  top: 164px;
+  height: 194px;
+  border-left: 2px solid var(--threshold-cyan);
+  z-index: 3;
+}
+.quantum-energy::before,
+.quantum-energy::after {
+  content: '';
+  position: absolute;
+  left: -2px;
+  top: 0;
+  width: 18px;
+  height: 18px;
+  border-top: 2px solid var(--threshold-cyan);
+  transform-origin: top left;
+}
+.quantum-energy::before { transform: rotate(58deg); }
+.quantum-energy::after { transform: rotate(122deg); }
+.quantum-energy span {
+  position: absolute;
+  left: 18px;
+  top: 54px;
+  font-family: var(--font-mono);
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--threshold-cyan);
+}
+.quantum-copy {
+  position: absolute;
+  left: 0;
+  top: 30px;
+  max-width: 310px;
+}
+.quantum-copy .stage-title {
+  font-size: clamp(26px, 2.35vw, 36px);
 }
 .stage-eyebrow {
   display: block;
@@ -272,14 +328,14 @@ section { padding: 96px 64px; }
   margin-bottom: 12px;
 }
 .stage-copy {
-  max-width: 330px;
-  font-size: 14px;
-  line-height: 1.8;
+  max-width: 360px;
+  font-size: 13px;
+  line-height: 1.72;
   color: var(--level-gray);
 }
 .brand-edge-label {
   position: absolute;
-  left: 34px;
+  left: 52px;
   top: calc(50% - 20px);
   z-index: 4;
   display: grid;
@@ -310,11 +366,11 @@ section { padding: 96px 64px; }
 }
 .brand-signal {
   position: absolute;
-  right: 34px;
-  top: calc(50% + 38px);
+  right: 52px;
+  top: calc(50% + 48px);
   z-index: 3;
-  width: 156px;
-  padding: 18px 18px 20px;
+  width: 136px;
+  padding: 14px 14px 16px;
   background: var(--quantum-black);
   color: var(--pure-white);
 }
@@ -329,23 +385,60 @@ section { padding: 96px 64px; }
 }
 .brand-signal strong {
   display: block;
-  font-size: 21px;
+  font-size: 19px;
   line-height: 1.25;
   font-weight: 800;
+}
+.quantum-note {
+  position: absolute;
+  left: auto;
+  right: 52px;
+  bottom: 30px;
+  z-index: 3;
+  display: grid;
+  grid-template-columns: 1fr;
+  row-gap: 4px;
+  align-items: baseline;
+  width: 260px;
+  padding-top: 12px;
+  border-top: 1px solid #E4E8EB;
+}
+.quantum-note strong {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 4px;
+  color: var(--quantum-black);
+}
+.quantum-note span {
+  display: block;
+  font-size: 12px;
+  color: var(--level-gray);
+  line-height: 1.5;
+}
+.quantum-note em {
+  display: block;
+  font-style: normal;
+  font-size: 13px;
+  color: var(--threshold-cyan);
 }
 
 @media (max-width: 980px) {
   #brand {
     padding: 112px 40px 76px;
   }
-  .brand-left { max-width: none; }
-  .brand-proof-row {
+  .brand-hero {
     grid-template-columns: 1fr;
-    gap: 28px;
+    gap: 34px;
+  }
+  .brand-left { max-width: none; }
+  .brand-right {
+    justify-content: center;
+    padding-top: 0;
   }
   .brand-threshold-card {
     max-width: none;
-    min-height: 440px;
+    min-height: 640px;
   }
 }
 
@@ -357,26 +450,52 @@ section { padding: 96px 64px; }
   #brand .sub-h1 { font-size: 22px; }
   .guide-block { gap: 16px; }
   .guide-text { font-size: 15px; }
-  .brand-house-grid { grid-template-columns: 1fr; }
-  .brand-house-item,
-  .brand-house-item:nth-child(2n),
-  .brand-house-item:nth-last-child(-n + 2) {
-    border-right: none;
-    border-bottom: 1px solid #DDE2E6;
-  }
-  .brand-house-item:last-child { border-bottom: none; }
   .brand-threshold-card {
-    min-height: 390px;
+    min-height: 700px;
     padding: 24px;
   }
-  .threshold-stage {
+  .quantum-state {
     left: 24px;
     right: 24px;
   }
-  .brand-edge-label { left: 24px; }
+  .quantum-state--after { top: 78px; }
+  .quantum-state--before { top: 408px; }
+  .quantum-copy {
+    max-width: calc(100% - 12px);
+    top: 34px;
+  }
+  .quantum-copy .stage-title {
+    font-size: 30px;
+  }
+  .quantum-copy .stage-copy {
+    font-size: 13px;
+    line-height: 1.7;
+  }
+  .quantum-leap-rail {
+    left: calc(24px + 48%);
+    top: 78px;
+    height: 330px;
+  }
+  .quantum-energy {
+    right: 30px;
+    top: 122px;
+    height: 190px;
+  }
+  .brand-edge-label {
+    left: 24px;
+    top: calc(50% - 16px);
+  }
   .brand-signal {
     right: 24px;
-    width: 136px;
+    width: 124px;
+    top: calc(50% + 58px);
+    padding: 14px;
+  }
+  .quantum-note {
+    left: 24px;
+    right: 24px;
+    bottom: 24px;
+    width: auto;
   }
 }
 
@@ -466,32 +585,42 @@ section { padding: 96px 64px; }
 @keyframes scroll-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
 @keyframes scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .logo-track-wrap:hover .logo-track { animation-play-state: paused; }
+.logo-matrix {
+  display: grid;
+  gap: 16px;
+  padding: 0 64px;
+}
+.logo-row {
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 16px;
+}
 .logo-cell {
-  width: 220px; height: 92px;
+  min-height: 96px;
   display: flex; align-items: center; justify-content: center;
   border: 1px solid #E8EAED;
-  margin: 8px;
-  flex-shrink: 0;
   background: var(--pure-white);
-  transition: border-color 200ms;
-  padding: 20px 28px;
+  transition: border-color 200ms, background-color 200ms;
+  padding: 22px 30px;
   overflow: hidden;
 }
-.logo-cell:hover { border-color: var(--threshold-cyan); }
+.logo-cell:hover {
+  border-color: var(--threshold-cyan);
+  background-color: rgba(0, 193, 212, 0.035);
+}
 .logo-cell img {
   display: block;
   width: auto;
   height: auto;
-  max-width: 132px;
-  max-height: 38px;
+  max-width: 156px;
+  max-height: 46px;
   object-fit: contain;
-  opacity: 0.72;
-  filter: grayscale(1);
-  transition: opacity 200ms, filter 200ms;
+  opacity: 0.94;
+  filter: none;
+  transition: opacity 200ms;
 }
 .logo-cell:hover img {
-  opacity: 0.94;
-  filter: grayscale(0);
+  opacity: 1;
 }
 
 /* ── 加入我们 ── */
@@ -500,15 +629,12 @@ section { padding: 96px 64px; }
   padding: 0;
   overflow: hidden;
 }
-/* 背景大图区域 + 黑色半透明蒙层 */
+/* 背景色块 + 黑色半透明蒙层 */
 .join-bg {
   position: absolute;
   inset: 0;
-  /* 背景图占位：请替换为实际团队/办公室照片 URL
-     推荐尺寸：1920×900px，深色调或高对比度场景
-     示例：background-image: url('https://your-cdn/join-bg.jpg'); */
   background-color: #0A0C0E;
-  background-image: none; /* TODO: 替换为实际图片 */
+  background-image: none;
   background-size: cover;
   background-position: center;
 }
@@ -548,9 +674,17 @@ section { padding: 96px 64px; }
 .culture-kw {
   font-family: var(--font-en); font-size: 11px; font-weight: 700;
   letter-spacing: 2px; color: var(--threshold-cyan); text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 16px;
 }
-.culture-zh { font-size: 18px; font-weight: 700; color: var(--pure-white); margin-bottom: 6px; }
+.culture-zh {
+  font-size: clamp(40px, 4.2vw, 56px);
+  line-height: 1.02;
+  font-weight: 800;
+  letter-spacing: 0;
+  color: var(--pure-white);
+  margin-bottom: 22px;
+}
+.culture-zh span { display: block; }
 .culture-desc { font-size: 13px; color: #666; line-height: 1.7; }
 /* π 型人才 */
 .pi-talent {
@@ -583,10 +717,10 @@ section { padding: 96px 64px; }
   border-left: 2px solid var(--threshold-cyan);
 }
 .pi-diagram {
-  min-height: 360px;
+  min-height: 388px;
   border: 1px solid rgba(255,255,255,0.14);
   background: #050607;
-  padding: 28px;
+  padding: 30px;
   position: relative;
   overflow: hidden;
 }
@@ -598,65 +732,105 @@ section { padding: 96px 64px; }
   height: 1px;
   background: rgba(255,255,255,0.08);
 }
-.pi-diagram::before { top: 92px; }
-.pi-diagram::after { bottom: 96px; }
+.pi-diagram::before { top: 168px; }
+.pi-diagram::after { bottom: 56px; }
 .pi-diagram-kicker {
   font-family: var(--font-mono); font-size: 10px; letter-spacing: 2px;
   color: var(--threshold-cyan); text-transform: uppercase;
+  position: relative;
+  z-index: 2;
 }
 .pi-diagram-stage {
   position: relative;
-  height: 210px;
-  margin: 28px 0 22px;
+  height: 326px;
+  margin: 26px 0 24px;
 }
 .pi-beam {
   position: absolute;
-  left: 12%;
-  right: 12%;
-  top: 8px;
-  height: 34px;
+  left: 8%;
+  right: 8%;
+  top: 68px;
+  height: 52px;
   border: 1px solid var(--threshold-cyan);
   display: flex; align-items: center; justify-content: center;
   color: var(--threshold-cyan);
   font-size: 12px; font-weight: 700; letter-spacing: 1px;
+  background: rgba(0,193,212,0.045);
+  z-index: 2;
 }
 .pi-leg {
   position: absolute;
-  top: 58px;
-  bottom: 0;
-  width: 26%;
+  top: 142px;
+  bottom: 4px;
+  width: 31%;
   border: 1px solid rgba(255,255,255,0.16);
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
-  padding: 18px;
+  justify-content: flex-start;
+  padding: 24px 16px;
+  background: rgba(255,255,255,0.026);
+  z-index: 2;
 }
-.pi-leg-left { left: 17%; }
-.pi-leg-right { right: 17%; }
+.pi-leg::before {
+  content: '';
+  position: absolute;
+  top: -21px;
+  left: 50%;
+  width: 1px;
+  height: 21px;
+  background: rgba(255,255,255,0.18);
+}
+.pi-leg-left { left: 12%; }
+.pi-leg-right { right: 12%; }
 .pi-leg-label {
-  font-size: 22px; font-weight: 800; color: var(--pure-white);
-  margin-bottom: 8px;
+  font-size: 24px; font-weight: 800; color: var(--pure-white);
+  line-height: 1.15;
+  margin-bottom: 14px;
 }
 .pi-leg-sub {
   font-family: var(--font-mono); font-size: 10px; line-height: 1.8;
   color: #7B8086; text-transform: uppercase;
 }
+.pi-leg-left .pi-leg-sub {
+  font-family: var(--font-cn);
+  font-size: 12px;
+  line-height: 1.72;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #AEB4BA;
+}
+.pi-leg-right .pi-leg-sub {
+  font-family: var(--font-cn);
+  font-size: 11px;
+  line-height: 1.72;
+  letter-spacing: 0;
+  text-transform: none;
+  color: #AEB4BA;
+}
 .pi-core {
   position: absolute;
-  left: 50%; top: 52%;
+  left: 50%; top: 67%;
   transform: translate(-50%, -50%);
-  width: 82px; height: 82px;
-  border: 1px solid rgba(0,193,212,0.55);
+  width: auto; height: auto;
+  border: 0;
   display: flex; align-items: center; justify-content: center;
-  color: var(--threshold-cyan);
-  font-family: var(--font-en); font-size: 56px; font-weight: 800;
-  background: #050607;
+  color: rgba(0,193,212,0.11);
+  font-family: var(--font-en); font-size: 224px; font-weight: 800;
+  line-height: 0.85;
+  background: transparent;
+  pointer-events: none;
+  z-index: 1;
 }
 .pi-diagram-bottom {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 0;
   border: 1px solid rgba(255,255,255,0.08);
+  z-index: 3;
 }
 .pi-diagram-bottom span {
   padding: 14px 12px;
@@ -826,23 +1000,82 @@ section { padding: 96px 64px; }
     padding-left: 24px;
     padding-right: 24px;
   }
+  .logo-matrix {
+    padding: 0 24px;
+    gap: 12px;
+  }
+  .logo-row {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 12px;
+  }
   .logo-cell {
-    width: 180px;
-    height: 82px;
+    min-height: 82px;
+    padding: 18px 20px;
+  }
+  .logo-cell img {
+    max-width: 126px;
+    max-height: 40px;
   }
   #join h2 { font-size: 38px; }
   .pi-talent-title { font-size: 30px; }
-  .pi-diagram { padding: 20px; min-height: 320px; }
+  .pi-diagram { padding: 20px; min-height: 360px; }
   .pi-diagram::before,
   .pi-diagram::after {
     left: 20px;
     right: 20px;
   }
-  .pi-leg { width: 31%; padding: 14px; }
-  .pi-leg-left { left: 10%; }
-  .pi-leg-right { right: 10%; }
-  .pi-leg-label { font-size: 18px; }
-  .pi-core { width: 64px; height: 64px; font-size: 44px; }
+  .pi-diagram::before { top: 156px; }
+  .pi-diagram::after { bottom: 52px; }
+  .pi-diagram-stage {
+    height: auto;
+    display: grid;
+    gap: 16px;
+    margin: 22px 0 18px;
+  }
+  .pi-diagram-bottom {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+  }
+  .pi-beam {
+    position: relative;
+    left: auto;
+    right: auto;
+    top: auto;
+    height: 46px;
+  }
+  .pi-leg {
+    position: relative;
+    top: auto;
+    bottom: auto;
+    width: auto;
+    min-height: 150px;
+    padding: 20px 18px 22px;
+  }
+  .pi-leg::before { display: none; }
+  .pi-leg-left { left: 4%; }
+  .pi-leg-right { right: 4%; }
+  .pi-leg-left,
+  .pi-leg-right {
+    left: auto;
+    right: auto;
+  }
+  .pi-leg-label {
+    font-size: 22px;
+    margin-bottom: 12px;
+  }
+  .pi-leg-sub { font-size: 9px; }
+  .pi-leg-left .pi-leg-sub,
+  .pi-leg-right .pi-leg-sub {
+    font-size: 12px;
+    line-height: 1.7;
+    white-space: nowrap;
+  }
+  .pi-core {
+    top: 65%;
+    font-size: 190px;
+  }
   .join-col { padding: 28px 24px; }
   .benefits-grid { grid-template-columns: 1fr; }
 }
@@ -892,6 +1125,99 @@ footer {
 </style>
   <link rel="stylesheet" href="./components/site-shell.css" />
   <link rel="stylesheet" href="./components/frontis-page-normalize.css" />
+  <style>
+    body.page-about #brand {
+      padding-top: clamp(156px, 11vw, 192px) !important;
+      padding-bottom: 92px !important;
+    }
+
+    body.page-about #team {
+      min-height: 880px !important;
+      padding-top: 144px !important;
+      padding-bottom: 156px !important;
+      display: flex !important;
+      flex-direction: column !important;
+      justify-content: center !important;
+    }
+
+    body.page-about #team h2 {
+      margin-bottom: 72px !important;
+    }
+
+    body.page-about #team .founder-layout {
+      min-height: 500px !important;
+    }
+
+    body.page-about #team .founder-name {
+      font-size: clamp(32px, 3.1vw, 44px) !important;
+      line-height: 1.14 !important;
+      margin-bottom: 12px !important;
+    }
+
+    body.page-about #team .founder-role {
+      font-size: clamp(17px, 1.35vw, 20px) !important;
+      line-height: 1.72 !important;
+      font-weight: 600 !important;
+      margin-bottom: 28px !important;
+    }
+
+    body.page-about #team .founder-layout .founder-bio .founder-desc {
+      font-size: 15px !important;
+      line-height: 1.82 !important;
+      color: rgba(255, 255, 255, 0.58) !important;
+      max-width: 560px !important;
+    }
+
+    body.page-about #join .culture-kw {
+      margin-bottom: 16px !important;
+    }
+
+    body.page-about #join .culture-zh {
+      font-size: clamp(40px, 4.2vw, 56px) !important;
+      line-height: 1.02 !important;
+      font-weight: 800 !important;
+      letter-spacing: 0 !important;
+      margin-bottom: 22px !important;
+    }
+
+    body.page-about #join .culture-zh span {
+      display: block !important;
+    }
+
+    @media (max-width: 760px) {
+      body.page-about #brand {
+        padding-top: 120px !important;
+        padding-bottom: 72px !important;
+      }
+
+      body.page-about #team {
+        min-height: auto !important;
+        padding-top: 96px !important;
+        padding-bottom: 104px !important;
+        display: block !important;
+      }
+
+      body.page-about #team h2 {
+        margin-bottom: 48px !important;
+      }
+
+      body.page-about #team .founder-layout {
+        min-height: auto !important;
+      }
+
+      body.page-about #team .founder-name {
+        font-size: 30px !important;
+      }
+
+      body.page-about #team .founder-role {
+        font-size: 16px !important;
+      }
+
+      body.page-about #join .culture-zh {
+        font-size: clamp(38px, 12vw, 50px) !important;
+      }
+    }
+  </style>
 </head>
 <body class="page-about">
 
@@ -900,48 +1226,48 @@ footer {
 
 <!-- ── Screen 1 · 公司理念 / Brand House ── -->
 <section id="brand">
-  <div class="brand-left">
-    <span class="tag animate-in">BRAND HOUSE · 公司理念</span>
-    <div class="threshold-line"></div>
-    <h1 class="animate-in" style="transition-delay:80ms;">跃迁</h1>
-    <p class="sub-h1 animate-in" style="transition-delay:120ms;">让企业进入 AI「自动驾驶」时代</p>
-    <div class="guide-block animate-in" style="transition-delay:200ms;">
-      <div class="guide-line"></div>
-      <div class="guide-text">
-        <p><em>衔远是 AI 原生企业构建者。</em>我们提供企业级 AI 原生平台，陪伴企业从 +AI 工具跃迁到 AI 原生组织。</p>
-        <p>这不是买一套软件，也不是让员工学会使用 AI，而是让每个员工拥有 AI 数字分身，让企业拥有一支可复制、可进化的 AI 专家军团。</p>
-        <p>跃迁不是转型，不是升级，而是系统跨越临界点后进入全新状态。临界点之前，AI 是辅助工具；临界点之后，AI 成为组织能力，系统在每一次使用中持续学习，越用越聪明。</p>
-        <p>这也是企业客户迈向 AGI 时代的惊险一跃，更是衔远的使命所在。</p>
-      </div>
-    </div>
-  </div>
-
-  <div class="brand-proof-row">
-    <div class="brand-house-grid animate-in" style="transition-delay:280ms;" aria-label="衔远品牌屋核心内容">
-      <div class="brand-house-item">
-        <span class="brand-house-key">POSITION · 定位</span>
-        <span class="brand-house-value">AI 原生企业构建者</span>
-      </div>
-      <div class="brand-house-item">
-        <span class="brand-house-key">PLATFORM · 平台</span>
-        <span class="brand-house-value">可持续进化的企业级 AI 原生平台</span>
-      </div>
-      <div class="brand-house-item">
-        <span class="brand-house-key">ME · 员工</span>
-        <span class="brand-house-value">每个员工拥有 AI 数字分身</span>
-      </div>
-      <div class="brand-house-item">
-        <span class="brand-house-key">WE · 企业</span>
-        <span class="brand-house-value">拥有可复制、可进化的 AI 专家军团</span>
+  <div class="brand-hero">
+    <div class="brand-left">
+      <span class="tag animate-in">FRONTIS AI · 公司理念</span>
+      <div class="threshold-line"></div>
+      <h1 class="animate-in" style="transition-delay:80ms;">跃迁</h1>
+      <p class="sub-h1 animate-in" style="transition-delay:120ms;">让企业进入 AI「自动驾驶」时代</p>
+      <div class="guide-block animate-in" style="transition-delay:200ms;">
+        <div class="guide-line"></div>
+        <div class="guide-text">
+          <p><em>AI 原生企业构建者。</em></p>
+          <p>衔远提供企业级 AI 原生平台，陪伴企业从 +AI 工具跃迁到 AI 原生组织。</p>
+          <p>这不是让员工学会使用 AI，而是让每个员工拥有 AI 数字分身，让企业拥有一支可复制、可进化的 AI 专家军团。</p>
+          <p>跃迁不是转型，不是升级，而是系统跨越临界点后进入全新状态。</p>
+          <p>临界点之前，AI 是辅助工具；<br>临界点之后，AI 成为组织能力，系统在每一次使用中持续学习，越用越聪明。</p>
+          <p>这是组织迈向 AGI 时代的惊险一跃，更是衔远的使命所在。</p>
+        </div>
       </div>
     </div>
 
     <div class="brand-right">
-      <div class="brand-threshold-card animate-in" style="transition-delay:340ms;" role="img" aria-label="企业从旧范式跨越临界线进入 AI 原生组织的示意">
-        <div class="threshold-stage threshold-stage--after">
-          <span class="stage-eyebrow">AFTER · AI-NATIVE</span>
-          <span class="stage-title">AI 原生组织</span>
-          <p class="stage-copy">员工拥有数字分身，企业拥有专家军团，系统在真实任务中持续进化。</p>
+      <div class="brand-threshold-card animate-in" style="transition-delay:260ms;" role="img" aria-label="企业从旧范式跨越临界线进入 AI 原生组织的示意">
+        <div class="quantum-state quantum-state--after">
+          <span class="quantum-level">n=2</span>
+          <span class="quantum-line"></span>
+          <span class="quantum-node quantum-node--after"></span>
+          <div class="quantum-copy">
+            <span class="stage-eyebrow">AFTER · AI-NATIVE</span>
+            <span class="stage-title">AI 原生组织</span>
+            <p class="stage-copy">员工拥有数字分身，企业拥有专家军团，系统在真实任务中持续进化。</p>
+          </div>
+        </div>
+        <div class="quantum-leap-rail" aria-hidden="true"></div>
+        <div class="quantum-energy" aria-hidden="true"><span>ΔE<br>input</span></div>
+        <div class="quantum-state quantum-state--before">
+          <span class="quantum-level">n=1</span>
+          <span class="quantum-line"></span>
+          <span class="quantum-node quantum-node--before"></span>
+          <div class="quantum-copy">
+            <span class="stage-eyebrow">BEFORE · +AI</span>
+            <span class="stage-title">+AI 工具</span>
+            <p class="stage-copy">辅助层 · 人脑承载 · 难以复用</p>
+          </div>
         </div>
         <div class="brand-edge-label">
           <i aria-hidden="true"></i>
@@ -950,12 +1276,12 @@ footer {
         </div>
         <div class="brand-signal">
           <span>AGI ERA</span>
-          <strong>向上跃迁<br>越用越聪明</strong>
+          <strong>跃迁<br>越用越聪明</strong>
         </div>
-        <div class="threshold-stage threshold-stage--before">
-          <span class="stage-eyebrow">BEFORE · +AI</span>
-          <span class="stage-title">+AI 工具</span>
-          <p class="stage-copy">AI 停留在辅助层，知识仍由人脑承载，组织能力难以复制和持续进化。</p>
+        <div class="quantum-note" aria-hidden="true">
+          <strong>QUANTUM LEAP</strong>
+          <span>不连续 · 不可回头 · 越过临界</span>
+          <em>这不是+AI工具，也不是转型，是跃迁</em>
         </div>
       </div>
     </div>
@@ -991,58 +1317,35 @@ footer {
     <h2>服务客户</h2>
     <p class="sub">正在帮助领先企业跨越 AI 临界线</p>
   </div>
-  <!-- Row 1 -->
-  <div class="logo-track-wrap" style="margin-bottom:0;">
-    <div class="logo-track row1">
+  <div class="logo-matrix" aria-label="服务客户 logo 墙">
+    <div class="logo-row">
       <div class="logo-cell"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy"></div>
-      <!-- duplicate for seamless loop -->
-      <div class="logo-cell"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy"></div>
     </div>
-  </div>
-  <!-- Row 2 -->
-  <div class="logo-track-wrap">
-    <div class="logo-track row2">
+    <div class="logo-row">
+      <div class="logo-cell"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy"></div>
+    </div>
+    <div class="logo-row">
       <div class="logo-cell"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy"></div>
       <div class="logo-cell"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy"></div>
-      <!-- duplicate -->
-      <div class="logo-cell"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy"></div>
+      <div class="logo-cell"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy"></div>
     </div>
   </div>
 </section>
 
 <!-- ── 加入我们 ── -->
 <section id="join">
-  <!-- 背景大图 + 蒙层 -->
-  <div class="join-bg">
-    <!-- TODO: 将下方 background-image 替换为实际图片
-         推荐：团队合照 / 办公室实景 / 城市夜景
-         规格：1920×900px，深色或高对比度
-         示例：style="background-image:url('https://your-cdn/join-bg.jpg')"
-    -->
-  </div>
+  <!-- 背景色块 + 蒙层 -->
+  <div class="join-bg"></div>
   <div class="join-bg-overlay"></div>
 
   <div class="join-inner">
@@ -1057,17 +1360,17 @@ footer {
     <div class="join-culture animate-in">
       <div class="culture-item">
         <div class="culture-kw">CUSTOMER</div>
-        <div class="culture-zh">成就客户</div>
+        <div class="culture-zh"><span>成就</span><span>客户</span></div>
         <div class="culture-desc">客户的成功，<br>才是我们的成功</div>
       </div>
       <div class="culture-item">
         <div class="culture-kw">OUTCOME</div>
-        <div class="culture-zh">结果导向</div>
+        <div class="culture-zh"><span>结果</span><span>导向</span></div>
         <div class="culture-desc">以终为始，凭数据发言，<br>拿结果说话</div>
       </div>
       <div class="culture-item">
         <div class="culture-kw">NEVER SETTLE</div>
-        <div class="culture-zh">永不满足</div>
+        <div class="culture-zh"><span>永不</span><span>满足</span></div>
         <div class="culture-desc">好奇驱动，进化不止，<br>永不自我设限</div>
       </div>
     </div>
@@ -1085,23 +1388,23 @@ footer {
       <div class="pi-diagram" role="img" aria-label="π 型人才模型图示">
         <div class="pi-diagram-kicker">PI TALENT OPERATING MODEL</div>
         <div class="pi-diagram-stage">
+          <div class="pi-diagram-bottom">
+            <span>自主性</span>
+            <span>掌控力</span>
+            <span>审美与共情</span>
+          </div>
           <div class="pi-beam">ACP 元能力</div>
           <div class="pi-leg pi-leg-left">
             <div class="pi-leg-label">硬核技能</div>
-            <div class="pi-leg-sub">Algorithm / Engineering / System</div>
+            <div class="pi-leg-sub">全栈闭环能力<br>极限兜底能力<br>进化重构能力</div>
           </div>
           <div class="pi-leg pi-leg-right">
             <div class="pi-leg-label">AI 素养</div>
-            <div class="pi-leg-sub">Agent / Business / AI Native</div>
+            <div class="pi-leg-sub">AI任务原子化与定义能力<br>人机协同与实战共生能力<br>AI结果校准与判别能力</div>
           </div>
-          <div class="pi-core">π</div>
+          <div class="pi-core" aria-hidden="true">π</div>
         </div>
-        <div class="pi-diagram-bottom">
-          <span>自主性</span>
-          <span>掌控力</span>
-          <span>审美与共情</span>
-        </div>
-        <div class="pi-diagram-caption">AI 原生时代创造者</div>
+        <div class="pi-diagram-caption">AI原生时代的构建者 AI-Native builder</div>
       </div>
     </div>
 
@@ -1201,7 +1504,7 @@ footer {
           </details>
         </div>
         <div class="join-cta-row">
-          <a href="mailto:hr@frontis.cn">投递简历 → hr@frontis.cn</a>
+          <a href="mailto:hr-public@frontis.cn">投递简历 → hr-public@frontis.cn</a>
         </div>
       </div>
 

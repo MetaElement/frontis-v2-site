@@ -3,8 +3,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>衔远科技 Frontis AI - 打造可持续进化的AI生产力</title>
-  <meta name="description" content="Leadeep AI 领衔者——为企业领导者配备AI专家军团，辅助战略决策、商机跟进与竞情洞察。" />
+  <title>Leadeep AI 领衔者 · 领导者的数字分身和 AI 专家团</title>
+  <meta name="description" content="Leadeep AI 领衔者，为领导者打造可持续进化的数字分身和 AI 专家团，以私域决策中枢沉淀商业直觉、统帅专家协同并持续创造认知复利。" />
+  <link rel="icon" href="./assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
@@ -1104,11 +1105,11 @@
       .footer-grid { grid-template-columns: 1fr 1fr; }
     }
 
-    @media (max-width: 768px) {
-      #hero { flex-direction: column; }
-      .hero-upper,
-      .hero-lower { flex-direction: column; }
-      .hero-upper-left { padding: 40px 24px 32px; }
+	    @media (max-width: 768px) {
+	      #hero { flex-direction: column; }
+	      .hero-upper,
+	      .hero-lower { flex-direction: column; }
+	      .hero-upper-left { padding: 40px 24px 32px; }
       .hero-upper-right { width: 100%; padding: 0 24px; }
       .hero-lower-left { padding: 32px 24px; }
       .hero-lower-right { display: none; }
@@ -1119,14 +1120,726 @@
       #security { padding: 64px 24px; }
       #hardware { padding: 64px 24px; }
       .contact-inner { padding: 64px 24px; }
-      footer { padding: 48px 24px 24px; }
-      .footer-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+	      footer { padding: 48px 24px 24px; }
+	      .footer-grid { grid-template-columns: 1fr; }
+	    }
+
+	    /* ============================================================
+	       Leadeep AI attachment refresh
+	    ============================================================ */
+	    body.leadeep-refresh {
+	      background: var(--pure-white);
+	      color: var(--quantum-black);
+	    }
+
+	    body.leadeep-refresh section {
+	      min-height: auto;
+	      scroll-margin-top: 96px;
+	    }
+
+	    body.leadeep-refresh #hardware,
+	    body.leadeep-refresh #security,
+	    body.leadeep-refresh #contact {
+	      min-height: auto;
+	      display: block;
+	      align-items: initial;
+	      justify-content: initial;
+	    }
+
+	    body.leadeep-refresh #contact {
+	      padding: 0;
+	    }
+
+	    .ld-section {
+	      position: relative;
+	      padding: 108px 80px;
+	      overflow: hidden;
+	    }
+
+	    .ld-inner {
+	      width: min(100%, 1240px);
+	      margin: 0 auto;
+	    }
+
+	    .ld-kicker {
+	      display: inline-flex;
+	      align-items: center;
+	      gap: 10px;
+	      margin-bottom: 18px;
+	      color: var(--threshold-cyan);
+	      font-family: var(--font-en);
+	      font-size: 11px;
+	      font-weight: 600;
+	      letter-spacing: 0.12em;
+	      text-transform: uppercase;
+	    }
+
+	    .ld-kicker::before {
+	      content: "";
+	      width: 28px;
+	      height: 1px;
+	      background: var(--threshold-cyan);
+	    }
+
+	    .ld-title {
+	      margin: 0;
+	      color: var(--quantum-black);
+	      font-family: var(--font-cn);
+	      font-size: clamp(36px, 4.2vw, 64px);
+	      font-weight: 750;
+	      line-height: 1.08;
+	      letter-spacing: 0;
+	      overflow-wrap: anywhere;
+	    }
+
+	    .ld-title--light {
+	      color: var(--pure-white);
+	    }
+
+	    .ld-copy {
+	      max-width: 680px;
+	      margin-top: 22px;
+	      color: var(--level-gray);
+	      font-size: 16px;
+	      line-height: 1.85;
+	      overflow-wrap: anywhere;
+	    }
+
+	    .ld-copy--light {
+	      color: rgba(255, 255, 255, 0.66);
+	    }
+
+	    .ld-edge {
+	      height: 4px;
+	      background: var(--threshold-cyan);
+	    }
+
+	    .ld-actions {
+	      display: flex;
+	      flex-wrap: wrap;
+	      gap: 14px;
+	      margin-top: 34px;
+	    }
+
+	    .ld-btn {
+	      display: inline-flex;
+	      align-items: center;
+	      justify-content: center;
+	      min-height: 50px;
+	      padding: 0 28px;
+	      border: 1px solid var(--quantum-black);
+	      font-size: 15px;
+	      font-weight: 700;
+	      text-decoration: none;
+	      transition: background 180ms var(--ease-threshold), color 180ms var(--ease-threshold), border-color 180ms var(--ease-threshold);
+	    }
+
+	    .ld-btn--black {
+	      background: var(--quantum-black);
+	      color: var(--pure-white);
+	    }
+
+	    .ld-btn--black:hover,
+	    .ld-btn--black:focus-visible {
+	      background: var(--threshold-cyan);
+	      border-color: var(--threshold-cyan);
+	      color: var(--quantum-black);
+	    }
+
+	    .ld-btn--white {
+	      background: var(--pure-white);
+	      color: var(--quantum-black);
+	      border-color: var(--pure-white);
+	    }
+
+	    .ld-btn--white:hover,
+	    .ld-btn--white:focus-visible {
+	      background: var(--threshold-cyan);
+	      border-color: var(--threshold-cyan);
+	      color: var(--quantum-black);
+	    }
+
+	    .ld-btn--ghost {
+	      background: transparent;
+	      color: var(--quantum-black);
+	    }
+
+	    .ld-btn--ghost:hover,
+	    .ld-btn--ghost:focus-visible {
+	      border-color: var(--threshold-cyan);
+	      color: var(--threshold-cyan);
+	    }
+
+	    .ld-btn--ghost-light {
+	      background: transparent;
+	      color: var(--pure-white);
+	      border-color: rgba(255, 255, 255, 0.44);
+	    }
+
+	    .ld-btn--ghost-light:hover,
+	    .ld-btn--ghost-light:focus-visible {
+	      border-color: var(--threshold-cyan);
+	      color: var(--threshold-cyan);
+	    }
+
+	    .ld-visual-frame {
+	      position: relative;
+	      border: 1px solid #dfe4e8;
+	      background: var(--pure-white);
+	      overflow: hidden;
+	    }
+
+	    .ld-visual-frame img {
+	      width: 100%;
+	      height: auto;
+	      object-fit: contain;
+	    }
+
+	    body.leadeep-refresh #hero.ld-hero {
+	      display: block;
+	      min-height: auto;
+	      padding-top: var(--nav-height);
+	      background: var(--pure-white);
+	    }
+
+	    .ld-hero__upper {
+	      padding: 64px 80px 54px;
+	      background: var(--pure-white);
+	    }
+
+	    .ld-hero__grid {
+	      display: grid;
+	      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.72fr);
+	      gap: 72px;
+	      align-items: end;
+	      width: min(100%, 1240px);
+	      margin: 0 auto;
+	    }
+
+	    .ld-hero__title {
+	      max-width: 820px;
+	      margin: 0;
+	      color: var(--quantum-black);
+	      font-size: clamp(52px, 6.4vw, 96px);
+	      font-weight: 780;
+	      line-height: 0.98;
+	      letter-spacing: 0;
+	      overflow-wrap: anywhere;
+	    }
+
+	    .ld-hero__title span {
+	      display: block;
+	    }
+
+	    .ld-hero__lead {
+	      max-width: 720px;
+	      margin: 28px 0 0;
+	      color: var(--level-gray);
+	      font-size: clamp(18px, 1.5vw, 22px);
+	      line-height: 1.72;
+	      overflow-wrap: anywhere;
+	    }
+
+	    .ld-hero__visual {
+	      min-height: 520px;
+	      padding: 28px;
+	      display: flex;
+	      align-items: center;
+	      justify-content: center;
+	      border-color: #dfe4e8;
+	    }
+
+	    .ld-hero__visual img {
+	      width: 100%;
+	      max-width: 100%;
+	      height: auto;
+	      max-height: 520px;
+	      object-fit: contain;
+	    }
+
+	    .ld-hero__lower {
+	      background: var(--quantum-black);
+	      color: var(--pure-white);
+	      padding: 36px 80px 44px;
+	    }
+
+	    .ld-hero__lower-inner {
+	      display: grid;
+	      grid-template-columns: minmax(0, 1fr) auto;
+	      gap: 56px;
+	      align-items: center;
+	      width: min(100%, 1240px);
+	      margin: 0 auto;
+	    }
+
+	    .ld-hero__statement {
+	      max-width: 760px;
+	      color: rgba(255, 255, 255, 0.72);
+	      font-size: 15px;
+	      line-height: 1.8;
+	      overflow-wrap: anywhere;
+	    }
+
+	    .ld-proof-strip {
+	      display: grid;
+	      grid-template-columns: repeat(3, minmax(100px, 1fr));
+	      border: 1px solid rgba(255, 255, 255, 0.16);
+	    }
+
+	    .ld-proof-strip div {
+	      padding: 18px 22px;
+	      border-right: 1px solid rgba(255, 255, 255, 0.16);
+	    }
+
+	    .ld-proof-strip div:last-child {
+	      border-right: 0;
+	    }
+
+	    .ld-proof-strip strong {
+	      display: block;
+	      color: var(--threshold-cyan);
+	      font-family: var(--font-mono);
+	      font-size: 22px;
+	      line-height: 1;
+	    }
+
+	    .ld-proof-strip span {
+	      display: block;
+	      margin-top: 8px;
+	      color: rgba(255, 255, 255, 0.56);
+	      font-size: 12px;
+	      white-space: nowrap;
+	    }
+
+	    .ld-two-col {
+	      display: grid;
+	      grid-template-columns: minmax(0, 0.95fr) minmax(360px, 1fr);
+	      gap: 72px;
+	      align-items: center;
+	    }
+
+	    .ld-panel-stack {
+	      display: grid;
+	      gap: 0;
+	      border-top: 1px solid #dfe4e8;
+	    }
+
+	    .ld-panel {
+	      padding: 28px 0;
+	      border-bottom: 1px solid #dfe4e8;
+	    }
+
+	    .ld-panel strong,
+	    .ld-dark-panel strong {
+	      display: block;
+	      margin-bottom: 10px;
+	      color: var(--quantum-black);
+	      font-size: 22px;
+	      line-height: 1.3;
+	    }
+
+	    .ld-panel p,
+	    .ld-dark-panel p {
+	      margin: 0;
+	      color: var(--level-gray);
+	      font-size: 15px;
+	      line-height: 1.8;
+	    }
+
+	    .ld-system-visual {
+	      padding: 28px;
+	    }
+
+	    .ld-hardware {
+	      background: var(--quantum-black);
+	      color: var(--pure-white);
+	    }
+
+	    .ld-hardware-grid {
+	      display: grid;
+	      grid-template-columns: minmax(360px, 0.86fr) minmax(0, 1fr);
+	      gap: 72px;
+	      align-items: center;
+	    }
+
+	    .ld-device-photo {
+	      min-height: clamp(500px, 42vw, 620px);
+	      padding: 0;
+	      background: #050505;
+	      border-color: rgba(0, 193, 212, 0.54);
+	    }
+
+	    .ld-device-photo img {
+	      position: absolute;
+	      inset: 0;
+	      width: 100%;
+	      height: 100%;
+	      object-fit: cover;
+	      object-position: center;
+	      transform: scale(1.34);
+	      transform-origin: center;
+	    }
+
+	    .ld-spec-grid {
+	      display: grid;
+	      grid-template-columns: repeat(3, minmax(0, 1fr));
+	      margin-top: 34px;
+	      border-top: 1px solid rgba(255, 255, 255, 0.16);
+	      border-left: 1px solid rgba(255, 255, 255, 0.16);
+	    }
+
+	    .ld-spec-grid div {
+	      min-height: 124px;
+	      padding: 22px;
+	      border-right: 1px solid rgba(255, 255, 255, 0.16);
+	      border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+	    }
+
+	    .ld-spec-grid strong {
+	      display: block;
+	      color: var(--threshold-cyan);
+	      font-family: var(--font-mono);
+	      font-size: 12px;
+	      letter-spacing: 0.08em;
+	      text-transform: uppercase;
+	    }
+
+	    .ld-spec-grid span {
+	      display: block;
+	      margin-top: 16px;
+	      color: rgba(255, 255, 255, 0.82);
+	      font-size: 15px;
+	      line-height: 1.55;
+	    }
+
+	    .ld-expert-gallery {
+	      display: grid;
+	      grid-template-columns: repeat(3, minmax(0, 1fr));
+	      gap: 24px;
+	      margin-top: 56px;
+	    }
+
+	    .ld-expert-card {
+	      display: grid;
+	      grid-template-columns: minmax(150px, 0.54fr) minmax(0, 1fr);
+	      gap: 22px;
+	      align-items: center;
+	      border: 1px solid #dfe4e8;
+	      padding: 20px;
+	      background: var(--pure-white);
+	    }
+
+	    .ld-expert-card img {
+	      width: 100%;
+	      max-height: 340px;
+	      object-fit: contain;
+	      background: #f7fbfb;
+	    }
+
+	    .ld-expert-card strong {
+	      display: block;
+	      color: var(--quantum-black);
+	      font-size: 22px;
+	      line-height: 1.25;
+	      margin-bottom: 10px;
+	    }
+
+	    .ld-expert-card p {
+	      margin: 0;
+	      color: var(--level-gray);
+	      font-size: 14px;
+	      line-height: 1.76;
+	    }
+
+	    .ld-foundation {
+	      background: var(--quantum-black);
+	      color: var(--pure-white);
+	    }
+
+	    .ld-foundation-grid {
+	      display: grid;
+	      grid-template-columns: repeat(3, minmax(0, 1fr));
+	      margin-top: 58px;
+	      border-top: 1px solid rgba(0, 193, 212, 0.66);
+	      border-left: 1px solid rgba(255, 255, 255, 0.14);
+	    }
+
+	    .ld-foundation-item {
+	      min-height: 270px;
+	      padding: 30px;
+	      border-right: 1px solid rgba(255, 255, 255, 0.14);
+	      border-bottom: 1px solid rgba(255, 255, 255, 0.14);
+	    }
+
+	    .ld-foundation-item em {
+	      display: block;
+	      color: var(--threshold-cyan);
+	      font-family: var(--font-mono);
+	      font-size: 12px;
+	      font-style: normal;
+	      letter-spacing: 0.12em;
+	      text-transform: uppercase;
+	      margin-bottom: 36px;
+	    }
+
+	    .ld-foundation-item strong {
+	      display: block;
+	      color: var(--pure-white);
+	      font-size: 28px;
+	      line-height: 1.16;
+	      margin-bottom: 16px;
+	    }
+
+	    .ld-foundation-item p {
+	      margin: 0;
+	      color: rgba(255, 255, 255, 0.62);
+	      font-size: 15px;
+	      line-height: 1.78;
+	    }
+
+	    .ld-security-layout {
+	      display: grid;
+	      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.52fr);
+	      gap: 70px;
+	      align-items: center;
+	    }
+
+	    .ld-security-visual {
+	      max-width: 380px;
+	      margin-left: auto;
+	      padding: 18px;
+	      background: var(--pure-white);
+	    }
+
+	    .ld-security-list {
+	      display: grid;
+	      gap: 0;
+	      margin-top: 40px;
+	      border-top: 1px solid #dfe4e8;
+	    }
+
+	    .ld-security-row {
+	      display: grid;
+	      grid-template-columns: 44px minmax(0, 1fr);
+	      gap: 20px;
+	      padding: 24px 0;
+	      border-bottom: 1px solid #dfe4e8;
+	    }
+
+	    .ld-security-row i {
+	      width: 12px;
+	      height: 12px;
+	      margin-top: 7px;
+	      background: var(--threshold-cyan);
+	      display: block;
+	    }
+
+	    .ld-final {
+	      padding: 0;
+	      background: var(--pure-white);
+	    }
+
+	    .ld-final-grid {
+	      display: grid;
+	      grid-template-columns: minmax(0, 1fr) minmax(380px, 0.74fr);
+	      min-height: 720px;
+	    }
+
+	    .ld-final-copy {
+	      padding: 108px 80px;
+	      display: flex;
+	      flex-direction: column;
+	      justify-content: center;
+	    }
+
+	    .ld-final-visual {
+	      position: relative;
+	      min-height: 580px;
+	      background: var(--quantum-black);
+	      overflow: hidden;
+	    }
+
+	    .ld-final-visual img {
+	      width: 100%;
+	      height: 100%;
+	      object-fit: cover;
+	      object-position: center;
+	    }
+
+	    .ld-final-metrics {
+	      display: grid;
+	      grid-template-columns: repeat(3, minmax(0, 1fr));
+	      gap: 0;
+	      margin-top: 40px;
+	      border-top: 1px solid #dfe4e8;
+	      border-left: 1px solid #dfe4e8;
+	    }
+
+	    .ld-final-metrics div {
+	      min-height: 112px;
+	      padding: 20px;
+	      border-right: 1px solid #dfe4e8;
+	      border-bottom: 1px solid #dfe4e8;
+	    }
+
+	    .ld-final-metrics strong {
+	      display: block;
+	      color: var(--quantum-black);
+	      font-family: var(--font-mono);
+	      font-size: 24px;
+	    }
+
+	    .ld-final-metrics span {
+	      display: block;
+	      margin-top: 8px;
+	      color: var(--level-gray);
+	      font-size: 13px;
+	      line-height: 1.5;
+	    }
+
+	    .ld-contact-line {
+	      display: grid;
+	      gap: 10px;
+	      margin-top: 30px;
+	      color: var(--level-gray);
+	      font-size: 13px;
+	      line-height: 1.6;
+	    }
+
+	    .ld-contact-line a {
+	      color: var(--quantum-black);
+	      font-family: var(--font-mono);
+	    }
+
+	    @media (max-width: 1100px) {
+	      .ld-section,
+	      .ld-hero__upper,
+	      .ld-hero__lower,
+	      .ld-final-copy {
+	        padding-left: 40px;
+	        padding-right: 40px;
+	      }
+
+	      .ld-hero__grid,
+	      .ld-two-col,
+	      .ld-hardware-grid,
+	      .ld-security-layout,
+	      .ld-final-grid {
+	        grid-template-columns: 1fr;
+	      }
+
+	      .ld-hero__lower-inner {
+	        grid-template-columns: 1fr;
+	      }
+
+	      .ld-expert-gallery,
+	      .ld-foundation-grid {
+	        grid-template-columns: 1fr;
+	      }
+	    }
+
+	    @media (max-width: 720px) {
+	      .ld-section,
+	      .ld-hero__upper,
+	      .ld-hero__lower,
+	      .ld-final-copy {
+	        padding: 72px 20px;
+	      }
+
+	      .ld-inner,
+	      .ld-hero__grid,
+	      .ld-hero__lower-inner {
+	        width: 100%;
+	        max-width: calc(100vw - 40px);
+	      }
+
+	      .ld-title {
+	        max-width: calc(100vw - 64px);
+	        font-size: clamp(30px, 8.6vw, 36px);
+	        line-height: 1.12;
+	      }
+
+	      .ld-copy {
+	        font-size: 14px;
+	        line-height: 1.75;
+	      }
+
+	      .ld-hero__upper {
+	        padding-top: 44px;
+	        padding-bottom: 40px;
+	      }
+
+	      .ld-hero__grid,
+	      .ld-two-col,
+	      .ld-hardware-grid,
+	      .ld-security-layout {
+	        gap: 36px;
+	      }
+
+	      .ld-hero__title {
+	        font-size: clamp(38px, 11.2vw, 52px);
+	        line-height: 1.04;
+	      }
+
+	      .ld-hero__visual,
+	      .ld-device-photo {
+	        width: 100%;
+	        max-width: calc(100vw - 48px);
+	        min-height: 320px;
+	        padding: 0;
+	      }
+
+	      .ld-hero__visual img {
+	        width: 82%;
+	        max-width: 280px;
+	      }
+
+	      .ld-hero__lead,
+	      .ld-hero__statement,
+	      .ld-copy,
+	      .ld-panel p {
+	        max-width: calc(100vw - 64px);
+	        word-break: break-all;
+	      }
+
+	      .ld-proof-strip,
+	      .ld-spec-grid,
+	      .ld-final-metrics {
+	        grid-template-columns: 1fr;
+	      }
+
+	      .ld-proof-strip div {
+	        border-right: 0;
+	        border-bottom: 1px solid rgba(255, 255, 255, 0.16);
+	      }
+
+	      .ld-proof-strip div:last-child {
+	        border-bottom: 0;
+	      }
+
+	      .ld-expert-card {
+	        grid-template-columns: 1fr;
+	      }
+
+	      .ld-security-row {
+	        grid-template-columns: 24px minmax(0, 1fr);
+	      }
+
+	      .ld-final-grid {
+	        display: flex;
+	        flex-direction: column-reverse;
+	        min-height: auto;
+	      }
+
+	      .ld-final-visual {
+	        min-height: 420px;
+	      }
+	    }
+	  </style>
   <link rel="stylesheet" href="./components/site-shell.css" />
 </head>
 
-<body>
+<body class="leadeep-refresh">
 
   <!-- ============================================================
        Navigation
@@ -1134,495 +1847,220 @@
   <div data-site-header></div>
 
 
-  <!-- ============================================================
-       Section 1 — Hero 区
-  ============================================================ -->
-  <section id="hero">
-
-    <!-- 上半白色区域 -->
-    <div class="hero-upper">
-
-      <!-- 左侧内容 -->
-      <div class="hero-upper-left">
-        <!-- 小标签 -->
-        <div class="hero-scene-tag animate-in">
-          STRATEGIC MANAGEMENT · 战略管理专家团
-        </div>
-
-        <!-- 大标题 H0 -->
-        <h1 class="hero-h0 animate-in delay-1">
-          战略管理<br />专家团
-        </h1>
-
-        <!-- 副品牌标识 -->
-        <div class="hero-sub-brand animate-in delay-2">
-          <div class="hero-sub-brand-line"></div>
-          <div>
-            <span class="hero-sub-brand-text">Leadeep AI · 领衔者</span>
-            <span class="hero-sub-brand-divider">|</span>
-            <span class="hero-sub-brand-mono">DECISION AI</span>
+  <main class="leadeep-page">
+    <section id="hero" class="ld-hero" aria-labelledby="hero-title">
+      <div class="ld-hero__upper">
+        <div class="ld-hero__grid">
+          <div class="animate-in">
+            <div class="ld-kicker">LEADEEP AI · 领衔者</div>
+            <h1 id="hero-title" class="ld-hero__title">
+              <span>领导者的</span>
+              <span>数字分身和</span>
+              <span>AI 专家团</span>
+            </h1>
+            <p class="ld-hero__lead">
+              专为您量身定制的私域决策中枢。<br />
+              无感沉淀商业直觉，克隆您的数字分身，<br />
+              统帅 AI 专家团破局变现。
+            </p>
+            <div class="ld-actions">
+              <a class="ld-btn ld-btn--black" href="https://web.leadeepai.com/download" target="_blank" rel="noopener">下载 App</a>
+              <a class="ld-btn ld-btn--ghost" href="#pain">查看系统</a>
+            </div>
+          </div>
+          <div class="ld-visual-frame ld-hero__visual animate-in delay-2">
+            <img src="./assets/leadeep-ai/leadeep-hero-device.png" alt="Leadeep AI 手机端与录音卡产品展示" />
           </div>
         </div>
-
-        <!-- 副文案 -->
-        <p class="hero-copy animate-in delay-3">
-          为企业领导者配备 AI 专家军团<br />
-          辅助战略决策、商机跟进与竞情洞察
-        </p>
       </div>
-
-      <!-- 右侧图片（从上延伸到黑色区域） -->
-      <div class="hero-upper-right animate-in delay-2">
-        <div class="img-placeholder hero-img-wrap">
-          [待提供：Leadeep AI 产品界面截图]
-        </div>
-      </div>
-    </div>
-
-    <!-- The Edge 临界线 -->
-    <div class="hero-edge-wrap">
-      <div class="edge-line"></div>
-    </div>
-
-    <!-- 下半黑色区域 -->
-    <div class="hero-lower">
-      <div class="hero-lower-left">
-        <a href="#contact" class="btn-outline-white animate-in delay-1" style="align-self:flex-start;">
-          申请体验 →
-        </a>
-      </div>
-      <div class="hero-lower-right">
-        <!-- 右侧图片下半部分延伸（视觉连续） -->
-      </div>
-    </div>
-
-  </section>
-
-
-  <!-- ============================================================
-       Section 2 — Agent 专家团（核心）
-  ============================================================ -->
-  <section id="agents">
-
-    <!-- 标题区 -->
-    <div class="agents-header">
-      <div class="label-tag animate-in">AGENT ROSTER · 专家团 Agent</div>
-      <h2 class="section-title-large animate-in delay-1">
-        4 位 AI 专家，覆盖战略决策全链路
-      </h2>
-    </div>
-
-    <!-- Agent 卡片网格 -->
-    <div class="agents-grid">
-
-      <!-- Agent 1：战略复盘专家 -->
-      <div class="agent-card animate-in-up delay-1">
-        <div class="agent-card-icon">
-          <div class="agent-card-num">AGENT / 01</div>
-          <!-- SVG：会议/文档主题，量子黑背景，青色线条 -->
-          <svg class="agent-icon-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="56" height="56" fill="#000000"/>
-            <!-- 文档主体 -->
-            <rect x="13" y="10" width="24" height="30" stroke="#00C1D4" stroke-width="1.5"/>
-            <!-- 文档折角 -->
-            <polyline points="31,10 37,10 37,16 31,16 31,10" stroke="#00C1D4" stroke-width="1.5" fill="none"/>
-            <!-- 文字行 -->
-            <line x1="17" y1="21" x2="29" y2="21" stroke="#00C1D4" stroke-width="1.2" opacity="0.6"/>
-            <line x1="17" y1="26" x2="33" y2="26" stroke="#00C1D4" stroke-width="1.2" opacity="0.6"/>
-            <line x1="17" y1="31" x2="27" y2="31" stroke="#00C1D4" stroke-width="1.2" opacity="0.4"/>
-            <!-- 能量节点 -->
-            <circle cx="43" cy="38" r="3" fill="#00C1D4" opacity="0.9"/>
-            <circle cx="43" cy="46" r="2" fill="#00C1D4" opacity="0.4"/>
-            <!-- 连接线 -->
-            <line x1="37" y1="38" x2="40" y2="38" stroke="#00C1D4" stroke-width="1" opacity="0.5"/>
-          </svg>
-        </div>
-        <!-- 截图占位 -->
-        <div class="agent-card-img img-placeholder">[Agent截图]</div>
-        <div class="agent-card-body">
-          <div class="agent-card-name">战略复盘专家</div>
-          <div class="agent-card-en">Strategy Review Agent</div>
-          <p class="agent-card-desc">自动提炼会议录音中的决策主线与跟进事项，形成结构化复盘报告，帮助团队将每次决策沉淀为可追溯的战略资产。</p>
-        </div>
-      </div>
-
-      <!-- Agent 2：商机跟进专家 -->
-      <div class="agent-card animate-in-up delay-2">
-        <div class="agent-card-icon">
-          <div class="agent-card-num">AGENT / 02</div>
-          <!-- SVG：折线图/增长，青色+橙色节点 -->
-          <svg class="agent-icon-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="56" height="56" fill="#000000"/>
-            <!-- 坐标轴 -->
-            <line x1="10" y1="42" x2="46" y2="42" stroke="#00C1D4" stroke-width="1.2" opacity="0.4"/>
-            <line x1="10" y1="10" x2="10" y2="42" stroke="#00C1D4" stroke-width="1.2" opacity="0.4"/>
-            <!-- 增长折线 -->
-            <polyline points="12,38 20,30 28,32 36,20 44,14" stroke="#00C1D4" stroke-width="1.8" fill="none"/>
-            <!-- 数据节点 -->
-            <circle cx="12" cy="38" r="2.5" fill="#00C1D4"/>
-            <circle cx="20" cy="30" r="2.5" fill="#00C1D4"/>
-            <circle cx="28" cy="32" r="2.5" fill="#00C1D4"/>
-            <!-- 橙色峰值节点 -->
-            <circle cx="36" cy="20" r="3.5" fill="#FA5F26"/>
-            <circle cx="44" cy="14" r="2.5" fill="#00C1D4"/>
-          </svg>
-        </div>
-        <!-- 截图占位 -->
-        <div class="agent-card-img img-placeholder">[Agent截图]</div>
-        <div class="agent-card-body">
-          <div class="agent-card-name">商机跟进专家</div>
-          <div class="agent-card-en">Opportunity Tracker Agent</div>
-          <p class="agent-card-desc">识别客户信号，自动生成跟进优先级与行动建议，找到隐藏销售机会，让每一个潜在商机都不被遗漏。</p>
-        </div>
-      </div>
-
-      <!-- Agent 3：竞情简报专家 -->
-      <div class="agent-card animate-in-up delay-3">
-        <div class="agent-card-icon">
-          <div class="agent-card-num">AGENT / 03</div>
-          <!-- SVG：雷达/监控，青色波纹 -->
-          <svg class="agent-icon-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="56" height="56" fill="#000000"/>
-            <!-- 雷达同心圆 -->
-            <circle cx="28" cy="28" r="16" stroke="#00C1D4" stroke-width="1" opacity="0.25"/>
-            <circle cx="28" cy="28" r="10" stroke="#00C1D4" stroke-width="1" opacity="0.45"/>
-            <circle cx="28" cy="28" r="5"  stroke="#00C1D4" stroke-width="1" opacity="0.7"/>
-            <!-- 十字准线 -->
-            <line x1="28" y1="10" x2="28" y2="46" stroke="#00C1D4" stroke-width="1" opacity="0.2"/>
-            <line x1="10" y1="28" x2="46" y2="28" stroke="#00C1D4" stroke-width="1" opacity="0.2"/>
-            <!-- 雷达扫描线 -->
-            <line x1="28" y1="28" x2="44" y2="16" stroke="#00C1D4" stroke-width="1.5" opacity="0.7"/>
-            <!-- 中心点 -->
-            <circle cx="28" cy="28" r="2.5" fill="#00C1D4"/>
-            <!-- 探测点 -->
-            <circle cx="38" cy="18" r="2" fill="#00C1D4" opacity="0.8"/>
-            <circle cx="42" cy="22" r="1.5" fill="#00C1D4" opacity="0.5"/>
-          </svg>
-        </div>
-        <!-- 截图占位 -->
-        <div class="agent-card-img img-placeholder">[Agent截图]</div>
-        <div class="agent-card-body">
-          <div class="agent-card-name">竞情简报专家</div>
-          <div class="agent-card-en">Competitive Intel Agent</div>
-          <p class="agent-card-desc">持续监控竞对动态，定期生成管理简报，帮你掌握行业节奏，在战略博弈中始终保持信息优势。</p>
-        </div>
-      </div>
-
-      <!-- Agent 4：高管周报专家 -->
-      <div class="agent-card animate-in-up delay-4">
-        <div class="agent-card-icon">
-          <div class="agent-card-num">AGENT / 04</div>
-          <!-- SVG：文档+笔，青色线条 -->
-          <svg class="agent-icon-svg" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-            <rect width="56" height="56" fill="#000000"/>
-            <!-- 文档 -->
-            <rect x="11" y="12" width="26" height="32" stroke="#00C1D4" stroke-width="1.5"/>
-            <!-- 文字行 -->
-            <line x1="15" y1="20" x2="31" y2="20" stroke="#00C1D4" stroke-width="1.2" opacity="0.6"/>
-            <line x1="15" y1="25" x2="33" y2="25" stroke="#00C1D4" stroke-width="1.2" opacity="0.6"/>
-            <line x1="15" y1="30" x2="28" y2="30" stroke="#00C1D4" stroke-width="1.2" opacity="0.4"/>
-            <!-- 钢笔/画笔 -->
-            <rect x="36" y="28" width="6" height="16" rx="0" stroke="#00C1D4" stroke-width="1.5" transform="rotate(-45 39 36)"/>
-            <!-- 笔尖 -->
-            <polygon points="41,43 44,46 38,46" fill="#00C1D4" opacity="0.8"/>
-            <!-- 能量节点 -->
-            <circle cx="44" cy="14" r="2.5" fill="#00C1D4" opacity="0.6"/>
-          </svg>
-        </div>
-        <!-- 截图占位 -->
-        <div class="agent-card-img img-placeholder">[Agent截图]</div>
-        <div class="agent-card-body">
-          <div class="agent-card-name">高管周报专家</div>
-          <div class="agent-card-en">Executive Report Agent</div>
-          <p class="agent-card-desc">口述关键判断，自动生成结构化管理简报，沉淀决策洞察，让每一次思考都成为可传递的管理智识。</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       Section 3 — 产品形态（深色背景）
-  ============================================================ -->
-  <section id="product-forms">
-    <!-- The Edge 临界线 -->
-    <div class="edge-line"></div>
-
-    <div class="product-forms-inner">
-      <!-- 标题区 -->
-      <div class="product-forms-header">
-        <div class="label-tag animate-in" style="color:var(--threshold-cyan);">PRODUCT FORMS · 产品形态</div>
-        <h2 class="section-title-light animate-in delay-1">
-          三种形态，让 AI 专家随时待命
-        </h2>
-      </div>
-
-      <!-- 三栏布局 -->
-      <div class="products-grid">
-
-        <!-- 左：随身录音卡片 -->
-        <div class="product-col animate-in delay-1">
-          <div class="product-col-img img-placeholder-dark">[录音卡片实物图]</div>
-          <div class="product-col-name">随身录音卡片</div>
-          <p class="product-col-desc">信用卡大小，随身携带。会议、拜访、电话全程录音，自动上传分析，让每一次对话都不被遗漏。</p>
-        </div>
-
-        <!-- 中：Leadeep App -->
-        <div class="product-col animate-in delay-2">
-          <div class="product-col-img img-placeholder-dark">[App 主界面截图]</div>
-          <div class="product-col-name">Leadeep App</div>
-          <p class="product-col-desc">AI 秘书随时待命，语音指令直接执行，一句话触发专家分析，决策支持触手可及。</p>
-        </div>
-
-        <!-- 右：AI 数字分身 -->
-        <div class="product-col animate-in delay-3">
-          <!-- AI 数字分身 SVG 图形 -->
-          <div style="height:150px;background:#0a0a0a;border:1px solid #00C1D4;display:flex;align-items:center;justify-content:center;margin-bottom:28px;">
-            <svg width="100" height="100" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-              <!-- 人物轮廓 -->
-              <circle cx="50" cy="30" r="14" stroke="#00C1D4" stroke-width="1.5"/>
-              <path d="M22 80 Q22 58 50 58 Q78 58 78 80" stroke="#00C1D4" stroke-width="1.5" fill="none"/>
-              <!-- AI 光环圆 -->
-              <circle cx="50" cy="30" r="22" stroke="#00C1D4" stroke-width="0.8" stroke-dasharray="3 4" opacity="0.5"/>
-              <circle cx="50" cy="30" r="30" stroke="#00C1D4" stroke-width="0.5" stroke-dasharray="2 6" opacity="0.25"/>
-              <!-- 能量节点 -->
-              <circle cx="50" cy="8"  r="2.5" fill="#00C1D4"/>
-              <circle cx="72" cy="16" r="2"   fill="#00C1D4" opacity="0.7"/>
-              <circle cx="80" cy="38" r="2"   fill="#00C1D4" opacity="0.5"/>
-              <circle cx="28" cy="16" r="2"   fill="#00C1D4" opacity="0.7"/>
-              <circle cx="20" cy="38" r="2"   fill="#00C1D4" opacity="0.5"/>
-              <!-- 连接线 -->
-              <line x1="50" y1="8"  x2="50" y2="8"  stroke="#00C1D4" stroke-width="1" opacity="0.4"/>
-              <line x1="72" y1="16" x2="62" y2="22" stroke="#00C1D4" stroke-width="0.8" opacity="0.4"/>
-              <line x1="28" y1="16" x2="38" y2="22" stroke="#00C1D4" stroke-width="0.8" opacity="0.4"/>
-              <!-- 数据流点 -->
-              <circle cx="85" cy="55" r="1.5" fill="#00C1D4" opacity="0.6"/>
-              <circle cx="88" cy="62" r="1"   fill="#00C1D4" opacity="0.4"/>
-              <circle cx="15" cy="55" r="1.5" fill="#00C1D4" opacity="0.6"/>
-            </svg>
+      <div class="ld-edge" aria-hidden="true"></div>
+      <div class="ld-hero__lower">
+        <div class="ld-hero__lower-inner">
+          <p class="ld-hero__statement animate-in">
+            企业的增长天花板，往往卡在管理者的认知带宽上。领衔者让高价值商业直觉不再开完即焚，而是持续进入个人和组织的私域决策系统。
+          </p>
+          <div class="ld-proof-strip animate-in delay-2" aria-label="Leadeep AI 核心结构">
+            <div><strong>1</strong><span>物理抓手</span></div>
+            <div><strong>3</strong><span>高维中枢</span></div>
+            <div><strong>A2A</strong><span>商机网络</span></div>
           </div>
-          <div class="product-col-name">AI 数字分身</div>
-          <p class="product-col-desc">持续学习你的决策风格，越用越懂你，形成专属 AI 秘书，让你的管理智慧以数字形式永续传承。</p>
         </div>
-
       </div>
-    </div>
-  </section>
+    </section>
 
-
-  <!-- ============================================================
-       Section 4 — 数据安全（余能灰背景）
-  ============================================================ -->
-  <section id="security">
-
-    <!-- 标题区 -->
-    <div class="security-header">
-      <div class="label-tag animate-in">SECURITY PROMISE · 安全承诺</div>
-      <h2 class="section-title-dark animate-in delay-1">
-        数据安全，是你的专属资产
-      </h2>
-    </div>
-
-    <!-- 三栏安全条目 -->
-    <div class="security-grid">
-
-      <!-- 硬件级加密 -->
-      <div class="security-item animate-in delay-1">
-        <div class="security-item-line"></div>
-        <div class="security-item-body">
-          <div class="security-item-title">
-            <div class="energy-dot"></div>
-            硬件级加密
+    <section id="pain" class="ld-section" aria-labelledby="pain-title">
+      <div class="ld-inner ld-two-col">
+        <div class="animate-in">
+          <div class="ld-kicker">PAIN TO MODE · 直击痛点</div>
+          <h2 id="pain-title" class="ld-title">开启“立法者模式”，<br />把执行交给进化。</h2>
+          <p class="ld-copy">
+            每天在繁杂会议和无效社交中消耗精力，遇到复杂决策只能独自拍脑袋承担风险。Leadeep 不是效率工具，而是由 “1 个物理抓手 + 3 大高维中枢” 构成的软硬一体增长系统。
+          </p>
+          <div class="ld-panel-stack">
+            <div class="ld-panel">
+              <strong>管理者设定规则与边界</strong>
+              <p>领导者负责判断、规则和商业边界，不再被信息过滤、纪要整理和资源撮合拖住。</p>
+            </div>
+            <div class="ld-panel">
+              <strong>数字分身接管推演与协同</strong>
+              <p>情报过滤、方案推演、专家协作与资源撮合，交给专属数字分身和 AI 专家团持续完成。</p>
+            </div>
           </div>
-          <p class="security-item-desc">
-            录音数据在设备端完成加密，传输过程端到端保护，无任何明文外泄风险。你的每一段对话，从录音的那一刻起就受到军工级保护。
+        </div>
+        <div class="ld-visual-frame ld-system-visual animate-in delay-2">
+          <img src="./assets/leadeep-ai/leadeep-growth-system.png" alt="Leadeep AI 由智能录音卡、AI智能中枢、战略顾问团和超级商务分身构成的增长系统" />
+        </div>
+      </div>
+    </section>
+
+    <section id="hardware" class="ld-section ld-hardware" aria-labelledby="hardware-title">
+      <div class="ld-inner ld-hardware-grid">
+        <div class="ld-visual-frame ld-device-photo animate-in">
+          <img src="./assets/leadeep-ai/leadeep-recorder-card.png" alt="Leadeep AI 智能录音卡产品图" />
+        </div>
+        <div class="animate-in delay-2">
+          <div class="ld-kicker">PHYSICAL CAPTURE · 物理抓手</div>
+          <h2 id="hardware-title" class="ld-title ld-title--light">摆脱手机束缚，<br />物理级截流商业智慧。</h2>
+          <p class="ld-copy ld-copy--light">
+            在高端商务洽谈中，它以 10 米远场拾音和四麦克风降噪阵列，无感记录每一次对话。您的大脑只负责高维战略交流，它悄无声息地将转瞬即逝的灵感和隐性信息，100% 结构化沉淀为公司的私有数字资产。
+          </p>
+          <div class="ld-spec-grid" aria-label="智能录音卡核心能力">
+            <div><strong>10M</strong><span>远场拾音，覆盖商务洽谈和会议空间。</span></div>
+            <div><strong>4 MIC</strong><span>四麦克风降噪阵列，稳定捕捉关键对话。</span></div>
+            <div><strong>PRIVATE</strong><span>从录音开始沉淀为可追溯的私有资产。</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="experts" class="ld-section" aria-labelledby="experts-title">
+      <div class="ld-inner">
+        <div class="animate-in">
+          <div class="ld-kicker">AI EXPERTS · 高维中枢</div>
+          <h2 id="experts-title" class="ld-title">随时召开虚拟董事会，<br />让商务分身永不下班。</h2>
+          <p class="ld-copy">
+            遇到棘手难题，数字分身立刻拉起 AI 财务专家、AI 法务专家联合兵棋推演。激活 A2A 撮合网络后，它会在云端 24 小时寻源，通过 AI 间的双盲试探，把对口大单的决策人联系方式推送到手机。
           </p>
         </div>
+        <div class="ld-expert-gallery">
+          <article class="ld-expert-card animate-in-up delay-1">
+            <img src="./assets/leadeep-ai/leadeep-board-expert.png" alt="Leadeep AI 决策 AI 专家界面示意" />
+            <div>
+              <strong>决策中枢</strong>
+              <p>复杂议题不再靠单点拍板，而是由数字分身调度专家团输出客观破局报告。</p>
+            </div>
+          </article>
+          <article class="ld-expert-card animate-in-up delay-2">
+            <img src="./assets/leadeep-ai/leadeep-intel-expert.png" alt="Leadeep AI 商业情报专家界面示意" />
+            <div>
+              <strong>商业情报</strong>
+              <p>把分散信息转成管理者可读的判断材料，形成连续的私域情报流。</p>
+            </div>
+          </article>
+          <article class="ld-expert-card animate-in-up delay-3">
+            <img src="./assets/leadeep-ai/leadeep-business-expert.png" alt="Leadeep AI 商务销售专家界面示意" />
+            <div>
+              <strong>商机雷达</strong>
+              <p>跳过无效社交，通过 A2A 网络直达交易线索和高价值联系人。</p>
+            </div>
+          </article>
+        </div>
       </div>
+    </section>
 
-      <!-- 数据主权独享 -->
-      <div class="security-item animate-in delay-2">
-        <div class="security-item-line"></div>
-        <div class="security-item-body">
-          <div class="security-item-title">
-            <div class="energy-dot"></div>
-            数据主权独享
-          </div>
-          <p class="security-item-desc">
-            你的对话、录音、分析结果仅属于你，不用于模型训练，不对第三方开放。数据权归属清晰，企业信息主权完整不可分割。
+    <section id="foundation" class="ld-section ld-foundation" aria-labelledby="foundation-title">
+      <div class="ld-inner">
+        <div class="animate-in">
+          <div class="ld-kicker">FRONTIS HORIZON · 衔远大观底座</div>
+          <h2 id="foundation-title" class="ld-title ld-title--light">源于衔远大观的组织进化飞轮。</h2>
+          <p class="ld-copy ld-copy--light">
+            市面上的大模型只是静态百科全书，而 Leadeep 具备不可复制的自我进化力。这源于其深度植根于衔远大观 Frontis Horizon AI 原生系统底座。
           </p>
         </div>
-      </div>
-
-      <!-- 企业私有部署 -->
-      <div class="security-item animate-in delay-3">
-        <div class="security-item-line"></div>
-        <div class="security-item-body">
-          <div class="security-item-title">
-            <div class="energy-dot"></div>
-            企业私有部署
+        <div class="ld-foundation-grid" aria-label="衔远大观 ME WE MA 三层底座">
+          <div class="ld-foundation-item animate-in-up delay-1">
+            <em>ME · Digital Twin</em>
+            <strong>数字分身</strong>
+            <p>大观赋予 Leadeep 长期记忆能力，深度对齐您的商业逻辑。</p>
           </div>
-          <p class="security-item-desc">
-            支持私有云和本地化部署，数据不出企业网络，满足最严格的合规要求，适配金融、医疗、政府等高敏感行业场景。
+          <div class="ld-foundation-item animate-in-up delay-2">
+            <em>WE · Expert Network</em>
+            <strong>专家网络</strong>
+            <p>系统内置的各类智囊，皆由大观底层平台驱动，实现跨维度专业协同。</p>
+          </div>
+          <div class="ld-foundation-item animate-in-up delay-3">
+            <em>MA · Evolution Engine</em>
+            <strong>进化引擎</strong>
+            <p>元智能体引擎实时学习每次决策，让系统从听得懂向算得准进化。</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="security" class="ld-section" aria-labelledby="security-title">
+      <div class="ld-inner ld-security-layout">
+        <div class="animate-in">
+          <div class="ld-kicker">DATA SOVEREIGNTY · 绝对数据主权</div>
+          <h2 id="security-title" class="ld-title">不可触碰的底线，是绝对数据主权。</h2>
+          <div class="ld-security-list">
+            <div class="ld-security-row">
+              <i aria-hidden="true"></i>
+              <div class="ld-panel">
+                <strong>硬件防丢</strong>
+                <p>芯片级非对称加密，设备丢失即变废砖。</p>
+              </div>
+            </div>
+            <div class="ld-security-row">
+              <i aria-hidden="true"></i>
+              <div class="ld-panel">
+                <strong>云端防漏</strong>
+                <p>独立的私有云隔离舱，您的数据绝不参与公共模型训练。</p>
+              </div>
+            </div>
+            <div class="ld-security-row">
+              <i aria-hidden="true"></i>
+              <div class="ld-panel">
+                <strong>架构级隔离</strong>
+                <p>支持私有化部署，将系统及大观底座整体迁移至自有服务器，实现物理级安全。</p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="ld-visual-frame ld-security-visual animate-in delay-2">
+          <img src="./assets/leadeep-ai/leadeep-security-stack.png" alt="Leadeep AI 三层安全保障体系示意" />
+        </div>
+      </div>
+    </section>
+
+    <section id="contact" class="ld-final" aria-labelledby="final-title">
+      <div class="ld-edge" aria-hidden="true"></div>
+      <div class="ld-final-grid">
+        <div class="ld-final-copy animate-in">
+          <div class="ld-kicker">COMPOUND INTELLIGENCE · 认知复利</div>
+          <h2 id="final-title" class="ld-title">投资一份永不凋零的认知复利。</h2>
+          <p class="ld-copy">
+            第一天它只是助理，一年后它将是您最信赖的数字合伙人。每年释放 150+ 小时信息整理时间，多维推演规避百万级试错风险，A2A 网络创造的变现价值无上限。
           </p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       Section 5 — 硬件规格（量子黑背景）
-  ============================================================ -->
-  <section id="hardware">
-    <div class="hardware-inner">
-
-      <!-- 左侧图片占位 -->
-      <div class="animate-in">
-        <div class="img-placeholder-dark hardware-img">[待提供：录音卡片多角度产品图]</div>
-      </div>
-
-      <!-- 右侧规格参数 -->
-      <div class="animate-in delay-2">
-        <div class="hardware-label">LEADEEP AI · 领衔者</div>
-        <h2 class="hardware-title">智能录音卡<br />规格参数</h2>
-
-        <!-- 规格列表（两列网格） -->
-        <div class="spec-list">
-          <div class="spec-item">
-            <span class="spec-label">尺寸</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">86 × 54 × 4mm</span>
-            </div>
+          <div class="ld-final-metrics" aria-label="Leadeep AI 价值指标">
+            <div><strong>150+</strong><span>每年释放的信息整理时间</span></div>
+            <div><strong>百万级</strong><span>多维推演规避的试错风险</span></div>
+            <div><strong>A2A</strong><span>持续扩张的商务撮合网络</span></div>
           </div>
-          <div class="spec-item">
-            <span class="spec-label">材质</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">钛金属 + 肤感皮纹</span>
-            </div>
+          <div class="ld-actions">
+            <a class="ld-btn ld-btn--black" href="https://web.leadeepai.com/download" target="_blank" rel="noopener">下载 App</a>
+            <a class="ld-btn ld-btn--ghost" href="./scene.html">返回场景总览</a>
           </div>
-          <div class="spec-item">
-            <span class="spec-label">显示</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">全彩 OLED 显示屏</span>
-            </div>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">麦克风</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">四降噪麦克风阵列</span>
-            </div>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">距离</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">高达 10 米拾音</span>
-            </div>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">续航</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">连续录制 32 小时以上｜待机 90 天</span>
-            </div>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">存储</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">64GB 本地加密存储</span>
-            </div>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">连接</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">Bluetooth 5.3 + Wi-Fi 6</span>
-            </div>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">充电</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">Type-C 快捷充电</span>
-            </div>
-          </div>
-          <div class="spec-item">
-            <span class="spec-label">使用</span>
-            <div style="display:flex;align-items:flex-start;gap:8px;flex:1;">
-              <div class="energy-dot" style="margin-top:4px;"></div>
-              <span class="spec-value">内置强磁力模组，瞬吸即稳</span>
-            </div>
+          <div class="ld-contact-line" aria-label="联系邮箱">
+            <span>商务合作 <a href="mailto:xianyuan@frontis.ai">xianyuan@frontis.ai</a></span>
+            <span>生态合作 <a href="mailto:sunlei@frontis.cn">sunlei@frontis.cn</a></span>
           </div>
         </div>
-
-        <!-- CTA 按钮组 -->
-        <div class="hardware-btns">
-          <a href="#contact" class="btn-solid-white">立即购买 →</a>
-          <a href="#contact" class="btn-outline-dark-white">下载 App →</a>
+        <div class="ld-final-visual animate-in delay-2">
+          <img src="./assets/leadeep-ai/leadeep-executive-call.jpeg" alt="商务领导者使用 Leadeep AI 进行高端沟通的场景图" />
         </div>
       </div>
-
-    </div>
-  </section>
-
-
-  <!-- ============================================================
-       Section 6 — 开启跃迁 + 返回上级
-  ============================================================ -->
-  <section id="contact">
-
-    <!-- The Edge 临界线 -->
-    <div class="edge-line contact-edge"></div>
-
-    <div class="contact-inner">
-
-      <!-- 左侧：CTA -->
-      <div class="contact-left">
-        <h2 class="contact-title animate-in">
-          准备好让 AI<br />为你出谋划策了吗？
-        </h2>
-        <p class="contact-sub animate-in delay-1">
-          申请产品体验，率先迈入AI原生时代
-        </p>
-        <a href="mailto:cooperation@frontis.cn" class="btn-solid-dark animate-in delay-2">
-          开启跃迁 →
-        </a>
-      </div>
-
-      <!-- 右侧：次级信息 -->
-      <div class="contact-right animate-in delay-2">
-
-        <!-- 返回场景总览 -->
-        <a href="./scene.html" class="contact-back">
-          <span class="contact-back-arrow">←</span>
-          返回场景总览
-        </a>
-
-        <!-- 联系邮箱 -->
-        <div class="contact-emails">
-          <div class="contact-emails-title">联系邮箱</div>
-          <div class="contact-email-item">
-            <span class="contact-email-label">商务合作</span>
-            <span class="contact-email-addr">cooperation@frontis.cn</span>
-          </div>
-          <div class="contact-email-item">
-            <span class="contact-email-label">市场合作</span>
-            <span class="contact-email-addr">marketing@frontis.cn</span>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section>
+    </section>
+  </main>
 
 
   <!-- ============================================================

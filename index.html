@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#FFFFFF" />
   <title>衔远科技 Frontis AI - 打造可持续进化的AI生产力</title>
   <meta name="description" content="衔远科技 Frontis AI，为企业和领导者打造持续进化的 AI 专家团能力。Frontis Horizon 企业级 AI 专家体系，Leadeep AI 企业家专属 AI 数字分身。" />
-  <link rel="icon" href="./assets/logo-dark.svg" type="image/svg+xml" />
+  <link rel="icon" href="./assets/favicon.png" type="image/png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet" />
@@ -406,11 +406,11 @@
     }
     .hero-title .line3:empty { display: none; }
     .hero-title-accent {
-      color: currentColor;
+      color: var(--threshold-cyan);
       letter-spacing: 0;
     }
     .hero-title-dot {
-      color: currentColor;
+      color: var(--energy-orange);
     }
     .hero-title .line1.hero-visible {
       opacity: 1;
@@ -3930,6 +3930,7 @@
       border-left: 1px solid rgba(255, 255, 255, 0.16);
       position: relative;
       overflow: hidden;
+      isolation: isolate;
     }
 
     .fx-product-layer:last-child {
@@ -3940,6 +3941,8 @@
     .fx-scenario-item span,
     .fx-tech-node span,
     .fx-contact-choice span {
+      position: relative;
+      z-index: 2;
       color: var(--threshold-cyan);
       font-family: var(--font-mono);
       font-size: 12px;
@@ -3948,6 +3951,8 @@
     }
 
     .fx-product-layer strong {
+      position: relative;
+      z-index: 2;
       color: var(--pure-white);
       font-family: var(--font-en);
       font-size: 64px;
@@ -3956,10 +3961,79 @@
     }
 
     .fx-product-layer em {
+      position: relative;
+      z-index: 2;
       color: rgba(255, 255, 255, 0.62);
       font-style: normal;
       font-size: 18px;
       font-weight: 700;
+    }
+
+    .fx-product-visual {
+      position: absolute;
+      top: 22px;
+      right: 18px;
+      z-index: 0;
+      width: min(66%, 220px);
+      height: 132px;
+      pointer-events: none;
+      opacity: 0.72;
+    }
+
+    .fx-product-layer::after {
+      content: "";
+      position: absolute;
+      left: 28px;
+      right: 28px;
+      bottom: 28px;
+      z-index: 1;
+      height: 1px;
+      background: rgba(255, 255, 255, 0.1);
+      pointer-events: none;
+    }
+
+    .fx-product-visual .fx-pv-frame {
+      fill: rgba(255, 255, 255, 0.025);
+      stroke: rgba(255, 255, 255, 0.16);
+    }
+
+    .fx-product-visual .fx-pv-panel {
+      fill: rgba(0, 0, 0, 0.58);
+      stroke: rgba(255, 255, 255, 0.18);
+    }
+
+    .fx-product-visual .fx-pv-line {
+      fill: none;
+      stroke: rgba(255, 255, 255, 0.24);
+      stroke-width: 1.3;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .fx-product-visual .fx-pv-cyan {
+      fill: none;
+      stroke: var(--threshold-cyan);
+      stroke-width: 1.8;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .fx-product-visual .fx-pv-dot {
+      fill: var(--threshold-cyan);
+      stroke: var(--quantum-black);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .fx-product-visual .fx-pv-orange {
+      fill: var(--energy-orange);
+      stroke: none;
+    }
+
+    .fx-product-visual .fx-pv-text {
+      fill: rgba(255, 255, 255, 0.46);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0;
     }
 
     .fx-product-layer--peak span {
@@ -4141,7 +4215,8 @@
     }
 
     .fx-scenario-item {
-      min-height: 220px;
+      position: relative;
+      min-height: 318px;
       display: grid;
       align-content: end;
       gap: 14px;
@@ -4149,6 +4224,95 @@
       border-right: 1px solid rgba(0, 16, 19, 0.16);
       border-bottom: 1px solid rgba(0, 16, 19, 0.16);
       color: inherit;
+      overflow: hidden;
+      isolation: isolate;
+      transition:
+        border-color 220ms var(--ease-threshold),
+        background 220ms var(--ease-threshold);
+    }
+
+    .fx-scenario-item::before {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      z-index: 1;
+      height: 58%;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.96) 54%, var(--pure-white) 100%);
+      pointer-events: none;
+    }
+
+    .fx-scenario-item:hover {
+      border-color: rgba(0, 193, 212, 0.56);
+      background: rgba(0, 193, 212, 0.035);
+    }
+
+    .fx-scenario-item > :not(.fx-scenario-visual) {
+      position: relative;
+      z-index: 2;
+    }
+
+    .fx-scenario-visual {
+      position: absolute;
+      top: 22px;
+      left: 22px;
+      right: 22px;
+      z-index: 0;
+      width: calc(100% - 44px);
+      height: 154px;
+      pointer-events: none;
+      opacity: 0.88;
+    }
+
+    .fx-scenario-visual .fx-vis-frame {
+      fill: #F7F9FA;
+      stroke: rgba(0, 16, 19, 0.14);
+    }
+
+    .fx-scenario-visual .fx-vis-panel {
+      fill: var(--pure-white);
+      stroke: rgba(0, 16, 19, 0.12);
+    }
+
+    .fx-scenario-visual .fx-vis-line {
+      fill: none;
+      stroke: rgba(0, 16, 19, 0.24);
+      stroke-width: 1.3;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .fx-scenario-visual .fx-vis-cyan {
+      fill: none;
+      stroke: var(--threshold-cyan);
+      stroke-width: 1.8;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .fx-scenario-visual .fx-vis-orange {
+      fill: var(--energy-orange);
+      stroke: none;
+    }
+
+    .fx-scenario-visual .fx-vis-dot {
+      fill: var(--threshold-cyan);
+      stroke: var(--pure-white);
+      stroke-width: 2;
+      vector-effect: non-scaling-stroke;
+    }
+
+    .fx-scenario-visual .fx-vis-text {
+      fill: rgba(0, 16, 19, 0.46);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0;
+    }
+
+    .fx-scenario-visual .fx-vis-label {
+      fill: var(--quantum-black);
+      font-family: var(--font-en);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0;
     }
 
     .fx-scenario-item strong {
@@ -4196,6 +4360,10 @@
       font-size: 52px;
       font-weight: 800;
       line-height: 1;
+    }
+
+    .fx-proof-grid .fx-proof-accent strong {
+      color: var(--energy-orange);
     }
 
     .fx-proof-grid span {
@@ -4603,8 +4771,35 @@
         padding: 22px;
       }
 
+      .fx-scenario-item {
+        min-height: 258px;
+        padding: 20px;
+      }
+
+      .fx-scenario-visual {
+        top: 18px;
+        left: 18px;
+        right: 18px;
+        width: calc(100% - 36px);
+        height: 118px;
+      }
+
       .fx-product-layer {
         padding: 18px 14px;
+      }
+
+      .fx-product-layer::after {
+        left: 14px;
+        right: 14px;
+        bottom: 18px;
+      }
+
+      .fx-product-visual {
+        top: 14px;
+        right: 10px;
+        width: min(78%, 120px);
+        height: 82px;
+        opacity: 0.52;
       }
 
       .fx-product-layer strong {
@@ -4712,7 +4907,7 @@
 
   <!-- 开启跃迁按钮（黑色区） -->
   <div class="hero-cta">
-    <a href="#contact" class="btn-demo">开启跃迁</a>
+    <a href="https://ai.frontis.cn/login" class="btn-demo" data-leap-cta data-hover="即刻体验"><span class="leap-cta__label">开启跃迁</span></a>
   </div>
 
   <div class="hero-mobile-map" aria-hidden="true">
@@ -4740,18 +4935,54 @@
     <div class="fx-product-system">
       <div class="fx-product-grid" aria-label="衔远大观 ME WE MA 三层架构">
         <div class="fx-product-layer">
+          <svg class="fx-product-visual fx-product-visual--me" viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+            <rect class="fx-pv-frame" x="1" y="1" width="238" height="148" />
+            <circle class="fx-pv-cyan" cx="118" cy="76" r="38" />
+            <path class="fx-pv-line" d="M118 22V130M64 76H176" />
+            <rect class="fx-pv-panel" x="24" y="28" width="54" height="30" />
+            <rect class="fx-pv-panel" x="160" y="28" width="54" height="30" />
+            <rect class="fx-pv-panel" x="24" y="96" width="54" height="30" />
+            <rect class="fx-pv-panel" x="160" y="96" width="54" height="30" />
+            <circle class="fx-pv-dot" cx="118" cy="76" r="5" />
+            <path class="fx-pv-cyan" d="M78 44L118 76L78 112M160 44L118 76L160 112" />
+            <text class="fx-pv-text" x="26" y="21">MEMORY CONTEXT</text>
+          </svg>
           <span>01</span>
           <strong>ME</strong>
           <em>数字分身</em>
         </div>
         <div class="fx-product-link" aria-hidden="true"></div>
         <div class="fx-product-layer">
+          <svg class="fx-product-visual fx-product-visual--we" viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+            <rect class="fx-pv-frame" x="1" y="1" width="238" height="148" />
+            <path class="fx-pv-line" d="M120 74L56 42M120 74L184 42M120 74L56 110M120 74L184 110" />
+            <path class="fx-pv-cyan" d="M56 42C90 26 150 26 184 42M56 110C90 128 150 128 184 110" />
+            <circle class="fx-pv-dot" cx="120" cy="74" r="8" />
+            <circle class="fx-pv-dot" cx="56" cy="42" r="5" />
+            <circle class="fx-pv-dot" cx="184" cy="42" r="5" />
+            <circle class="fx-pv-dot" cx="56" cy="110" r="5" />
+            <circle class="fx-pv-dot" cx="184" cy="110" r="5" />
+            <rect class="fx-pv-panel" x="92" y="56" width="56" height="36" />
+            <text class="fx-pv-text" x="26" y="21">EXPERT NETWORK</text>
+          </svg>
           <span>02</span>
           <strong>WE</strong>
           <em>专家网络</em>
         </div>
         <div class="fx-product-link" aria-hidden="true"></div>
         <div class="fx-product-layer fx-product-layer--peak">
+          <svg class="fx-product-visual fx-product-visual--ma" viewBox="0 0 240 150" aria-hidden="true" focusable="false">
+            <rect class="fx-pv-frame" x="1" y="1" width="238" height="148" />
+            <circle class="fx-pv-line" cx="120" cy="76" r="46" />
+            <path class="fx-pv-cyan" d="M120 30A46 46 0 0 1 164 63A46 46 0 0 1 144 116" />
+            <path class="fx-pv-line" d="M120 122A46 46 0 0 1 76 89A46 46 0 0 1 96 36" />
+            <circle class="fx-pv-dot" cx="120" cy="30" r="5" />
+            <circle class="fx-pv-dot" cx="164" cy="63" r="5" />
+            <circle class="fx-pv-orange" cx="144" cy="116" r="7" />
+            <rect class="fx-pv-panel" x="92" y="58" width="56" height="36" />
+            <path class="fx-pv-cyan" d="M105 76H135" />
+            <text class="fx-pv-text" x="26" y="21">EVOLUTION ENGINE</text>
+          </svg>
           <span>03</span>
           <strong>MA</strong>
           <em>进化引擎</em>
@@ -4925,21 +5156,77 @@
 
     <div class="fx-scenario-grid" aria-label="高价值场景入口">
       <a href="./scene-strategy.html" class="fx-scenario-item">
+        <svg class="fx-scenario-visual fx-scenario-visual--strategy" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
+          <rect class="fx-vis-frame" x="1" y="1" width="318" height="168" />
+          <path class="fx-vis-cyan" d="M34 132H286" />
+          <path class="fx-vis-line" d="M74 38V132M138 38V132M202 38V132M266 38V132" />
+          <rect class="fx-vis-panel" x="42" y="46" width="66" height="44" />
+          <rect class="fx-vis-panel" x="122" y="34" width="78" height="56" />
+          <rect class="fx-vis-panel" x="214" y="60" width="58" height="40" />
+          <path class="fx-vis-cyan" d="M76 122L160 58L244 82" />
+          <circle class="fx-vis-dot" cx="76" cy="122" r="5" />
+          <circle class="fx-vis-dot" cx="160" cy="58" r="5" />
+          <circle class="fx-vis-orange" cx="244" cy="82" r="6" />
+          <text class="fx-vis-text" x="44" y="28">STRATEGY BOARD</text>
+          <text class="fx-vis-label" x="132" y="146">DECISION</text>
+        </svg>
         <span>01</span>
         <strong>战略管理</strong>
         <em>会议 · 人才 · OKR复盘</em>
       </a>
       <a href="./scene-research.html" class="fx-scenario-item">
+        <svg class="fx-scenario-visual fx-scenario-visual--research" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
+          <rect class="fx-vis-frame" x="1" y="1" width="318" height="168" />
+          <rect class="fx-vis-panel" x="34" y="36" width="92" height="82" />
+          <path class="fx-vis-line" d="M50 58H108M50 78H96M50 98H114" />
+          <path class="fx-vis-cyan" d="M144 72H276" />
+          <path class="fx-vis-line" d="M144 104H276" />
+          <circle class="fx-vis-dot" cx="166" cy="72" r="5" />
+          <circle class="fx-vis-dot" cx="220" cy="72" r="5" />
+          <circle class="fx-vis-orange" cx="266" cy="72" r="6" />
+          <rect class="fx-vis-panel" x="152" y="92" width="38" height="28" />
+          <rect class="fx-vis-panel" x="206" y="92" width="38" height="28" />
+          <rect class="fx-vis-panel" x="260" y="92" width="24" height="28" />
+          <text class="fx-vis-text" x="44" y="28">R&D PIPELINE</text>
+          <text class="fx-vis-label" x="154" y="146">BUILD / TEST / LEARN</text>
+        </svg>
         <span>02</span>
         <strong>研发生产</strong>
         <em>规划 · 风险 · 知识沉淀</em>
       </a>
       <a href="./scene-supply.html" class="fx-scenario-item">
+        <svg class="fx-scenario-visual fx-scenario-visual--supply" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
+          <rect class="fx-vis-frame" x="1" y="1" width="318" height="168" />
+          <path class="fx-vis-line" d="M46 116H286M74 50V116M156 36V116M242 64V116" />
+          <path class="fx-vis-cyan" d="M58 104C96 58 132 58 164 92S236 122 270 70" />
+          <rect class="fx-vis-panel" x="38" y="88" width="54" height="38" />
+          <rect class="fx-vis-panel" x="134" y="26" width="58" height="42" />
+          <rect class="fx-vis-panel" x="220" y="62" width="58" height="38" />
+          <circle class="fx-vis-dot" cx="58" cy="104" r="5" />
+          <circle class="fx-vis-dot" cx="164" cy="92" r="5" />
+          <circle class="fx-vis-orange" cx="270" cy="70" r="6" />
+          <text class="fx-vis-text" x="44" y="28">SUPPLY ROUTING</text>
+          <text class="fx-vis-label" x="126" y="146">FLOW CONTROL</text>
+        </svg>
         <span>03</span>
         <strong>供应链运营</strong>
         <em>预测 · 招采 · 库存优化</em>
       </a>
       <a href="./scene-sales.html" class="fx-scenario-item">
+        <svg class="fx-scenario-visual fx-scenario-visual--growth" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
+          <rect class="fx-vis-frame" x="1" y="1" width="318" height="168" />
+          <path class="fx-vis-line" d="M54 42H150L124 78H80Z" />
+          <path class="fx-vis-line" d="M80 86H126L112 118H94Z" />
+          <path class="fx-vis-cyan" d="M176 122C206 86 230 62 278 44" />
+          <circle class="fx-vis-dot" cx="190" cy="108" r="5" />
+          <circle class="fx-vis-dot" cx="224" cy="76" r="5" />
+          <circle class="fx-vis-orange" cx="278" cy="44" r="6" />
+          <rect class="fx-vis-panel" x="174" y="38" width="34" height="24" />
+          <rect class="fx-vis-panel" x="224" y="102" width="52" height="28" />
+          <path class="fx-vis-line" d="M210 50H246M250 116H292" />
+          <text class="fx-vis-text" x="44" y="28">GROWTH LOOP</text>
+          <text class="fx-vis-label" x="120" y="146">LEADS / INSIGHT</text>
+        </svg>
         <span>04</span>
         <strong>营销增长</strong>
         <em>商机 · 方案 · 客户洞察</em>
@@ -5147,7 +5434,7 @@
         <strong>19</strong>
         <span>业务场景</span>
       </div>
-      <div>
+      <div class="fx-proof-accent">
         <strong>100+</strong>
         <span>服务客户</span>
       </div>

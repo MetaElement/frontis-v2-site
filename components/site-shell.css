@@ -130,6 +130,56 @@
   color: var(--site-shell-black);
 }
 
+[data-leap-cta] {
+  position: relative;
+  overflow: hidden;
+}
+
+[data-leap-cta] .leap-cta__label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    opacity 180ms var(--site-shell-ease),
+    transform 180ms var(--site-shell-ease);
+}
+
+[data-leap-cta]::after {
+  content: attr(data-hover);
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: currentColor;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translateY(8px);
+  pointer-events: none;
+  transition:
+    opacity 180ms var(--site-shell-ease),
+    transform 180ms var(--site-shell-ease);
+}
+
+[data-leap-cta]:hover,
+[data-leap-cta]:focus-visible {
+  background: var(--site-shell-cyan);
+  border-color: var(--site-shell-cyan);
+  color: var(--site-shell-black);
+}
+
+[data-leap-cta]:hover .leap-cta__label,
+[data-leap-cta]:focus-visible .leap-cta__label {
+  opacity: 0;
+  transform: translateY(-8px);
+}
+
+[data-leap-cta]:hover::after,
+[data-leap-cta]:focus-visible::after {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .site-header__link:focus-visible,
 .site-header__cta:focus-visible,
 .site-footer a:focus-visible {

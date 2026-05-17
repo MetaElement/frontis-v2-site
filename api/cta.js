@@ -181,7 +181,7 @@ function formatLeadHtml(lead) {
 async function sendLeadEmail(lead) {
   const apiKey = process.env.RESEND_API_KEY;
   const from = process.env.CTA_FROM_EMAIL;
-  const to = (process.env.CTA_TO_EMAIL || "partner@frontis.cn")
+  const to = (process.env.CTA_TO_EMAIL || "xianyuan@frontis.ai")
     .split(",")
     .map((email) => email.trim())
     .filter(Boolean);

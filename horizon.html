@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>衔远大观 · Frontis Horizon — 企业级 AI 原生平台</title>
+<link rel="icon" href="./assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <style>
@@ -222,7 +223,9 @@ nav {
   display: flex; align-items: center; justify-content: center;
 }
 .hero-visual {
-  position: relative; width: 460px; height: 460px;
+  position: relative;
+  width: clamp(500px, 42vw, 560px);
+  height: clamp(500px, 42vw, 560px);
 }
 .hero-ring {
   position: absolute; border: 1px solid rgba(0,193,212,0.15);
@@ -256,27 +259,28 @@ nav {
   text-align: center;
 }
 .hero-center-text {
-  font-family: var(--font-en); font-size: 11px; font-weight: 700;
+  font-family: var(--font-en); font-size: 12px; font-weight: 700;
   letter-spacing: 0.2em; color: var(--cyan); display: block; margin-bottom: 8px;
 }
 .hero-center-cn {
-  font-size: 28px; font-weight: 800; color: var(--white); display: block;
+  font-size: 34px; font-weight: 800; color: var(--white); display: block;
 }
 
 .hero-layer-badges {
   position: absolute;
-  display: flex; flex-direction: column; gap: 8px;
+  display: flex; flex-direction: column; gap: 12px;
 }
-.hero-layer-badges.left { left: -20px; top: 50%; transform: translateY(-50%); }
-.hero-layer-badges.right { right: -20px; top: 50%; transform: translateY(-50%); }
+.hero-layer-badges.left { left: -12px; top: 50%; transform: translateY(-50%); }
+.hero-layer-badges.right { right: -12px; top: 50%; transform: translateY(-50%); }
 .layer-badge {
   display: flex; align-items: center; gap: 8px;
-  padding: 6px 12px;
+  min-width: 128px;
+  padding: 10px 16px;
   background: rgba(0,0,0,0.8);
   border-left: 2px solid var(--cyan);
 }
-.layer-badge-label { font-family: var(--font-en); font-size: 10px; font-weight: 700; letter-spacing: 0.15em; color: var(--white); }
-.layer-badge-cn { font-size: 11px; color: rgba(255,255,255,0.5); }
+.layer-badge-label { font-family: var(--font-en); font-size: 12px; font-weight: 700; letter-spacing: 0.15em; color: var(--white); }
+.layer-badge-cn { font-size: 13px; color: rgba(255,255,255,0.58); }
 
 .hero-bottom {
   border-top: 1px solid rgba(255,255,255,0.08);
@@ -1059,7 +1063,7 @@ nav {
       </p>
       <div class="hero-ctas" data-anim="fb-leap" style="animation-delay:.28s">
         <a href="#cta" class="btn-primary">申请演示 <span class="arrow">→</span></a>
-        <a href="#layers" class="btn-outline">了解架构</a>
+        <a href="https://ai.frontis.cn/login" class="btn-outline">即刻体验 <span class="arrow">→</span></a>
       </div>
     </div>
     <div class="hero-right" data-anim="fb-blur-in" style="animation-delay:.3s">

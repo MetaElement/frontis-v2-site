@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>技术架构 · Frontis AI 衔远科技</title>
+<link rel="icon" href="./assets/favicon.png" type="image/png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -375,6 +376,58 @@ footer {
   .page-technology #chain .chain-sub {
     text-align: left !important;
   }
+
+  .page-technology :is(#why .two-col, #fusion .six-ten, #windtunnel .six-ten, #cta > div) {
+    width: min(100%, var(--fx-page-max)) !important;
+    max-width: var(--fx-page-max) !important;
+    margin-left: 0 !important;
+    margin-right: auto !important;
+  }
+
+  .page-technology #fusion .six-ten {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr) !important;
+    gap: clamp(40px, 5vw, 72px) !important;
+  }
+
+  .page-technology #fusion .fusion-visual {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .page-technology #fusion .fusion-visual svg {
+    width: min(100%, 760px) !important;
+    max-width: 760px !important;
+  }
+
+  .page-technology #windtunnel .six-ten {
+    grid-template-columns: minmax(0, 0.72fr) minmax(0, 1fr) !important;
+    gap: clamp(40px, 5vw, 72px) !important;
+  }
+
+  .page-technology #windtunnel .windtunnel-visual {
+    display: flex;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .page-technology #windtunnel .windtunnel-visual svg {
+    width: min(100%, 760px) !important;
+    max-width: 760px !important;
+  }
+
+  @media (max-width: 1024px) {
+    .page-technology #fusion .six-ten,
+    .page-technology #windtunnel .six-ten {
+      grid-template-columns: 1fr !important;
+      gap: 48px !important;
+    }
+
+    .page-technology #fusion .fusion-visual,
+    .page-technology #windtunnel .windtunnel-visual {
+      justify-content: flex-start;
+    }
+  }
 </style>
 </head>
 <body class="page-technology">
@@ -524,7 +577,7 @@ footer {
       <p class="animate-in" style="transition-delay:280ms;">这是创始人周伯文教授提出的「通专融合」技术路径</p>
     </div>
     <!-- 通专融合示意图 -->
-    <div class="animate-in" style="transition-delay:200ms;flex:1;min-width:0;">
+    <div class="fusion-visual animate-in" style="transition-delay:200ms;flex:1;min-width:0;">
       <svg viewBox="0 0 600 420" width="100%" style="display:block;max-width:640px;" xmlns="http://www.w3.org/2000/svg">
         <!-- 左圆：通用大模型 -->
         <circle cx="210" cy="210" r="155" stroke="#00C1D4" stroke-width="1.5" fill="rgba(0,193,212,0.04)"/>
@@ -750,7 +803,7 @@ footer {
       <p class="animate-in" style="transition-delay:280ms;">仿真环境与训练数据的协同积累，是企业级 AI 落地最稀缺的资产</p>
     </div>
     <!-- 数字风洞示意图 -->
-    <div class="animate-in" style="transition-delay:200ms;">
+    <div class="windtunnel-visual animate-in" style="transition-delay:200ms;">
       <svg viewBox="0 0 500 340" width="100%" style="max-width:500px;display:block;" xmlns="http://www.w3.org/2000/svg">
         <!-- 仿真空间大圆 -->
         <circle cx="220" cy="170" r="130" stroke="#00C1D4" stroke-width="1.5" fill="rgba(0,193,212,0.04)"/>
@@ -782,10 +835,10 @@ footer {
     <span class="slogan-en">GET IN TOUCH · 深入交流</span>
     <h2>想深入了解技术架构？</h2>
     <p>联系我们的技术团队，获取完整技术白皮书</p>
-    <a href="mailto:cooperation@frontis.cn" class="btn-primary">申请技术交流 →</a>
+    <a href="mailto:xianyuan@frontis.ai" class="btn-primary">申请技术交流 →</a>
     <a href="./horizon.html" class="btn-secondary">了解产品 →</a>
     <div class="contact-email">
-      <strong>商务合作</strong>&nbsp;&nbsp;cooperation@frontis.cn
+      <strong>商务合作</strong>&nbsp;&nbsp;xianyuan@frontis.ai
     </div>
   </div>
 </section>

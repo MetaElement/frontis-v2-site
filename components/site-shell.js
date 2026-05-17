@@ -38,19 +38,14 @@
 
   var pageHref = page === "index" ? "./index.html" : "./" + page + ".html";
   var activeGroup = groups[page] || "";
+  var productLoginHref = "https://ai.frontis.cn/login";
 
   function isCurrent(href) {
     return href === pageHref || (page === "index" && href === "./index.html");
   }
 
   function ctaHref() {
-    if (page === "index") return "#contact";
-    if (page === "horizon" || page === "technology") return "#cta";
-    if (page === "scene") return "#cta-section";
-    if (page === "ecosystem") return "#apply";
-    if (page === "about") return "./index.html#contact";
-    if (page === "scene-strategy") return "./scene-strategy.html#contact";
-    return "./index.html#contact";
+    return productLoginHref;
   }
 
   function renderNavItem(item) {
@@ -71,7 +66,7 @@
       '<div class="site-header__menu" role="navigation" aria-label="主导航">' +
       navItems.map(renderNavItem).join("") +
       "</div>" +
-      '<a class="site-header__cta" href="' + ctaHref() + '">开启跃迁</a>' +
+      '<a class="site-header__cta" href="' + ctaHref() + '" data-leap-cta data-hover="即刻体验"><span class="leap-cta__label">开启跃迁</span></a>' +
       "</div>" +
       "</header>";
   }
@@ -85,7 +80,7 @@
       '<div class="site-footer__grid">' +
       '<div class="site-footer__brand">' +
       '<a href="./index.html" aria-label="返回首页"><img src="./assets/logo-dark.svg" alt="FRONTIS 衔远科技" /></a>' +
-      '<div class="site-footer__email">partner@frontis.cn</div>' +
+      '<div class="site-footer__email">xianyuan@frontis.ai</div>' +
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
       footerLink("./horizon.html", "衔远大观") +
@@ -105,9 +100,9 @@
       footerLink("./ecosystem.html", "生态") +
       "</div></div>" +
       '<div><div class="site-footer__title">联系</div><div class="site-footer__contact">' +
-      '<a href="mailto:cooperation@frontis.cn">商务合作</a>' +
-      '<a href="mailto:marketing@frontis.cn">市场合作</a>' +
-      '<a href="mailto:hr@frontis.cn">人才招聘</a>' +
+      '<a href="mailto:xianyuan@frontis.ai">商务合作</a>' +
+      '<a href="mailto:sunlei@frontis.cn">生态合作</a>' +
+      '<a href="mailto:hr-public@frontis.cn">人才招聘</a>' +
       "</div></div>" +
       "</div>" +
       '<div class="site-footer__bottom">' +
@@ -153,11 +148,11 @@
       '</form>' +
       '<aside class="site-cta__contact" aria-label="联系我们">' +
       '<div class="site-cta__contact-title">联系我们</div>' +
-      '<div class="site-cta__contact-item"><span>商务合作</span><a href="mailto:cooperation@frontis.cn">cooperation@frontis.cn</a></div>' +
+      '<div class="site-cta__contact-item"><span>商务合作</span><a href="mailto:xianyuan@frontis.ai">xianyuan@frontis.ai</a></div>' +
       '<div class="site-cta__contact-divider"></div>' +
-      '<div class="site-cta__contact-item"><span>市场合作</span><a href="mailto:marketing@frontis.cn">marketing@frontis.cn</a></div>' +
+      '<div class="site-cta__contact-item"><span>生态合作</span><a href="mailto:sunlei@frontis.cn">sunlei@frontis.cn</a></div>' +
       '<div class="site-cta__contact-divider"></div>' +
-      '<div class="site-cta__contact-item"><span>人才招聘</span><a href="mailto:hr@frontis.cn">hr@frontis.cn</a></div>' +
+      '<div class="site-cta__contact-item"><span>人才招聘</span><a href="mailto:hr-public@frontis.cn">hr-public@frontis.cn</a></div>' +
       '</aside>' +
       '</div>' +
       '</div>' +

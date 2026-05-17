@@ -47,7 +47,7 @@ Required server-side environment variables:
 ```bash
 RESEND_API_KEY=re_xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
 CTA_FROM_EMAIL="Frontis Website <website@frontis.cn>"
-CTA_TO_EMAIL=partner@frontis.cn
+CTA_TO_EMAIL=xianyuan@frontis.ai
 CTA_ALLOWED_ORIGINS=https://frontis.cn,https://www.frontis.cn,https://metaelement.github.io
 ```
 

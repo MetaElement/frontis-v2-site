@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#FFFFFF" />
   <title>场景 · 衔远科技 FRONTIS</title>
   <meta name="description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理、生产研发、供应链运营、营销增长等高价值业务现场。" />
-  <link rel="icon" href="./assets/logo-dark.svg" type="image/svg+xml" />
+  <link rel="icon" href="./assets/favicon.png" type="image/png" />
   <!-- Google Fonts: Space Grotesk + JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -512,6 +512,57 @@
       border-top: 1px solid rgba(0, 16, 19, 0.12);
     }
 
+    .scene-value-points {
+      display: grid;
+      gap: 0;
+      margin: -10px 0 30px;
+      border-top: 1px solid rgba(0, 16, 19, 0.12);
+      border-bottom: 1px solid rgba(0, 16, 19, 0.12);
+    }
+
+    .scene-value-point {
+      display: grid;
+      grid-template-columns: 2px 1fr;
+      gap: 14px;
+      padding: 13px 0;
+      border-top: 1px solid rgba(0, 16, 19, 0.08);
+    }
+
+    .scene-value-point:first-child {
+      border-top: 0;
+    }
+
+    .scene-value-point__line {
+      width: 2px;
+      background: var(--threshold-cyan);
+      transform: scaleY(0.74);
+      transform-origin: center;
+    }
+
+    .scene-value-point--peak .scene-value-point__line {
+      background: var(--energy-orange);
+    }
+
+    .scene-value-point strong {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--quantum-black);
+      font-family: var(--font-cn);
+      font-size: 15px;
+      line-height: 1.45;
+      font-weight: 700;
+      letter-spacing: 0;
+    }
+
+    .scene-value-point span {
+      display: block;
+      color: var(--level-gray);
+      font-family: var(--font-cn);
+      font-size: 13px;
+      line-height: 1.66;
+      letter-spacing: 0;
+    }
+
     .agent-item {
       display: grid;
       grid-template-columns: 2px 1fr;
@@ -697,6 +748,109 @@
       filter: saturate(0.96) contrast(1.03);
     }
 
+    .scene-visual--stack .scene-visual-stack {
+      position: relative;
+      min-height: clamp(360px, 34vw, 500px);
+      background: rgba(0, 16, 19, 0.16);
+      border: 1px solid rgba(0, 16, 19, 0.18);
+      overflow: hidden;
+    }
+
+    .scene-visual--stack .scene-visual-stack::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      right: 0;
+      top: 52%;
+      height: 2px;
+      background: var(--threshold-cyan);
+      z-index: 3;
+      opacity: 0.9;
+      pointer-events: none;
+    }
+
+    .scene-visual--stack img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      aspect-ratio: auto;
+      border: 0;
+      filter: saturate(1.02) contrast(1.04);
+    }
+
+    .scene-visual-single,
+    .scene-expert-gallery {
+      position: absolute;
+      inset: 0;
+      transition: opacity 260ms var(--ease-threshold);
+    }
+
+    .scene-visual-single {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #F6F8FA;
+      opacity: 1;
+    }
+
+    .scene-visual-single .scene-visual-main {
+      width: 88%;
+      height: 88%;
+      object-fit: contain;
+      object-position: center;
+      padding: 0;
+      background: transparent;
+    }
+
+    .scene-expert-gallery {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 1px;
+      background: rgba(0, 16, 19, 0.16);
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scene-expert-gallery img {
+      object-fit: cover;
+      object-position: center;
+      padding: 0;
+    }
+
+    .scene-visual-stack[data-agent-visual="advisory"] .scene-visual-single {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .scene-visual-stack[data-agent-visual="advisory"] .scene-expert-gallery {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .scene-visual-stack__label {
+      position: absolute;
+      left: 18px;
+      bottom: 18px;
+      z-index: 4;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 12px;
+      background: var(--quantum-black);
+      color: var(--pure-white);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .scene-visual-stack__label::before {
+      content: '';
+      width: 8px;
+      height: 8px;
+      background: var(--energy-orange);
+    }
+
     .scene-visual-caption {
       margin-top: 12px;
       color: rgba(0, 16, 19, 0.46);
@@ -739,13 +893,17 @@
     }
 
     #supply .scene-title    { color: var(--pure-white); }
-    #supply .scene-tagline  { color: rgba(255, 255, 255, 0.76); }
+    #supply .scene-tagline  { color: rgba(255, 255, 255, 0.76) !important; }
     #supply .scene-tag__sep { color: rgba(255, 255, 255, 0.3); }
     #supply .scene-brand { color: var(--threshold-cyan); }
     #supply .agent-list,
     #supply .agent-item { border-color: rgba(255, 255, 255, 0.14); }
     #supply .agent-item__name { color: var(--pure-white); }
-    #supply .agent-item__desc { color: rgba(255, 255, 255, 0.74); }
+    #supply .agent-item__desc {
+      color: rgba(255, 255, 255, 0.88) !important;
+      font-weight: 500;
+      line-height: 1.72;
+    }
     #supply .scene-visual img {
       border-color: rgba(255, 255, 255, 0.18);
       background:
@@ -753,6 +911,14 @@
         var(--quantum-black);
     }
     #supply .scene-visual-caption { color: rgba(255, 255, 255, 0.42); }
+
+    body.page-scene #supply .scene-tagline {
+      color: rgba(255, 255, 255, 0.76) !important;
+    }
+
+    body.page-scene #supply .agent-item__desc {
+      color: rgba(255, 255, 255, 0.88) !important;
+    }
 
     /* ============================================================
        第五屏：营销增长（纯白，锁定）
@@ -939,6 +1105,43 @@
         top: -12px;
       }
 
+      .scene-visual--stack .scene-visual-stack {
+        min-height: auto;
+        height: 430px;
+      }
+
+      .scene-visual--stack .scene-visual-stack::before {
+        top: 52%;
+        bottom: auto;
+      }
+
+      .scene-visual-single .scene-visual-main {
+        width: 92%;
+        height: 92%;
+      }
+
+      .scene-expert-gallery {
+        grid-template-columns: repeat(3, 1fr);
+      }
+
+      .scene-visual-stack[data-agent-visual="advisory"] {
+        height: 760px;
+      }
+
+      .scene-visual-stack[data-agent-visual="advisory"] .scene-expert-gallery {
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3, 1fr);
+      }
+
+      .scene-visual-stack[data-agent-visual="advisory"] .scene-expert-gallery img {
+        object-fit: contain;
+        background: #DFF8FA;
+      }
+
+      .scene-visual-stack__label {
+        bottom: 18px;
+      }
+
       .visual-placeholder { height: 240px; }
 
       .footer__grid {
@@ -1054,13 +1257,37 @@
         面向领导者的 AI 决策专家团，沉淀认知，辅助决策。
       </p>
 
+      <div class="scene-value-points animate-in delay-3" aria-label="Leadeep AI 核心价值">
+        <div class="scene-value-point scene-value-point--peak">
+          <span class="scene-value-point__line" aria-hidden="true"></span>
+          <div>
+            <strong>商业直觉不再开完即焚</strong>
+            <span>把会议、对话和判断沉淀为个人与组织可复用的私域决策系统。</span>
+          </div>
+        </div>
+        <div class="scene-value-point">
+          <span class="scene-value-point__line" aria-hidden="true"></span>
+          <div>
+            <strong>1 个物理抓手 + 3 大高维中枢</strong>
+            <span>从现场记录、情报过滤到方案推演和专家协同，连续完成决策闭环。</span>
+          </div>
+        </div>
+        <div class="scene-value-point">
+          <span class="scene-value-point__line" aria-hidden="true"></span>
+          <div>
+            <strong>A2A 商机网络 24 小时寻源</strong>
+            <span>通过 AI 间双盲试探，把对口大单和关键联系人持续推送到手机。</span>
+          </div>
+        </div>
+      </div>
+
       <!-- Agent 列表（左侧2px跃迁青竖线引导） -->
       <ul class="agent-list" aria-label="战略管理 Agent 能力列表">
 
         <li class="agent-item animate-in delay-2">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name" data-agent-image="录音分析专家团">录音分析专家团</p>
+            <p class="agent-item__name" data-agent-image="录音分析专家团" data-agent-visual="recording">录音分析专家团</p>
             <p class="agent-item__desc">AI 战略专家、AI 财务专家、AI 法务专家、AI 心理分析师、AI 项目管理专家等，多维度深度分析录音内容。</p>
           </div>
         </li>
@@ -1068,7 +1295,7 @@
         <li class="agent-item animate-in delay-3">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name" data-agent-image="问策AI专家团">问策 AI 专家团</p>
+            <p class="agent-item__name" data-agent-image="问策AI专家团" data-agent-visual="advisory">问策 AI 专家团</p>
             <p class="agent-item__desc">覆盖 AI 战略、销售、市场、商务、解决方案与投融资专家，支持企业经营决策全场景。</p>
           </div>
         </li>
@@ -1085,8 +1312,24 @@
 
     </div>
 
-    <figure class="scene-visual animate-in delay-3">
-      <img src="./assets/scene-agents/leadeep-recording.png" data-default-image="录音分析专家团" alt="战略管理专家团 Agent 界面" loading="lazy" />
+    <figure class="scene-visual scene-visual--stack animate-in delay-3">
+      <div class="scene-visual-stack" data-agent-visual="recording" aria-label="战略管理专家团能力展示图">
+        <div class="scene-visual-single">
+          <img
+            class="scene-visual-main"
+            src="./assets/leadeep-ai/leadeep-hero-device.png"
+            data-default-image="录音分析专家团"
+            alt="Leadeep AI 录音分析专家团产品组合图"
+            loading="lazy"
+          />
+        </div>
+        <div class="scene-expert-gallery" aria-hidden="true">
+          <img src="./assets/leadeep-ai/leadeep-board-expert.png" alt="" loading="lazy" />
+          <img src="./assets/leadeep-ai/leadeep-intel-expert.png" alt="" loading="lazy" />
+          <img src="./assets/leadeep-ai/leadeep-business-expert.png" alt="" loading="lazy" />
+        </div>
+        <span class="scene-visual-stack__label">Recording analysis</span>
+      </div>
       <figcaption class="scene-visual-caption">LEADEEP AI · DECISION INTELLIGENCE</figcaption>
     </figure>
 
@@ -1194,7 +1437,7 @@
         <span class="node-cyan" aria-hidden="true"></span>
         供应链运营专家团
         <span class="scene-tag__sep">·</span>
-        SUPPLY OPRATION
+        SUPPLY OPERATION
       </div>
 
       <h2 class="scene-title animate-in delay-1" id="supply-heading">供应链运营专家团</h2>
@@ -1413,8 +1656,8 @@
 
   /* ── 场景专家图：跟随能力项切换，保持页面轻量 ── */
   var agentImages = {
-    '录音分析专家团': './assets/scene-agents/leadeep-recording.png',
-    '问策AI专家团': './assets/scene-agents/leadeep-advisory.jpg',
+    '录音分析专家团': './assets/leadeep-ai/leadeep-hero-device.png',
+    '问策AI专家团': './assets/leadeep-ai/leadeep-board-expert.png',
     '进度管理专家': './assets/scene-agents/schedule-management.png',
     '现场单据采集专家': './assets/scene-agents/field-documents.png',
     '方案编制审核专家': './assets/scene-agents/plan-review.jpg',
@@ -1430,12 +1673,30 @@
     'AI金牌客服专家': './assets/scene-agents/customer-service.png'
   };
 
+  var strategyVisualLabels = {
+    recording: 'Recording analysis',
+    advisory: 'Decision AI experts'
+  };
+
   function activateAgent(section, item, img, imageName) {
-    if (!imageName || !agentImages[imageName]) return;
     section.querySelectorAll('.agent-item.is-active').forEach(function (activeItem) {
       activeItem.classList.remove('is-active');
     });
     item.classList.add('is-active');
+
+    var nameEl = item.querySelector('.agent-item__name');
+    var visualStack = section.querySelector('.scene-visual-stack[data-agent-visual]');
+    if (visualStack && nameEl && nameEl.dataset.agentVisual) {
+      var visualMode = nameEl.dataset.agentVisual;
+      visualStack.dataset.agentVisual = visualMode;
+      var label = visualStack.querySelector('.scene-visual-stack__label');
+      if (label && strategyVisualLabels[visualMode]) {
+        label.textContent = strategyVisualLabels[visualMode];
+      }
+      return;
+    }
+
+    if (!imageName || !agentImages[imageName]) return;
     if (img.getAttribute('src') === agentImages[imageName]) return;
     img.style.opacity = '0';
     window.setTimeout(function () {
