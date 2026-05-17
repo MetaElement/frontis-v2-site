@@ -481,10 +481,6 @@
       border-color: var(--threshold-cyan);
     }
 
-    .hero-mobile-map {
-      display: none;
-    }
-
     /* =============================================
        Screen 2 · 产品分流
     ============================================= */
@@ -3590,49 +3586,6 @@
       .hero-cta {
         top: calc(68vh + 22px);
       }
-      .hero-mobile-map {
-        position: absolute;
-        left: 24px;
-        right: auto;
-        width: min(342px, calc(100vw - 48px));
-        top: calc(68vh + 92px);
-        z-index: 24;
-        display: grid;
-        grid-template-columns: 46px minmax(24px, 1fr) 46px minmax(24px, 1fr) 46px;
-        align-items: center;
-        gap: 12px;
-        color: var(--pure-white);
-        font-family: var(--font-en), var(--font-cn);
-        font-size: 13px;
-        letter-spacing: 0;
-      }
-      .hero-mobile-map span {
-        display: inline-grid;
-        place-items: center;
-        width: 46px;
-        height: 46px;
-        border: 1px solid rgba(255, 255, 255, 0.74);
-        color: var(--pure-white);
-      }
-      .hero-mobile-map span::before {
-        content: "";
-        display: block;
-        width: 7px;
-        height: 7px;
-        margin-bottom: 4px;
-        background: var(--threshold-cyan);
-        border-radius: 50%;
-      }
-      .hero-mobile-map span:last-child::before {
-        width: 10px;
-        height: 10px;
-        background: var(--energy-orange);
-      }
-      .hero-mobile-map i {
-        display: block;
-        height: 2px;
-        background: var(--threshold-cyan);
-      }
       .contact-opportunity-grid,
       .scenes-decision-grid {
         grid-template-columns: 1fr !important;
@@ -3731,15 +3684,6 @@
       }
       .hero-cta .btn-demo {
         padding: 13px 28px;
-      }
-      .hero-mobile-map {
-        top: calc(68vh + 84px);
-        grid-template-columns: 42px minmax(20px, 1fr) 42px minmax(20px, 1fr) 42px;
-        gap: 9px;
-      }
-      .hero-mobile-map span {
-        width: 42px;
-        height: 42px;
       }
     }
 
@@ -4908,14 +4852,6 @@
   <!-- 开启跃迁按钮（黑色区） -->
   <div class="hero-cta">
     <a href="https://ai.frontis.cn/login" class="btn-demo" data-leap-cta data-hover="即刻体验"><span class="leap-cta__label">开启跃迁</span></a>
-  </div>
-
-  <div class="hero-mobile-map" aria-hidden="true">
-    <span>ME</span>
-    <i></i>
-    <span>WE</span>
-    <i></i>
-    <span>MA</span>
   </div>
 
 </section>
