@@ -18,6 +18,7 @@ const pages = [
 ];
 
 const requiredAssets = [
+  "assets/favicon.png",
   "assets/logo-light.svg",
   "assets/logo-dark.svg",
   "components/site-shell.css",
