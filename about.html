@@ -552,57 +552,80 @@ section { padding: 96px 64px; }
 }
 
 /* ── 服务客户 logo墙 ── */
-#clients { background: var(--pure-white); padding: 96px 0; overflow: hidden; }
+#clients { background: var(--pure-white); padding: 96px 0 104px; overflow: hidden; }
 #clients .section-header { padding: 0 64px 56px; }
 #clients h2 {
   font-family: var(--font-en); font-size: 40px; font-weight: 700;
   color: var(--quantum-black); margin-bottom: 12px;
 }
 #clients .sub { font-size: 17px; color: var(--level-gray); }
+.logo-marquee {
+  display: grid;
+  gap: 14px;
+  width: 100%;
+}
 .logo-track-wrap {
   width: 100%;
   overflow: hidden;
   position: relative;
 }
-.logo-track-wrap::before,
-.logo-track-wrap::after {
-  content: '';
-  position: absolute;
-  top: 0; bottom: 0;
-  width: 120px;
-  z-index: 2;
-  pointer-events: none;
-}
-.logo-track-wrap::before { left: 0; background: linear-gradient(to right, var(--pure-white), transparent); }
-.logo-track-wrap::after  { right: 0; background: linear-gradient(to left, var(--pure-white), transparent); }
 .logo-track {
+  --duration: 44s;
   display: flex;
-  gap: 0;
   width: max-content;
+  will-change: transform;
+  animation: logo-scroll-left var(--duration) linear infinite;
 }
-.logo-track.row1 { animation: scroll-left  32s linear infinite; }
-.logo-track.row2 { animation: scroll-right 28s linear infinite; }
-@keyframes scroll-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
-@keyframes scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
-.logo-track-wrap:hover .logo-track { animation-play-state: paused; }
-.logo-matrix {
-  display: grid;
-  gap: 16px;
-  padding: 0 64px;
+.logo-track--right {
+  --duration: 48s;
+  animation-name: logo-scroll-right;
 }
-.logo-row {
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
-  gap: 16px;
+.logo-track--left {
+  --duration: 42s;
+  animation-name: logo-scroll-left;
 }
+.logo-track-wrap:hover .logo-track,
+.logo-track:has(.logo-cell:hover) {
+  animation-play-state: paused;
+}
+.logo-sequence {
+  display: flex;
+  flex: 0 0 auto;
+  gap: 14px;
+  padding-right: 14px;
+}
+@keyframes logo-scroll-left  { from { transform: translateX(0); }    to { transform: translateX(-50%); } }
+@keyframes logo-scroll-right { from { transform: translateX(-50%); } to { transform: translateX(0); } }
 .logo-cell {
-  min-height: 96px;
-  display: flex; align-items: center; justify-content: center;
+  --logo-width: 74%;
+  --logo-height: 62%;
+  flex: 0 0 clamp(154px, 14vw, 214px);
+  height: 104px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   border: 1px solid #E8EAED;
   background: var(--pure-white);
   transition: border-color 200ms, background-color 200ms;
-  padding: 22px 30px;
+  padding: 0;
   overflow: hidden;
+}
+.logo-cell--wide {
+  --logo-width: 86%;
+  --logo-height: 58%;
+  flex-basis: clamp(184px, 17vw, 260px);
+}
+.logo-cell--wordmark {
+  --logo-width: 82%;
+  --logo-height: 62%;
+}
+.logo-cell--square {
+  --logo-width: 64%;
+  --logo-height: 68%;
+}
+.logo-cell--compact {
+  --logo-width: 72%;
+  --logo-height: 66%;
 }
 .logo-cell:hover {
   border-color: var(--threshold-cyan);
@@ -610,17 +633,47 @@ section { padding: 96px 64px; }
 }
 .logo-cell img {
   display: block;
-  width: auto;
-  height: auto;
-  max-width: 156px;
-  max-height: 46px;
+  width: var(--logo-width);
+  height: var(--logo-height);
+  max-width: none;
+  max-height: none;
   object-fit: contain;
   opacity: 0.94;
   filter: none;
+  transform: scale(var(--logo-scale, 1));
+  transform-origin: center;
   transition: opacity 200ms;
+}
+.logo-cell img[src*="hisense"] { --logo-scale: 1.72; }
+.logo-cell img[src*="yili"] { --logo-scale: 1.36; }
+.logo-cell img[src*="feihe"] { --logo-scale: 1.24; }
+.logo-cell img[src*="beibingyang"] { --logo-scale: 1.18; }
+.logo-cell img[src*="xiamen-itg"] { --logo-scale: 1.16; }
+.logo-cell img[src*="mistine"] { --logo-scale: 1.08; }
+.logo-cell img[src*="visa"] { --logo-scale: 0.94; }
+.logo-cell img[src*="club-med"] { --logo-scale: 0.98; }
+.logo-cell img[src*="haolai"] { --logo-scale: 1.06; }
+.logo-cell img[src*="weilong"] { --logo-scale: 1.12; }
+.logo-cell img[src*="guoquan"] { --logo-scale: 1.08; }
+.logo-cell img[src*="cnd-group"],
+.logo-cell img[src*="cscec"] {
+  --logo-scale: 0.96;
 }
 .logo-cell:hover img {
   opacity: 1;
+}
+@media (prefers-reduced-motion: reduce) {
+  .logo-track {
+    animation: none;
+    transform: none !important;
+  }
+  .logo-track .logo-sequence[aria-hidden="true"] {
+    display: none;
+  }
+  .logo-track-wrap {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 }
 
 /* ── 加入我们 ── */
@@ -1000,21 +1053,16 @@ section { padding: 96px 64px; }
     padding-left: 24px;
     padding-right: 24px;
   }
-  .logo-matrix {
-    padding: 0 24px;
-    gap: 12px;
+  .logo-marquee {
+    gap: 10px;
   }
-  .logo-row {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-    gap: 12px;
-  }
+  .logo-sequence { gap: 10px; padding-right: 10px; }
   .logo-cell {
-    min-height: 82px;
-    padding: 18px 20px;
+    flex-basis: 142px;
+    height: 80px;
   }
-  .logo-cell img {
-    max-width: 126px;
-    max-height: 40px;
+  .logo-cell--wide {
+    flex-basis: 176px;
   }
   #join h2 { font-size: 38px; }
   .pi-talent-title { font-size: 30px; }
@@ -1317,27 +1365,116 @@ footer {
     <h2>服务客户</h2>
     <p class="sub">正在帮助领先企业跨越 AI 临界线</p>
   </div>
-  <div class="logo-matrix" aria-label="服务客户 logo 墙">
-    <div class="logo-row">
-      <div class="logo-cell"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy"></div>
+  <div class="logo-marquee" aria-label="服务客户 logo 墙">
+    <div class="logo-track-wrap" aria-label="服务客户第一行">
+      <div class="logo-track logo-track--right">
+        <div class="logo-sequence">
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="logo-sequence" aria-hidden="true">
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cnd-group.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/jd.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cscec.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/yili.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/hisense.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/feihe.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/guoquan.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/xiamen-itg.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/visa.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/club-med.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/haolai.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/mistine.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/beibingyang.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/weilong.webp" alt="" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
     </div>
-    <div class="logo-row">
-      <div class="logo-cell"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy"></div>
+
+    <div class="logo-track-wrap" aria-label="服务客户第二行">
+      <div class="logo-track logo-track--left">
+        <div class="logo-sequence">
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="logo-sequence" aria-hidden="true">
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/feihe.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/guoquan.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/xiamen-itg.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/visa.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/club-med.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/haolai.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/mistine.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/beibingyang.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/weilong.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cnd-group.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/jd.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cscec.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/yili.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/hisense.webp" alt="" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
     </div>
-    <div class="logo-row">
-      <div class="logo-cell"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy"></div>
-      <div class="logo-cell"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy"></div>
+
+    <div class="logo-track-wrap" aria-label="服务客户第三行">
+      <div class="logo-track logo-track--right">
+        <div class="logo-sequence">
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/haolai.jpg" alt="好来" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/mistine.png" alt="蜜丝婷" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/beibingyang.webp" alt="北冰洋" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/weilong.webp" alt="卫龙" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cnd-group.png" alt="建发集团" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/jd.jpg" alt="京东" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cscec.png" alt="中国建筑" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/yili.jpg" alt="伊利" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/hisense.webp" alt="海信" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/feihe.jpg" alt="飞鹤" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/guoquan.jpg" alt="锅圈食汇" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/xiamen-itg.webp" alt="厦门国贸" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/visa.png" alt="VISA" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/club-med.jpg" alt="Club Med" loading="lazy" decoding="async"></div>
+        </div>
+        <div class="logo-sequence" aria-hidden="true">
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/haolai.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/mistine.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/beibingyang.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/weilong.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cnd-group.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/jd.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wide"><img src="./assets/client-logos/cscec.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/yili.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/hisense.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/feihe.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--square"><img src="./assets/client-logos/guoquan.jpg" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--compact"><img src="./assets/client-logos/xiamen-itg.webp" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/visa.png" alt="" loading="lazy" decoding="async"></div>
+          <div class="logo-cell logo-cell--wordmark"><img src="./assets/client-logos/club-med.jpg" alt="" loading="lazy" decoding="async"></div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
