@@ -299,6 +299,7 @@ footer.site-footer {
 }
 
 .site-footer__links a,
+.site-footer__links .site-footer__link-static,
 .site-footer__contact span,
 .site-footer__contact a {
   color: #8a8f96;
@@ -306,6 +307,10 @@ footer.site-footer {
   line-height: 1.45;
   text-decoration: none;
   transition: color 160ms var(--site-shell-ease);
+}
+
+.site-footer__links .site-footer__link-static {
+  cursor: default;
 }
 
 .site-footer__links a:hover,
@@ -339,6 +344,31 @@ footer.site-footer {
 
 .site-footer__bottom a:hover {
   color: var(--site-shell-cyan);
+}
+
+.site-footer__records {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.site-footer__police-record {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.site-footer__police-record img {
+  width: 16px;
+  height: 16px;
+  flex: 0 0 auto;
+}
+
+.site-footer__police-record span {
+  color: inherit;
+  font-size: inherit;
 }
 
 .site-cta {
@@ -1151,6 +1181,13 @@ body #cta-section.site-cta > .site-cta__inner {
   .site-footer__bottom {
     flex-direction: column;
     align-items: flex-start;
+    gap: 8px;
+  }
+
+  .site-footer__records {
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: flex-start;
     gap: 8px;
   }
 }

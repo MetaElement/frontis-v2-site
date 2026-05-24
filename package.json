@@ -5,11 +5,18 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 127.0.0.1",
-    "build": "vite build && node scripts/copy-static.mjs",
+    "dev:full": "node scripts/local-cta-server.mjs",
+    "seo": "node scripts/apply-seo.mjs",
+    "build": "npm run seo && vite build && node scripts/copy-static.mjs",
     "preview": "vite preview --host 127.0.0.1",
-    "check": "node scripts/check-site.mjs"
+    "start": "node scripts/serve-production.mjs",
+    "check": "node scripts/check-site.mjs",
+    "test:cta": "node scripts/test-cta-api.mjs"
   },
   "devDependencies": {
     "vite": "^8.0.12"
+  },
+  "dependencies": {
+    "nodemailer": "^8.0.7"
   }
 }

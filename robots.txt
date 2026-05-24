@@ -1,0 +1,8 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /experiments/
+Disallow: /outputs/
+Disallow: /releases/
+
+Sitemap: https://frontis.cn/sitemap.xml

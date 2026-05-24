@@ -85,6 +85,39 @@
     return '<a href="' + href + '"' + (isCurrent(href) ? ' class="is-active" aria-current="page"' : "") + ">" + label + "</a>";
   }
 
+  function footerStatic(label) {
+    return '<span class="site-footer__link-static" aria-disabled="true">' + label + "</span>";
+  }
+
+  function escapeAttr(value) {
+    return String(value || "")
+      .replace(/&/g, "&amp;")
+      .replace(/"/g, "&quot;")
+      .replace(/</g, "&lt;")
+      .replace(/>/g, "&gt;");
+  }
+
+  function trackSiteEvent(eventName, params) {
+    var payload = Object.assign({
+      page_path: window.location.pathname,
+      page_title: document.title,
+    }, params || {});
+
+    if (typeof window.frontisTrack === "function") {
+      window.frontisTrack(eventName, payload);
+      return;
+    }
+
+    if (typeof window.CustomEvent === "function") {
+      document.dispatchEvent(new CustomEvent("frontis:analytics", {
+        detail: {
+          eventName: eventName,
+          params: payload,
+        },
+      }));
+    }
+  }
+
   function renderFooter() {
     return '<footer class="site-footer" role="contentinfo">' +
       '<div class="site-footer__grid">' +
@@ -101,9 +134,9 @@
       '<div><div class="site-footer__title">场景</div><div class="site-footer__links">' +
       footerLink("./scene.html", "场景总览") +
       footerLink("./scene-strategy.html", "战略管理") +
-      footerLink("./scene-research.html", "生产研发") +
-      footerLink("./scene-supply.html", "供应链运营") +
-      footerLink("./scene-sales.html", "营销增长") +
+      footerStatic("生产研发") +
+      footerStatic("供应链运营") +
+      footerStatic("营销增长") +
       "</div></div>" +
       '<div><div class="site-footer__title">公司</div><div class="site-footer__links">' +
       footerLink("./about.html", "关于衔远") +
@@ -117,7 +150,13 @@
       "</div>" +
       '<div class="site-footer__bottom">' +
       "<span>© 2026 衔远科技 FRONTIS AI</span>" +
+      '<div class="site-footer__records">' +
       '<a href="https://beian.miit.gov.cn" target="_blank" rel="noopener">京ICP备2022014486号-1</a>' +
+      '<a class="site-footer__police-record" href="https://beian.mps.gov.cn/#/query/webSearch?code=11010802042925" target="_blank" rel="noopener">' +
+      '<img src="./assets/beian-police.png" alt="" aria-hidden="true" decoding="async">' +
+      "<span>京公网安备11010802042925号</span>" +
+      "</a>" +
+      "</div>" +
       "</div>" +
       "</footer>";
   }
@@ -125,6 +164,8 @@
   function renderSharedCta(target) {
     var id = target && target.id ? target.id : "contact";
     var labelId = id + "-heading";
+    var targetEndpoint = target && target.getAttribute ? target.getAttribute("data-cta-endpoint") : "";
+    var endpointAttr = targetEndpoint ? ' data-cta-endpoint="' + escapeAttr(targetEndpoint) + '"' : "";
 
     return '<section id="' + id + '" class="site-cta" aria-labelledby="' + labelId + '">' +
       '<div class="site-cta__inner">' +
@@ -136,7 +177,7 @@
       '<p class="site-cta__copy">申请产品体验，率先迈入AI原生时代</p>' +
       '</div>' +
       '<div class="site-cta__grid site-cta__grid--form">' +
-      '<form class="site-cta__form" data-site-cta-form novalidate>' +
+      '<form class="site-cta__form" data-site-cta-form' + endpointAttr + ' novalidate>' +
       '<div class="site-cta__form-head"><strong>申请产品演示</strong><span>我们会确认场景、试点路径与下一步安排。</span></div>' +
       '<div class="site-cta__fields">' +
       '<label><span>姓名</span><input name="name" autocomplete="name" placeholder="请输入您的姓名" required></label>' +
@@ -146,7 +187,7 @@
       '</div>' +
       '<fieldset class="site-cta__radios">' +
       '<legend>我更感兴趣：</legend>' +
-      '<label><input type="radio" name="interest" value="horizon"><span>Frontis Horizon（企业级）</span></label>' +
+      '<label><input type="radio" name="interest" value="horizon" checked><span>Frontis Horizon（企业级）</span></label>' +
       '<label><input type="radio" name="interest" value="leadeep"><span>Leadeep AI（个人 / 老板）</span></label>' +
       '<label><input type="radio" name="interest" value="ecosystem"><span>城市生态合作</span></label>' +
       '<label><input type="radio" name="interest" value="other"><span>其他</span></label>' +
@@ -169,7 +210,14 @@
       '</section>';
   }
 
-  function getCtaEndpoint() {
+  function isStaticHostedPage() {
+    return window.location.hostname === "metaelement.github.io" || /\.github\.io$/i.test(window.location.hostname);
+  }
+
+  function getCtaEndpoint(form) {
+    var formEndpoint = form && form.getAttribute ? form.getAttribute("data-cta-endpoint") : "";
+    if (formEndpoint) return formEndpoint.trim();
+
     if (window.FRONTIS_CTA_ENDPOINT && typeof window.FRONTIS_CTA_ENDPOINT === "string") {
       return window.FRONTIS_CTA_ENDPOINT.trim();
     }
@@ -178,6 +226,7 @@
     if (endpointMeta && endpointMeta.content) return endpointMeta.content.trim();
 
     if (window.location.protocol === "http:" || window.location.protocol === "https:") {
+      if (isStaticHostedPage()) return "";
       return "/api/cta";
     }
 
@@ -205,7 +254,23 @@
       sourcePage: window.location.href || pageHref,
       pageTitle: document.title,
       submittedAt: new Date().toISOString(),
+      referrer: document.referrer || "",
+      tracking: getCtaTracking(),
     };
+  }
+
+  function getCtaTracking() {
+    var tracking = {};
+    try {
+      var params = new URLSearchParams(window.location.search);
+      ["utm_source", "utm_medium", "utm_campaign", "utm_content", "utm_term"].forEach(function (key) {
+        var value = params.get(key);
+        if (value) tracking[key] = value;
+      });
+    } catch (error) {
+      return tracking;
+    }
+    return tracking;
   }
 
   function validateCtaPayload(payload) {
@@ -283,18 +348,30 @@
       var payload = normalizeCtaForm(form);
       var validationMessage = validateCtaPayload(payload);
       if (validationMessage) {
+        trackSiteEvent("frontis_cta_validation_error", {
+          interest: payload.interest || "unknown",
+          error_type: validationMessage.indexOf("邮箱") >= 0 ? "invalid_email" : "missing_required",
+        });
         setCtaStatus(form, "error", validationMessage);
         return;
       }
 
-      var endpoint = getCtaEndpoint();
+      var endpoint = getCtaEndpoint(form);
       if (!endpoint) {
-        setCtaStatus(form, "error", "当前为本地文件预览，尚未配置提交服务。请部署 API 后再测试提交。");
+        trackSiteEvent("frontis_cta_submit_error", {
+          interest: payload.interest || "unknown",
+          error_type: "missing_endpoint",
+        });
+        setCtaStatus(form, "error", "当前页面尚未配置提交服务。请部署 API 后配置 frontis-cta-endpoint。");
         return;
       }
 
+      trackSiteEvent("frontis_cta_submit", {
+        interest: payload.interest || "unknown",
+      });
       button.textContent = "正在提交...";
       button.disabled = true;
+      button.setAttribute("aria-busy", "true");
       setCtaStatus(form, "pending", "正在提交预约信息，请稍候。");
 
       try {
@@ -306,21 +383,35 @@
           },
           body: JSON.stringify(payload),
         });
-        var result = await response.json().catch(function () {
+        var responseType = response.headers.get("content-type") || "";
+        var result = responseType.indexOf("application/json") >= 0 ? await response.json().catch(function () {
           return {};
-        });
+        }) : {};
 
         if (!response.ok || result.ok === false) {
-          throw new Error(result.message || "提交失败，请稍后重试。");
+          var fallbackMessage = response.status === 404 && endpoint === "/api/cta" ?
+            "提交服务尚未部署：当前站点没有 /api/cta，请配置 frontis-cta-endpoint。" :
+            "提交失败，请稍后重试。";
+          throw new Error(result.message || fallbackMessage);
         }
 
         form.reset();
         button.textContent = "已提交，我们会尽快联系你";
         setCtaStatus(form, "success", "预约信息已发送，我们会在 1 个工作日内联系你。");
+        trackSiteEvent("generate_lead", {
+          method: "website_cta",
+          interest: payload.interest || "unknown",
+        });
       } catch (error) {
         button.textContent = originalText;
         button.disabled = false;
         setCtaStatus(form, "error", error && error.message ? error.message : "提交失败，请稍后重试。");
+        trackSiteEvent("frontis_cta_submit_error", {
+          interest: payload.interest || "unknown",
+          error_type: "submit_failed",
+        });
+      } finally {
+        button.removeAttribute("aria-busy");
       }
     });
   });

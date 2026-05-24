@@ -2,7 +2,13 @@ import fs from "node:fs";
 import path from "node:path";
 
 const staticFiles = [
+  "robots.txt",
+  "sitemap.xml",
+  "assets/og-frontis.svg",
+  "components/analytics-config.js",
+  "components/analytics.js",
   "components/site-shell.js",
+  "assets/beian-police.png",
   "assets/logo-dark.svg",
   "assets/logo-light.svg",
 ];

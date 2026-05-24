@@ -1,0 +1,13 @@
+<svg width="1200" height="630" viewBox="0 0 1200 630" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <rect width="1200" height="630" fill="#FFFFFF"/>
+  <path d="M96 96H1104" stroke="#00C1D4" stroke-width="4"/>
+  <path d="M96 534H1104" stroke="#000000" stroke-width="2"/>
+  <text x="96" y="207" fill="#000000" font-family="Arial, 'PingFang SC', sans-serif" font-size="72" font-weight="700">衔远科技 Frontis AI</text>
+  <text x="96" y="306" fill="#000000" font-family="Arial, 'PingFang SC', sans-serif" font-size="46" font-weight="700">企业 AI 专家团与 AI 原生组织平台</text>
+  <text x="96" y="390" fill="#3D4145" font-family="Arial, 'PingFang SC', sans-serif" font-size="30">Frontis Horizon · Leadeep AI · AI Expert Teams</text>
+  <rect x="96" y="454" width="256" height="54" fill="#000000"/>
+  <text x="124" y="490" fill="#FFFFFF" font-family="Arial, 'PingFang SC', sans-serif" font-size="24" font-weight="700">frontis.cn</text>
+  <circle cx="1016" cy="474" r="58" fill="#00C1D4"/>
+  <path d="M972 474H1060" stroke="#000000" stroke-width="10"/>
+  <path d="M1016 430V518" stroke="#000000" stroke-width="10"/>
+</svg>
