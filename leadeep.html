@@ -195,1038 +195,6 @@
     .delay-4 { transition-delay: 0.4s; }
     .delay-5 { transition-delay: 0.5s; }
 
-    /* ============================================================
-       Navigation
-    ============================================================ */
-    .nav {
-      position: fixed;
-      top: 0;
-      left: 0;
-      right: 0;
-      height: var(--nav-height);
-      background: var(--pure-white);
-      border-bottom: 1px solid #e8eaec;
-      z-index: 1000;
-      display: flex;
-      align-items: center;
-      padding: 0 48px;
-      gap: 0;
-    }
-
-    .nav-logo {
-      display: flex;
-      align-items: center;
-      margin-right: 48px;
-      flex-shrink: 0;
-    }
-
-    .nav-logo img {
-      height: 28px;
-      width: auto;
-    }
-
-    .nav-links {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      flex: 1;
-    }
-
-    .nav-item {
-      position: relative;
-      height: var(--nav-height);
-      display: flex;
-      align-items: center;
-    }
-
-    .nav-link {
-      font-family: var(--font-cn);
-      font-size: 14px;
-      font-weight: 500;
-      color: var(--quantum-black);
-      padding: 0 18px;
-      height: 100%;
-      display: flex;
-      align-items: center;
-      cursor: pointer;
-      white-space: nowrap;
-      transition: color 0.2s;
-    }
-
-    .nav-link:hover {
-      color: var(--threshold-cyan);
-    }
-
-    /* Active 状态：青色下划线 */
-    .nav-link.active {
-      color: var(--threshold-cyan);
-    }
-
-    .nav-link.active::after {
-      content: '';
-      position: absolute;
-      bottom: 0;
-      left: 18px;
-      right: 18px;
-      height: 2px;
-      background: var(--threshold-cyan);
-    }
-
-    /* 下拉菜单 */
-    .nav-dropdown {
-      position: absolute;
-      top: calc(var(--nav-height) - 1px);
-      left: 0;
-      background: var(--pure-white);
-      border: 1px solid #e8eaec;
-      border-top: 2px solid var(--threshold-cyan);
-      min-width: 180px;
-      opacity: 0;
-      pointer-events: none;
-      transform: translateY(-6px);
-      transition: opacity 0.2s, transform 0.2s;
-    }
-
-    .nav-item:hover .nav-dropdown {
-      opacity: 1;
-      pointer-events: all;
-      transform: translateY(0);
-    }
-
-    .nav-dropdown-item {
-      display: block;
-      padding: 12px 20px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--quantum-black);
-      border-bottom: 1px solid #f0f2f4;
-      transition: background 0.15s, color 0.15s;
-    }
-
-    .nav-dropdown-item:last-child {
-      border-bottom: none;
-    }
-
-    .nav-dropdown-item:hover {
-      background: var(--energy-gray);
-      color: var(--threshold-cyan);
-    }
-
-    .nav-dropdown-sub {
-      font-family: var(--font-en);
-      font-size: 10px;
-      font-weight: 400;
-      color: #999;
-      display: block;
-      margin-top: 2px;
-    }
-
-    .nav-cta {
-      margin-left: auto;
-      display: flex;
-      align-items: center;
-    }
-
-    .btn-nav {
-      font-family: var(--font-cn);
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--pure-white);
-      background: var(--quantum-black);
-      padding: 8px 20px;
-      border: 1px solid var(--quantum-black);
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-      white-space: nowrap;
-    }
-
-    .btn-nav:hover {
-      background: var(--threshold-cyan);
-      border-color: var(--threshold-cyan);
-    }
-
-    /* ============================================================
-       Buttons
-    ============================================================ */
-    .btn-outline-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-cn);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--pure-white);
-      background: transparent;
-      border: 1px solid var(--pure-white);
-      padding: 12px 28px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn-outline-white:hover {
-      background: var(--pure-white);
-      color: var(--quantum-black);
-    }
-
-    .btn-solid-dark {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-cn);
-      font-size: 15px;
-      font-weight: 600;
-      color: var(--pure-white);
-      background: var(--quantum-black);
-      border: 1px solid var(--quantum-black);
-      padding: 14px 32px;
-      cursor: pointer;
-      transition: background 0.2s, border-color 0.2s;
-    }
-
-    .btn-solid-dark:hover {
-      background: var(--threshold-cyan);
-      border-color: var(--threshold-cyan);
-    }
-
-    .btn-solid-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-cn);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--quantum-black);
-      background: var(--pure-white);
-      border: 1px solid var(--pure-white);
-      padding: 12px 28px;
-      cursor: pointer;
-      transition: background 0.2s, color 0.2s;
-    }
-
-    .btn-solid-white:hover {
-      background: var(--threshold-cyan);
-      border-color: var(--threshold-cyan);
-      color: var(--pure-white);
-    }
-
-    .btn-outline-dark-white {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-family: var(--font-cn);
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--pure-white);
-      background: transparent;
-      border: 1px solid rgba(255,255,255,0.4);
-      padding: 12px 28px;
-      cursor: pointer;
-      transition: border-color 0.2s, color 0.2s;
-    }
-
-    .btn-outline-dark-white:hover {
-      border-color: var(--pure-white);
-      color: var(--pure-white);
-    }
-
-    /* ============================================================
-       图形语言公共元素
-    ============================================================ */
-    /* The Edge 临界线 */
-    .edge-line {
-      width: 100%;
-      height: 6px;
-      background: var(--threshold-cyan);
-      box-shadow: 0 4px 24px rgba(0, 193, 212, 0.35);
-      flex-shrink: 0;
-    }
-
-    /* 2px 青色引导竖线 */
-    .guide-line-v {
-      width: 2px;
-      background: var(--threshold-cyan);
-      flex-shrink: 0;
-    }
-
-    /* 能量节点圆点 */
-    .energy-dot {
-      width: 8px;
-      height: 8px;
-      background: var(--threshold-cyan);
-      border-radius: 50%;
-      flex-shrink: 0;
-    }
-
-    /* 标签 */
-    .label-tag {
-      font-family: var(--font-en);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: var(--threshold-cyan);
-    }
-
-    /* 占位图片框 */
-    .img-placeholder {
-      background: var(--quantum-black);
-      border: 1px solid var(--threshold-cyan);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      font-size: 11px;
-      font-family: var(--font-mono);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    .img-placeholder-dark {
-      background: #0a0a0a;
-      border: 1px solid var(--threshold-cyan);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      color: #555;
-      font-size: 11px;
-      font-family: var(--font-mono);
-      text-align: center;
-      line-height: 1.6;
-    }
-
-    /* ============================================================
-       Section 1 — Hero
-    ============================================================ */
-    #hero {
-      min-height: 100vh;
-      display: flex;
-      flex-direction: column;
-      padding-top: var(--nav-height);
-    }
-
-    .hero-upper {
-      flex: 1;
-      background: var(--pure-white);
-      display: flex;
-      position: relative;
-    }
-
-    .hero-upper-left {
-      flex: 1;
-      padding: 64px 48px 48px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: flex-end;
-    }
-
-    .hero-upper-right {
-      width: 40%;
-      flex-shrink: 0;
-      padding: 40px 48px 0 24px;
-      display: flex;
-      align-items: stretch;
-    }
-
-    .hero-scene-tag {
-      font-family: var(--font-en);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--threshold-cyan);
-      margin-bottom: 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .hero-scene-tag::before {
-      content: '';
-      width: 24px;
-      height: 1px;
-      background: var(--threshold-cyan);
-    }
-
-    .hero-h0 {
-      font-family: var(--font-cn);
-      font-size: clamp(56px, 6vw, 96px);
-      font-weight: 700;
-      color: var(--quantum-black);
-      line-height: 1.05;
-      letter-spacing: -0.02em;
-      margin-bottom: 28px;
-    }
-
-    .hero-sub-brand {
-      display: flex;
-      align-items: center;
-      gap: 0;
-      margin-bottom: 20px;
-    }
-
-    .hero-sub-brand-line {
-      width: 3px;
-      height: 36px;
-      background: var(--energy-orange);
-      margin-right: 16px;
-      flex-shrink: 0;
-    }
-
-    .hero-sub-brand-text {
-      font-family: var(--font-en);
-      font-size: 16px;
-      font-weight: 600;
-      color: var(--quantum-black);
-      letter-spacing: 0.04em;
-    }
-
-    .hero-sub-brand-divider {
-      color: #ccc;
-      margin: 0 12px;
-    }
-
-    .hero-sub-brand-mono {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      font-weight: 500;
-      color: var(--level-gray);
-      letter-spacing: 0.1em;
-    }
-
-    .hero-copy {
-      font-family: var(--font-cn);
-      font-size: 16px;
-      line-height: 1.8;
-      color: var(--level-gray);
-    }
-
-    /* Hero 临界线 */
-    .hero-edge-wrap {
-      position: relative;
-      z-index: 2;
-    }
-
-    .hero-lower {
-      background: var(--quantum-black);
-      display: flex;
-      min-height: 180px;
-    }
-
-    .hero-lower-left {
-      flex: 1;
-      padding: 40px 48px 48px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .hero-lower-right {
-      width: 40%;
-      flex-shrink: 0;
-      padding: 0 48px 40px 24px;
-    }
-
-    /* Hero 右侧跨临界线图片 */
-    .hero-img-wrap {
-      width: 100%;
-      height: 100%;
-      min-height: 420px;
-    }
-
-    /* ============================================================
-       Section 2 — Agent 专家团
-    ============================================================ */
-    #agents {
-      min-height: 100vh;
-      background: var(--pure-white);
-      padding: 96px 80px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .agents-header {
-      margin-bottom: 56px;
-    }
-
-    .section-title-large {
-      font-family: var(--font-cn);
-      font-size: clamp(32px, 3.5vw, 48px);
-      font-weight: 700;
-      color: var(--quantum-black);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin-top: 12px;
-    }
-
-    .agents-grid {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 0;
-      flex: 1;
-    }
-
-    /* Agent 卡片 */
-    .agent-card {
-      border: 1px solid #e8eaec;
-      padding: 0;
-      display: flex;
-      flex-direction: column;
-      transition: border-color 0.25s;
-      cursor: default;
-      position: relative;
-    }
-
-    .agent-card:not(:first-child) {
-      border-left: none;
-    }
-
-    .agent-card:hover {
-      border-color: var(--threshold-cyan);
-      z-index: 1;
-    }
-
-    .agent-card:hover + .agent-card {
-      border-left-color: transparent;
-    }
-
-    .agent-card-icon {
-      padding: 28px 28px 20px;
-      border-bottom: 1px solid #e8eaec;
-    }
-
-    .agent-card:hover .agent-card-icon {
-      border-bottom-color: var(--threshold-cyan);
-    }
-
-    .agent-card-img {
-      height: 120px;
-      margin: 20px 28px;
-    }
-
-    .agent-card-body {
-      padding: 0 28px 28px;
-      flex: 1;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .agent-card-name {
-      font-family: var(--font-cn);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--quantum-black);
-      margin-bottom: 4px;
-    }
-
-    .agent-card-en {
-      font-family: var(--font-en);
-      font-size: 11px;
-      font-weight: 500;
-      color: var(--threshold-cyan);
-      letter-spacing: 0.06em;
-      margin-bottom: 16px;
-    }
-
-    .agent-card-desc {
-      font-family: var(--font-cn);
-      font-size: 14px;
-      line-height: 1.75;
-      color: var(--level-gray);
-      flex: 1;
-    }
-
-    /* Agent 序号 */
-    .agent-card-num {
-      font-family: var(--font-mono);
-      font-size: 10px;
-      color: #ccc;
-      letter-spacing: 0.08em;
-      margin-bottom: 8px;
-    }
-
-    /* SVG 图标容器 */
-    .agent-icon-svg {
-      width: 56px;
-      height: 56px;
-    }
-
-    /* ============================================================
-       Section 3 — 产品形态（深色）
-    ============================================================ */
-    #product-forms {
-      min-height: 100vh;
-      background: var(--quantum-black);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-forms-inner {
-      flex: 1;
-      padding: 80px 80px 96px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .product-forms-header {
-      margin-bottom: 64px;
-    }
-
-    .section-title-light {
-      font-family: var(--font-cn);
-      font-size: clamp(32px, 3.5vw, 48px);
-      font-weight: 700;
-      color: var(--pure-white);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin-top: 12px;
-    }
-
-    .products-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      flex: 1;
-      gap: 0;
-    }
-
-    .product-col {
-      padding: 0 40px;
-      display: flex;
-      flex-direction: column;
-      position: relative;
-    }
-
-    .product-col:not(:first-child)::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0;
-      bottom: 0;
-      width: 1px;
-      background: var(--threshold-cyan);
-    }
-
-    .product-col:first-child {
-      padding-left: 0;
-    }
-
-    .product-col:last-child {
-      padding-right: 0;
-    }
-
-    .product-col-img {
-      height: 150px;
-      margin-bottom: 28px;
-    }
-
-    .product-col-name {
-      font-family: var(--font-cn);
-      font-size: 20px;
-      font-weight: 700;
-      color: var(--pure-white);
-      margin-bottom: 12px;
-    }
-
-    .product-col-desc {
-      font-family: var(--font-cn);
-      font-size: 14px;
-      line-height: 1.8;
-      color: rgba(255,255,255,0.5);
-    }
-
-    /* ============================================================
-       Section 4 — 数据安全（浅色背景）
-    ============================================================ */
-    #security {
-      min-height: 100vh;
-      background: var(--energy-gray);
-      padding: 96px 80px;
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-    }
-
-    .security-header {
-      margin-bottom: 72px;
-    }
-
-    .section-title-dark {
-      font-family: var(--font-cn);
-      font-size: clamp(32px, 3.5vw, 48px);
-      font-weight: 700;
-      color: var(--quantum-black);
-      line-height: 1.2;
-      letter-spacing: -0.01em;
-      margin-top: 12px;
-    }
-
-    .security-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 64px;
-    }
-
-    .security-item {
-      display: flex;
-      gap: 20px;
-    }
-
-    .security-item-line {
-      width: 2px;
-      background: var(--threshold-cyan);
-      flex-shrink: 0;
-      min-height: 80px;
-    }
-
-    .security-item-body {}
-
-    .security-item-title {
-      font-family: var(--font-cn);
-      font-size: 18px;
-      font-weight: 700;
-      color: var(--quantum-black);
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    .security-item-title .energy-dot {
-      flex-shrink: 0;
-    }
-
-    .security-item-desc {
-      font-family: var(--font-cn);
-      font-size: 14px;
-      line-height: 1.85;
-      color: var(--level-gray);
-    }
-
-    /* ============================================================
-       Section 5 — 硬件规格（深色）
-    ============================================================ */
-    #hardware {
-      min-height: 100vh;
-      background: var(--quantum-black);
-      padding: 96px 80px;
-      display: flex;
-      align-items: center;
-    }
-
-    .hardware-inner {
-      display: grid;
-      grid-template-columns: 40% 60%;
-      gap: 80px;
-      width: 100%;
-      align-items: center;
-    }
-
-    .hardware-img {
-      height: 280px;
-    }
-
-    .hardware-label {
-      font-family: var(--font-en);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.14em;
-      color: var(--threshold-cyan);
-      margin-bottom: 16px;
-    }
-
-    .hardware-title {
-      font-family: var(--font-cn);
-      font-size: clamp(24px, 2.5vw, 36px);
-      font-weight: 700;
-      color: var(--pure-white);
-      line-height: 1.3;
-      margin-bottom: 40px;
-    }
-
-    .spec-list {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0;
-      margin-bottom: 40px;
-      border-top: 1px solid rgba(255,255,255,0.08);
-    }
-
-    .spec-item {
-      display: flex;
-      align-items: flex-start;
-      gap: 10px;
-      padding: 14px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding-right: 16px;
-    }
-
-    .spec-label {
-      font-family: var(--font-cn);
-      font-size: 12px;
-      color: rgba(255,255,255,0.45);
-      width: 40px;
-      flex-shrink: 0;
-      padding-top: 1px;
-    }
-
-    .spec-value {
-      font-family: var(--font-cn);
-      font-size: 13px;
-      color: var(--pure-white);
-      font-weight: 500;
-      flex: 1;
-    }
-
-    .spec-value.mono {
-      font-family: var(--font-mono);
-      color: var(--threshold-cyan);
-    }
-
-    .hardware-btns {
-      display: flex;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* ============================================================
-       Section 6 — 开启跃迁
-    ============================================================ */
-    #contact {
-      min-height: 100vh;
-      background: var(--pure-white);
-      display: flex;
-      flex-direction: column;
-    }
-
-    .contact-edge {
-      flex-shrink: 0;
-    }
-
-    .contact-inner {
-      flex: 1;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      padding: 96px 80px;
-      gap: 80px;
-      align-items: center;
-    }
-
-    .contact-left {}
-
-    .contact-title {
-      font-family: var(--font-cn);
-      font-size: clamp(32px, 3.5vw, 52px);
-      font-weight: 700;
-      color: var(--quantum-black);
-      line-height: 1.15;
-      letter-spacing: -0.01em;
-      margin-bottom: 20px;
-    }
-
-    .contact-sub {
-      font-family: var(--font-cn);
-      font-size: 16px;
-      color: var(--level-gray);
-      line-height: 1.7;
-      margin-bottom: 40px;
-    }
-
-    .contact-right {
-      display: flex;
-      flex-direction: column;
-      gap: 40px;
-    }
-
-    .contact-back {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      font-family: var(--font-cn);
-      font-size: 14px;
-      color: var(--threshold-cyan);
-      font-weight: 500;
-      transition: gap 0.2s;
-    }
-
-    .contact-back:hover {
-      gap: 14px;
-    }
-
-    .contact-back-arrow {
-      font-size: 16px;
-      line-height: 1;
-    }
-
-    .contact-emails {}
-
-    .contact-emails-title {
-      font-family: var(--font-cn);
-      font-size: 12px;
-      font-weight: 600;
-      color: #999;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      margin-bottom: 16px;
-    }
-
-    .contact-email-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid #f0f2f4;
-    }
-
-    .contact-email-item:first-of-type {
-      border-top: 1px solid #f0f2f4;
-    }
-
-    .contact-email-label {
-      font-family: var(--font-cn);
-      font-size: 13px;
-      color: var(--level-gray);
-      width: 72px;
-      flex-shrink: 0;
-    }
-
-    .contact-email-addr {
-      font-family: var(--font-mono);
-      font-size: 13px;
-      color: var(--quantum-black);
-    }
-
-    /* ============================================================
-       Footer
-    ============================================================ */
-    footer {
-      background: var(--quantum-black);
-      padding: 64px 80px 32px;
-    }
-
-    .footer-grid {
-      display: grid;
-      grid-template-columns: 1.6fr 1fr 1fr 1fr 1.4fr;
-      gap: 40px;
-      margin-bottom: 56px;
-    }
-
-    .footer-col-title {
-      font-family: var(--font-en);
-      font-size: 10px;
-      font-weight: 600;
-      letter-spacing: 0.12em;
-      color: rgba(255,255,255,0.35);
-      text-transform: uppercase;
-      margin-bottom: 20px;
-    }
-
-    .footer-logo {
-      margin-bottom: 20px;
-    }
-
-    .footer-logo img {
-      height: 24px;
-      width: auto;
-    }
-
-    .footer-brand-email {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: rgba(255,255,255,0.4);
-    }
-
-    .footer-link {
-      display: block;
-      font-family: var(--font-cn);
-      font-size: 13px;
-      color: rgba(255,255,255,0.55);
-      margin-bottom: 12px;
-      transition: color 0.2s;
-    }
-
-    .footer-link:hover {
-      color: var(--pure-white);
-    }
-
-    .footer-link.highlight {
-      color: var(--threshold-cyan);
-    }
-
-    .footer-link.highlight:hover {
-      color: var(--pure-white);
-    }
-
-    .footer-contact-item {
-      display: flex;
-      flex-direction: column;
-      gap: 4px;
-      margin-bottom: 16px;
-    }
-
-    .footer-contact-label {
-      font-family: var(--font-cn);
-      font-size: 11px;
-      color: rgba(255,255,255,0.3);
-    }
-
-    .footer-contact-addr {
-      font-family: var(--font-mono);
-      font-size: 12px;
-      color: rgba(255,255,255,0.55);
-    }
-
-    .footer-bottom {
-      border-top: 1px solid rgba(255,255,255,0.08);
-      padding-top: 24px;
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-    }
-
-    .footer-copy {
-      font-family: var(--font-en);
-      font-size: 11px;
-      color: rgba(255,255,255,0.25);
-    }
-
-    .footer-icp {
-      font-family: var(--font-mono);
-      font-size: 11px;
-      color: rgba(255,255,255,0.2);
-    }
-
-    /* ============================================================
-       Responsive
-    ============================================================ */
-    @media (max-width: 1024px) {
-      .nav { padding: 0 24px; }
-      .agents-grid { grid-template-columns: repeat(2, 1fr); }
-      .products-grid { grid-template-columns: 1fr; gap: 40px; }
-      .product-col::before { display: none; }
-      .product-col { padding: 0; border-top: 1px solid rgba(0,193,212,0.3); }
-      .product-col:first-child { border-top: none; }
-      .security-grid { grid-template-columns: 1fr; gap: 40px; }
-      .hardware-inner { grid-template-columns: 1fr; gap: 40px; }
-      .contact-inner { grid-template-columns: 1fr; }
-      .footer-grid { grid-template-columns: 1fr 1fr; }
-    }
-
-	    @media (max-width: 768px) {
-	      #hero { flex-direction: column; }
-	      .hero-upper,
-	      .hero-lower { flex-direction: column; }
-	      .hero-upper-left { padding: 40px 24px 32px; }
-      .hero-upper-right { width: 100%; padding: 0 24px; }
-      .hero-lower-left { padding: 32px 24px; }
-      .hero-lower-right { display: none; }
-      .hero-img-wrap { min-height: 260px; }
-      .agents-grid { grid-template-columns: 1fr; }
-      #agents { padding: 64px 24px; }
-      #product-forms .product-forms-inner { padding: 64px 24px; }
-      #security { padding: 64px 24px; }
-      #hardware { padding: 64px 24px; }
-      .contact-inner { padding: 64px 24px; }
-	      footer { padding: 48px 24px 24px; }
-	      .footer-grid { grid-template-columns: 1fr; }
-	    }
 
 	    /* ============================================================
 	       Leadeep AI attachment refresh
@@ -1256,44 +224,45 @@
 
 	    .ld-section {
 	      position: relative;
-	      padding: 108px 80px;
+	      padding: 96px 0 80px;
 	      overflow: hidden;
 	    }
 
 	    .ld-inner {
-	      width: min(100%, 1240px);
+	      width: min(100% - 160px, 1240px);
 	      margin: 0 auto;
 	    }
 
-	    .ld-kicker {
-	      display: inline-flex;
-	      align-items: center;
-	      gap: 10px;
-	      margin-bottom: 18px;
-	      color: var(--threshold-cyan);
-	      font-family: var(--font-en);
-	      font-size: 11px;
-	      font-weight: 600;
-	      letter-spacing: 0.12em;
-	      text-transform: uppercase;
+	    #pain,
+	    #experts {
+	      border-bottom: 1px solid rgba(0, 16, 19, 0.12);
 	    }
 
-	    .ld-kicker::before {
-	      content: "";
-	      width: 28px;
-	      height: 1px;
-	      background: var(--threshold-cyan);
+	    .ld-hardware,
+	    .ld-foundation {
+	      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+	    }
+
+	    .ld-kicker {
+	      display: block;
+	      margin-bottom: 18px;
+	      color: var(--threshold-cyan);
+	      font-family: var(--font-mono);
+	      font-size: 11px;
+	      font-weight: 600;
+	      letter-spacing: 3px;
+	      text-transform: uppercase;
 	    }
 
 	    .ld-title {
 	      margin: 0;
 	      color: var(--quantum-black);
 	      font-family: var(--font-cn);
-	      font-size: clamp(36px, 4.2vw, 64px);
+	      font-size: 40px;
 	      font-weight: 750;
-	      line-height: 1.08;
+	      line-height: 1.32;
 	      letter-spacing: 0;
-	      overflow-wrap: anywhere;
+	      word-break: keep-all;
 	    }
 
 	    .ld-title--light {
@@ -1306,7 +275,6 @@
 	      color: var(--level-gray);
 	      font-size: 16px;
 	      line-height: 1.85;
-	      overflow-wrap: anywhere;
 	    }
 
 	    .ld-copy--light {
@@ -1314,7 +282,7 @@
 	    }
 
 	    .ld-edge {
-	      height: 4px;
+	      height: 2px;
 	      background: var(--threshold-cyan);
 	    }
 
@@ -1407,7 +375,7 @@
 	    }
 
 	    .ld-hero__upper {
-	      padding: 64px 80px 54px;
+	      padding: 64px 0 54px;
 	      background: var(--pure-white);
 	    }
 
@@ -1416,7 +384,7 @@
 	      grid-template-columns: minmax(0, 1fr) minmax(360px, 0.72fr);
 	      gap: 72px;
 	      align-items: end;
-	      width: min(100%, 1240px);
+	      width: min(100% - 160px, 1240px);
 	      margin: 0 auto;
 	    }
 
@@ -1426,9 +394,9 @@
 	      color: var(--quantum-black);
 	      font-size: clamp(52px, 6.4vw, 96px);
 	      font-weight: 780;
-	      line-height: 0.98;
+	      line-height: 1.04;
 	      letter-spacing: 0;
-	      overflow-wrap: anywhere;
+	      word-break: keep-all;
 	    }
 
 	    .ld-hero__title span {
@@ -1441,7 +409,6 @@
 	      color: var(--level-gray);
 	      font-size: clamp(18px, 1.5vw, 22px);
 	      line-height: 1.72;
-	      overflow-wrap: anywhere;
 	    }
 
 	    .ld-hero__visual {
@@ -1464,7 +431,8 @@
 	    .ld-hero__lower {
 	      background: var(--quantum-black);
 	      color: var(--pure-white);
-	      padding: 36px 80px 44px;
+	      padding: 36px 0 44px;
+	      border-bottom: 1px solid rgba(255, 255, 255, 0.12);
 	    }
 
 	    .ld-hero__lower-inner {
@@ -1472,7 +440,7 @@
 	      grid-template-columns: minmax(0, 1fr) auto;
 	      gap: 56px;
 	      align-items: center;
-	      width: min(100%, 1240px);
+	      width: min(100% - 160px, 1240px);
 	      margin: 0 auto;
 	    }
 
@@ -1481,7 +449,6 @@
 	      color: rgba(255, 255, 255, 0.72);
 	      font-size: 15px;
 	      line-height: 1.8;
-	      overflow-wrap: anywhere;
 	    }
 
 	    .ld-proof-strip {
@@ -1750,7 +717,7 @@
 	    }
 
 	    .ld-final-copy {
-	      padding: 108px 80px;
+	      padding: 96px 80px 80px;
 	      display: flex;
 	      flex-direction: column;
 	      justify-content: center;
@@ -1816,9 +783,12 @@
 	    }
 
 	    @media (max-width: 1100px) {
-	      .ld-section,
-	      .ld-hero__upper,
-	      .ld-hero__lower,
+	      .ld-inner,
+	      .ld-hero__grid,
+	      .ld-hero__lower-inner {
+	        width: min(100% - 80px, 1240px);
+	      }
+
 	      .ld-final-copy {
 	        padding-left: 40px;
 	        padding-right: 40px;
@@ -1843,34 +813,36 @@
 	    }
 
 	    @media (max-width: 720px) {
-	      .ld-section,
-	      .ld-hero__upper,
-	      .ld-hero__lower,
+	      .ld-section {
+	        padding: 76px 0 60px;
+	      }
+
+	      .ld-hero__upper {
+	        padding: 48px 0 40px;
+	      }
+
+	      .ld-hero__lower {
+	        padding: 32px 0 36px;
+	      }
+
 	      .ld-final-copy {
-	        padding: 72px 20px;
+	        padding: 76px 20px 60px;
 	      }
 
 	      .ld-inner,
 	      .ld-hero__grid,
 	      .ld-hero__lower-inner {
-	        width: 100%;
-	        max-width: calc(100vw - 40px);
+	        width: calc(100% - 40px);
 	      }
 
 	      .ld-title {
-	        max-width: calc(100vw - 64px);
-	        font-size: clamp(30px, 8.6vw, 36px);
-	        line-height: 1.12;
+	        font-size: 30px;
+	        line-height: 1.35;
 	      }
 
 	      .ld-copy {
 	        font-size: 14px;
 	        line-height: 1.75;
-	      }
-
-	      .ld-hero__upper {
-	        padding-top: 44px;
-	        padding-bottom: 40px;
 	      }
 
 	      .ld-hero__grid,
@@ -1885,25 +857,23 @@
 	        line-height: 1.04;
 	      }
 
-	      .ld-hero__visual,
 	      .ld-device-photo {
 	        width: 100%;
-	        max-width: calc(100vw - 48px);
 	        min-height: 320px;
 	        padding: 0;
 	      }
 
-	      .ld-hero__visual img {
-	        width: 82%;
-	        max-width: 280px;
+	      .ld-hero__visual {
+	        width: 100%;
+	        min-height: 0;
+	        padding: 20px 0;
 	      }
 
-	      .ld-hero__lead,
-	      .ld-hero__statement,
-	      .ld-copy,
-	      .ld-panel p {
-	        max-width: calc(100vw - 64px);
-	        word-break: break-all;
+	      .ld-hero__visual img {
+	        width: 76%;
+	        max-width: 250px;
+	        max-height: 320px;
+	        filter: saturate(0.82);
 	      }
 
 	      .ld-proof-strip,
@@ -1959,7 +929,7 @@
       <div class="ld-hero__upper">
         <div class="ld-hero__grid">
           <div class="animate-in">
-            <div class="ld-kicker">LEADEEP AI · 领衔者</div>
+            <div class="ld-kicker">LEADEEP AI</div>
             <h1 id="hero-title" class="ld-hero__title">
               <span>领导者的</span>
               <span>数字分身和</span>
@@ -1999,7 +969,7 @@
     <section id="pain" class="ld-section" aria-labelledby="pain-title">
       <div class="ld-inner ld-two-col">
         <div class="animate-in">
-          <div class="ld-kicker">PAIN TO MODE · 直击痛点</div>
+          <div class="ld-kicker">01 / OPERATING MODE</div>
           <h2 id="pain-title" class="ld-title">开启“立法者模式”，<br />把执行交给进化。</h2>
           <p class="ld-copy">
             每天在繁杂会议和无效社交中消耗精力，遇到复杂决策只能独自拍脑袋承担风险。Leadeep 不是效率工具，而是由 “1 个物理抓手 + 3 大高维中枢” 构成的软硬一体增长系统。
@@ -2016,7 +986,48 @@
           </div>
         </div>
         <div class="ld-visual-frame ld-system-visual animate-in delay-2">
-          <img src="./assets/leadeep-ai/leadeep-growth-system.png" alt="Leadeep AI 由智能录音卡、AI智能中枢、战略顾问团和超级商务分身构成的增长系统" />
+          <svg viewBox="0 0 520 460" role="img" aria-label="Leadeep AI 由智能录音卡、数字分身与三大高维中枢构成的增长系统示意" style="width:100%;height:auto;display:block;">
+            <g stroke="rgba(0,16,19,0.07)" stroke-width="1">
+              <line x1="0" y1="116" x2="520" y2="116" />
+              <line x1="0" y1="245" x2="520" y2="245" />
+              <line x1="0" y1="370" x2="520" y2="370" />
+              <line x1="90" y1="0" x2="90" y2="460" />
+              <line x1="260" y1="0" x2="260" y2="460" />
+              <line x1="430" y1="0" x2="430" y2="460" />
+            </g>
+            <g fill="none" stroke="#3D4145" stroke-width="1.2">
+              <path d="M260 210 V 168 H 90 V 116" />
+              <line x1="260" y1="210" x2="260" y2="116" />
+              <path d="M260 210 V 168 H 430 V 116" />
+              <line x1="260" y1="370" x2="260" y2="280" />
+              <rect x="20" y="60" width="140" height="56" />
+              <rect x="190" y="60" width="140" height="56" />
+              <rect x="360" y="60" width="140" height="56" />
+              <rect x="190" y="370" width="140" height="60" />
+            </g>
+            <rect x="172" y="210" width="176" height="70" fill="none" stroke="#00C1D4" stroke-width="1.6" />
+            <circle cx="348" cy="210" r="4" fill="#FA5F26" />
+            <g fill="#00C1D4">
+              <circle cx="90" cy="116" r="3" />
+              <circle cx="260" cy="116" r="3" />
+              <circle cx="430" cy="116" r="3" />
+              <circle cx="260" cy="370" r="3" />
+            </g>
+            <g text-anchor="middle" font-family="-apple-system,'PingFang SC',sans-serif" font-size="14" font-weight="600" fill="#001013">
+              <text x="90" y="85">决策中枢</text>
+              <text x="260" y="85">商业情报</text>
+              <text x="430" y="85">商机雷达</text>
+              <text x="260" y="240">数字分身</text>
+              <text x="260" y="394">智能录音卡</text>
+            </g>
+            <g text-anchor="middle" font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="1.5">
+              <text x="90" y="103" fill="rgba(0,16,19,0.52)">BOARD</text>
+              <text x="260" y="103" fill="rgba(0,16,19,0.52)">INTEL</text>
+              <text x="430" y="103" fill="rgba(0,16,19,0.52)">RADAR</text>
+              <text x="260" y="260" fill="#00C1D4">DIGITAL TWIN</text>
+              <text x="260" y="414" fill="rgba(0,16,19,0.52)">CAPTURE CARD</text>
+            </g>
+          </svg>
         </div>
       </div>
     </section>
@@ -2027,7 +1038,7 @@
           <img src="./assets/leadeep-ai/leadeep-recorder-card.png" alt="Leadeep AI 智能录音卡产品图" />
         </div>
         <div class="animate-in delay-2">
-          <div class="ld-kicker">PHYSICAL CAPTURE · 物理抓手</div>
+          <div class="ld-kicker">02 / PHYSICAL CAPTURE</div>
           <h2 id="hardware-title" class="ld-title ld-title--light">摆脱手机束缚，<br />物理级截流商业智慧。</h2>
           <p class="ld-copy ld-copy--light">
             在高端商务洽谈中，它以 10 米远场拾音和四麦克风降噪阵列，无感记录每一次对话。您的大脑只负责高维战略交流，它悄无声息地将转瞬即逝的灵感和隐性信息，100% 结构化沉淀为公司的私有数字资产。
@@ -2044,7 +1055,7 @@
     <section id="experts" class="ld-section" aria-labelledby="experts-title">
       <div class="ld-inner">
         <div class="animate-in">
-          <div class="ld-kicker">AI EXPERTS · 高维中枢</div>
+          <div class="ld-kicker">03 / AI EXPERTS</div>
           <h2 id="experts-title" class="ld-title">随时召开虚拟董事会，<br />让商务分身永不下班。</h2>
           <p class="ld-copy">
             遇到棘手难题，数字分身立刻拉起 AI 财务专家、AI 法务专家联合兵棋推演。激活 A2A 撮合网络后，它会在云端 24 小时寻源，通过 AI 间的双盲试探，把对口大单的决策人联系方式推送到手机。
@@ -2079,7 +1090,7 @@
     <section id="foundation" class="ld-section ld-foundation" aria-labelledby="foundation-title">
       <div class="ld-inner">
         <div class="animate-in">
-          <div class="ld-kicker">FRONTIS HORIZON · 衔远大观底座</div>
+          <div class="ld-kicker">04 / FRONTIS HORIZON</div>
           <h2 id="foundation-title" class="ld-title ld-title--light">源于衔远大观的组织进化飞轮。</h2>
           <p class="ld-copy ld-copy--light">
             市面上的大模型只是静态百科全书，而 Leadeep 具备不可复制的自我进化力。这源于其深度植根于衔远大观 Frontis Horizon AI 原生系统底座。
@@ -2108,7 +1119,7 @@
     <section id="security" class="ld-section" aria-labelledby="security-title">
       <div class="ld-inner ld-security-layout">
         <div class="animate-in">
-          <div class="ld-kicker">DATA SOVEREIGNTY · 绝对数据主权</div>
+          <div class="ld-kicker">05 / DATA SOVEREIGNTY</div>
           <h2 id="security-title" class="ld-title">不可触碰的底线，是绝对数据主权。</h2>
           <div class="ld-security-list">
             <div class="ld-security-row">
@@ -2135,7 +1146,28 @@
           </div>
         </div>
         <div class="ld-visual-frame ld-security-visual animate-in delay-2">
-          <img src="./assets/leadeep-ai/leadeep-security-stack.png" alt="Leadeep AI 三层安全保障体系示意" />
+          <svg viewBox="0 0 340 360" role="img" aria-label="硬件、云端、架构三层数据安全防护示意" style="width:100%;height:auto;display:block;">
+            <g stroke="rgba(0,16,19,0.07)" stroke-width="1">
+              <line x1="0" y1="90" x2="340" y2="90" />
+              <line x1="0" y1="180" x2="340" y2="180" />
+              <line x1="0" y1="270" x2="340" y2="270" />
+              <line x1="170" y1="0" x2="170" y2="360" />
+            </g>
+            <rect x="20" y="20" width="300" height="320" fill="none" stroke="#3D4145" stroke-width="1.2" />
+            <rect x="56" y="84" width="228" height="220" fill="none" stroke="#00C1D4" stroke-width="1.6" />
+            <rect x="94" y="158" width="152" height="104" fill="none" stroke="#3D4145" stroke-width="1.2" />
+            <circle cx="170" cy="240" r="4" fill="#FA5F26" />
+            <g font-family="'JetBrains Mono',monospace" font-size="9" letter-spacing="1.5">
+              <text x="32" y="44" fill="rgba(0,16,19,0.52)">L3 / ARCHITECTURE</text>
+              <text x="68" y="108" fill="#00C1D4">L2 / PRIVATE CLOUD</text>
+              <text x="106" y="182" fill="rgba(0,16,19,0.52)">L1 / CHIP</text>
+            </g>
+            <g font-family="-apple-system,'PingFang SC',sans-serif" font-size="13" font-weight="600" fill="#001013">
+              <text x="32" y="63">架构级隔离</text>
+              <text x="68" y="127">云端隔离舱</text>
+              <text x="106" y="201">芯片级加密</text>
+            </g>
+          </svg>
         </div>
       </div>
     </section>
@@ -2144,7 +1176,7 @@
       <div class="ld-edge" aria-hidden="true"></div>
       <div class="ld-final-grid">
         <div class="ld-final-copy animate-in">
-          <div class="ld-kicker">COMPOUND INTELLIGENCE · 认知复利</div>
+          <div class="ld-kicker">06 / COMPOUND VALUE</div>
           <h2 id="final-title" class="ld-title">投资一份永不凋零的认知复利。</h2>
           <p class="ld-copy">
             第一天它只是助理，一年后它将是您最信赖的数字合伙人。每年释放 150+ 小时信息整理时间，多维推演规避百万级试错风险，A2A 网络创造的变现价值无上限。
@@ -2156,7 +1188,7 @@
           </div>
           <div class="ld-actions">
             <a class="ld-btn ld-btn--black" href="https://web.leadeepai.com/download" target="_blank" rel="noopener">下载 App</a>
-            <a class="ld-btn ld-btn--ghost" href="./scene.html">返回场景总览</a>
+            <a class="ld-btn ld-btn--ghost" href="https://mall.jd.com/index-1016114314.html" target="_blank" rel="noopener">立即购买</a>
           </div>
           <div class="ld-contact-line" aria-label="联系邮箱">
             <span>商务合作 <a href="mailto:xianyuan@frontis.ai">xianyuan@frontis.ai</a></span>
