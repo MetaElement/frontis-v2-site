@@ -333,13 +333,13 @@ nav {
   height: clamp(500px, 42vw, 560px);
 }
 .hero-ring {
-  position: absolute; border: 1px solid rgba(0,193,212,0.15);
+  position: absolute; border: 1px solid rgba(0,193,212,0.3);
   border-radius: 50%;
   top: 50%; left: 50%; transform: translate(-50%,-50%);
 }
 .hero-ring-1 { width: 100%; height: 100%; }
-.hero-ring-2 { width: 72%; height: 72%; border-color: rgba(0,193,212,0.25); }
-.hero-ring-3 { width: 44%; height: 44%; border-color: rgba(0,193,212,0.4); }
+.hero-ring-2 { width: 72%; height: 72%; border-color: rgba(0,193,212,0.42); }
+.hero-ring-3 { width: 44%; height: 44%; border-color: rgba(0,193,212,0.55); }
 
 .hero-orbit {
   position: absolute; top: 50%; left: 50%;
@@ -364,11 +364,11 @@ nav {
   text-align: center;
 }
 .hero-center-text {
-  font-family: var(--font-en); font-size: 12px; font-weight: 700;
+  font-family: var(--font-en); font-size: 13px; font-weight: 700;
   letter-spacing: 0.2em; color: var(--cyan); display: block; margin-bottom: 8px;
 }
 .hero-center-cn {
-  font-size: 34px; font-weight: 800; color: var(--white); display: block;
+  font-size: 40px; font-weight: 800; color: var(--white); display: block;
 }
 
 .hero-layer-badges {
@@ -397,11 +397,11 @@ nav {
 .hero-stat {}
 .hero-stat-num { font-family: var(--font-en); font-size: 28px; font-weight: 800; color: var(--white); }
 .hero-stat-num span { color: var(--cyan); }
-.hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.4); margin-top: 2px; }
+.hero-stat-label { font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 2px; }
 .hero-scroll-hint {
   display: flex; align-items: center; gap: 8px;
   font-family: var(--font-en); font-size: 11px; letter-spacing: 0.12em;
-  color: rgba(255,255,255,0.3);
+  color: rgba(255,255,255,0.5);
 }
 .scroll-line {
   width: 32px; height: 1px; background: rgba(255,255,255,0.2);
@@ -412,7 +412,7 @@ nav {
    ============================================= */
 #layers {
   background: var(--white);
-  padding: 120px 0;
+  padding: 96px 0 80px;
 }
 .layers-inner {
   max-width: 1280px; margin: 0 auto; padding: 0 48px;
@@ -432,7 +432,7 @@ nav {
   margin-top: 48px; padding-top: 24px;
   border-top: 1px solid var(--surface);
   font-size: 14px; color: rgba(0,0,0,0.45); line-height: 1.8;
-  font-style: italic; max-width: 360px;
+  max-width: 360px;
 }
 
 .layers-right {}
@@ -488,7 +488,7 @@ nav {
    SECTION 3 / 4 / 5 — DETAIL SECTIONS
    ============================================= */
 .detail-section {
-  padding: 120px 0;
+  padding: 96px 0 80px;
   position: relative;
 }
 .detail-section:nth-child(even) { background: var(--surface); }
@@ -714,7 +714,10 @@ nav {
 }
 .expert-card.active { border-color: rgba(0,193,212,0.4); background: rgba(0,193,212,0.06); }
 .expert-card-top { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 8px; }
-.expert-icon { font-size: 18px; }
+.expert-icon {
+  font-family: var(--font-en); font-size: 11px; font-weight: 800;
+  letter-spacing: 0.08em; color: var(--cyan);
+}
 .expert-status {
   width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.2);
 }
@@ -740,14 +743,14 @@ nav {
 .ma-event-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; margin-top: 3px; }
 .ma-event-connector { width: 1px; flex: 1; background: rgba(0,193,212,0.2); min-height: 20px; }
 .ma-event-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
-.ma-event-time { font-family: var(--font-en); font-size: 10px; color: rgba(255,255,255,0.25); margin-top: 2px; }
+.ma-event-time { font-family: var(--font-en); font-size: 10px; color: rgba(255,255,255,0.48); margin-top: 2px; }
 
 /* =============================================
    SECTION 6 — FLYWHEEL
    ============================================= */
 #flywheel {
   background: var(--black);
-  padding: 120px 0;
+  padding: 96px 0 80px;
   position: relative;
   overflow: hidden;
 }
@@ -934,7 +937,7 @@ nav {
    ============================================= */
 #versions {
   background: var(--white);
-  padding: 120px 0;
+  padding: 96px 0 80px;
 }
 .versions-inner { max-width: 1280px; margin: 0 auto; padding: 0 48px; }
 .versions-header { margin-bottom: 64px; }
@@ -959,9 +962,9 @@ nav {
 .version-dot {
   width: 10px; height: 10px; border-radius: 50%;
 }
-.version-dot.green  { background: #22C55E; }
+.version-dot.green  { background: var(--cyan); }
 .version-dot.orange { background: var(--orange); }
-.version-dot.red    { background: #EF4444; }
+.version-dot.red    { background: #3D4145; }
 .version-edition {
   font-family: var(--font-en); font-size: 11px; font-weight: 700;
   letter-spacing: 0.18em; color: var(--gray);
@@ -1015,7 +1018,7 @@ nav {
    ============================================= */
 #cta {
   background: var(--black);
-  padding: 120px 0 80px;
+  padding: 96px 0 80px;
   position: relative;
 }
 .cta-inner {
@@ -1074,7 +1077,7 @@ nav {
   display: flex; justify-content: space-between; align-items: center;
 }
 .footer-logo { color: var(--white); }
-.footer-copy { font-size: 12px; color: rgba(255,255,255,0.25); font-family: var(--font-en); }
+.footer-copy { font-size: 12px; color: rgba(255,255,255,0.48); font-family: var(--font-en); }
 .footer-links { display: flex; gap: 24px; }
 .footer-links a { font-size: 12px; color: rgba(255,255,255,0.3); text-decoration: none; font-family: var(--font-en); letter-spacing: 0.08em; }
 .footer-links a:hover { color: rgba(255,255,255,0.6); }
@@ -1116,13 +1119,15 @@ nav {
   .flywheel-inner, .flywheel-static, .cta-inner, .hero-content,
   .footer-bottom { padding-left: 24px; padding-right: 24px; }
   .hero-bottom { padding-left: 24px; padding-right: 24px; }
-  .hero-stats { gap: 32px; }
+  .hero-stats { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
+  .hero-stat-num { font-size: 18px; white-space: nowrap; }
+  .hero-scroll-hint { display: none; }
   .hero-main-title { font-size: 56px; letter-spacing: 0.04em; white-space: normal; }
   .hero-brand-line { font-size: 12px; letter-spacing: 0.08em; }
   .hero-sub-title { font-size: 18px; letter-spacing: 0.06em; }
-  .device-showcase { min-height: 580px; }
+  .device-showcase { min-height: 620px; }
   .phone-device { right: 0; bottom: 0; width: 148px; height: 300px; }
-  .mac-device { padding-bottom: 92px; }
+  .mac-device { padding-bottom: 148px; }
   .device-sync-note { bottom: 18px; left: 0; }
   .flywheel-wheel { width: min(100%, 430px); }
   .wheel-step { width: 132px; gap: 7px; }
@@ -1130,8 +1135,8 @@ nav {
   .wheel-step-caption { font-size: 10px; }
   .wheel-step-num { width: 34px; height: 34px; font-size: 11px; }
   .wheel-center { width: 116px; height: 116px; }
-  .wheel-step-2 { right: -10px; }
-  .wheel-step-5 { left: -10px; }
+  .wheel-step-2 { right: 0; }
+  .wheel-step-5 { left: 0; }
   .form-grid { grid-template-columns: 1fr; }
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 }
@@ -1240,11 +1245,11 @@ nav {
 <!-- ============================================================
      SECTION 2 — THREE LAYERS
      ============================================================ -->
-<section id="layers" class="section" style="background:var(--white); padding:120px 0;">
+<section id="layers" class="section" style="background:var(--white); padding:96px 0 80px;">
   <div class="layers-inner">
     <div class="layers-left">
       <div class="layers-kicker reveal">
-        <span class="kicker">ARCHITECTURE OVERVIEW</span>
+        <span class="kicker">01 / ARCHITECTURE</span>
       </div>
       <h2 class="h2 layers-headline reveal reveal-delay-1">
         三层架构<br>驱动AI原生组织
@@ -1327,9 +1332,8 @@ nav {
   <div class="detail-inner">
     <div class="detail-left">
       <div class="detail-kicker reveal">
-        <span class="kicker">LAYER 01</span>
+        <span class="kicker">02 / ME LAYER</span>
       </div>
-      <p class="detail-label reveal reveal-delay-1">ME. 数字分身</p>
       <h2 class="h2 detail-title reveal reveal-delay-1">AI 时代的<br>第二个自己</h2>
       <p class="detail-subtitle reveal reveal-delay-2">不只是工具，是随着你成长的数字分身。</p>
 
@@ -1373,7 +1377,7 @@ nav {
               <div class="mockup-dot"></div>
               <div class="mockup-dot"></div>
               <div class="mockup-dot"></div>
-              <span style="margin-left:8px;font-family:var(--font-en);font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;">ME · DESKTOP</span>
+              <span style="margin-left:8px;font-family:var(--font-en);font-size:11px;color:rgba(255,255,255,0.48);letter-spacing:0.1em;">ME · DESKTOP</span>
             </div>
             <div class="mockup-body">
               <div class="me-chat">
@@ -1438,15 +1442,15 @@ nav {
           <div class="mockup-dot"></div>
           <div class="mockup-dot"></div>
           <div class="mockup-dot"></div>
-          <span style="margin-left:8px;font-family:var(--font-en);font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;">WE · EXPERT NETWORK</span>
+          <span style="margin-left:8px;font-family:var(--font-en);font-size:11px;color:rgba(255,255,255,0.48);letter-spacing:0.1em;">WE · EXPERT NETWORK</span>
         </div>
         <div class="mockup-body">
-          <div style="font-family:var(--font-en);font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.3);margin-bottom:16px;">EXPERT PLAZA · 专家广场</div>
+          <div style="font-family:var(--font-en);font-size:10px;letter-spacing:0.15em;color:rgba(255,255,255,0.5);margin-bottom:16px;">EXPERT PLAZA · 专家广场</div>
           <div class="expert-grid">
             <div class="expert-card active">
               <span class="expert-edge"></span>
               <div class="expert-card-top">
-                <span class="expert-icon">🏗️</span>
+                <span class="expert-icon">CON</span>
                 <span class="expert-status active"></span>
               </div>
               <div class="expert-name">合同变更索赔</div>
@@ -1454,7 +1458,7 @@ nav {
             </div>
             <div class="expert-card">
               <div class="expert-card-top">
-                <span class="expert-icon">🔗</span>
+                <span class="expert-icon">SCM</span>
                 <span class="expert-status"></span>
               </div>
               <div class="expert-name">采购分析</div>
@@ -1462,7 +1466,7 @@ nav {
             </div>
             <div class="expert-card">
               <div class="expert-card-top">
-                <span class="expert-icon">💰</span>
+                <span class="expert-icon">FIN</span>
                 <span class="expert-status"></span>
               </div>
               <div class="expert-name">风控分析</div>
@@ -1471,7 +1475,7 @@ nav {
             <div class="expert-card active">
               <span class="expert-edge"></span>
               <div class="expert-card-top">
-                <span class="expert-icon">🛒</span>
+                <span class="expert-icon">ECO</span>
                 <span class="expert-status active"></span>
               </div>
               <div class="expert-name">选品分析</div>
@@ -1479,7 +1483,7 @@ nav {
             </div>
           </div>
           <div style="margin-top:16px;padding-top:12px;border-top:1px solid rgba(255,255,255,0.06);">
-            <div style="font-size:11px;color:rgba(255,255,255,0.25);font-family:var(--font-en);">2 专家团已激活 · ME 调度中</div>
+            <div style="font-size:11px;color:rgba(255,255,255,0.48);font-family:var(--font-en);">2 专家团已激活 · ME 调度中</div>
           </div>
         </div>
       </div>
@@ -1487,9 +1491,8 @@ nav {
 
     <div class="detail-left">
       <div class="detail-kicker reveal">
-        <span class="kicker">LAYER 02</span>
+        <span class="kicker">03 / WE LAYER</span>
       </div>
-      <p class="detail-label reveal reveal-delay-1">WE. 专家网络</p>
       <h2 class="h2 detail-title reveal reveal-delay-1">永不下班的<br>AI 专家军团</h2>
       <p class="detail-subtitle reveal reveal-delay-2">WE 是衔远大观的中层——企业级 AI 专家协作网络。每一个专家团，都是针对特定行业或场景深度定制的 Agent 集合。ME 负责调度，WE 负责执行。</p>
 
@@ -1540,9 +1543,8 @@ nav {
   <div class="detail-inner">
     <div class="detail-left">
       <div class="detail-kicker reveal">
-        <span class="kicker">LAYER 03</span>
+        <span class="kicker">04 / MA LAYER</span>
       </div>
-      <p class="detail-label reveal reveal-delay-1">MA. 进化引擎</p>
       <h2 class="h2 detail-title reveal reveal-delay-1">组织持续<br>变得更聪明</h2>
       <p class="detail-subtitle reveal reveal-delay-2">不是工具会停止进化，是引擎会持续驱动。</p>
 
@@ -1584,7 +1586,7 @@ nav {
           <div class="mockup-dot"></div>
           <div class="mockup-dot"></div>
           <div class="mockup-dot"></div>
-          <span style="margin-left:8px;font-family:var(--font-en);font-size:11px;color:rgba(255,255,255,0.25);letter-spacing:0.1em;">MA · EVOLUTION ENGINE</span>
+          <span style="margin-left:8px;font-family:var(--font-en);font-size:11px;color:rgba(255,255,255,0.48);letter-spacing:0.1em;">MA · EVOLUTION ENGINE</span>
         </div>
         <div class="mockup-body">
           <div class="ma-dashboard">
@@ -1645,7 +1647,7 @@ nav {
 <!-- ============================================================
      SECTION 6 — FLYWHEEL
      ============================================================ -->
-<section id="flywheel" class="section" style="background:var(--black);padding:120px 0;position:relative;overflow:hidden;">
+<section id="flywheel" class="section" style="background:var(--black);padding:96px 0 80px;position:relative;overflow:hidden;">
   <span class="the-edge edge-top"></span>
 
   <!-- Background Strata lines -->
@@ -1658,7 +1660,7 @@ nav {
 
   <div class="flywheel-static">
     <div class="flywheel-right-text reveal">
-      <div style="margin-bottom:20px;"><span class="kicker">THE FLYWHEEL</span></div>
+      <div style="margin-bottom:20px;"><span class="kicker">05 / FLYWHEEL</span></div>
       <div class="flywheel-big-text">越用<span>越强</span><br>的 AI 飞轮</div>
       <p class="flywheel-desc">不是工具，是会自我进化的生产力引擎。每一次使用，都在为下一次使用积蓄能量。</p>
     </div>
@@ -1722,11 +1724,11 @@ nav {
 <!-- ============================================================
      SECTION 7 — VERSION SELECTION
      ============================================================ -->
-<section id="versions" class="section" style="background:var(--white);padding:120px 0;">
+<section id="versions" class="section" style="background:var(--white);padding:96px 0 80px;">
   <div class="versions-inner">
     <div class="versions-header reveal">
       <h2 class="h2 versions-headline">从快速上手到<br>私有部署</h2>
-      <p class="versions-sub">找到最适合你的方式</p>
+      <p class="versions-sub">找到最适合你的方式。</p>
     </div>
 
     <div class="versions-grid reveal reveal-delay-1">
