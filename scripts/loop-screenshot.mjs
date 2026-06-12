@@ -48,6 +48,12 @@ for (const vp of viewports) {
     document
       .querySelectorAll("section")
       .forEach((el) => el.classList.add("section-enter", "visible"));
+    // fullPage 截图不绘制运行中/带 filter 的 CSS animation，直接禁用并强制终态
+    const st = document.createElement("style");
+    st.textContent =
+      "*,*::before,*::after{animation:none!important;}" +
+      "[data-anim]{opacity:1!important;filter:none!important;transform:none!important;}";
+    document.head.appendChild(st);
     await new Promise((r) => setTimeout(r, 400));
   });
   await p.screenshot({ path: path.join(outDir, `${vp.name}.png`), fullPage: true });
