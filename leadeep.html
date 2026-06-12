@@ -518,7 +518,7 @@
 	    }
 
 	    .ld-system-visual {
-	      padding: 28px;
+	      padding: 24px;
 	    }
 
 	    .ld-hardware {
@@ -534,7 +534,7 @@
 	    }
 
 	    .ld-device-photo {
-	      min-height: clamp(500px, 42vw, 620px);
+	      min-height: clamp(460px, 38vw, 560px);
 	      padding: 0;
 	      background: #050505;
 	      border-color: rgba(0, 193, 212, 0.54);
@@ -683,6 +683,7 @@
 	      background: var(--pure-white);
 	    }
 
+	    .ld-system-visual__meta,
 	    .ld-security-visual__meta {
 	      display: flex;
 	      justify-content: space-between;
@@ -695,6 +696,7 @@
 	      color: rgba(0, 16, 19, 0.52);
 	    }
 
+	    .ld-system-visual__meta span:last-child,
 	    .ld-security-visual__meta span:last-child {
 	      color: var(--threshold-cyan);
 	    }
@@ -754,7 +756,7 @@
 	      z-index: 1;
 	      padding: 6px 10px;
 	      font-family: var(--font-mono);
-	      font-size: 10px;
+	      font-size: 11px;
 	      letter-spacing: 2px;
 	      color: var(--threshold-cyan);
 	      background: rgba(0, 16, 19, 0.6);
@@ -936,7 +938,12 @@
 	      }
 
 	      .ld-expert-card {
-	        grid-template-columns: 1fr;
+	        grid-template-columns: minmax(96px, 0.36fr) minmax(0, 1fr);
+	        gap: 16px;
+	      }
+
+	      .ld-expert-card img {
+	        max-height: 200px;
 	      }
 
 	      .ld-security-row {
@@ -1029,7 +1036,7 @@
           </div>
         </div>
         <div class="ld-visual-frame ld-system-visual animate-in delay-2">
-          <svg viewBox="0 0 520 460" role="img" aria-label="Leadeep AI 由智能录音卡、数字分身与三大高维中枢构成的增长系统示意" style="width:100%;height:auto;display:block;">
+          <svg viewBox="10 36 500 408" role="img" aria-label="Leadeep AI 由智能录音卡、数字分身与三大高维中枢构成的增长系统示意" style="width:100%;height:auto;display:block;">
             <g stroke="rgba(0,16,19,0.07)" stroke-width="1">
               <line x1="0" y1="116" x2="520" y2="116" />
               <line x1="0" y1="245" x2="520" y2="245" />
@@ -1071,6 +1078,10 @@
               <text x="260" y="414" fill="rgba(0,16,19,0.52)">CAPTURE CARD</text>
             </g>
           </svg>
+          <div class="ld-system-visual__meta">
+            <span>GROWTH SYSTEM</span>
+            <span>1 + 3 / A2A</span>
+          </div>
         </div>
       </div>
     </section>
