@@ -381,7 +381,7 @@ nav {
   display: flex; align-items: center; gap: 8px;
   min-width: 128px;
   padding: 10px 16px;
-  background: rgba(0,0,0,0.8);
+  background: rgba(0,0,0,0.92);
   border-left: 2px solid var(--cyan);
 }
 .layer-badge-label { font-family: var(--font-en); font-size: 12px; font-weight: 700; letter-spacing: 0.15em; color: var(--white); }
@@ -431,7 +431,7 @@ nav {
 .layers-tagline {
   margin-top: 48px; padding-top: 24px;
   border-top: 1px solid var(--surface);
-  font-size: 14px; color: rgba(0,0,0,0.45); line-height: 1.8;
+  font-size: 14px; color: rgba(0,0,0,0.56); line-height: 1.8;
   max-width: 360px;
 }
 
@@ -950,12 +950,13 @@ nav {
 }
 .version-card {
   background: var(--white);
+  border: 1px solid rgba(0,16,19,0.12);
   padding: 48px 36px;
   position: relative;
   transition: background 0.25s;
 }
 .version-card:hover { background: #fafafa; }
-.version-card.featured { background: var(--black); }
+.version-card.featured { background: var(--black); border-color: var(--black); }
 .version-card.featured:hover { background: #0d0d0d; }
 
 .version-dot-row { display: flex; align-items: center; gap: 10px; margin-bottom: 28px; }
@@ -1128,7 +1129,7 @@ nav {
   .device-showcase { min-height: 620px; }
   .phone-device { right: 0; bottom: 0; width: 148px; height: 300px; }
   .mac-device { padding-bottom: 148px; }
-  .device-sync-note { bottom: 18px; left: 0; }
+  .device-sync-note { bottom: 18px; left: 0; max-width: calc(100% - 164px); }
   .flywheel-wheel { width: min(100%, 430px); }
   .wheel-step { width: 132px; gap: 7px; }
   .wheel-step-title { font-size: 12px; }
@@ -1138,6 +1139,9 @@ nav {
   .wheel-step-2 { right: 0; }
   .wheel-step-5 { left: 0; }
   .form-grid { grid-template-columns: 1fr; }
+  #layers, .detail-section, #flywheel, #versions, #cta { padding: 76px 0 60px; }
+  .versions-header { margin-bottom: 36px; }
+  .version-card { padding: 36px 24px; }
   .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
 }
 </style>
@@ -1245,7 +1249,7 @@ nav {
 <!-- ============================================================
      SECTION 2 — THREE LAYERS
      ============================================================ -->
-<section id="layers" class="section" style="background:var(--white); padding:96px 0 80px;">
+<section id="layers" class="section" style="background:var(--white);">
   <div class="layers-inner">
     <div class="layers-left">
       <div class="layers-kicker reveal">
@@ -1647,7 +1651,7 @@ nav {
 <!-- ============================================================
      SECTION 6 — FLYWHEEL
      ============================================================ -->
-<section id="flywheel" class="section" style="background:var(--black);padding:96px 0 80px;position:relative;overflow:hidden;">
+<section id="flywheel" class="section" style="background:var(--black);position:relative;overflow:hidden;">
   <span class="the-edge edge-top"></span>
 
   <!-- Background Strata lines -->
@@ -1724,7 +1728,7 @@ nav {
 <!-- ============================================================
      SECTION 7 — VERSION SELECTION
      ============================================================ -->
-<section id="versions" class="section" style="background:var(--white);padding:96px 0 80px;">
+<section id="versions" class="section" style="background:var(--white);">
   <div class="versions-inner">
     <div class="versions-header reveal">
       <h2 class="h2 versions-headline">从快速上手到<br>私有部署</h2>
