@@ -32,3 +32,31 @@
 - 截图前已定格入场动画，黑色区块非加载失败
 - 表单实测双列有边框；如评审报与实测矛盾的 high 问题，先用 Playwright evaluate 验证再决定是否修改
 
+## horizon
+
+评分轨迹：6.4 → 7.5 → 7.8 → 8.0 → 8.2（连续两轮提升 <0.3 判停，round-5 即峰值）
+
+### 截图工具（已修入 scripts/loop-screenshot.mjs，全站通用）
+- fullPage 截图不绘制带 blur filter / 运行中的 CSS animation：截图前注入样式禁用全部 animation，并对 `[data-anim]` 强制 `opacity:1; filter:none; transform:none`
+- `waitUntil: "domcontentloaded"` + fonts.ready + 1.5s 等待（GTM 长连接会让 networkidle 超时）
+- vite 改 CSS 后第一次截图可能因热重载导航失败，重试即可
+- 子代理评审大图易超时：用 sips 生成 1x 降采样版（desktop-1x/mobile-1x）供整体判断，2x 原图留作局部核验
+
+### 图形 / 色板
+- 黑底装饰环线/线框透明度 ≥0.3（1px 青线），层级递进 0.3/0.42/0.55
+- 状态点限定色板：青=可用、橙=单一焦点强调、层级灰=暂缺；禁红绿语义色
+- 图标用 mono 缩写（CON/SCM/FIN）替代 emoji；11px/800/0.08em/青色
+- 设备 mockup 底座扁平深灰（#23272B/#2A2E33），禁金属渐变；移动端隐藏底座
+
+### 布局 / 移动端
+- detail 双栏区移动端必须文先图后：`order: 2 !important` 覆盖桌面的 inline order:-1
+- 移动区块 padding 76px 0 60px；移除区块 inline padding，全部走 CSS 以便媒体查询覆盖
+- 移动 hero 统计行用 3 列 grid + 隐藏 scroll hint，防孤行
+- 卡片内绝对定位装饰（手机模型等）旁的文字/标签限宽避让 `max-width: calc(100% - Npx)`
+- 定价卡：白卡 1px rgba(0,16,19,0.12) 边框；卡体 flex column、CTA `margin-top:auto` 锚底
+
+### 共享组件更新（全站生效，勿回退）
+- site-cta 单选/复选选中态：青底 + 白色 SVG 对勾（非白色小方块）
+- site-cta textarea `resize: none`（工程线框质感，不露原生手柄）
+
+
