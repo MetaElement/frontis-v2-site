@@ -421,6 +421,18 @@
     .scene-content {
       flex: 0 1 52%;
       min-width: 0;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scene-content .btn-primary {
+      align-self: flex-start;
+      margin-top: 32px;
+    }
+
+    .scene-status-row {
+      margin-top: auto;
+      padding-top: 20px;
     }
 
     .scene-visual {
@@ -840,7 +852,7 @@
     }
 
     #strategy .scene-visual-main {
-      filter: saturate(0.6) contrast(1.05);
+      filter: saturate(0.55) contrast(1.05);
     }
 
     .scene-expert-gallery {
@@ -965,21 +977,34 @@
       border-top-color: rgba(255, 255, 255, 0.14);
     }
 
-    #supply .scene-visual-stack {
-      background: #1A1E22;
+    #supply .scene-visual > img {
+      flex: 1;
+      aspect-ratio: auto;
+      min-height: 0;
+      margin: 0;
     }
 
-    #supply .scene-visual--stack img {
-      filter: saturate(0.6) contrast(1.05);
-    }
-
-    #supply .scene-visual-stack::after {
+    #strategy .scene-visual-stack::after {
       content: '';
       position: absolute;
       inset: 14px;
       border: 1px solid rgba(0, 193, 212, 0.4);
       pointer-events: none;
       z-index: 3;
+    }
+
+    .scene-visual-stack__corner {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      z-index: 4;
+      padding: 6px 8px;
+      background: rgba(0, 16, 19, 0.72);
+      color: var(--threshold-cyan);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     body.page-scene #supply .scene-tagline {
@@ -1076,6 +1101,7 @@
       .hero__index-item {
         border: 1px solid rgba(255, 255, 255, 0.16);
         padding: 12px 14px;
+        min-height: 56px;
       }
 
       .hero__title {
@@ -1171,7 +1197,11 @@
     }
 
     body.page-scene .hero__title-line--lead {
-      font-size: 0.72em;
+      font-size: clamp(20px, 1.9vw, 26px);
+      font-weight: 600;
+      color: rgba(0, 16, 19, 0.62);
+      letter-spacing: 0.02em;
+      margin-bottom: 10px;
     }
 
     body.page-scene .hero__title-line--core {
@@ -1356,6 +1386,7 @@
 
     <figure class="scene-visual scene-visual--stack animate-in delay-3">
       <div class="scene-visual-stack" data-agent-visual="recording" aria-label="战略管理专家团能力展示图">
+        <span class="scene-visual-stack__corner" aria-hidden="true">LEADEEP / IN PRODUCT</span>
         <div class="scene-visual-single">
           <img
             class="scene-visual-main"
@@ -1443,7 +1474,7 @@
       </ul>
 
       <!-- 状态标签（能量橙，唯一峰值强调） -->
-      <div class="animate-in delay-5">
+      <div class="scene-status-row animate-in delay-5">
         <span class="status-badge" role="status" aria-label="能力持续扩展中">
           <span class="node-orange" aria-hidden="true"></span>
           能力持续扩展中
@@ -1533,7 +1564,7 @@
       </ul>
 
       <!-- 状态标签 -->
-      <div class="animate-in delay-5">
+      <div class="scene-status-row animate-in delay-5">
         <span class="status-badge" role="status" aria-label="能力持续扩展中">
           <span class="node-orange" aria-hidden="true"></span>
           能力持续扩展中
@@ -1599,7 +1630,7 @@
       </ul>
 
       <!-- 状态标签 -->
-      <div class="animate-in delay-5">
+      <div class="scene-status-row animate-in delay-5">
         <span class="status-badge" role="status" aria-label="能力持续扩展中">
           <span class="node-orange" aria-hidden="true"></span>
           能力持续扩展中
