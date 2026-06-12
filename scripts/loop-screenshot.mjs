@@ -38,6 +38,14 @@ for (const vp of viewports) {
       };
       step();
     });
+    // 入场动画按 100ms/元素 级联，直接定格为动画完成后的最终状态
+    document
+      .querySelectorAll(".animate-in, .animate-up, .section-enter")
+      .forEach((el) => el.classList.add("visible"));
+    document
+      .querySelectorAll("section")
+      .forEach((el) => el.classList.add("section-enter", "visible"));
+    await new Promise((r) => setTimeout(r, 400));
   });
   await p.screenshot({ path: path.join(outDir, `${vp.name}.png`), fullPage: true });
   await ctx.close();
