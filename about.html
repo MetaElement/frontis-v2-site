@@ -564,7 +564,7 @@ section { padding: 96px 64px; }
     margin-top: 16px;
   }
   .brand-threshold-card {
-    min-height: 700px;
+    min-height: 716px;
     padding: 24px;
   }
   .quantum-state {
@@ -572,7 +572,7 @@ section { padding: 96px 64px; }
     right: 24px;
   }
   .quantum-state--after { top: 78px; }
-  .quantum-state--before { top: 408px; }
+  .quantum-state--before { top: 424px; }
   .quantum-copy {
     max-width: calc(100% - 12px);
     top: 34px;
@@ -587,12 +587,17 @@ section { padding: 96px 64px; }
   .quantum-leap-rail {
     left: calc(24px + 48%);
     top: 78px;
-    height: 330px;
+    height: 346px;
   }
   .quantum-energy {
     right: 30px;
     top: 122px;
     height: 190px;
+  }
+  .quantum-energy span {
+    left: auto;
+    right: 12px;
+    text-align: right;
   }
   .brand-edge-label {
     left: 24px;
@@ -812,6 +817,12 @@ section { padding: 96px 64px; }
 .logo-cell img[src*="cscec"] {
   --logo-scale: 0.96;
 }
+.logo-cell img[src*="visa"],
+.logo-cell img[src*="cnd-group"],
+.logo-cell img[src*="cscec"] {
+  opacity: 0.5;
+}
+.logo-cell img[src*="yili"] { opacity: 0.55; }
 .logo-cell:hover img {
   opacity: 1;
   filter: none;
@@ -878,6 +889,8 @@ section { padding: 96px 64px; }
   position: relative;
   padding: 28px 32px;
   border-right: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
 }
 .culture-item:last-child { border-right: none; }
 .culture-num {
@@ -903,7 +916,21 @@ section { padding: 96px 64px; }
   margin-bottom: 18px;
 }
 .culture-zh span { display: block; }
-.culture-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; }
+.culture-desc { font-size: 14px; color: rgba(255,255,255,0.6); line-height: 1.7; margin-bottom: 28px; }
+.culture-foot {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 12px;
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+}
+.culture-foot span:first-child { color: rgba(255,255,255,0.52); }
+.culture-foot span:last-child { color: var(--threshold-cyan); }
 /* π 型人才 */
 .pi-talent {
   display: grid;
@@ -1227,15 +1254,15 @@ section { padding: 96px 64px; }
   .culture-num { top: 24px; right: 24px; }
   .pi-talent { padding: 40px 0 48px; margin-bottom: 48px; }
   .logo-marquee {
-    gap: 10px;
+    gap: 8px;
   }
-  .logo-sequence { gap: 10px; padding-right: 10px; }
+  .logo-sequence { gap: 8px; padding-right: 8px; }
   .logo-cell {
-    flex-basis: 142px;
-    height: 80px;
+    flex-basis: 124px;
+    height: 64px;
   }
   .logo-cell--wide {
-    flex-basis: 176px;
+    flex-basis: 152px;
   }
   #join h2 { font-size: 38px; }
   .pi-talent-title { font-size: 30px; }
@@ -1673,18 +1700,21 @@ footer {
         <div class="culture-kw">CUSTOMER</div>
         <div class="culture-zh"><span>成就</span><span>客户</span></div>
         <div class="culture-desc">客户的成功，<br>才是我们的成功</div>
+        <div class="culture-foot" aria-hidden="true"><span>衡量工作的唯一标准</span><span>DELIVER</span></div>
       </div>
       <div class="culture-item">
         <div class="culture-num" aria-hidden="true">A-02</div>
         <div class="culture-kw">OUTCOME</div>
         <div class="culture-zh"><span>结果</span><span>导向</span></div>
         <div class="culture-desc">以终为始，凭数据发言，<br>拿结果说话</div>
+        <div class="culture-foot" aria-hidden="true"><span>拒绝过程表演</span><span>MEASURE</span></div>
       </div>
       <div class="culture-item">
         <div class="culture-num" aria-hidden="true">A-03</div>
         <div class="culture-kw">NEVER SETTLE</div>
         <div class="culture-zh"><span>永不</span><span>满足</span></div>
         <div class="culture-desc">好奇驱动，进化不止，<br>永不自我设限</div>
+        <div class="culture-foot" aria-hidden="true"><span>把每天当作第一天</span><span>EVOLVE</span></div>
       </div>
     </div>
 
