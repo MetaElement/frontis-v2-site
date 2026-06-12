@@ -703,7 +703,7 @@ footer.site-footer {
 .site-cta__radios {
   display: flex;
   flex-wrap: wrap;
-  gap: 12px 24px;
+  gap: 16px 28px;
   margin: 28px 0 26px;
   padding: 0;
   border: 0;
