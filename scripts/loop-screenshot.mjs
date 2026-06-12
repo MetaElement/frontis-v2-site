@@ -43,6 +43,9 @@ for (const vp of viewports) {
       .querySelectorAll(".animate-in, .animate-up, .section-enter")
       .forEach((el) => el.classList.add("visible"));
     document
+      .querySelectorAll(".reveal")
+      .forEach((el) => el.classList.add("in-view"));
+    document
       .querySelectorAll("section")
       .forEach((el) => el.classList.add("section-enter", "visible"));
     await new Promise((r) => setTimeout(r, 400));
