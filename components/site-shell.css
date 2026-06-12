@@ -345,7 +345,8 @@ footer.site-footer {
 .site-footer__bottom span,
 .site-footer__bottom a {
   color: #4a4f57;
-  font-size: 12px;
+  font-size: 13px;
+  line-height: 1.6;
   text-decoration: none;
   transition: color 160ms var(--site-shell-ease);
 }
