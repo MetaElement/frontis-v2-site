@@ -111,3 +111,23 @@
 
 ### 教训
 - 给截图容器加描边/角标前，先 grep HTML 确认该区块用的是哪种容器结构；死规则会让评审连续两轮报"修复无效"
+
+## about.html 打磨结论（轨迹 5.9 → 6.9 → 7.4 → 7.7 → 7.9 → 8.0，6 轮硬上限，终态 round-6）
+
+### 位图 logo 墙入系（双重校正）
+- 统一滤镜 `grayscale(1) contrast(1.05)` + 基准 opacity 0.62、hover 还原彩色，只解决「彩色污染」；还需两层光学校正：
+  - 尺寸：per-logo `--logo-scale`（细字标 1.1-1.7 放大、重色块 0.76-0.96 缩小）
+  - 明度：重色块 logo（VISA/建发/中建 0.5、伊利 0.55）单独降 opacity，否则灰度后视觉重量仍压过细线 logo
+- 移动端 marquee 定格态按 64px cell 高、8px 间隙收紧，与相邻区块 48px 节奏对齐
+
+### 价值卡「下半部空」的解法
+- 大标题+短正文卡片必然下空：加 mono 注脚行（左灰 0.52 短补充语 + 右青 EN 关键词、1px 上分隔线 0.14、padding-top 14px），卡容器 `display:flex; flex-direction:column` + 注脚 `margin-top:auto` 锚底，同时解决三卡底边不齐
+- 注脚左侧写新信息（行为准则），不要复述正文
+
+### 绝对定位示意卡的移动端适配
+- 卡内 absolute 元素在窄屏会与正文碰撞：mono 标签贴线右侧（`left:18px`）在 390px 下被 `overflow:hidden` 截断，改 `left:auto; right:12px; text-align:right` 移到线左侧，再沿轨下移（top 调大）避开正文行尾
+- 段间距放宽 = min-height 与下段 top 同步加（700→716 / 408→424），50% 锚点元素会自动跟随
+
+### 评审误判记录
+- 1x 整图下评审报「价值卡正文行数不等底边不齐」，2x 局部核验三卡均两行且底边齐——1x 图上 medium 级版式问题也需主会话 sips 裁切 2x 核验后再决定是否修
+- sips 裁切局部：`sips -c <h> <w> --cropOffset <y> 0 in.png --out crop.png`（评审子代理 Bash 不可用时由主会话代验）
