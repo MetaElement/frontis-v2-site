@@ -1191,6 +1191,16 @@ body #cta-section.site-cta > .site-cta__inner {
     grid-column: 1 / -1;
   }
 
+  .site-footer__links {
+    gap: 4px;
+  }
+
+  .site-footer__links a,
+  .site-footer__links .site-footer__link-static,
+  .site-footer__contact a {
+    padding: 6px 0;
+  }
+
   .site-footer__bottom {
     flex-direction: column;
     align-items: flex-start;

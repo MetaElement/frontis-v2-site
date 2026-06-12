@@ -397,7 +397,7 @@
       top: 76vh;
       left: 0;
       right: 0;
-      height: 6px;
+      height: 3px;
       background: var(--threshold-cyan);
       z-index: 10;
       --hero-line-duration: 1600ms;
@@ -405,9 +405,9 @@
       transform: scaleX(0);
       transition: none;
       box-shadow:
-        0 6px 32px 12px rgba(0, 193, 212, 0.38),
-        0 16px 90px 32px rgba(0, 193, 212, 0.18),
-        0 32px 160px 56px rgba(0, 193, 212, 0.08);
+        0 4px 22px 8px rgba(0, 193, 212, 0.22),
+        0 12px 60px 22px rgba(0, 193, 212, 0.1),
+        0 24px 110px 40px rgba(0, 193, 212, 0.04);
       clip-path: inset(0 -200px -200px -200px);
     }
     .threshold-line.line-drawn {
@@ -423,7 +423,7 @@
       right: 0;
       bottom: 0;
       background:
-        linear-gradient(180deg, rgba(0, 193, 212, 0.16) 0%, rgba(0, 16, 19, 0.82) 18%, var(--quantum-black) 72%),
+        linear-gradient(180deg, rgba(0, 193, 212, 0.09) 0%, rgba(0, 16, 19, 0.86) 16%, var(--quantum-black) 70%),
         var(--quantum-black);
       z-index: 1;
       overflow: hidden;
@@ -534,9 +534,9 @@
     /* Hero 右侧工程线框图（白色上半区，纯装饰） */
     .hero-vis {
       position: absolute;
-      top: 100px;
+      top: 128px;
       right: 64px;
-      width: min(520px, 36vw);
+      width: min(560px, 38vw);
       z-index: 10;
       opacity: 0;
       transform: translateY(14px);
@@ -3866,9 +3866,13 @@
       color: var(--pure-white);
     }
 
-    /* 黑色区块之间的分隔线（hero 黑下区 → products） */
+    /* 黑色区块之间的分隔线（hero 黑下区 → products；白区块之间用 trust 上缘） */
     #products {
       border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
+    #trust {
+      border-top: 1px solid rgba(0, 16, 19, 0.12) !important;
     }
 
     #scenes-preview,
@@ -4378,13 +4382,13 @@
     }
 
     .fx-scenario-visual .fx-vis-frame {
-      fill: #F7F9FA;
+      fill: var(--energy-gray);
       stroke: rgba(0, 16, 19, 0.14);
     }
 
     .fx-scenario-visual .fx-vis-panel {
       fill: var(--pure-white);
-      stroke: rgba(0, 16, 19, 0.12);
+      stroke: rgba(0, 16, 19, 0.2);
     }
 
     .fx-scenario-visual .fx-vis-grid {
@@ -4421,7 +4425,7 @@
     }
 
     .fx-scenario-visual .fx-vis-text {
-      fill: rgba(0, 16, 19, 0.46);
+      fill: rgba(0, 16, 19, 0.6);
       font-family: var(--font-mono);
       font-size: 9px;
       font-weight: 800;
@@ -4808,6 +4812,10 @@
 
       .fx-proof-grid div:last-child {
         grid-column: 1 / -1;
+        grid-auto-flow: column;
+        justify-content: start;
+        align-items: baseline;
+        column-gap: 16px;
       }
     }
 
@@ -4881,6 +4889,11 @@
 
       .fx-tech-flow {
         grid-template-columns: 1fr;
+      }
+
+      /* 窄屏下隐藏标题行尾的青色破折号装饰，避免折行后悬挂 */
+      .hero-title-accent {
+        display: none;
       }
 
       .fx-tech-flow i {
