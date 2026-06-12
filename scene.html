@@ -325,11 +325,46 @@
       line-height: 2;
       letter-spacing: 0;
       max-width: 680px;
-      margin-bottom: 44px;
+      margin-bottom: 26px;
     }
 
     .hero__subtitle span {
       display: block;
+    }
+
+    .hero__index {
+      display: flex;
+      margin-bottom: 34px;
+    }
+
+    .hero__index-item {
+      display: flex;
+      flex-direction: column;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 16px 34px;
+      border-left: 1px solid rgba(255, 255, 255, 0.16);
+      font-family: var(--font-cn);
+      font-size: 14px;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.85);
+      text-decoration: none;
+      transition: color 0.18s;
+    }
+
+    .hero__index-item:last-child {
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .hero__index-item span {
+      font-family: var(--font-mono);
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      color: var(--threshold-cyan);
+    }
+
+    .hero__index-item:hover {
+      color: var(--pure-white);
     }
 
     /* 滚动提示 */
@@ -702,18 +737,26 @@
       color: var(--quantum-black);
     }
 
-    /* 状态标签（橙色） */
+    /* 状态注脚（mono，橙点为区块单一焦点） */
     .status-badge {
       display: inline-flex;
       align-items: center;
       gap: 8px;
+      margin-top: 18px;
       font-family: var(--font-mono);
-      font-size: 12px;
+      font-size: 11px;
       font-weight: 500;
-      color: var(--energy-orange);
-      border: 1px solid var(--energy-orange);
-      padding: 7px 14px;
-      letter-spacing: 0.06em;
+      color: var(--level-gray);
+      letter-spacing: 1.5px;
+    }
+
+    .status-badge .node-orange {
+      width: 8px;
+      height: 8px;
+    }
+
+    #supply .status-badge {
+      color: rgba(255, 255, 255, 0.56);
     }
 
     .scene-visual::before {
@@ -850,12 +893,22 @@
     }
 
     .scene-visual-caption {
-      margin-top: 12px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 16px;
+      margin-top: 14px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(0, 16, 19, 0.12);
       color: rgba(0, 16, 19, 0.56);
       font-family: var(--font-mono);
       font-size: 11px;
       letter-spacing: 0.1em;
       text-transform: uppercase;
+    }
+
+    .scene-visual-caption span:last-child {
+      color: var(--threshold-cyan);
     }
 
     /* ============================================================
@@ -907,7 +960,10 @@
         linear-gradient(180deg, rgba(0, 193, 212, 0.12), transparent 36%),
         var(--quantum-black);
     }
-    #supply .scene-visual-caption { color: rgba(255, 255, 255, 0.56); }
+    #supply .scene-visual-caption {
+      color: rgba(255, 255, 255, 0.56);
+      border-top-color: rgba(255, 255, 255, 0.14);
+    }
 
     #supply .scene-visual-stack {
       background: #1A1E22;
@@ -1009,6 +1065,19 @@
       .hero__upper,
       .hero__lower { padding: 48px 24px; }
 
+      .hero__index {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 10px;
+        width: 100%;
+        margin-bottom: 28px;
+      }
+
+      .hero__index-item {
+        border: 1px solid rgba(255, 255, 255, 0.16);
+        padding: 12px 14px;
+      }
+
       .hero__title {
         font-size: 42px;
       }
@@ -1050,6 +1119,7 @@
       }
 
       .agent-item__desc {
+        font-size: 13px;
         line-height: 1.6;
       }
 
@@ -1188,12 +1258,17 @@
   <!-- The Edge 临界线（Hero 区唯一一条） -->
   <div class="edge-line" role="separator" aria-hidden="true"></div>
 
-  <!-- 下黑区：副标题 + 滚动提示 -->
+  <!-- 下黑区：场景导览 + 滚动提示 -->
   <div class="hero__lower">
     <p class="hero__subtitle animate-in delay-2">
-      <span>覆盖战略管理 · 生产研发 · 供应链运营 · 营销增长四大业务现场</span>
-      <span>每个场景背后都有一支可交付、可复用、可进化的 AI 专家团</span>
+      <span>每个场景背后都有一支可交付、可复用、可进化的 AI 专家团。</span>
     </p>
+    <nav class="hero__index animate-in delay-2" aria-label="场景导览">
+      <a class="hero__index-item" href="#strategy"><span>01</span>战略管理</a>
+      <a class="hero__index-item" href="#production"><span>02</span>生产研发</a>
+      <a class="hero__index-item" href="#supply"><span>03</span>供应链运营</a>
+      <a class="hero__index-item" href="#marketing"><span>04</span>营销增长</a>
+    </nav>
     <div class="hero__scroll animate-in delay-3" aria-hidden="true">
       <span class="node-cyan"></span>
       <p class="hero__scroll-text">SCROLL TO EXPLORE</p>
@@ -1297,7 +1372,7 @@
         </div>
         <span class="scene-visual-stack__label">Recording analysis</span>
       </div>
-      <figcaption class="scene-visual-caption">LEADEEP AI · DECISION INTELLIGENCE</figcaption>
+      <figcaption class="scene-visual-caption"><span>LEADEEP AI · DECISION INTELLIGENCE</span><span>FIG. 01</span></figcaption>
     </figure>
 
   </div>
@@ -1379,7 +1454,7 @@
 
     <figure class="scene-visual animate-in delay-3">
       <img src="./assets/scene-agents/schedule-management.png" data-default-image="进度管理专家" alt="生产研发专家团 Agent 界面" loading="lazy" />
-      <figcaption class="scene-visual-caption">XIAOZHU · PROJECT INTELLIGENCE</figcaption>
+      <figcaption class="scene-visual-caption"><span>XIAOZHU · PROJECT INTELLIGENCE</span><span>FIG. 02</span></figcaption>
     </figure>
 
   </div>
@@ -1469,7 +1544,7 @@
 
     <figure class="scene-visual animate-in delay-3">
       <img src="./assets/scene-agents/port-logistics.png" data-default-image="铁矿石套保专家" alt="供应链运营专家团 Agent 界面" loading="lazy" />
-      <figcaption class="scene-visual-caption">WANQIAN · COMMODITY DECISION LOOP</figcaption>
+      <figcaption class="scene-visual-caption"><span>WANQIAN · COMMODITY DECISION LOOP</span><span>FIG. 03</span></figcaption>
     </figure>
 
   </div>
@@ -1535,7 +1610,7 @@
 
     <figure class="scene-visual animate-in delay-3">
       <img src="./assets/scene-agents/sales-champion.png" data-default-image="AI销冠专家" alt="营销增长专家团 Agent 界面" loading="lazy" />
-      <figcaption class="scene-visual-caption">GROWTH AI · CUSTOMER OPERATING LOOP</figcaption>
+      <figcaption class="scene-visual-caption"><span>GROWTH AI · CUSTOMER OPERATING LOOP</span><span>FIG. 04</span></figcaption>
     </figure>
 
   </div>
