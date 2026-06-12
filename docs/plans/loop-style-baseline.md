@@ -87,5 +87,27 @@
 - hero 设备图：能量灰底板承托、92%/330px 居中、saturate(0.82)
 - 统计带保持 3 列横排（同 horizon），span 取消 nowrap 允许换行
 
+## scene
 
+评分轨迹：5.9 → 6.9 → 7.4 → 7.6 → 7.9 → 8.0（6 轮上限到，round-6 即峰值）
 
+### CJK 标题断行（keep-all 的正确用法）
+- `word-break: keep-all` 对无标点连续中文必致移动端溢出；解法不是回退 normal（会在词中间断行），而是保留 keep-all 并在 HTML 语义断点插 `<wbr>`
+- 移动端 hero 主标题字号上限 `clamp(30px,8.5vw,38px)`
+
+### hero 多行标题层级
+- 三行等大标题层级模糊：首行疑问/引导句降级为 `clamp(20px,1.9vw,26px)/600` + 弱化色 `rgba(0,16,19,0.62)`，与核心主张拉开
+- hero 下黑色过渡带不要堆居中小字：改 4 列 mono 导览（编号 span 11px/1.5px 青色 + 14px/600 标签 + 1px 竖分隔线），移动端 2×2 grid、单元 min-height 56px
+
+### 区块行动元素统一
+- 同层级区块的收尾行动样式必须一致（全部 mono 箭头链接或全部按钮），橙色只留全页单一焦点
+- 状态徽章降级为 mono 注脚行（11px/1.5px、层级灰、无边框），`margin-top:auto` 锚底对齐双栏底边；内容列加 `display:flex; flex-direction:column` 才能让锚底生效
+
+### figcaption 升级范式
+- 截图说明改双端 flex：左说明文字 + 右 `FIG. 0N` mono 青字，`padding-top 12px` + 1px 上分隔线（白底 rgba(0,16,19,0.12)、黑底 rgba(255,255,255,0.14)）
+
+### 黑区位图等高
+- 黑底区单张高截图与长列表等高：`.scene-visual` flex column + `img { flex:1; aspect-ratio:auto; min-height:0; }` 拉伸；改样式前先确认选择器命中真实 DOM（曾对不存在的 stack 容器写了两轮死规则）
+
+### 教训
+- 给截图容器加描边/角标前，先 grep HTML 确认该区块用的是哪种容器结构；死规则会让评审连续两轮报"修复无效"
