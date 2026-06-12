@@ -21,8 +21,9 @@ for (const vp of viewports) {
     isMobile: vp.name === "mobile",
   });
   const p = await ctx.newPage();
-  await p.goto(url, { waitUntil: "networkidle" });
+  await p.goto(url, { waitUntil: "domcontentloaded" });
   await p.evaluate(() => document.fonts.ready);
+  await p.waitForTimeout(1500);
   // 滚到底再回顶，触发懒加载/滚动入场动画后定格
   await p.evaluate(async () => {
     await new Promise((done) => {
