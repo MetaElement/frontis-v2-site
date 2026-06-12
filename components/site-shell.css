@@ -302,10 +302,6 @@ footer.site-footer {
   gap: 10px;
 }
 
-.site-footer__subgroup {
-  margin-top: 28px;
-}
-
 .site-footer__links a,
 .site-footer__links .site-footer__link-static,
 .site-footer__contact span,
@@ -517,7 +513,7 @@ footer.site-footer {
 
 .site-cta__grid--form {
   grid-template-columns: minmax(0, 1fr) 320px;
-  gap: 80px;
+  gap: 56px;
   justify-content: stretch;
   align-items: start;
   margin-top: 0;
@@ -1138,6 +1134,12 @@ body #cta-section.site-cta > .site-cta__inner {
 
   .site-cta__fields {
     gap: 18px;
+  }
+
+  .site-cta__radios {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 14px;
   }
 
   .site-cta__opportunity,

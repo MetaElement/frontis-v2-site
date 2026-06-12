@@ -436,8 +436,8 @@
         to bottom,
         transparent 0px,
         transparent 28px,
-        rgba(255,255,255,0.09) 28px,
-        rgba(255,255,255,0.09) 29px
+        rgba(255,255,255,0.04) 28px,
+        rgba(255,255,255,0.04) 29px
       );
       pointer-events: none;
     }
@@ -518,10 +518,7 @@
       transition: opacity 900ms var(--ease-threshold), transform 900ms var(--ease-threshold);
     }
     .hero-cta {
-      position: absolute;
-      left: 64px;
-      top: calc(76vh + 40px);
-      z-index: 25;
+      margin-top: 36px;
       opacity: 0;
       transform: translateY(10px);
     }
@@ -591,14 +588,14 @@
       .hero-vis { display: none; }
     }
 
-    /* Hero CTA 按钮：白色线框白色字 / hover：青色填充黑字 */
+    /* Hero CTA 按钮：白底区黑色线框 / hover：青色填充 */
     .hero-cta .btn-demo {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      background: transparent;
+      background: var(--quantum-black);
       color: #ffffff;
-      border: 1.5px solid #ffffff;
+      border: 1.5px solid var(--quantum-black);
       border-radius: 0;
       padding: 14px 40px;
       font-family: 'Space Grotesk', sans-serif;
@@ -3724,12 +3721,9 @@
       .hero-lower {
         top: 68vh;
       }
-      .hero-text-area,
-      .hero-cta {
+      .hero-text-area {
         left: 24px;
         right: 24px;
-      }
-      .hero-text-area {
         max-width: calc(100% - 48px);
         bottom: calc(32vh + 44px);
       }
@@ -3742,7 +3736,7 @@
         max-width: 32em;
       }
       .hero-cta {
-        top: calc(68vh + 22px);
+        margin-top: 28px;
       }
       .contact-opportunity-grid,
       .scenes-decision-grid {
@@ -3893,7 +3887,7 @@
     .fx-section-inner {
       width: min(1240px, calc(100% - 96px));
       margin: 0 auto;
-      padding: 118px 0;
+      padding: 110px 0 88px;
     }
 
     #products .fx-section-inner,
@@ -4078,6 +4072,16 @@
       font-style: normal;
       font-size: 18px;
       font-weight: 700;
+    }
+
+    .fx-product-layer small {
+      position: relative;
+      z-index: 2;
+      margin-top: 4px;
+      max-width: 30ch;
+      color: rgba(255, 255, 255, 0.52);
+      font-size: 13px;
+      line-height: 1.7;
     }
 
     .fx-product-visual {
@@ -4812,10 +4816,6 @@
 
       .fx-proof-grid div:last-child {
         grid-column: 1 / -1;
-        grid-auto-flow: column;
-        justify-content: start;
-        align-items: baseline;
-        column-gap: 16px;
       }
     }
 
@@ -5050,6 +5050,9 @@
       <p class="hero-subtitle" id="heroSubtitle">
         衔远大观让每个员工拥有 ME 数字分身，每个团队连接 WE 专家网络，并由 MA 进化引擎把每一次任务沉淀为组织能力。
       </p>
+      <div class="hero-cta">
+        <a href="https://ai.frontis.cn/login" class="btn-demo" data-leap-cta data-hover="即刻体验"><span class="leap-cta__label">开启跃迁</span></a>
+      </div>
     </div>
 
     <!-- 右侧工程线框图（装饰） -->
@@ -5068,11 +5071,6 @@
         <text class="hv-text" x="208" y="142">THRESHOLD</text>
       </svg>
     </div>
-  </div>
-
-  <!-- 开启跃迁按钮（黑色区） -->
-  <div class="hero-cta">
-    <a href="https://ai.frontis.cn/login" class="btn-demo" data-leap-cta data-hover="即刻体验"><span class="leap-cta__label">开启跃迁</span></a>
   </div>
 
 </section>
@@ -5107,6 +5105,7 @@
           <span>01</span>
           <strong>ME</strong>
           <em>数字分身</em>
+          <small>长期记住岗位、偏好与历史任务，是每个员工的 AI 入口。</small>
         </div>
         <div class="fx-product-link" aria-hidden="true"></div>
         <div class="fx-product-layer">
@@ -5125,6 +5124,7 @@
           <span>02</span>
           <strong>WE</strong>
           <em>专家网络</em>
+          <small>战略、研发、供应链等专家 Agent 按任务动态组队协同。</small>
         </div>
         <div class="fx-product-link" aria-hidden="true"></div>
         <div class="fx-product-layer fx-product-layer--peak">
@@ -5143,6 +5143,7 @@
           <span>03</span>
           <strong>MA</strong>
           <em>进化引擎</em>
+          <small>把每一次任务的过程与反馈，沉淀为组织级可复用能力。</small>
         </div>
       </div>
     </div>

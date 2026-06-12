@@ -126,12 +126,10 @@
       '<p class="site-footer__tagline">让组织从 +AI 工具跃迁到 AI 原生，每一次任务都沉淀为组织能力。</p>' +
       '<div class="site-footer__email">xianyuan@frontis.ai</div>' +
       "</div>" +
-      '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
+      '<div><div class="site-footer__title">产品与技术</div><div class="site-footer__links">' +
       footerLink("./horizon.html", "衔远大观") +
-      "</div>" +
-      '<div class="site-footer__subgroup"><div class="site-footer__title">技术</div><div class="site-footer__links">' +
       footerLink("./technology.html", "技术架构") +
-      "</div></div></div>" +
+      "</div></div>" +
       '<div><div class="site-footer__title">场景</div><div class="site-footer__links">' +
       footerLink("./scene.html", "场景总览") +
       footerLink("./scene-strategy.html", "战略管理") +
