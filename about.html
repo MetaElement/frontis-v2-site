@@ -615,8 +615,8 @@ section { padding: 96px 64px; }
 /* ── Screen 2 · 创始人 ── */
 #team {
   background:var(--quantum-black); padding:96px 64px;
-  border-top:1px solid rgba(255,255,255,0.12);
-  border-bottom:1px solid rgba(255,255,255,0.12);
+  border-top:1px solid rgba(255,255,255,0.14);
+  border-bottom:1px solid rgba(255,255,255,0.14);
 }
 #team h2 {
   font-family:var(--font-en); font-size:40px; font-weight:700;
@@ -626,8 +626,12 @@ section { padding: 96px 64px; }
   display: grid;
   grid-template-columns: minmax(0, 0.95fr) minmax(380px, 1.05fr);
   gap: 64px;
-  align-items: center;
+  align-items: stretch;
   max-width: 1120px;
+}
+.founder-bio {
+  display: flex;
+  flex-direction: column;
 }
 .founder-name {
   font-family: var(--font-en);
@@ -641,7 +645,22 @@ section { padding: 96px 64px; }
   margin-bottom: 24px;
 }
 .threshold-line-small { width: 48px; height: 2px; background: var(--threshold-cyan); margin-bottom: 24px; }
-.founder-desc { font-size: 16px; color: #C8CACF; line-height: 1.9; margin-bottom: 40px; }
+.founder-desc { font-size: 16px; color: #C8CACF; line-height: 1.9; margin-bottom: 0; }
+.founder-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 16px;
+  margin-top: auto;
+  padding-top: 16px;
+  border-top: 1px solid rgba(255,255,255,0.14);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: rgba(255,255,255,0.56);
+}
+.founder-meta span:last-child { color: var(--threshold-cyan); }
 .founder-figure {
   justify-self: end;
   width: 100%;
@@ -784,8 +803,8 @@ section { padding: 96px 64px; }
 .logo-cell img[src*="beibingyang"] { --logo-scale: 1.18; }
 .logo-cell img[src*="xiamen-itg"] { --logo-scale: 1.16; }
 .logo-cell img[src*="mistine"] { --logo-scale: 1.08; }
-.logo-cell img[src*="visa"] { --logo-scale: 0.94; }
-.logo-cell img[src*="club-med"] { --logo-scale: 0.98; }
+.logo-cell img[src*="visa"] { --logo-scale: 0.76; }
+.logo-cell img[src*="club-med"] { --logo-scale: 0.9; }
 .logo-cell img[src*="haolai"] { --logo-scale: 1.06; }
 .logo-cell img[src*="weilong"] { --logo-scale: 1.12; }
 .logo-cell img[src*="guoquan"] { --logo-scale: 1.08; }
@@ -816,7 +835,7 @@ section { padding: 96px 64px; }
   position: relative;
   padding: 0;
   overflow: hidden;
-  border-top: 1px solid rgba(255,255,255,0.12);
+  border-top: 1px solid rgba(255,255,255,0.14);
 }
 /* 背景色块 + 黑色半透明蒙层 */
 .join-bg {
@@ -852,14 +871,24 @@ section { padding: 96px 64px; }
 /* 企业文化横条 */
 .join-culture {
   display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-bottom: 64px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 .culture-item {
+  position: relative;
   padding: 28px 32px;
   border-right: 1px solid rgba(255,255,255,0.08);
 }
 .culture-item:last-child { border-right: none; }
+.culture-num {
+  position: absolute;
+  top: 28px;
+  right: 32px;
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 1.5px;
+  color: rgba(255,255,255,0.32);
+}
 .culture-kw {
   font-family: var(--font-mono); font-size: 11px; font-weight: 700;
   letter-spacing: 2px; color: var(--threshold-cyan); text-transform: uppercase;
@@ -883,8 +912,8 @@ section { padding: 96px 64px; }
   align-items: start;
   padding: 56px 0 64px;
   margin-bottom: 64px;
-  border-top: 1px solid rgba(255,255,255,0.08);
-  border-bottom: 1px solid rgba(255,255,255,0.08);
+  border-top: 1px solid rgba(255,255,255,0.12);
+  border-bottom: 1px solid rgba(255,255,255,0.12);
 }
 .pi-talent-label {
   font-family: var(--font-mono); font-size: 11px; font-weight: 700;
@@ -1484,6 +1513,10 @@ footer {
         周伯文教授在2022年率先提出“通专融合”技术，致力于解决AI发展中大模型通用泛化与高度专业能力相互制约的全球性难题。<br>
         衔远科技依托于“通专融合”技术打造了全栈企业级AI原生平台-衔远大观，成为产业落地AI原生组织和实现AGI的基础设施平台。
       </p>
+      <div class="founder-meta" aria-hidden="true">
+        <span>通专融合 · 2022 首次提出</span>
+        <span>GENERAL-SPECIALIZED FUSION</span>
+      </div>
     </div>
     <figure class="founder-figure">
       <img src="./assets/about-founder-fusion.png" alt="通专融合技术路线示意图" class="founder-figure-img" loading="lazy">
@@ -1631,16 +1664,19 @@ footer {
     <!-- 企业文化横条 -->
     <div class="join-culture animate-in">
       <div class="culture-item">
+        <div class="culture-num" aria-hidden="true">A-01</div>
         <div class="culture-kw">CUSTOMER</div>
         <div class="culture-zh"><span>成就</span><span>客户</span></div>
         <div class="culture-desc">客户的成功，<br>才是我们的成功</div>
       </div>
       <div class="culture-item">
+        <div class="culture-num" aria-hidden="true">A-02</div>
         <div class="culture-kw">OUTCOME</div>
         <div class="culture-zh"><span>结果</span><span>导向</span></div>
         <div class="culture-desc">以终为始，凭数据发言，<br>拿结果说话</div>
       </div>
       <div class="culture-item">
+        <div class="culture-num" aria-hidden="true">A-03</div>
         <div class="culture-kw">NEVER SETTLE</div>
         <div class="culture-zh"><span>永不</span><span>满足</span></div>
         <div class="culture-desc">好奇驱动，进化不止，<br>永不自我设限</div>
