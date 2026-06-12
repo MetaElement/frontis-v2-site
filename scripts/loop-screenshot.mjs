@@ -41,7 +41,7 @@ for (const vp of viewports) {
     });
     // 入场动画按 100ms/元素 级联，直接定格为动画完成后的最终状态
     document
-      .querySelectorAll(".animate-in, .animate-up, .section-enter")
+      .querySelectorAll(".animate-in, .animate-in-up, .animate-up, .section-enter")
       .forEach((el) => el.classList.add("visible"));
     document
       .querySelectorAll(".reveal")
@@ -53,7 +53,8 @@ for (const vp of viewports) {
     const st = document.createElement("style");
     st.textContent =
       "*,*::before,*::after{animation:none!important;}" +
-      "[data-anim]{opacity:1!important;filter:none!important;transform:none!important;}";
+      "[data-anim]{opacity:1!important;filter:none!important;transform:none!important;}" +
+      ".animate-in,.animate-in-up{opacity:1!important;transform:none!important;transition:none!important;}";
     document.head.appendChild(st);
     await new Promise((r) => setTimeout(r, 400));
   });
