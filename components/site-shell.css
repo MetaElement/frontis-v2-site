@@ -754,7 +754,7 @@ footer.site-footer {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: min(100%, calc(50% - 10px));
+  width: 100%;
   min-height: 58px;
   margin-top: 22px;
   border: 1px solid var(--site-shell-black);
