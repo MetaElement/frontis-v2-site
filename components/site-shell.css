@@ -686,7 +686,7 @@ footer.site-footer {
 
 .site-cta__message textarea {
   min-height: 176px;
-  resize: vertical;
+  resize: none;
   padding: 14px;
 }
 
@@ -737,9 +737,7 @@ footer.site-footer {
 
 .site-cta__radios input:checked {
   border-color: var(--site-shell-cyan);
-  background:
-    linear-gradient(var(--site-shell-white), var(--site-shell-white)) center / 8px 8px no-repeat,
-    var(--site-shell-cyan);
+  background: var(--site-shell-cyan);
 }
 
 .site-cta__trap {

@@ -613,7 +613,7 @@ nav {
   width: 80px;
   height: 36px;
   transform: translateX(-50%);
-  background: linear-gradient(180deg, #c8ccd1, #8f969e);
+  background: #23272B;
   clip-path: polygon(30% 0, 70% 0, 86% 100%, 14% 100%);
 }
 .mac-base {
@@ -623,7 +623,7 @@ nav {
   width: 230px;
   height: 12px;
   transform: translateX(-50%);
-  background: linear-gradient(90deg, #8d939a, #eceff1 45%, #7e858d);
+  background: #2A2E33;
   box-shadow: 0 14px 30px rgba(0,0,0,0.16);
 }
 .phone-device {
@@ -1058,7 +1058,7 @@ nav {
 }
 .form-input::placeholder, .form-textarea::placeholder { color: rgba(255,255,255,0.2); }
 .form-select option { background: #1a1a1a; }
-.form-textarea { resize: vertical; min-height: 80px; }
+.form-textarea { resize: none; min-height: 80px; }
 .form-submit {
   margin-top: 16px; width: 100%;
   background: var(--cyan); color: var(--black);
@@ -1106,6 +1106,7 @@ nav {
   .layers-left { max-width: 100%; }
   .layers-quote, .layers-tagline { max-width: 100%; }
   .detail-inner, .detail-inner.reverse { grid-template-columns: 1fr; direction: ltr; }
+  .detail-inner .detail-right { order: 2 !important; }
   .detail-right { position: static; }
   .device-showcase { min-height: 500px; justify-content: flex-start; }
   .flywheel-static { grid-template-columns: 1fr; }
@@ -1120,6 +1121,7 @@ nav {
   .flywheel-inner, .flywheel-static, .cta-inner, .hero-content,
   .footer-bottom { padding-left: 24px; padding-right: 24px; }
   .hero-bottom { padding-left: 24px; padding-right: 24px; }
+  .hero-content { gap: 36px; }
   .hero-stats { width: 100%; display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; }
   .hero-stat-num { font-size: 18px; white-space: nowrap; }
   .hero-scroll-hint { display: none; }
@@ -1128,7 +1130,9 @@ nav {
   .hero-sub-title { font-size: 18px; letter-spacing: 0.06em; }
   .device-showcase { min-height: 620px; }
   .phone-device { right: 0; bottom: 0; width: 148px; height: 300px; }
-  .mac-device { padding-bottom: 148px; }
+  .mac-device { padding-bottom: 128px; }
+  .mac-neck, .mac-base { display: none; }
+  .memory-tag-row { max-width: calc(100% - 124px); }
   .device-sync-note { bottom: 18px; left: 0; max-width: calc(100% - 164px); }
   .flywheel-wheel { width: min(100%, 430px); }
   .wheel-step { width: 132px; gap: 7px; }
@@ -1505,24 +1509,28 @@ nav {
           <div style="width:2px;background:var(--cyan);align-self:stretch;flex-shrink:0;"></div>
           <div class="feature-content" style="padding-left:16px;">
             <div class="feature-title">战略管理AI专家团</div>
+            <div style="font-family:var(--font-en);font-size:11px;letter-spacing:0.08em;color:rgba(0,16,19,0.45);margin-top:4px;">STRATEGY &amp; PLANNING</div>
           </div>
         </div>
         <div class="feature-item reveal reveal-delay-2">
           <div style="width:2px;background:var(--cyan);align-self:stretch;flex-shrink:0;"></div>
           <div class="feature-content" style="padding-left:16px;">
             <div class="feature-title">研发生产AI专家团</div>
+            <div style="font-family:var(--font-en);font-size:11px;letter-spacing:0.08em;color:rgba(0,16,19,0.45);margin-top:4px;">R&amp;D &amp; PRODUCTION</div>
           </div>
         </div>
         <div class="feature-item reveal reveal-delay-3">
           <div style="width:2px;background:var(--cyan);align-self:stretch;flex-shrink:0;"></div>
           <div class="feature-content" style="padding-left:16px;">
             <div class="feature-title">供应链运营AI专家团</div>
+            <div style="font-family:var(--font-en);font-size:11px;letter-spacing:0.08em;color:rgba(0,16,19,0.45);margin-top:4px;">SUPPLY CHAIN OPS</div>
           </div>
         </div>
         <div class="feature-item reveal reveal-delay-4">
           <div style="width:2px;background:var(--cyan);align-self:stretch;flex-shrink:0;"></div>
           <div class="feature-content" style="padding-left:16px;">
             <div class="feature-title">营销增长AI专家团</div>
+            <div style="font-family:var(--font-en);font-size:11px;letter-spacing:0.08em;color:rgba(0,16,19,0.45);margin-top:4px;">GROWTH MARKETING</div>
           </div>
         </div>
       </div>
