@@ -123,6 +123,7 @@
       '<div class="site-footer__grid">' +
       '<div class="site-footer__brand">' +
       '<a href="./index.html" aria-label="返回首页"><img src="./assets/logo-dark.svg" alt="FRONTIS 衔远科技" /></a>' +
+      '<p class="site-footer__tagline">让组织从 +AI 工具跃迁到 AI 原生，每一次任务都沉淀为组织能力。</p>' +
       '<div class="site-footer__email">xianyuan@frontis.ai</div>' +
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +

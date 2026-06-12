@@ -470,6 +470,7 @@
       margin-bottom: 24px;
       letter-spacing: 0;
       text-wrap: balance;
+      word-break: keep-all;
     }
     .hero-title .line1,
     .hero-title .line2,
@@ -528,6 +529,66 @@
       opacity: 1;
       transform: translateY(0);
       transition: opacity 400ms var(--ease-threshold) 200ms, transform 400ms var(--ease-threshold) 200ms;
+    }
+
+    /* Hero 右侧工程线框图（白色上半区，纯装饰） */
+    .hero-vis {
+      position: absolute;
+      top: 108px;
+      right: 64px;
+      width: 400px;
+      z-index: 10;
+      opacity: 0;
+      transform: translateY(14px);
+      pointer-events: none;
+    }
+    .hero-vis.hero-visible {
+      opacity: 1;
+      transform: translateY(0);
+      transition: opacity 900ms var(--ease-threshold) 500ms, transform 900ms var(--ease-threshold) 500ms;
+    }
+    .hero-vis svg {
+      display: block;
+      width: 100%;
+      height: auto;
+    }
+    .hero-vis .hv-line {
+      fill: none;
+      stroke: rgba(0, 16, 19, 0.18);
+      stroke-width: 1.2;
+      vector-effect: non-scaling-stroke;
+    }
+    .hero-vis .hv-dash {
+      fill: none;
+      stroke: rgba(0, 16, 19, 0.26);
+      stroke-width: 1.2;
+      stroke-dasharray: 4 5;
+      vector-effect: non-scaling-stroke;
+    }
+    .hero-vis .hv-cyan {
+      fill: none;
+      stroke: var(--threshold-cyan);
+      stroke-width: 1.8;
+      vector-effect: non-scaling-stroke;
+    }
+    .hero-vis .hv-dot {
+      fill: var(--threshold-cyan);
+      stroke: var(--pure-white);
+      stroke-width: 2;
+    }
+    .hero-vis .hv-orange {
+      fill: var(--energy-orange);
+      stroke: none;
+    }
+    .hero-vis .hv-text {
+      fill: rgba(0, 16, 19, 0.45);
+      font-family: var(--font-mono);
+      font-size: 9px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+    }
+    @media (max-width: 1180px) {
+      .hero-vis { display: none; }
     }
 
     /* Hero CTA 按钮：白色线框白色字 / hover：青色填充黑字 */
@@ -3805,6 +3866,11 @@
       color: var(--pure-white);
     }
 
+    /* 黑色区块之间的分隔线（hero 黑下区 → products） */
+    #products {
+      border-top: 1px solid rgba(255, 255, 255, 0.12) !important;
+    }
+
     #scenes-preview,
     #trust,
     #contact {
@@ -4420,17 +4486,12 @@
       font-weight: 700;
     }
 
-    .fx-proof-grid .fx-proof-l4 {
-      background: var(--quantum-black);
-      color: var(--pure-white);
+    .fx-proof-grid .fx-proof-l4 strong {
+      color: var(--quantum-black);
     }
 
-    .fx-proof-l4 strong {
-      color: var(--pure-white);
-    }
-
-    .fx-proof-l4 span {
-      color: rgba(255, 255, 255, 0.58);
+    .fx-proof-grid .fx-proof-l4 span {
+      color: rgba(0, 16, 19, 0.56);
     }
 
     .fx-tech-flow {
@@ -4441,10 +4502,10 @@
     }
 
     .fx-tech-node {
-      min-height: 180px;
+      min-height: 168px;
       display: grid;
       align-content: center;
-      gap: 12px;
+      gap: 10px;
       padding: 28px;
       border: 1px solid rgba(255, 255, 255, 0.16);
     }
@@ -4454,6 +4515,14 @@
       font-size: 24px;
       font-weight: 800;
       line-height: 1.2;
+    }
+
+    .fx-tech-node em {
+      color: rgba(255, 255, 255, 0.56);
+      font-style: normal;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.6;
     }
 
     .fx-tech-node--l4 {
@@ -4777,8 +4846,12 @@
       }
 
       .fx-product-grid {
-        grid-template-columns: repeat(3, minmax(0, 1fr));
+        grid-template-columns: 1fr;
         margin-top: 0;
+      }
+
+      .fx-scenario-grid {
+        grid-template-columns: 1fr;
       }
 
       .fx-flywheel--evolution {
@@ -4954,6 +5027,23 @@
         衔远大观让每个员工拥有 ME 数字分身，每个团队连接 WE 专家网络，并由 MA 进化引擎把每一次任务沉淀为组织能力。
       </p>
     </div>
+
+    <!-- 右侧工程线框图（装饰） -->
+    <div class="hero-vis" id="heroVis" aria-hidden="true">
+      <svg viewBox="0 0 400 300" role="presentation" focusable="false">
+        <path class="hv-line" d="M0 75H400M0 150H400M0 225H400" />
+        <path class="hv-line" d="M80 0V300M160 0V300M240 0V300M320 0V300" />
+        <path class="hv-dash" d="M24 234H148" />
+        <path class="hv-dash" d="M252 66H376" />
+        <path class="hv-cyan" d="M24 234H120L280 66H376" />
+        <circle class="hv-dot" cx="120" cy="234" r="5" />
+        <circle class="hv-dot" cx="200" cy="150" r="5" />
+        <circle class="hv-orange" cx="280" cy="66" r="6" />
+        <text class="hv-text" x="24" y="256">+AI TOOL</text>
+        <text class="hv-text" x="284" y="52">AI-NATIVE ORG</text>
+        <text class="hv-text" x="208" y="142">THRESHOLD</text>
+      </svg>
+    </div>
   </div>
 
   <!-- 开启跃迁按钮（黑色区） -->
@@ -4970,7 +5060,7 @@
 <section id="products" aria-label="产品介绍">
   <div class="fx-redesign fx-section-inner fx-product animate-in">
     <div class="fx-section-head">
-      <span class="fx-kicker">FRONTIS HORIZON</span>
+      <span class="fx-kicker">01 / FRONTIS HORIZON</span>
       <h2 class="fx-section-title">衔远大观</h2>
       <p class="fx-section-copy">让每个人都有 数字分身 和 专家网络，越用越聪明。</p>
     </div>
@@ -5192,7 +5282,7 @@
 <section id="scenes-preview" aria-label="场景导流">
   <div class="fx-redesign fx-section-inner fx-scenes animate-in">
     <div class="fx-section-head">
-      <span class="fx-kicker">场景 SCENARIOS</span>
+      <span class="fx-kicker">02 / 场景 SCENARIOS</span>
       <h2 class="fx-section-title">从关键决策开始</h2>
       <p class="fx-section-copy">先进入最高价值的业务现场，再扩展为全组织的 AI 自动驾驶。</p>
     </div>
@@ -5537,19 +5627,19 @@
 <section id="technology" aria-label="核心技术">
   <div class="fx-redesign fx-section-inner fx-tech animate-in">
     <div class="fx-section-head">
-      <span class="fx-kicker">技术 TECHNOLOGY</span>
+      <span class="fx-kicker">03 / 技术 TECHNOLOGY</span>
       <h2 class="fx-section-title">通专融合 涌现专家级AI生产力</h2>
       <p class="fx-section-copy">把通用大模型变成行业专家</p>
     </div>
 
     <div class="fx-tech-flow" aria-label="核心技术路径">
-      <div class="fx-tech-node"><span>MODEL</span><strong>通用模型</strong></div>
+      <div class="fx-tech-node"><span>MODEL</span><strong>通用模型</strong><em>通用大模型提供推理与生成底座</em></div>
       <i aria-hidden="true"></i>
-      <div class="fx-tech-node fx-tech-node--l4"><span>L4</span><strong>能力转化</strong></div>
+      <div class="fx-tech-node fx-tech-node--l4"><span>L4</span><strong>能力转化</strong><em>通专融合 × 数字风洞，注入行业判断</em></div>
       <i aria-hidden="true"></i>
-      <div class="fx-tech-node"><span>AGENT</span><strong>行业专家</strong></div>
+      <div class="fx-tech-node"><span>AGENT</span><strong>行业专家</strong><em>封装为可调用的专家 Agent 与 Skill</em></div>
       <i aria-hidden="true"></i>
-      <div class="fx-tech-node fx-tech-node--peak"><span>LOOP</span><strong>持续进化</strong></div>
+      <div class="fx-tech-node fx-tech-node--peak"><span>LOOP</span><strong>持续进化</strong><em>任务结果回流，能力随业务进化</em></div>
     </div>
 
     <a href="./technology.html" class="fx-line-link">深入了解技术架构 →</a>
@@ -5804,6 +5894,8 @@
     // t=600ms: CTA 按钮
     setTimeout(function () {
       if (ctaWrap) ctaWrap.classList.add('hero-visible');
+      var heroVis = document.getElementById('heroVis');
+      if (heroVis) heroVis.classList.add('hero-visible');
     }, 600);
 
     document.addEventListener('visibilitychange', function () {
