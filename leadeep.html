@@ -605,6 +605,7 @@
 	      max-height: 340px;
 	      object-fit: contain;
 	      background: #f7fbfb;
+	      filter: saturate(0.6);
 	    }
 
 	    .ld-expert-card strong {
@@ -670,16 +671,32 @@
 
 	    .ld-security-layout {
 	      display: grid;
-	      grid-template-columns: minmax(0, 1fr) minmax(300px, 0.52fr);
+	      grid-template-columns: minmax(0, 1fr) minmax(320px, 0.6fr);
 	      gap: 70px;
 	      align-items: center;
 	    }
 
 	    .ld-security-visual {
-	      max-width: 430px;
+	      max-width: 460px;
 	      margin-left: auto;
 	      padding: 24px;
 	      background: var(--pure-white);
+	    }
+
+	    .ld-security-visual__meta {
+	      display: flex;
+	      justify-content: space-between;
+	      margin-top: 20px;
+	      padding-top: 14px;
+	      border-top: 1px solid #dfe4e8;
+	      font-family: var(--font-mono);
+	      font-size: 10px;
+	      letter-spacing: 1.5px;
+	      color: rgba(0, 16, 19, 0.52);
+	    }
+
+	    .ld-security-visual__meta span:last-child {
+	      color: var(--threshold-cyan);
 	    }
 
 	    .ld-security-list {
@@ -728,6 +745,20 @@
 	      min-height: 580px;
 	      background: var(--quantum-black);
 	      overflow: hidden;
+	    }
+
+	    .ld-final-visual__tag {
+	      position: absolute;
+	      top: 20px;
+	      left: 20px;
+	      z-index: 1;
+	      padding: 6px 10px;
+	      font-family: var(--font-mono);
+	      font-size: 10px;
+	      letter-spacing: 2px;
+	      color: var(--threshold-cyan);
+	      background: rgba(0, 16, 19, 0.6);
+	      border: 1px solid rgba(255, 255, 255, 0.22);
 	    }
 
 	    .ld-final-visual img {
@@ -874,13 +905,14 @@
 	      .ld-hero__visual {
 	        width: 100%;
 	        min-height: 0;
-	        padding: 20px 0;
+	        padding: 28px 16px;
+	        background: var(--energy-gray);
 	      }
 
 	      .ld-hero__visual img {
-	        width: 76%;
-	        max-width: 250px;
-	        max-height: 320px;
+	        width: 84%;
+	        max-width: 300px;
+	        max-height: 360px;
 	        filter: saturate(0.82);
 	      }
 
@@ -897,6 +929,10 @@
 
 	      .ld-proof-strip div:last-child {
 	        border-bottom: 0;
+	      }
+
+	      .ld-proof-strip strong {
+	        font-size: 26px;
 	      }
 
 	      .ld-expert-card {
@@ -1175,6 +1211,10 @@
               <text x="106" y="201">芯片级加密</text>
             </g>
           </svg>
+          <div class="ld-security-visual__meta">
+            <span>SECURITY MODEL</span>
+            <span>L1 — L3</span>
+          </div>
         </div>
       </div>
     </section>
@@ -1203,6 +1243,7 @@
           </div>
         </div>
         <div class="ld-final-visual animate-in delay-2">
+          <span class="ld-final-visual__tag">LEADEEP / IN FIELD</span>
           <img src="./assets/leadeep-ai/leadeep-executive-call.jpeg" alt="商务领导者使用 Leadeep AI 进行高端沟通的场景图" />
         </div>
       </div>
