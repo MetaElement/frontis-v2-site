@@ -374,7 +374,7 @@
       margin: 0 auto;
       padding: 96px 48px 80px;
       display: flex;
-      align-items: center;
+      align-items: stretch;
       gap: clamp(48px, 7vw, 96px);
     }
 
@@ -392,6 +392,17 @@
       flex: 0 1 48%;
       min-width: 0;
       position: relative;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .scene-visual > img {
+      margin-top: auto;
+      margin-bottom: auto;
+    }
+
+    .scene-visual--stack .scene-visual-stack {
+      flex: 1;
     }
 
     /* 场景标签（单色行）*/
@@ -898,6 +909,14 @@
     }
     #supply .scene-visual-caption { color: rgba(255, 255, 255, 0.56); }
 
+    #supply .scene-visual-stack {
+      background: #1A1E22;
+    }
+
+    #supply .scene-visual--stack img {
+      filter: saturate(0.6) contrast(1.05);
+    }
+
     #supply .scene-visual-stack::after {
       content: '';
       position: absolute;
@@ -1026,6 +1045,12 @@
 
       .agent-item {
         transform: none !important;
+        padding: 13px 0;
+        gap: 12px;
+      }
+
+      .agent-item__desc {
+        line-height: 1.6;
       }
 
     }
@@ -1115,7 +1140,6 @@
 
       body.page-scene .hero__title {
         font-size: clamp(30px, 8.5vw, 38px) !important;
-        word-break: normal;
       }
 
       body.page-scene .hero__lower {
@@ -1154,9 +1178,9 @@
         FRONTIS · SCENE OVERVIEW
       </p>
       <h1 class="hero__title animate-in delay-1" id="hero-heading">
-        <span class="hero__title-line hero__title-line--lead">能想象即将到来的景象吗？</span>
-        <span class="hero__title-line hero__title-line--core">你的<span class="hero__title-accent">数字分身</span>正在带领AI专家团</span>
-        <span class="hero__title-line">7x24小时持续工作中</span>
+        <span class="hero__title-line hero__title-line--lead">能想象<wbr>即将到来的<wbr>景象吗？</span>
+        <span class="hero__title-line hero__title-line--core">你的<span class="hero__title-accent">数字分身</span><wbr>正在带领<wbr>AI专家团</span>
+        <span class="hero__title-line">7x24小时<wbr>持续工作中</span>
       </h1>
     </div>
   </div>
