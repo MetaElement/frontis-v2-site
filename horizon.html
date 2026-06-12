@@ -743,7 +743,7 @@ nav {
 .ma-event-dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); flex-shrink: 0; margin-top: 3px; }
 .ma-event-connector { width: 1px; flex: 1; background: rgba(0,193,212,0.2); min-height: 20px; }
 .ma-event-text { font-size: 12px; color: rgba(255,255,255,0.6); line-height: 1.5; }
-.ma-event-time { font-family: var(--font-en); font-size: 10px; color: rgba(255,255,255,0.48); margin-top: 2px; }
+.ma-event-time { font-family: var(--font-en); font-size: 10px; color: rgba(255,255,255,0.55); margin-top: 2px; }
 
 /* =============================================
    SECTION 6 — FLYWHEEL
@@ -954,7 +954,10 @@ nav {
   padding: 48px 36px;
   position: relative;
   transition: background 0.25s;
+  display: flex;
+  flex-direction: column;
 }
+.version-card .version-cta { margin-top: auto; align-self: flex-start; }
 .version-card:hover { background: #fafafa; }
 .version-card.featured { background: var(--black); border-color: var(--black); }
 .version-card.featured:hover { background: #0d0d0d; }
@@ -1134,7 +1137,7 @@ nav {
   .mac-neck, .mac-base { display: none; }
   .memory-tag-row { max-width: calc(100% - 124px); }
   .device-sync-note { bottom: 18px; left: 0; max-width: calc(100% - 164px); }
-  .flywheel-wheel { width: min(100%, 430px); }
+  .flywheel-wheel { width: min(calc(100% - 16px), 430px); margin: 0 auto; }
   .wheel-step { width: 132px; gap: 7px; }
   .wheel-step-title { font-size: 12px; }
   .wheel-step-caption { font-size: 10px; }
