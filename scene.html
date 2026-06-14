@@ -12,7 +12,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <meta name="theme-color" content="#FFFFFF" />
   <title>AI 应用场景 | 衔远科技 Frontis AI</title>
-  <meta name="description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。" />
+  <meta name="description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理与运营、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。" />
   <!-- FRONTIS SEO:BEGIN -->
   <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />
   <meta name="author" content="衔远科技 Frontis AI" />
@@ -21,13 +21,13 @@
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="衔远科技 Frontis AI" />
   <meta property="og:title" content="AI 应用场景 | 衔远科技 Frontis AI" />
-  <meta property="og:description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。" />
+  <meta property="og:description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理与运营、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。" />
   <meta property="og:url" content="https://frontis.cn/scene.html" />
   <meta property="og:image" content="https://frontis.cn/assets/og-frontis.svg" />
   <meta property="og:image:alt" content="衔远科技 Frontis AI 企业 AI 专家团平台" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="AI 应用场景 | 衔远科技 Frontis AI" />
-  <meta name="twitter:description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。" />
+  <meta name="twitter:description" content="衔远科技 Frontis AI 场景总览，覆盖战略管理与运营、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。" />
   <meta name="twitter:image" content="https://frontis.cn/assets/og-frontis.svg" />
   <script type="application/ld+json">
   {
@@ -63,7 +63,7 @@
         "@id": "https://frontis.cn/scene.html#webpage",
         "url": "https://frontis.cn/scene.html",
         "name": "AI 应用场景 | 衔远科技 Frontis AI",
-        "description": "衔远科技 Frontis AI 场景总览，覆盖战略管理、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。",
+        "description": "衔远科技 Frontis AI 场景总览，覆盖战略管理与运营、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。",
         "isPartOf": {
           "@id": "https://frontis.cn/#website"
         },
@@ -946,6 +946,11 @@
       overflow: hidden;
     }
 
+    .scene-visual--stack .scene-visual-stack--strategy-loop {
+      min-height: clamp(500px, 42vw, 620px);
+      background: var(--pure-white);
+    }
+
     .scene-visual--stack img {
       display: block;
       width: 100%;
@@ -1026,6 +1031,203 @@
       width: 8px;
       height: 8px;
       background: var(--energy-orange);
+    }
+
+    .strategy-loop-visual {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(12px, 1.8vw, 22px);
+      background: var(--pure-white);
+    }
+
+    .strategy-loop-visual::before {
+      content: "";
+      display: none;
+      position: absolute;
+      left: clamp(22px, 3vw, 34px);
+      top: clamp(22px, 3vw, 34px);
+      bottom: clamp(22px, 3vw, 34px);
+      width: 2px;
+      background: var(--threshold-cyan);
+    }
+
+    .strategy-loop-image {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      background: var(--pure-white);
+    }
+
+    .strategy-loop-visual .strategy-loop-visual__header,
+    .strategy-loop-visual .strategy-loop-svg {
+      display: none;
+    }
+
+    .strategy-loop-visual__header {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 108px;
+      gap: 18px;
+      align-items: start;
+      padding-left: 18px;
+    }
+
+    .strategy-loop-visual__kicker {
+      display: block;
+      margin-bottom: 8px;
+      color: var(--threshold-cyan);
+      font-family: var(--font-mono);
+      font-size: 10px;
+      line-height: 1;
+      text-transform: uppercase;
+      letter-spacing: 0;
+    }
+
+    .strategy-loop-visual__title {
+      display: block;
+      color: var(--quantum-black);
+      font-family: var(--font-cn);
+      font-size: clamp(22px, 2.3vw, 34px);
+      line-height: 1.08;
+      font-weight: 900;
+      letter-spacing: 0;
+    }
+
+    .strategy-loop-visual__summary {
+      max-width: 380px;
+      margin: 10px 0 0;
+      color: var(--level-gray);
+      font-family: var(--font-cn);
+      font-size: 13px;
+      line-height: 1.62;
+      letter-spacing: 0;
+    }
+
+    .strategy-loop-core {
+      position: relative;
+      display: grid;
+      place-items: center;
+      min-height: 96px;
+      border: 1px solid rgba(0, 16, 19, 0.22);
+      background: var(--quantum-black);
+    }
+
+    .strategy-loop-core::before,
+    .strategy-loop-core::after {
+      content: "";
+      position: absolute;
+      background: var(--threshold-cyan);
+    }
+
+    .strategy-loop-core::before {
+      left: 12px;
+      right: 12px;
+      top: 50%;
+      height: 2px;
+    }
+
+    .strategy-loop-core::after {
+      top: 12px;
+      bottom: 12px;
+      left: 50%;
+      width: 2px;
+    }
+
+    .strategy-loop-core__label {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border: 1px solid var(--threshold-cyan);
+      color: var(--pure-white);
+      font-family: var(--font-mono);
+      font-size: 18px;
+      font-weight: 800;
+      line-height: 1;
+      background: var(--quantum-black);
+    }
+
+    .strategy-loop-svg {
+      position: relative;
+      z-index: 1;
+      display: block;
+      width: 100%;
+      height: 100%;
+      min-height: 260px;
+    }
+
+    .strategy-loop-svg text {
+      font-family: var(--font-cn);
+      letter-spacing: 0;
+    }
+
+    .strategy-loop-svg__mono {
+      font-family: var(--font-mono);
+    }
+
+    .strategy-loop-svg__box {
+      fill: var(--pure-white);
+      stroke: rgba(0, 16, 19, 0.18);
+      stroke-width: 1;
+      transition: fill 180ms var(--ease-threshold), stroke 180ms var(--ease-threshold);
+    }
+
+    .strategy-loop-svg__row text {
+      fill: var(--quantum-black);
+      transition: fill 180ms var(--ease-threshold);
+    }
+
+    .strategy-loop-svg__row .strategy-loop-svg__desc {
+      fill: var(--level-gray);
+    }
+
+    .strategy-loop-svg__row .strategy-loop-svg__index {
+      fill: var(--threshold-cyan);
+      font-family: var(--font-mono);
+      font-weight: 800;
+    }
+
+    .strategy-loop-visual[data-active-flow="review"] .strategy-loop-svg__row--review .strategy-loop-svg__box,
+    .strategy-loop-visual[data-active-flow="okr"] .strategy-loop-svg__row--okr .strategy-loop-svg__box,
+    .strategy-loop-visual[data-active-flow="data"] .strategy-loop-svg__row--data .strategy-loop-svg__box,
+    .strategy-loop-visual[data-active-flow="talent"] .strategy-loop-svg__row--talent .strategy-loop-svg__box,
+    .strategy-loop-visual[data-active-flow="learning"] .strategy-loop-svg__row--learning .strategy-loop-svg__box {
+      fill: var(--quantum-black);
+      stroke: var(--threshold-cyan);
+      stroke-width: 2;
+    }
+
+    .strategy-loop-visual[data-active-flow="review"] .strategy-loop-svg__row--review text,
+    .strategy-loop-visual[data-active-flow="okr"] .strategy-loop-svg__row--okr text,
+    .strategy-loop-visual[data-active-flow="data"] .strategy-loop-svg__row--data text,
+    .strategy-loop-visual[data-active-flow="talent"] .strategy-loop-svg__row--talent text,
+    .strategy-loop-visual[data-active-flow="learning"] .strategy-loop-svg__row--learning text {
+      fill: var(--pure-white);
+    }
+
+    .strategy-loop-visual[data-active-flow="review"] .strategy-loop-svg__row--review .strategy-loop-svg__index,
+    .strategy-loop-visual[data-active-flow="okr"] .strategy-loop-svg__row--okr .strategy-loop-svg__index,
+    .strategy-loop-visual[data-active-flow="data"] .strategy-loop-svg__row--data .strategy-loop-svg__index,
+    .strategy-loop-visual[data-active-flow="talent"] .strategy-loop-svg__row--talent .strategy-loop-svg__index,
+    .strategy-loop-visual[data-active-flow="learning"] .strategy-loop-svg__row--learning .strategy-loop-svg__index {
+      fill: var(--energy-orange);
+    }
+
+    .strategy-loop-visual[data-active-flow="review"] .strategy-loop-svg__row--review .strategy-loop-svg__desc,
+    .strategy-loop-visual[data-active-flow="okr"] .strategy-loop-svg__row--okr .strategy-loop-svg__desc,
+    .strategy-loop-visual[data-active-flow="data"] .strategy-loop-svg__row--data .strategy-loop-svg__desc,
+    .strategy-loop-visual[data-active-flow="talent"] .strategy-loop-svg__row--talent .strategy-loop-svg__desc,
+    .strategy-loop-visual[data-active-flow="learning"] .strategy-loop-svg__row--learning .strategy-loop-svg__desc {
+      fill: rgba(255, 255, 255, 0.74);
     }
 
     .scene-visual-caption {
@@ -1287,6 +1489,10 @@
         height: 430px;
       }
 
+      .scene-visual--stack .scene-visual-stack--strategy-loop {
+        height: 560px;
+      }
+
       .scene-visual-single .scene-visual-main {
         width: 92%;
         height: 92%;
@@ -1312,6 +1518,18 @@
 
       .scene-visual-stack__label {
         bottom: 18px;
+      }
+
+      .strategy-loop-visual {
+        padding: 24px;
+      }
+
+      .strategy-loop-visual__header {
+        grid-template-columns: minmax(0, 1fr) 96px;
+      }
+
+      .strategy-loop-svg {
+        min-height: 300px;
       }
 
       .visual-placeholder { height: 240px; }
@@ -1360,6 +1578,30 @@
 
       .scene-twin-core {
         min-height: 104px;
+      }
+
+      .scene-visual--stack .scene-visual-stack--strategy-loop {
+        height: 620px;
+      }
+
+      .strategy-loop-visual {
+        gap: 14px;
+        padding: 22px 16px;
+      }
+
+      .strategy-loop-visual::before {
+        left: 16px;
+        top: 22px;
+        bottom: 22px;
+      }
+
+      .strategy-loop-visual__header {
+        grid-template-columns: 1fr;
+        padding-left: 14px;
+      }
+
+      .strategy-loop-core {
+        display: none;
       }
 
       .agent-item {
@@ -1511,7 +1753,7 @@
   <!-- 下黑区：副标题 + 滚动提示 -->
   <div class="hero__lower">
     <p class="hero__subtitle animate-in delay-2">
-      <span>覆盖战略管理 · 生产研发 · 供应链运营 · 营销增长四大业务现场</span>
+      <span>覆盖战略管理与运营 · 生产研发 · 供应链运营 · 营销增长四大业务现场</span>
       <span>每个场景背后都有一支可交付、可复用、可进化的 AI 专家团</span>
     </p>
     <div class="hero__scroll animate-in delay-3" aria-hidden="true">
@@ -1524,7 +1766,7 @@
 
 
 <!-- ============================================================
-     第二屏：战略管理专家团（纯白，可点击）
+     第二屏：战略管理与运营专家团（纯白，可点击）
 ============================================================ -->
 <section
   id="strategy"
@@ -1538,57 +1780,54 @@
       <!-- 场景标签 -->
       <div class="scene-tag animate-in">
         <span class="node-cyan" aria-hidden="true"></span>
-        战略管理专家团
+        战略管理与运营专家团
         <span class="scene-tag__sep">·</span>
-        STRATEGIC MANAGEMENT
+        STRATEGY OPS
       </div>
 
       <!-- 大标题 -->
-      <h2 class="scene-title animate-in delay-1" id="strategy-heading">战略管理专家团</h2>
+      <h2 class="scene-title animate-in delay-1" id="strategy-heading">战略管理与运营专家团</h2>
 
       <!-- 副品牌 -->
-      <p class="scene-brand animate-in delay-2">Leadeep AI · 领衔者</p>
+      <p class="scene-brand animate-in delay-2">Horizon 大观</p>
 
       <!-- 一句话定位 -->
       <p class="scene-tagline animate-in delay-2">
-        面向领导者的 AI 决策专家团，沉淀认知，辅助决策。
+        把企业事实、OKR、经营数据与复盘行动接入同一条管理闭环，围绕战略复盘、经营归因、行动闭环和组织进化推动管理升级。
       </p>
 
-      <div class="scene-value-points animate-in delay-3" aria-label="领导者数字分身核心能力">
-        <div class="scene-value-points__header">
-          <div class="scene-value-points__intro">
-            <span class="scene-value-points__kicker">LEADER DIGITAL TWIN</span>
-            <strong class="scene-value-points__title">领导者数字分身</strong>
-            <p class="scene-value-points__summary">
-              把领导者的经验、判断和关系网络沉淀为可持续工作的 AI 决策分身。
-            </p>
-          </div>
-          <div class="scene-twin-core" aria-hidden="true">
-            <span class="scene-twin-core__label">Decision ME</span>
-            <b class="scene-twin-core__me">ME</b>
-            <span class="scene-twin-core__tag scene-twin-core__tag--memory">记忆</span>
-            <span class="scene-twin-core__tag scene-twin-core__tag--decision">判断</span>
-            <span class="scene-twin-core__tag scene-twin-core__tag--network">网络</span>
-          </div>
-        </div>
-      </div>
-
       <!-- Agent 列表（左侧2px跃迁青竖线引导） -->
-      <ul class="agent-list" aria-label="战略管理 Agent 能力列表">
+      <ul class="agent-list" aria-label="战略管理与运营 Agent 能力列表">
 
         <li class="agent-item animate-in delay-2">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name" data-agent-image="录音分析专家团" data-agent-visual="recording">录音分析专家团</p>
-            <p class="agent-item__desc">AI 战略专家、AI 财务专家、AI 法务专家、AI 心理分析师、AI 项目管理专家等，多维度深度分析录音内容。</p>
+            <p class="agent-item__name" data-agent-flow="review" data-agent-label="Strategy review">战略复盘</p>
+            <p class="agent-item__desc">把公司级核心判断、OKR 进展、证据缺口、Top Gap 和跨部门机制聚合到一屏，形成可执行的战略判断。</p>
           </div>
         </li>
 
         <li class="agent-item animate-in delay-3">
           <div class="agent-item__line" aria-hidden="true"></div>
           <div class="agent-item__body">
-            <p class="agent-item__name" data-agent-image="问策AI专家团" data-agent-visual="advisory">问策 AI 专家团</p>
-            <p class="agent-item__desc">覆盖 AI 战略、销售、市场、商务、解决方案与投融资专家，支持企业经营决策全场景。</p>
+            <p class="agent-item__name" data-agent-flow="data" data-agent-label="Business attribution">经营归因</p>
+            <p class="agent-item__desc">接入指标、CRM、财务、人力和项目系统，统一口径并标记背离、风险与因果线索，让会议从“对数”变成“做判断”。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-4">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-flow="action" data-agent-label="Action loop">行动闭环</p>
+            <p class="agent-item__desc">把复盘建议转成 owner、deadline、验证标准和升级路由，形成跨部门行动队列并持续追踪完成质量。</p>
+          </div>
+        </li>
+
+        <li class="agent-item animate-in delay-5">
+          <div class="agent-item__line" aria-hidden="true"></div>
+          <div class="agent-item__body">
+            <p class="agent-item__name" data-agent-flow="evolution" data-agent-label="Organization evolution">组织进化</p>
+            <p class="agent-item__desc">把执行结果沉淀为 SOP、规则、本体更新、能力地图和 Skill 评测，让组织能力随业务复盘持续升级。</p>
           </div>
         </li>
 
@@ -1596,7 +1835,7 @@
 
       <!-- CTA 按钮（阻止冒泡，避免双重跳转） -->
       <a
-        href="./scene-strategy.html"
+        href="./leadeep.html"
         class="btn-primary animate-in delay-5"
       >
         了解详情 →
@@ -1605,24 +1844,17 @@
     </div>
 
     <figure class="scene-visual scene-visual--stack animate-in delay-3">
-      <div class="scene-visual-stack" data-agent-visual="recording" aria-label="战略管理专家团能力展示图">
-        <div class="scene-visual-single">
+      <div class="scene-visual-stack scene-visual-stack--strategy-loop" aria-label="战略管理与运营专家团能力展示图">
+        <div class="strategy-loop-visual" data-active-flow="review" aria-label="战略管理与运营核心功能图示">
           <img
-            class="scene-visual-main"
-            src="./assets/leadeep-ai/leadeep-hero-device.png"
-            data-default-image="录音分析专家团"
-            alt="Leadeep AI 录音分析专家团产品组合图"
+            class="strategy-loop-image"
+            src="./assets/leadeep-ai/horizon-strategy-operating-loop.png"
+            alt="Horizon 大观战略管理与运营核心功能信息图，展示 AI 管理闭环下的战略复盘、经营归因、行动闭环和组织进化"
             loading="lazy"
           />
         </div>
-        <div class="scene-expert-gallery" aria-hidden="true">
-          <img src="./assets/leadeep-ai/leadeep-board-expert.png" alt="" loading="lazy" />
-          <img src="./assets/leadeep-ai/leadeep-intel-expert.png" alt="" loading="lazy" />
-          <img src="./assets/leadeep-ai/leadeep-business-expert.png" alt="" loading="lazy" />
-        </div>
-        <span class="scene-visual-stack__label">Recording analysis</span>
       </div>
-      <figcaption class="scene-visual-caption">LEADEEP AI · DECISION INTELLIGENCE</figcaption>
+      <figcaption class="scene-visual-caption">HORIZON · STRATEGY OPERATING INTELLIGENCE</figcaption>
     </figure>
 
   </div>
@@ -1948,8 +2180,6 @@
 
   /* ── 场景专家图：跟随能力项切换，保持页面轻量 ── */
   var agentImages = {
-    '录音分析专家团': './assets/leadeep-ai/leadeep-hero-device.png',
-    '问策AI专家团': './assets/leadeep-ai/leadeep-board-expert.png',
     '进度管理专家': './assets/scene-agents/schedule-management.png',
     '现场单据采集专家': './assets/scene-agents/field-documents.png',
     '方案编制审核专家': './assets/scene-agents/plan-review.jpg',
@@ -1965,11 +2195,6 @@
     'AI金牌客服专家': './assets/scene-agents/customer-service.png'
   };
 
-  var strategyVisualLabels = {
-    recording: 'Recording analysis',
-    advisory: 'Decision AI experts'
-  };
-
   function activateAgent(section, item, img, imageName) {
     section.querySelectorAll('.agent-item.is-active').forEach(function (activeItem) {
       activeItem.classList.remove('is-active');
@@ -1977,17 +2202,19 @@
     item.classList.add('is-active');
 
     var nameEl = item.querySelector('.agent-item__name');
-    var visualStack = section.querySelector('.scene-visual-stack[data-agent-visual]');
-    if (visualStack && nameEl && nameEl.dataset.agentVisual) {
-      var visualMode = nameEl.dataset.agentVisual;
-      visualStack.dataset.agentVisual = visualMode;
-      var label = visualStack.querySelector('.scene-visual-stack__label');
-      if (label && strategyVisualLabels[visualMode]) {
-        label.textContent = strategyVisualLabels[visualMode];
-      }
-      return;
+    var visualStack = section.querySelector('.scene-visual-stack');
+    var loopVisual = section.querySelector('.strategy-loop-visual');
+
+    if (loopVisual && nameEl && nameEl.dataset.agentFlow) {
+      loopVisual.dataset.activeFlow = nameEl.dataset.agentFlow;
     }
 
+    if (visualStack && nameEl && nameEl.dataset.agentLabel) {
+      var stackLabel = visualStack.querySelector('.scene-visual-stack__label');
+      if (stackLabel) stackLabel.textContent = nameEl.dataset.agentLabel;
+    }
+
+    if (!img) return;
     if (!imageName || !agentImages[imageName]) return;
     if (img.getAttribute('src') === agentImages[imageName]) return;
     img.style.opacity = '0';
@@ -1999,14 +2226,16 @@
 
   document.querySelectorAll('.scene-section').forEach(function (section) {
     var img = section.querySelector('.scene-visual img');
-    if (!img) return;
 
-    var defaultImage = img.dataset.defaultImage;
-    if (defaultImage && agentImages[defaultImage]) {
-      img.src = agentImages[defaultImage];
+    if (img) {
+      var defaultImage = img.dataset.defaultImage;
+      if (defaultImage && agentImages[defaultImage]) {
+        img.src = agentImages[defaultImage];
+      }
     }
 
     var agentItems = Array.prototype.slice.call(section.querySelectorAll('.agent-item'));
+    if (!agentItems.length) return;
     agentItems.forEach(function (item, index) {
       var nameEl = item.querySelector('.agent-item__name');
       if (!nameEl) return;
@@ -2018,7 +2247,7 @@
       item.addEventListener('focus', function () {
         activateAgent(section, item, img, imageName);
       });
-      if (index === 0) item.classList.add('is-active');
+      if (index === 0) activateAgent(section, item, img, imageName);
     });
   });
 

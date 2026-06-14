@@ -10,6 +10,10 @@
       key: "products",
       label: "产品",
       href: "./horizon.html",
+      children: [
+        { key: "horizon", label: "Frontis Horizon 衔远大观", href: "./horizon.html" },
+        { key: "leadeep-ai", label: "Leadeep AI 衔远领衔者", href: "./leadeep.html" },
+      ],
     },
     {
       key: "scenes",
@@ -26,7 +30,6 @@
     horizon: "products",
     leadeep: "products",
     scene: "scenes",
-    "scene-strategy": "scenes",
     "scene-supply": "scenes",
     "scene-sales": "scenes",
     "scene-ops": "scenes",
@@ -50,10 +53,21 @@
 
   function renderNavItem(item) {
     var active = activeGroup === item.key ? " is-active" : "";
+    var children = item.children || [];
+    var hasChildren = children.length > 0;
+    var dropdown = hasChildren ? '<div class="site-header__dropdown" aria-label="' + item.label + '子导航">' +
+      children.map(function (child, index) {
+        return '<a class="site-header__dropdown-link" href="' + child.href + '"' + (isCurrent(child.href) ? ' aria-current="page"' : "") + ">" +
+          '<span class="site-header__dropdown-index">' + String(index + 1).padStart(2, "0") + "</span>" +
+          '<span class="site-header__dropdown-label">' + child.label + "</span>" +
+          "</a>";
+      }).join("") +
+      "</div>" : "";
 
-    return '<div class="site-header__item' + active + '">' +
-      '<a class="site-header__link" href="' + item.href + '"' + (isCurrent(item.href) ? ' aria-current="page"' : "") + ">" +
-      item.label + "</a>" +
+    return '<div class="site-header__item' + (hasChildren ? " site-header__item--has-menu" : "") + active + '">' +
+      '<a class="site-header__link" href="' + item.href + '"' + (hasChildren ? ' aria-haspopup="true" aria-expanded="false"' : "") + (isCurrent(item.href) ? ' aria-current="page"' : "") + ">" +
+      item.label + (hasChildren ? '<span class="site-header__link-mark" aria-hidden="true"></span>' : "") + "</a>" +
+      dropdown +
       "</div>";
   }
 
@@ -126,14 +140,14 @@
       '<div class="site-footer__email">xianyuan@frontis.ai</div>' +
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
-      footerLink("./horizon.html", "衔远大观") +
+      footerLink("./horizon.html", "Frontis Horizon 衔远大观") +
+      footerLink("./leadeep.html", "Leadeep AI 衔远领衔者") +
       "</div>" +
       '<div class="site-footer__subgroup"><div class="site-footer__title">技术</div><div class="site-footer__links">' +
       footerLink("./technology.html", "技术架构") +
       "</div></div></div>" +
       '<div><div class="site-footer__title">场景</div><div class="site-footer__links">' +
       footerLink("./scene.html", "场景总览") +
-      footerLink("./scene-strategy.html", "战略管理") +
       footerStatic("生产研发") +
       footerStatic("供应链运营") +
       footerStatic("营销增长") +
@@ -416,9 +430,38 @@
     });
   });
 
-  document.querySelectorAll(".site-header__item").forEach(function (item) {
+  function setDropdownOpen(item, open) {
+    item.classList.toggle("is-open", open);
+    var trigger = item.querySelector(".site-header__link[aria-haspopup='true']");
+    if (trigger) trigger.setAttribute("aria-expanded", open ? "true" : "false");
+  }
+
+  document.querySelectorAll(".site-header__item--has-menu").forEach(function (item) {
+    var trigger = item.querySelector(".site-header__link");
+
+    item.addEventListener("mouseenter", function () {
+      setDropdownOpen(item, true);
+    });
+
+    item.addEventListener("mouseleave", function () {
+      setDropdownOpen(item, false);
+    });
+
+    item.addEventListener("focusin", function () {
+      setDropdownOpen(item, true);
+    });
+
+    item.addEventListener("focusout", function (event) {
+      if (!event.relatedTarget || !item.contains(event.relatedTarget)) {
+        setDropdownOpen(item, false);
+      }
+    });
+
     item.addEventListener("keydown", function (event) {
-      if (event.key === "Escape") item.classList.remove("is-open");
+      if (event.key === "Escape") {
+        setDropdownOpen(item, false);
+        if (trigger) trigger.focus();
+      }
     });
   });
 

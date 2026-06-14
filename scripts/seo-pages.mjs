@@ -30,15 +30,15 @@ export const pages = [
   {
     file: "leadeep.html",
     path: "/leadeep.html",
-    title: "Leadeep AI 领衔者 | 企业家 AI 数字分身与专家团",
+    title: "Leadeep AI 衔远领衔者 | 领导者数字分身与 AI 专家团",
     description:
-      "Leadeep AI 领衔者为企业家和管理者打造 AI 数字分身、商业情报专家、决策顾问团与商务销售专家，沉淀个人商业直觉并持续创造认知复利。",
+      "Leadeep AI 衔远领衔者为企业家和管理者打造领导者数字分身、私域决策中枢、AI 专家团和 A2A 商机网络，让商业直觉持续沉淀并转化为行动。",
     priority: "0.85",
     changefreq: "weekly",
     schemaType: "SoftwareApplication",
     breadcrumbs: [
       { name: "首页", path: "/" },
-      { name: "Leadeep AI 领衔者", path: "/leadeep.html" },
+      { name: "Leadeep AI 衔远领衔者", path: "/leadeep.html" },
     ],
   },
   {
@@ -46,27 +46,12 @@ export const pages = [
     path: "/scene.html",
     title: "AI 应用场景 | 衔远科技 Frontis AI",
     description:
-      "衔远科技 Frontis AI 场景总览，覆盖战略管理、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。",
+      "衔远科技 Frontis AI 场景总览，覆盖战略管理与运营、生产研发、供应链运营、营销增长、运营管理等高价值业务现场，帮助企业部署可持续进化的 AI 专家团。",
     priority: "0.8",
     changefreq: "weekly",
     breadcrumbs: [
       { name: "首页", path: "/" },
       { name: "AI 应用场景", path: "/scene.html" },
-    ],
-  },
-  {
-    file: "scene-strategy.html",
-    path: "/scene-strategy.html",
-    title: "战略管理 AI 专家团 | Leadeep AI 领衔者",
-    description:
-      "战略管理 AI 专家团帮助领导者沉淀会议、访谈、行业情报和经营判断，形成可复用的决策中枢、专家协同体系与增长行动建议。",
-    priority: "0.75",
-    changefreq: "monthly",
-    schemaType: "Service",
-    breadcrumbs: [
-      { name: "首页", path: "/" },
-      { name: "AI 应用场景", path: "/scene.html" },
-      { name: "战略管理 AI 专家团", path: "/scene-strategy.html" },
     ],
   },
   {

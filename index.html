@@ -3788,6 +3788,7 @@
        Homepage minimal redesign: post-hero sections
     ============================================= */
     #products,
+    #leadeep-product,
     #scenes-preview,
     #trust,
     #technology,
@@ -3805,6 +3806,7 @@
       color: var(--pure-white);
     }
 
+    #leadeep-product,
     #scenes-preview,
     #trust,
     #contact {
@@ -3813,6 +3815,7 @@
     }
 
     #products > :not(.fx-redesign),
+    #leadeep-product > :not(.fx-redesign),
     #scenes-preview > :not(.fx-redesign),
     #trust > :not(.fx-redesign),
     #technology > :not(.fx-redesign),
@@ -3827,6 +3830,7 @@
     }
 
     #products .fx-section-inner,
+    #leadeep-product .fx-section-inner,
     #scenes-preview .fx-section-inner,
     #technology .fx-section-inner {
       box-sizing: border-box;
@@ -4089,6 +4093,467 @@
     .fx-tech-flow i {
       height: 2px;
       background: var(--threshold-cyan);
+    }
+
+    #leadeep-product {
+      border-top: 4px solid var(--threshold-cyan);
+    }
+
+    .fx-leadeep-product {
+      position: relative;
+      isolation: isolate;
+    }
+
+    .fx-leadeep-product::before {
+      content: "";
+      position: absolute;
+      top: 118px;
+      right: clamp(48px, 5.6vw, 96px);
+      width: min(34vw, 430px);
+      height: 1px;
+      background: rgba(0, 16, 19, 0.18);
+    }
+
+    .fx-leadeep-product::after {
+      content: "";
+      position: absolute;
+      top: 113px;
+      right: clamp(48px, 5.6vw, 96px);
+      width: 10px;
+      height: 10px;
+      background: var(--energy-orange);
+    }
+
+    .leadeep-product-title {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      line-height: 1;
+    }
+
+    .leadeep-product-title__brand {
+      color: var(--threshold-cyan);
+      font-family: var(--font-en);
+      font-size: 21px;
+      font-weight: 700;
+      letter-spacing: 0;
+      text-transform: uppercase;
+    }
+
+    .leadeep-product-title__name {
+      color: var(--quantum-black);
+      font-size: 42px;
+      font-weight: 760;
+      line-height: 1.08;
+      letter-spacing: 0;
+    }
+
+    .leadeep-product-board {
+      position: relative;
+      isolation: isolate;
+      display: grid;
+      grid-template-columns: minmax(420px, 0.88fr) minmax(460px, 0.92fr);
+      gap: 0;
+      margin-top: 76px;
+      border-top: 1px solid rgba(0, 16, 19, 0.16);
+      border-left: 1px solid rgba(0, 16, 19, 0.16);
+      overflow: hidden;
+    }
+
+    .leadeep-product-board::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      z-index: 1;
+      background: linear-gradient(100deg, rgba(0, 0, 0, 0.97) 0%, rgba(0, 0, 0, 0.82) 42%, rgba(0, 0, 0, 0.48) 72%, rgba(0, 0, 0, 0.18) 100%);
+      pointer-events: none;
+    }
+
+    .leadeep-product-copy,
+    .leadeep-product-visual {
+      position: relative;
+      z-index: 2;
+      min-height: 650px;
+      border-right: 1px solid rgba(0, 16, 19, 0.16);
+      border-bottom: 1px solid rgba(0, 16, 19, 0.16);
+    }
+
+    .leadeep-product-copy {
+      display: grid;
+      align-content: stretch;
+      background: var(--pure-white);
+    }
+
+    .leadeep-product-claim {
+      display: grid;
+      gap: 18px;
+      padding: clamp(30px, 3.6vw, 48px);
+      border-bottom: 1px solid rgba(0, 16, 19, 0.16);
+    }
+
+    .leadeep-product-claim__kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      color: var(--threshold-cyan);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .leadeep-product-claim__kicker::before {
+      content: "";
+      width: 24px;
+      height: 2px;
+      background: var(--threshold-cyan);
+    }
+
+    .leadeep-product-claim h3 {
+      max-width: 520px;
+      margin: 0;
+      color: var(--quantum-black);
+      font-size: clamp(34px, 3.8vw, 54px);
+      font-weight: 850;
+      line-height: 1.02;
+      letter-spacing: 0;
+    }
+
+    .leadeep-product-claim p {
+      max-width: 580px;
+      margin: 0;
+      color: rgba(0, 16, 19, 0.64);
+      font-size: 17px;
+      line-height: 1.78;
+    }
+
+    .leadeep-product-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-bottom: 1px solid rgba(0, 16, 19, 0.16);
+    }
+
+    .leadeep-product-metric {
+      min-height: 126px;
+      display: grid;
+      align-content: center;
+      gap: 8px;
+      padding: 24px;
+      border-right: 1px solid rgba(0, 16, 19, 0.16);
+    }
+
+    .leadeep-product-metric:last-child {
+      border-right: 0;
+    }
+
+    .leadeep-product-metric strong {
+      color: var(--quantum-black);
+      font-family: var(--font-en);
+      font-size: clamp(30px, 4vw, 48px);
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .leadeep-product-metric span {
+      color: rgba(0, 16, 19, 0.56);
+      font-size: 13px;
+      font-weight: 750;
+      line-height: 1.4;
+    }
+
+    .leadeep-product-metric--peak strong {
+      color: var(--energy-orange);
+    }
+
+    .leadeep-product-route {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 0;
+      padding: 0;
+      border-bottom: 1px solid rgba(0, 16, 19, 0.16);
+    }
+
+    .leadeep-product-step {
+      position: relative;
+      display: grid;
+      gap: 14px;
+      min-height: 144px;
+      padding: 20px 22px;
+      border-bottom: 1px solid rgba(0, 16, 19, 0.1);
+    }
+
+    .leadeep-product-step:nth-child(odd) {
+      border-right: 1px solid rgba(0, 16, 19, 0.1);
+    }
+
+    .leadeep-product-step:nth-child(n+3) {
+      border-bottom: 0;
+    }
+
+    .leadeep-product-step:last-child {
+      border-bottom: 0;
+    }
+
+    .leadeep-product-step em {
+      color: var(--threshold-cyan);
+      font-family: var(--font-mono);
+      font-size: 12px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 1.2;
+    }
+
+    .leadeep-product-step strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--quantum-black);
+      font-size: 20px;
+      font-weight: 850;
+      line-height: 1.2;
+    }
+
+    .leadeep-product-step span {
+      display: block;
+      color: rgba(0, 16, 19, 0.58);
+      font-size: 13px;
+      line-height: 1.62;
+    }
+
+    .leadeep-product-cta {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      padding: 28px clamp(30px, 3.6vw, 48px) clamp(30px, 3.6vw, 48px);
+    }
+
+    .leadeep-product-visual {
+      position: relative;
+      display: grid;
+      grid-template-rows: minmax(420px, 1fr) auto;
+      overflow: hidden;
+      background: #F7F9FA;
+    }
+
+    .leadeep-visual-stage {
+      position: relative;
+      display: grid;
+      align-items: center;
+      justify-items: center;
+      isolation: isolate;
+      min-height: 480px;
+      padding: clamp(34px, 4.2vw, 58px);
+      background: var(--pure-white);
+      overflow: hidden;
+    }
+
+    .leadeep-visual-stage::before {
+      content: none;
+      display: none;
+    }
+
+    .leadeep-visual-stage::after {
+      content: none;
+      display: none;
+    }
+
+    .leadeep-visual-device {
+      position: relative;
+      z-index: 3;
+      width: min(72%, 430px);
+      height: auto;
+      object-fit: contain;
+    }
+
+    .leadeep-visual-product-shot {
+      position: absolute;
+      inset: 0;
+      z-index: 0;
+      width: auto;
+      min-height: 0;
+      overflow: hidden;
+      border: 0;
+      background: var(--quantum-black);
+      pointer-events: none;
+    }
+
+    .leadeep-visual-product-shot .leadeep-visual-device {
+      position: absolute;
+      top: 50%;
+      right: -20%;
+      width: clamp(1100px, 138%, 1800px);
+      height: auto;
+      max-width: none;
+      min-height: 100%;
+      object-fit: contain;
+      object-position: center right;
+      opacity: 0.86;
+      filter: brightness(0.92) contrast(1.08);
+      transform: translateY(-50%) rotate(-6deg);
+      transform-origin: center;
+    }
+
+    .leadeep-visual-label {
+      position: absolute;
+      left: clamp(24px, 3vw, 44px);
+      top: clamp(24px, 3vw, 44px);
+      z-index: 5;
+      color: rgba(255, 255, 255, 0.72);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.8;
+      text-transform: uppercase;
+    }
+
+    .leadeep-visual-label strong {
+      display: block;
+      color: var(--pure-white);
+      font-family: var(--font-en);
+      font-size: 28px;
+      font-weight: 850;
+      line-height: 1;
+    }
+
+    .leadeep-visual-signal {
+      position: absolute;
+      z-index: 5;
+      border: 1px solid rgba(0, 16, 19, 0.14);
+      background: rgba(255, 255, 255, 0.88);
+    }
+
+    .leadeep-visual-signal--memory {
+      left: clamp(24px, 3vw, 44px);
+      top: auto;
+      bottom: clamp(28px, 3vw, 44px);
+      width: 168px;
+      min-height: 72px;
+    }
+
+    .leadeep-visual-signal--experts {
+      right: clamp(24px, 3vw, 44px);
+      top: clamp(28px, 3vw, 44px);
+      bottom: auto;
+      width: 196px;
+      min-height: 86px;
+    }
+
+    .leadeep-visual-signal::before {
+      content: "";
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      width: 8px;
+      height: 8px;
+      background: var(--threshold-cyan);
+    }
+
+    .leadeep-visual-signal--experts::before {
+      background: var(--energy-orange);
+    }
+
+    .leadeep-visual-signal span {
+      display: block;
+      padding: 18px 18px 18px 36px;
+      color: var(--quantum-black);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-weight: 800;
+      line-height: 1.55;
+      text-transform: uppercase;
+    }
+
+    .leadeep-visual-stack {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      border-top: 1px solid rgba(0, 16, 19, 0.16);
+      background: var(--quantum-black);
+      color: var(--pure-white);
+    }
+
+    .leadeep-visual-module {
+      min-height: 150px;
+      display: grid;
+      align-content: center;
+      gap: 10px;
+      padding: 24px;
+      border-right: 1px solid rgba(255, 255, 255, 0.16);
+    }
+
+    .leadeep-visual-module:last-child {
+      border-right: 0;
+    }
+
+    .leadeep-visual-module em {
+      color: var(--threshold-cyan);
+      font-family: var(--font-mono);
+      font-size: 11px;
+      font-style: normal;
+      font-weight: 800;
+      line-height: 1;
+    }
+
+    .leadeep-visual-module strong {
+      color: var(--pure-white);
+      font-size: 19px;
+      font-weight: 850;
+      line-height: 1.24;
+    }
+
+    .leadeep-visual-module span {
+      color: rgba(255, 255, 255, 0.58);
+      font-size: 13px;
+      line-height: 1.58;
+    }
+
+    #leadeep-product .leadeep-product-board {
+      border-top-color: rgba(255, 255, 255, 0.16);
+      border-left-color: rgba(255, 255, 255, 0.16);
+      background: var(--quantum-black);
+    }
+
+    #leadeep-product .leadeep-product-copy,
+    #leadeep-product .leadeep-product-visual {
+      border-right-color: rgba(255, 255, 255, 0.16);
+      border-bottom-color: rgba(255, 255, 255, 0.16);
+    }
+
+    #leadeep-product .leadeep-product-copy,
+    #leadeep-product .leadeep-product-visual,
+    #leadeep-product .leadeep-visual-stage {
+      background: transparent;
+    }
+
+    #leadeep-product .leadeep-product-claim,
+    #leadeep-product .leadeep-product-metrics,
+    #leadeep-product .leadeep-product-route {
+      border-bottom-color: rgba(255, 255, 255, 0.16);
+    }
+
+    #leadeep-product .leadeep-product-metric,
+    #leadeep-product .leadeep-product-step,
+    #leadeep-product .leadeep-product-step:nth-child(odd) {
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    #leadeep-product .leadeep-product-claim h3,
+    #leadeep-product .leadeep-product-metric strong,
+    #leadeep-product .leadeep-product-step strong {
+      color: var(--pure-white);
+    }
+
+    #leadeep-product .leadeep-product-claim p,
+    #leadeep-product .leadeep-product-metric span,
+    #leadeep-product .leadeep-product-step span {
+      color: rgba(255, 255, 255, 0.58);
+    }
+
+    #leadeep-product .leadeep-visual-signal {
+      border-color: rgba(255, 255, 255, 0.16);
+      background: rgba(0, 0, 0, 0.82);
+    }
+
+    #leadeep-product .leadeep-visual-signal span {
+      color: var(--pure-white);
     }
 
     .fx-flywheel {
@@ -4589,6 +5054,7 @@
 
     #products .fx-line-link,
     #products .horizon-showcase-cta .btn-primary,
+    #leadeep-product .fx-line-link,
     #scenes-preview .fx-line-link,
     #scenes-preview .scenes-preview-cta .btn-primary,
     #technology .fx-line-link,
@@ -4625,6 +5091,7 @@
     }
 
     #products .horizon-showcase-cta .btn-primary,
+    #leadeep-product .fx-line-link,
     #scenes-preview .fx-line-link,
     #scenes-preview .scenes-preview-cta .btn-primary {
       border-color: var(--quantum-black) !important;
@@ -4634,6 +5101,7 @@
 
     #products .fx-line-link::after,
     #products .horizon-showcase-cta .btn-primary::after,
+    #leadeep-product .fx-line-link::after,
     #scenes-preview .fx-line-link::after,
     #scenes-preview .scenes-preview-cta .btn-primary::after,
     #technology .fx-line-link::after,
@@ -4655,6 +5123,8 @@
 
     #products .horizon-showcase-cta .btn-primary:hover,
     #products .horizon-showcase-cta .btn-primary:focus-visible,
+    #leadeep-product .fx-line-link:hover,
+    #leadeep-product .fx-line-link:focus-visible,
     #scenes-preview .fx-line-link:hover,
     #scenes-preview .fx-line-link:focus-visible,
     #scenes-preview .scenes-preview-cta .btn-primary:hover,
@@ -4664,6 +5134,19 @@
       color: var(--quantum-black) !important;
     }
 
+    #leadeep-product .fx-line-link {
+      border-color: rgba(255, 255, 255, 0.72) !important;
+      background: transparent !important;
+      color: var(--pure-white) !important;
+    }
+
+    #leadeep-product .fx-line-link:hover,
+    #leadeep-product .fx-line-link:focus-visible {
+      border-color: var(--threshold-cyan) !important;
+      background: transparent !important;
+      color: var(--threshold-cyan) !important;
+    }
+
     @media (max-width: 1024px) {
       .fx-section-inner {
         width: min(100% - 56px, 900px);
@@ -4671,6 +5154,7 @@
       }
 
       #products .fx-section-inner,
+      #leadeep-product .fx-section-inner,
       #scenes-preview .fx-section-inner,
       #technology .fx-section-inner {
         width: 100% !important;
@@ -4682,6 +5166,20 @@
       .fx-proof {
         grid-template-columns: 1fr;
         gap: 34px;
+      }
+
+      .fx-leadeep-product::before,
+      .fx-leadeep-product::after {
+        display: none;
+      }
+
+      .leadeep-product-copy,
+      .leadeep-product-visual {
+        min-height: 0;
+      }
+
+      .leadeep-visual-stage {
+        min-height: 520px;
       }
 
       .fx-section-title {
@@ -4731,6 +5229,17 @@
       }
     }
 
+    @media (max-width: 900px) {
+      .leadeep-product-board {
+        grid-template-columns: 1fr;
+      }
+
+      .leadeep-product-copy,
+      .leadeep-product-visual {
+        min-height: 0;
+      }
+    }
+
     @media (max-width: 768px) {
       .fx-section-inner {
         width: calc(100% - 40px);
@@ -4738,6 +5247,7 @@
       }
 
       #products .fx-section-inner,
+      #leadeep-product .fx-section-inner,
       #scenes-preview .fx-section-inner,
       #technology .fx-section-inner {
         width: 100% !important;
@@ -4759,10 +5269,114 @@
       }
 
       .fx-product-grid,
+      .leadeep-product-board,
       .fx-tech-flow,
       .fx-scenario-grid,
       .fx-contact-grid {
         margin-top: 44px;
+      }
+
+      .leadeep-product-claim {
+        padding: 28px 22px;
+      }
+
+      .leadeep-product-claim h3 {
+        font-size: 34px;
+      }
+
+      .leadeep-product-title {
+        gap: 8px;
+      }
+
+      .leadeep-product-title__brand {
+        font-size: 17px;
+      }
+
+      .leadeep-product-title__name {
+        font-size: 34px;
+      }
+
+      .leadeep-product-metrics,
+      .leadeep-visual-stack {
+        grid-template-columns: 1fr;
+      }
+
+      .leadeep-product-metric,
+      .leadeep-visual-module {
+        min-height: 104px;
+        border-right: 0;
+        border-bottom: 1px solid rgba(0, 16, 19, 0.12);
+      }
+
+      #leadeep-product .leadeep-product-metric {
+        border-bottom-color: rgba(255, 255, 255, 0.12);
+      }
+
+      .leadeep-visual-module {
+        border-bottom-color: rgba(255, 255, 255, 0.14);
+      }
+
+      .leadeep-product-route {
+        grid-template-columns: 1fr;
+        padding: 0;
+      }
+
+      .leadeep-product-step {
+        gap: 16px;
+        min-height: 0;
+        padding: 22px;
+        border-right: 0 !important;
+        border-bottom: 1px solid rgba(0, 16, 19, 0.1) !important;
+      }
+
+      #leadeep-product .leadeep-product-step {
+        border-bottom-color: rgba(255, 255, 255, 0.12) !important;
+      }
+
+      .leadeep-product-step:last-child {
+        border-bottom: 0 !important;
+      }
+
+      .leadeep-product-cta {
+        padding: 0 22px 28px;
+      }
+
+      .leadeep-visual-stage {
+        min-height: 420px;
+        padding: 28px 18px;
+      }
+
+      .leadeep-visual-stage::before {
+        width: auto;
+      }
+
+      .leadeep-visual-device {
+        width: min(86%, 360px);
+      }
+
+      .leadeep-visual-product-shot {
+        inset: 0;
+        width: auto;
+        min-height: 0;
+      }
+
+      .leadeep-visual-product-shot .leadeep-visual-device {
+        right: -92%;
+        width: clamp(880px, 360%, 1220px);
+      }
+
+      .leadeep-visual-label {
+        left: 18px;
+        top: 18px;
+        font-size: 10px;
+      }
+
+      .leadeep-visual-label strong {
+        font-size: 20px;
+      }
+
+      .leadeep-visual-signal {
+        display: none;
       }
 
       .fx-line-link {
@@ -5187,18 +5801,130 @@
 </section>
 
 <!-- =============================================
-     Screen 3 · 场景导流
+     Screen 3 · Leadeep AI 产品
+============================================= -->
+<section id="leadeep-product" aria-label="Leadeep AI 衔远领衔者产品介绍">
+  <div class="fx-redesign fx-section-inner fx-leadeep-product animate-in">
+    <div class="fx-section-head fx-section-head--split">
+      <div>
+        <span class="fx-kicker">LEADEEP AI</span>
+        <h2 class="fx-section-title leadeep-product-title">
+          <span class="leadeep-product-title__name">衔远领衔者</span>
+        </h2>
+      </div>
+      <p class="fx-section-copy">为企业家和管理者打造领导者数字分身、私域决策中枢和 AI 专家团，把会议、商业直觉、客户线索与专家判断沉淀为可复用的增长系统。</p>
+    </div>
+
+    <div class="leadeep-product-board" aria-label="Leadeep AI 软硬一体产品系统">
+      <div class="leadeep-visual-product-shot" aria-label="Leadeep AI 智能录音卡产品背景展示">
+        <img class="leadeep-visual-device" src="./assets/leadeep-ai/leadeep-recorder-card.png" alt="Leadeep AI 智能录音卡产品背景展示" loading="lazy" />
+      </div>
+      <div class="leadeep-product-copy">
+        <div class="leadeep-product-claim">
+          <span class="leadeep-product-claim__kicker">LEADER DIGITAL TWIN</span>
+          <h3>领导者的数字分身和 AI 专家团。</h3>
+          <p>Leadeep AI 是源于衔远大观的领导者产品形态：用智能录音卡追踪关键对话，由数字分身理解商业逻辑，再调度 AI 专家团持续完成推演、情报、跟进与商机撮合。</p>
+        </div>
+
+        <div class="leadeep-product-metrics" aria-label="Leadeep AI 核心结构">
+          <div class="leadeep-product-metric">
+            <strong>1</strong>
+            <span>物理抓手<br />无感沉淀商业智慧</span>
+          </div>
+          <div class="leadeep-product-metric">
+            <strong>3</strong>
+            <span>高维中枢<br />决策、情报、商务协同</span>
+          </div>
+          <div class="leadeep-product-metric leadeep-product-metric--peak">
+            <strong>A2A</strong>
+            <span>商机网络<br />AI 间持续寻源撮合</span>
+          </div>
+        </div>
+
+        <div class="leadeep-product-route" aria-label="Leadeep AI 工作链路">
+          <div class="leadeep-product-step">
+            <em>01<br />CAPTURE</em>
+            <div>
+              <strong>物理级追踪关键现场</strong>
+              <span>商务洽谈、会议和客户拜访中的隐性信息，被录音卡转化为私域资产。</span>
+            </div>
+          </div>
+          <div class="leadeep-product-step">
+            <em>02<br />TWIN</em>
+            <div>
+              <strong>数字分身理解判断边界</strong>
+              <span>长期记忆行业经验、决策偏好、关系网络和沟通风格。</span>
+            </div>
+          </div>
+          <div class="leadeep-product-step">
+            <em>03<br />BOARD</em>
+            <div>
+              <strong>AI 专家团完成高维推演</strong>
+              <span>财务、法务、战略、情报和商务专家按任务动态组队。</span>
+            </div>
+          </div>
+          <div class="leadeep-product-step">
+            <em>04<br />ACTION</em>
+            <div>
+              <strong>把直觉转化为行动和复利</strong>
+              <span>会议结论、客户跟进、商机线索和复盘学习进入闭环。</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="leadeep-product-cta">
+          <a href="./leadeep.html" class="fx-line-link">了解 Leadeep AI →</a>
+        </div>
+      </div>
+
+      <figure class="leadeep-product-visual" aria-label="Leadeep AI 产品视觉展示">
+        <div class="leadeep-visual-stage">
+          <div class="leadeep-visual-label">
+            <strong>LEADEEP AI</strong>
+          </div>
+          <div class="leadeep-visual-signal leadeep-visual-signal--memory" aria-hidden="true">
+            <span>MEMORY<br />CONTEXT<br />JUDGEMENT</span>
+          </div>
+          <div class="leadeep-visual-signal leadeep-visual-signal--experts" aria-hidden="true">
+            <span>AI BOARD<br />A2A NETWORK<br />ACTION LOOP</span>
+          </div>
+        </div>
+
+        <div class="leadeep-visual-stack" aria-label="Leadeep AI 三个高维中枢">
+          <div class="leadeep-visual-module">
+            <em>01 / DECISION</em>
+            <strong>私域决策中枢</strong>
+            <span>把个人经验、会议判断和关键关系沉淀为可复用的商业直觉。</span>
+          </div>
+          <div class="leadeep-visual-module">
+            <em>02 / EXPERTS</em>
+            <strong>AI 专家董事会</strong>
+            <span>复杂议题自动拉起专家团，多维推演后给出可执行建议。</span>
+          </div>
+          <div class="leadeep-visual-module">
+            <em>03 / NETWORK</em>
+            <strong>A2A 商机雷达</strong>
+            <span>通过 AI 间双盲试探，持续发现对口大单和关键联系人。</span>
+          </div>
+        </div>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- =============================================
+     Screen 4 · 场景导流
 ============================================= -->
 <section id="scenes-preview" aria-label="场景导流">
   <div class="fx-redesign fx-section-inner fx-scenes animate-in">
     <div class="fx-section-head">
-      <span class="fx-kicker">场景 SCENARIOS</span>
-      <h2 class="fx-section-title">从关键决策开始</h2>
+      <span class="fx-kicker">SCENARIOS</span>
+      <h2 class="fx-section-title">一号位牵引，从关键决策开始</h2>
       <p class="fx-section-copy">先进入最高价值的业务现场，再扩展为全组织的 AI 自动驾驶。</p>
     </div>
 
     <div class="fx-scenario-grid" aria-label="高价值场景入口">
-      <a href="./scene-strategy.html" class="fx-scenario-item">
+      <div class="fx-scenario-item is-static" aria-label="战略管理">
         <svg class="fx-scenario-visual fx-scenario-visual--strategy" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
           <rect class="fx-vis-frame" x="1" y="1" width="318" height="168" />
           <path class="fx-vis-cyan" d="M34 132H286" />
@@ -5216,7 +5942,7 @@
         <span>01</span>
         <strong>战略管理</strong>
         <em>会议 · 人才 · OKR复盘</em>
-      </a>
+      </div>
       <div class="fx-scenario-item is-static" aria-label="研发生产">
         <svg class="fx-scenario-visual fx-scenario-visual--research" viewBox="0 0 320 170" aria-hidden="true" focusable="false">
           <rect class="fx-vis-frame" x="1" y="1" width="318" height="168" />
@@ -5353,7 +6079,7 @@
           </span>
         </div>
 
-        <a class="scenes-scene-node scenes-scene-node--hot scenes-scene-node--strategy" href="./scene-strategy.html">
+        <a class="scenes-scene-node scenes-scene-node--hot scenes-scene-node--strategy" href="./leadeep.html">
           <em>DECISION</em>
           <strong>战略管理</strong>
           <span>复盘、商机、竞情、高管周报</span>
@@ -5388,7 +6114,7 @@
     </div>
 
     <div class="scenes-decision-grid" aria-label="高价值决策场景">
-      <a href="./scene-strategy.html" class="scene-card">
+      <a href="./leadeep.html" class="scene-card">
         <span class="scene-card-index">01 / STRATEGY</span>
         <span class="scene-card-name">战略管理</span>
         <p class="scene-card-desc">复盘会议、跟进商机、监控竞情、生成高管周报。</p>
@@ -5700,6 +6426,12 @@
         line2: 'AI 时代的增强分身',
         line3: '',
         subtitle: 'ME 长期记住岗位背景、决策偏好与历史任务，把自然语言目标转译为可执行路径。'
+      },
+      {
+        line1: '让领导者的判断<span class="hero-title-accent">&#x2014;&#x2014;</span>',
+        line2: '进入 LEADEEP AI',
+        line3: '成为可复用决策系统<span class="hero-title-dot">。</span>',
+        subtitle: 'Leadeep AI 连接领导者数字分身、私域记忆和 AI 专家团，把会议、直觉、客户线索与复盘行动沉淀为持续增长系统。'
       },
       {
         line1: '每个团队<span class="hero-title-accent">&#x2014;&#x2014;</span>',

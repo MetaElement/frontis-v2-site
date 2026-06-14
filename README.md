@@ -8,7 +8,6 @@ High-fidelity static implementation of the Frontis public website prototype.
 - `horizon.html`
 - `leadeep.html`
 - `scene.html`
-- `scene-strategy.html`
 - `scene-supply.html`
 - `scene-sales.html`
 - `scene-ops.html`

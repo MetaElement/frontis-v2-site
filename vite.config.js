@@ -6,7 +6,6 @@ const pages = [
   "horizon",
   "leadeep",
   "scene",
-  "scene-strategy",
   "scene-supply",
   "scene-sales",
   "scene-ops",
