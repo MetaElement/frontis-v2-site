@@ -7,12 +7,14 @@ const DEFAULT_TO_EMAIL = "xianyuan@frontis.ai";
 
 const INTEREST_LABELS = {
   horizon: "Frontis Horizon（企业级）",
+  metaagent: "MetaAgent / 专业 AI 共建",
   leadeep: "Leadeep AI（个人 / 老板）",
   ecosystem: "城市生态合作",
   other: "其他",
 };
 const INTEREST_RECIPIENT_ENVS = {
   horizon: "CTA_TO_EMAIL_HORIZON",
+  metaagent: "CTA_TO_EMAIL_METAAGENT",
   leadeep: "CTA_TO_EMAIL_LEADEEP",
   ecosystem: "CTA_TO_EMAIL_ECOSYSTEM",
   other: "CTA_TO_EMAIL_OTHER",

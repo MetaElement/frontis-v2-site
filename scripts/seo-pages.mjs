@@ -6,9 +6,9 @@ export const pages = [
   {
     file: "index.html",
     path: "/",
-    title: "衔远科技 Frontis AI | 企业 AI 专家团与 AI 原生组织平台",
+    title: "衔远科技 Frontis AI | 让专业能力自我进化 · 专业 AI 基础设施",
     description:
-      "衔远科技 Frontis AI 为企业打造持续进化的 AI 专家团与 AI 原生组织平台，覆盖战略管理、生产研发、供应链运营、营销增长与领导者数字分身。",
+      "衔远科技 Frontis AI 打造自动化生产专业 AI 的基础设施：以 MetaAgent、Agent 评测及进化平台与 AI4ML 生产并进化专业智能，并通过衔远大观与 Leadeep AI 交付到组织与领导者。",
     priority: "1.0",
     changefreq: "weekly",
     breadcrumbs: [{ name: "首页", path: "/" }],

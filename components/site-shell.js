@@ -11,16 +11,18 @@
       label: "产品",
       href: "./horizon.html",
       children: [
+        { key: "platform", label: "MetaAgent 专业智能平台", href: "./index.html#platform" },
         { key: "horizon", label: "Frontis Horizon 衔远大观", href: "./horizon.html" },
         { key: "leadeep-ai", label: "Leadeep AI 衔远领衔者", href: "./leadeep.html" },
       ],
     },
     {
       key: "scenes",
-      label: "场景",
+      label: "产业场景",
       href: "./scene.html",
     },
     { key: "technology", label: "技术", href: "./technology.html" },
+    { key: "research", label: "开放研究", href: "./index.html#research" },
     { key: "ecosystem", label: "生态", href: "./ecosystem.html" },
     { key: "about", label: "关于衔远", href: "./about.html" },
   ];
@@ -140,11 +142,13 @@
       '<div class="site-footer__email">xianyuan@frontis.ai</div>' +
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
+      footerLink("./index.html#platform", "MetaAgent 专业智能平台") +
       footerLink("./horizon.html", "Frontis Horizon 衔远大观") +
       footerLink("./leadeep.html", "Leadeep AI 衔远领衔者") +
       "</div>" +
       '<div class="site-footer__subgroup"><div class="site-footer__title">技术</div><div class="site-footer__links">' +
       footerLink("./technology.html", "技术架构") +
+      footerLink("./index.html#research", "开放研究") +
       "</div></div></div>" +
       '<div><div class="site-footer__title">场景</div><div class="site-footer__links">' +
       footerLink("./scene.html", "场景总览") +
@@ -202,6 +206,7 @@
       '<fieldset class="site-cta__radios">' +
       '<legend>我更感兴趣：</legend>' +
       '<label><input type="radio" name="interest" value="horizon" checked><span>Frontis Horizon（企业级）</span></label>' +
+      '<label><input type="radio" name="interest" value="metaagent"><span>MetaAgent / 专业 AI 共建</span></label>' +
       '<label><input type="radio" name="interest" value="leadeep"><span>Leadeep AI（个人 / 老板）</span></label>' +
       '<label><input type="radio" name="interest" value="ecosystem"><span>城市生态合作</span></label>' +
       '<label><input type="radio" name="interest" value="other"><span>其他</span></label>' +
