@@ -6,15 +6,17 @@ const DEFAULT_ALLOWED_ORIGINS = [
 const DEFAULT_TO_EMAIL = "xianyuan@frontis.ai";
 
 const INTEREST_LABELS = {
+  ma: "Leadeep MA 进化平台",
+  solution: "研发 / 制造 / 供应解决方案",
   horizon: "Frontis Horizon（企业级）",
-  metaagent: "MetaAgent / 专业 AI 共建",
   leadeep: "Leadeep AI（个人 / 老板）",
   ecosystem: "城市生态合作",
   other: "其他",
 };
 const INTEREST_RECIPIENT_ENVS = {
+  ma: "CTA_TO_EMAIL_MA",
+  solution: "CTA_TO_EMAIL_SOLUTION",
   horizon: "CTA_TO_EMAIL_HORIZON",
-  metaagent: "CTA_TO_EMAIL_METAAGENT",
   leadeep: "CTA_TO_EMAIL_LEADEEP",
   ecosystem: "CTA_TO_EMAIL_ECOSYSTEM",
   other: "CTA_TO_EMAIL_OTHER",
@@ -148,7 +150,7 @@ function normalizeLead(body, req) {
     company: clean(body.company, 120),
     phone: clean(body.phone, 80),
     email: clean(body.email, 120).toLowerCase(),
-    interest: INTEREST_LABELS[interest] ? interest : "horizon",
+    interest: INTEREST_LABELS[interest] ? interest : "ma",
     message: clean(body.message, 1200),
     website: clean(body.website, 120),
     sourcePage,

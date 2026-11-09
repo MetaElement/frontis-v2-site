@@ -11,18 +11,14 @@
       label: "产品",
       href: "./horizon.html",
       children: [
-        { key: "platform", label: "MetaAgent 专业智能平台", href: "./index.html#platform" },
+        { key: "ma", label: "Leadeep MA 领衔者进化平台", href: "./index.html#product" },
+        { key: "leadeep-ai", label: "Leadeep AI 平台", href: "./leadeep.html" },
         { key: "horizon", label: "Frontis Horizon 衔远大观", href: "./horizon.html" },
-        { key: "leadeep-ai", label: "Leadeep AI 衔远领衔者", href: "./leadeep.html" },
       ],
     },
-    {
-      key: "scenes",
-      label: "产业场景",
-      href: "./scene.html",
-    },
+    { key: "solutions", label: "解决方案", href: "./index.html#solutions" },
+    { key: "industries", label: "行业", href: "./index.html#industries" },
     { key: "technology", label: "技术", href: "./technology.html" },
-    { key: "research", label: "开放研究", href: "./index.html#research" },
     { key: "ecosystem", label: "生态", href: "./ecosystem.html" },
     { key: "about", label: "关于衔远", href: "./about.html" },
   ];
@@ -31,11 +27,11 @@
     index: "index",
     horizon: "products",
     leadeep: "products",
-    scene: "scenes",
-    "scene-supply": "scenes",
-    "scene-sales": "scenes",
-    "scene-ops": "scenes",
-    "scene-research": "scenes",
+    scene: "solutions",
+    "scene-supply": "solutions",
+    "scene-sales": "solutions",
+    "scene-ops": "solutions",
+    "scene-research": "solutions",
     technology: "technology",
     ecosystem: "ecosystem",
     about: "about",
@@ -142,19 +138,18 @@
       '<div class="site-footer__email">xianyuan@frontis.ai</div>' +
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
-      footerLink("./index.html#platform", "MetaAgent 专业智能平台") +
+      footerLink("./index.html#product", "Leadeep MA 领衔者进化平台") +
+      footerLink("./leadeep.html", "Leadeep AI 平台") +
       footerLink("./horizon.html", "Frontis Horizon 衔远大观") +
-      footerLink("./leadeep.html", "Leadeep AI 衔远领衔者") +
       "</div>" +
       '<div class="site-footer__subgroup"><div class="site-footer__title">技术</div><div class="site-footer__links">' +
       footerLink("./technology.html", "技术架构") +
       footerLink("./index.html#research", "开放研究") +
       "</div></div></div>" +
-      '<div><div class="site-footer__title">场景</div><div class="site-footer__links">' +
+      '<div><div class="site-footer__title">解决方案</div><div class="site-footer__links">' +
+      footerLink("./index.html#solutions", "研发 · 制造 · 供应") +
+      footerLink("./index.html#industries", "重点行业") +
       footerLink("./scene.html", "场景总览") +
-      footerStatic("生产研发") +
-      footerStatic("供应链运营") +
-      footerStatic("营销增长") +
       "</div></div>" +
       '<div><div class="site-footer__title">公司</div><div class="site-footer__links">' +
       footerLink("./about.html", "关于衔远") +
@@ -205,9 +200,9 @@
       '</div>' +
       '<fieldset class="site-cta__radios">' +
       '<legend>我更感兴趣：</legend>' +
-      '<label><input type="radio" name="interest" value="horizon" checked><span>Frontis Horizon（企业级）</span></label>' +
-      '<label><input type="radio" name="interest" value="metaagent"><span>MetaAgent / 专业 AI 共建</span></label>' +
-      '<label><input type="radio" name="interest" value="leadeep"><span>Leadeep AI（个人 / 老板）</span></label>' +
+      '<label><input type="radio" name="interest" value="ma" checked><span>Leadeep MA 进化平台</span></label>' +
+      '<label><input type="radio" name="interest" value="solution"><span>研发 / 制造 / 供应解决方案</span></label>' +
+      '<label><input type="radio" name="interest" value="horizon"><span>Leadeep AI / 衔远大观</span></label>' +
       '<label><input type="radio" name="interest" value="ecosystem"><span>城市生态合作</span></label>' +
       '<label><input type="radio" name="interest" value="other"><span>其他</span></label>' +
       '</fieldset>' +
