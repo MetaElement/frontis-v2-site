@@ -11,13 +11,13 @@
       label: "产品",
       href: "./horizon.html",
       children: [
-        { key: "ma", label: "Leadeep MA 领衔者进化平台", href: "./index.html#product" },
-        { key: "leadeep-ai", label: "Leadeep AI 平台", href: "./leadeep.html" },
+        { key: "ma", label: "Frontis MetaAgent 进化平台", href: "./index.html#run" },
+        { key: "leadeep-ai", label: "Leadeep AI", href: "./leadeep.html" },
         { key: "horizon", label: "Frontis Horizon 衔远大观", href: "./horizon.html" },
       ],
     },
-    { key: "solutions", label: "解决方案", href: "./index.html#solutions" },
-    { key: "industries", label: "行业", href: "./index.html#industries" },
+    { key: "research", label: "研究", href: "./index.html#research" },
+    { key: "industries", label: "行业", href: "./index.html#markets" },
     { key: "technology", label: "技术", href: "./technology.html" },
     { key: "ecosystem", label: "生态", href: "./ecosystem.html" },
     { key: "about", label: "关于衔远", href: "./about.html" },
@@ -46,7 +46,8 @@
   }
 
   function ctaHref() {
-    return productLoginHref;
+    // Inner pages render the shared contact section; fall back to the homepage form.
+    return document.querySelector("[data-site-cta]") ? "#contact" : "./index.html#contact";
   }
 
   function renderNavItem(item) {
@@ -78,7 +79,7 @@
       '<div class="site-header__menu" role="navigation" aria-label="主导航">' +
       navItems.map(renderNavItem).join("") +
       "</div>" +
-      '<a class="site-header__cta" href="' + ctaHref() + '" data-leap-cta data-hover="即刻体验"><span class="leap-cta__label">开启跃迁</span></a>' +
+      '<a class="site-header__cta" href="' + ctaHref() + '" data-leap-cta data-hover="带一个 Agent 来"><span class="leap-cta__label">预约验证</span></a>' +
       '<button class="site-header__toggle" type="button" aria-expanded="false" aria-controls="site-mobile-menu">' +
       '<span class="site-header__toggle-text">目录</span>' +
       '<span class="site-header__toggle-icon" aria-hidden="true"><span></span><span></span></span>' +
@@ -87,7 +88,7 @@
       '<div id="site-mobile-menu" class="site-header__mobile-panel" hidden>' +
       '<div class="site-header__mobile-menu" role="navigation" aria-label="移动端主导航">' +
       navItems.map(renderNavItem).join("") +
-      '<a class="site-header__mobile-cta" href="' + ctaHref() + '">开启跃迁</a>' +
+      '<a class="site-header__mobile-cta" href="' + ctaHref() + '">预约验证</a>' +
       "</div>" +
       "</div>" +
       "</header>";
@@ -138,17 +139,18 @@
       '<div class="site-footer__email">xianyuan@frontis.ai</div>' +
       "</div>" +
       '<div><div class="site-footer__title">产品</div><div class="site-footer__links">' +
-      footerLink("./index.html#product", "Leadeep MA 领衔者进化平台") +
-      footerLink("./leadeep.html", "Leadeep AI 平台") +
+      footerLink("./index.html#run", "Frontis MetaAgent 进化平台") +
+      footerLink("./leadeep.html", "Leadeep AI") +
       footerLink("./horizon.html", "Frontis Horizon 衔远大观") +
+      '<a href="' + productLoginHref + '" rel="noopener">产品登录</a>' +
       "</div>" +
       '<div class="site-footer__subgroup"><div class="site-footer__title">技术</div><div class="site-footer__links">' +
       footerLink("./technology.html", "技术架构") +
       footerLink("./index.html#research", "开放研究") +
       "</div></div></div>" +
-      '<div><div class="site-footer__title">解决方案</div><div class="site-footer__links">' +
-      footerLink("./index.html#solutions", "研发 · 制造 · 供应") +
-      footerLink("./index.html#industries", "重点行业") +
+      '<div><div class="site-footer__title">平台</div><div class="site-footer__links">' +
+      footerLink("./index.html#markets", "重点行业") +
+      footerLink("./index.html#trust", "证据与治理") +
       footerLink("./scene.html", "场景总览") +
       "</div></div>" +
       '<div><div class="site-footer__title">公司</div><div class="site-footer__links">' +
@@ -185,9 +187,9 @@
       '<div class="site-cta__header">' +
       '<div class="site-cta__headline">' +
       '<span class="site-cta__kicker">联系我们 CONTACT FRONTIS</span>' +
-      '<h2 id="' + labelId + '" class="site-cta__title">即刻开启智能跃迁</h2>' +
+      '<h2 id="' + labelId + '" class="site-cta__title">带一个 Agent 来</h2>' +
       '</div>' +
-      '<p class="site-cta__copy">申请产品体验，率先迈入AI原生时代</p>' +
+      '<p class="site-cta__copy">从一个真实任务开始，先建立有效基线，再决定值不值得改。</p>' +
       '</div>' +
       '<div class="site-cta__grid site-cta__grid--form">' +
       '<form class="site-cta__form" data-site-cta-form' + endpointAttr + ' novalidate>' +
@@ -200,8 +202,8 @@
       '</div>' +
       '<fieldset class="site-cta__radios">' +
       '<legend>我更感兴趣：</legend>' +
-      '<label><input type="radio" name="interest" value="ma" checked><span>Leadeep MA 进化平台</span></label>' +
-      '<label><input type="radio" name="interest" value="solution"><span>研发 / 制造 / 供应解决方案</span></label>' +
+      '<label><input type="radio" name="interest" value="ma" checked><span>Frontis MetaAgent 进化平台</span></label>' +
+      '<label><input type="radio" name="interest" value="solution"><span>行业方案与共研</span></label>' +
       '<label><input type="radio" name="interest" value="horizon"><span>Leadeep AI / 衔远大观</span></label>' +
       '<label><input type="radio" name="interest" value="ecosystem"><span>城市生态合作</span></label>' +
       '<label><input type="radio" name="interest" value="other"><span>其他</span></label>' +

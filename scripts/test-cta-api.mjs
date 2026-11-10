@@ -92,6 +92,36 @@ try {
   );
 
   await expectCase(
+    "accepts a submission with email and no phone",
+    {
+      body: {
+        name: "Test User",
+        company: "Frontis QA",
+        phone: "",
+        email: "qa@example.com",
+        interest: "ma",
+        message: "[Agent stack] Dify",
+      },
+    },
+    200,
+    true,
+  );
+
+  await expectCase(
+    "rejects a submission with neither phone nor email",
+    {
+      body: {
+        name: "测试用户",
+        company: "衔远测试公司",
+        phone: "",
+        email: "",
+      },
+    },
+    400,
+    false,
+  );
+
+  await expectCase(
     "rejects missing required fields",
     {
       body: {

@@ -3,6 +3,7 @@ import { resolve } from "node:path";
 
 const pages = [
   "index",
+  "en",
   "horizon",
   "leadeep",
   "scene",

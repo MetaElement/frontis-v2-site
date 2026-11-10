@@ -6,8 +6,8 @@ const DEFAULT_ALLOWED_ORIGINS = [
 const DEFAULT_TO_EMAIL = "xianyuan@frontis.ai";
 
 const INTEREST_LABELS = {
-  ma: "Leadeep MA 进化平台",
-  solution: "研发 / 制造 / 供应解决方案",
+  ma: "Frontis MetaAgent 进化平台",
+  solution: "行业方案与共研",
   horizon: "Frontis Horizon（企业级）",
   leadeep: "Leadeep AI（个人 / 老板）",
   ecosystem: "城市生态合作",
@@ -167,8 +167,8 @@ function normalizeLead(body, req) {
 
 function validateLead(lead) {
   if (lead.website) return { ok: true, silent: true };
-  if (!lead.name || !lead.company || !lead.phone) {
-    return { ok: false, status: 400, message: "请补充姓名、公司和手机号码。" };
+  if (!lead.name || !lead.company || (!lead.phone && !lead.email)) {
+    return { ok: false, status: 400, message: "请补充姓名、公司，以及手机或邮箱中的一项。" };
   }
   if (lead.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(lead.email)) {
     return { ok: false, status: 400, message: "请填写有效的邮箱地址，或暂时留空。" };
@@ -182,7 +182,7 @@ function formatLeadText(lead) {
     "",
     `姓名：${lead.name}`,
     `公司：${lead.company}`,
-    `手机：${lead.phone}`,
+    `手机：${lead.phone || "未填写"}`,
     `邮箱：${lead.email || "未填写"}`,
     `沟通方向：${INTEREST_LABELS[lead.interest]}`,
     `来源页面：${lead.sourcePage || "未知"}`,
@@ -204,7 +204,7 @@ function formatLeadHtml(lead) {
   const rows = [
     ["姓名", lead.name],
     ["公司", lead.company],
-    ["手机", lead.phone],
+    ["手机", lead.phone || "未填写"],
     ["邮箱", lead.email || "未填写"],
     ["沟通方向", INTEREST_LABELS[lead.interest]],
     ["来源页面", lead.sourcePage || "未知"],
@@ -458,7 +458,7 @@ function formatFeishuLeadText(lead) {
     "",
     `姓名：${lead.name}`,
     `公司：${lead.company}`,
-    `手机：${lead.phone}`,
+    `手机：${lead.phone || "未填写"}`,
     `邮箱：${lead.email || "未填写"}`,
     `沟通方向：${INTEREST_LABELS[lead.interest]}`,
     `来源页面：${lead.sourcePage || "未知"}`,

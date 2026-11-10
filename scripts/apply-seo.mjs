@@ -41,6 +41,10 @@ function normalizeDescription(html, page) {
   return html.replace(/<title>[\s\S]*?<\/title>/i, `${title}\n  ${description}`);
 }
 
+function pageLang(page) {
+  return page.lang === "en" ? "en" : "zh-CN";
+}
+
 function schemaGraph(page) {
   const url = canonicalUrl(page);
   const graph = [
@@ -69,7 +73,7 @@ function schemaGraph(page) {
       name: page.title,
       description: page.description,
       isPartOf: { "@id": `${SITE_URL}/#website` },
-      inLanguage: "zh-CN",
+      inLanguage: pageLang(page),
       publisher: { "@id": `${SITE_URL}/#organization` },
     },
   ];
@@ -122,20 +126,25 @@ function schemaGraph(page) {
 function seoBlock(page) {
   const url = canonicalUrl(page);
   const json = JSON.stringify(schemaGraph(page), null, 2).replace(/</g, "\\u003c");
+  const isEnglish = pageLang(page) === "en";
+  const alternates = (page.alternates || []).map(
+    (item) => `  <link rel="alternate" hreflang="${escapeAttr(item.hreflang)}" href="${escapeAttr(`${SITE_URL}${item.path}`)}" />`,
+  );
 
   return [
     `  ${markerStart}`,
     `  <meta name="robots" content="index, follow, max-image-preview:large, max-snippet:-1, max-video-preview:-1" />`,
     `  <meta name="author" content="${escapeAttr(SITE_NAME)}" />`,
     `  <link rel="canonical" href="${escapeAttr(url)}" />`,
-    `  <meta property="og:locale" content="zh_CN" />`,
+    ...alternates,
+    `  <meta property="og:locale" content="${isEnglish ? "en_US" : "zh_CN"}" />`,
     `  <meta property="og:type" content="website" />`,
     `  <meta property="og:site_name" content="${escapeAttr(SITE_NAME)}" />`,
     `  <meta property="og:title" content="${escapeAttr(page.title)}" />`,
     `  <meta property="og:description" content="${escapeAttr(page.description)}" />`,
     `  <meta property="og:url" content="${escapeAttr(url)}" />`,
     `  <meta property="og:image" content="${escapeAttr(DEFAULT_IMAGE)}" />`,
-    `  <meta property="og:image:alt" content="衔远科技 Frontis AI 企业 AI 专家团平台" />`,
+    `  <meta property="og:image:alt" content="${isEnglish ? "Frontis AI" : "衔远科技 Frontis AI"}" />`,
     `  <meta name="twitter:card" content="summary_large_image" />`,
     `  <meta name="twitter:title" content="${escapeAttr(page.title)}" />`,
     `  <meta name="twitter:description" content="${escapeAttr(page.description)}" />`,

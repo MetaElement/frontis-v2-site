@@ -119,20 +119,36 @@ for (const page of pages) {
     errors.push(`${page}: logo still points to remote COS`);
   }
 
-  if (!html.includes("./components/site-shell.css")) {
-    errors.push(`${page}: missing shared shell stylesheet`);
-  }
+  if (seoByFile.get(page).shell === "home") {
+    // The homepage (both languages) carries its own header, footer and contact form.
+    if (!html.includes("./components/home.css")) errors.push(`${page}: missing homepage stylesheet`);
+    if (!html.includes("./components/home.js")) errors.push(`${page}: missing homepage script`);
+    if (!html.includes('class="hd"') || !html.includes('class="ft"')) errors.push(`${page}: missing homepage header or footer`);
+    if (!html.includes("data-form")) errors.push(`${page}: missing contact form`);
+    if (!html.includes("京公网安备11010802042925号") || !html.includes("京ICP备2022014486号-1")) {
+      errors.push(`${page}: missing ICP or public security record in the footer`);
+    }
+    for (const item of seoByFile.get(page).alternates || []) {
+      if (!html.includes(`hreflang="${item.hreflang}" href="${SITE_URL}${item.path}"`)) {
+        errors.push(`${page}: missing hreflang ${item.hreflang}`);
+      }
+    }
+  } else {
+    if (!html.includes("./components/site-shell.css")) {
+      errors.push(`${page}: missing shared shell stylesheet`);
+    }
 
-  if (!html.includes("data-site-header")) {
-    errors.push(`${page}: missing shared header mount`);
-  }
+    if (!html.includes("data-site-header")) {
+      errors.push(`${page}: missing shared header mount`);
+    }
 
-  if (!html.includes("data-site-footer")) {
-    errors.push(`${page}: missing shared footer mount`);
-  }
+    if (!html.includes("data-site-footer")) {
+      errors.push(`${page}: missing shared footer mount`);
+    }
 
-  if (!html.includes("./components/site-shell.js")) {
-    errors.push(`${page}: missing shared shell script`);
+    if (!html.includes("./components/site-shell.js")) {
+      errors.push(`${page}: missing shared shell script`);
+    }
   }
 
   if (!html.includes("./components/analytics-config.js") || !html.includes("./components/analytics.js")) {
@@ -179,6 +195,16 @@ if (!shellJs.includes("generate_lead") || !shellJs.includes("frontis_cta_submit"
 }
 if (!shellJs.includes("京公网安备11010802042925号") || !shellJs.includes("beian.mps.gov.cn/#/query/webSearch?code=11010802042925") || !shellJs.includes("./assets/beian-police.png")) {
   errors.push("Shared shell is missing the public security record footer link");
+}
+
+const homeJs = fs.readFileSync(path.join(root, "components/home.js"), "utf8");
+if (!homeJs.includes("generate_lead") || !homeJs.includes("frontis_cta_submit")) {
+  errors.push("Homepage script is missing CTA analytics events");
+}
+for (const font of ["martian-grotesk-latin.woff2", "martian-mono-latin.woff2", "frontis-hei-900.woff2"]) {
+  if (!fs.existsSync(path.join(root, "assets/fonts", font))) {
+    errors.push(`Missing self-hosted font: assets/fonts/${font} (run npm run fonts)`);
+  }
 }
 
 const analyticsConfig = fs.readFileSync(path.join(root, "components/analytics-config.js"), "utf8");

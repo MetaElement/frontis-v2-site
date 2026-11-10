@@ -2,6 +2,13 @@ export const SITE_URL = "https://frontis.cn";
 export const SITE_NAME = "衔远科技 Frontis AI";
 export const DEFAULT_IMAGE = `${SITE_URL}/assets/og-frontis.svg`;
 
+// The homepage exists in two languages; each version points at the other.
+const HOME_ALTERNATES = [
+  { hreflang: "zh-CN", path: "/" },
+  { hreflang: "en", path: "/en.html" },
+  { hreflang: "x-default", path: "/" },
+];
+
 export const pages = [
   {
     file: "index.html",
@@ -11,7 +18,23 @@ export const pages = [
       "衔远 MetaAgent 是改进 Agent 的 Agent：在企业自己的边界内评测、归因、研究改动并独立复测，让已经上线的 Agent 和专业模型持续变好，每一次采纳都由人批准。",
     priority: "1.0",
     changefreq: "weekly",
+    lang: "zh-CN",
+    shell: "home",
+    alternates: HOME_ALTERNATES,
     breadcrumbs: [{ name: "首页", path: "/" }],
+  },
+  {
+    file: "en.html",
+    path: "/en.html",
+    title: "Frontis AI | AI that improves your AI. Proven at every step.",
+    description:
+      "Frontis MetaAgent is an agent that improves agents: inside your own boundary it evaluates, finds root causes, researches changes and re-tests them independently, so the agents and specialist models you already run keep getting better. Every adoption is approved by a person.",
+    priority: "0.9",
+    changefreq: "weekly",
+    lang: "en",
+    shell: "home",
+    alternates: HOME_ALTERNATES,
+    breadcrumbs: [{ name: "Home", path: "/en.html" }],
   },
   {
     file: "horizon.html",
