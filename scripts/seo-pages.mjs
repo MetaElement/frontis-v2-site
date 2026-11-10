@@ -6,9 +6,9 @@ export const pages = [
   {
     file: "index.html",
     path: "/",
-    title: "衔远科技 Frontis AI | Leadeep MA 领衔者进化平台 · 让企业 AI 持续进化",
+    title: "衔远科技 Frontis AI | 让 AI 改进 AI：企业 AI 的进化基础设施",
     description:
-      "Leadeep MA 领衔者进化平台帮助企业持续改进 Agent 与专业模型：以 Benchmark OS 评测、AutoResearch 研究改进并独立复测，提供研发、制造、供应解决方案，服务人工智能、新能源与自动驾驶、先进制造、具身智能等行业。",
+      "衔远 MetaAgent 是改进 Agent 的 Agent：在企业自己的边界内评测、归因、研究改动并独立复测，让已经上线的 Agent 和专业模型持续变好，每一次采纳都由人批准。",
     priority: "1.0",
     changefreq: "weekly",
     breadcrumbs: [{ name: "首页", path: "/" }],

@@ -8,7 +8,7 @@ const staticFiles = [
   "components/analytics-config.js",
   "components/analytics.js",
   "components/site-shell.js",
-  "components/v3-home.js",
+  "components/home.js",
   "assets/beian-police.png",
   "assets/logo-dark.svg",
   "assets/logo-light.svg",
@@ -17,7 +17,6 @@ const staticFiles = [
 const staticDirs = [
   "assets/leadeep-ai",
   "assets/scene-agents",
-  "assets/v3",
 ];
 
 for (const file of staticFiles) {

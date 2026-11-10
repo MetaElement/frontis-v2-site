@@ -11,9 +11,13 @@
     "preview": "vite preview --host 127.0.0.1",
     "start": "node scripts/serve-production.mjs",
     "check": "node scripts/check-site.mjs",
-    "test:cta": "node scripts/test-cta-api.mjs"
+    "test:cta": "node scripts/test-cta-api.mjs",
+    "fonts": "node scripts/subset-fonts.mjs"
   },
   "devDependencies": {
+    "@fontsource-variable/martian-mono": "^5.3.0",
+    "@fontsource/noto-sans-sc": "^5.3.1",
+    "subset-font": "^2.9.0",
     "vite": "^8.0.12"
   },
   "dependencies": {
