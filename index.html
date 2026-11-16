@@ -86,7 +86,7 @@
   <link rel="icon" href="./assets/favicon.png?v=20260518-white-logo" type="image/png" />
   <link rel="preload" href="./assets/fonts/martian-grotesk-latin.woff2" as="font" type="font/woff2" crossorigin />
   <link rel="preload" href="./assets/fonts/frontis-hei-900.woff2" as="font" type="font/woff2" crossorigin />
-  <link rel="stylesheet" href="./components/home.css?v=20261110" />
+  <link rel="stylesheet" href="./components/home.css?v=20261113" />
   <script>document.documentElement.classList.add("js")</script>
 </head>
 <body class="home" data-lang="zh">
@@ -100,7 +100,7 @@
   <a class="hd__logo" href="./index.html" aria-label="Frontis 衔远科技首页"><img src="./assets/logo-light.svg" alt="FRONTIS 衔远科技" width="112" height="36" /></a>
   <nav class="hd__nav" id="hd-nav" aria-label="主导航">
     <a href="#run">平台</a>
-    <a href="#trust">证据</a>
+    <a href="#trust">凭什么信</a>
     <a href="#research">研究</a>
     <a href="#markets">行业</a>
     <a href="./about.html">公司</a>
@@ -113,31 +113,28 @@
   </div>
 </header>
 
-<div class="pass" aria-hidden="true"><i></i><span>PASS LINE</span><i></i></div>
+<div class="pass" aria-hidden="true"><i></i><i></i></div>
 
 <main id="main">
 
 <!-- ============ 00 · HERO ============ -->
 <section class="hero" id="top" aria-labelledby="hero-t">
   <div class="w">
-    <p class="k"><b>FRONTIS METAAGENT</b><span>企业 AI 的进化基础设施</span></p>
-    <h1 class="hero__t" id="hero-t">
-      <span class="ln"><span>让 AI 改进 AI。</span></span>
-      <span class="ln"><span>每一步，都有<em>证据</em>。</span></span>
-    </h1>
+    <h1 class="hero__t" id="hero-t">让 AI 改进 AI。<br />每一步，都有证据。</h1>
 
     <div class="hero__row">
       <div class="hero__copy">
-        <p class="lede">衔远 MetaAgent（MA）是改进 Agent 的 Agent。它在企业自己的边界内评测、归因、研究改动并独立复测，让已经上线的 Agent 和专业模型持续变好。每一次采纳，都由人批准。</p>
+        <p class="lede">衔远 MetaAgent（MA）是企业 AI 的进化基础设施：一个改进 Agent 的 Agent。它在企业自己的边界内评测、归因、研究改动并独立复测，让已经上线的 Agent 和专业模型持续变好。每一次采纳，都由人批准。</p>
         <div class="acts">
-          <a class="btn btn--ink" href="#contact" data-track="hero_cta">带一个 Agent 来<i aria-hidden="true">→</i></a>
-          <a class="btn btn--line" href="#run" data-track="hero_run">看一次真实运行<i aria-hidden="true">↓</i></a>
+          <a class="btn btn--ink" href="#contact" data-track="hero_cta">预约验证</a>
+          <a class="btn btn--line" href="#run" data-track="hero_run">看一次真实运行</a>
         </div>
+        <p class="hero__note">研究基础：开源模型 Frontis-MA1 在 MLE-Bench Lite 上的奖牌率为 71.21%，论文自报。<button class="ev" type="button" data-ev="1" aria-label="查看证据 1">1</button><a href="#research">看研究</a></p>
       </div>
 
       <figure class="mx" data-mx aria-label="一次真实进化运行的评测矩阵：基线 24/26，候选 3 达到 26/26">
         <header class="mx__hd">
-          <span>RUN 2026-11-04</span>
+          <span>运行 2026-11-04</span>
           <span>产品专家 Agent · 26 个用例</span>
           <button class="mx__replay" type="button" data-mx-replay>重放</button>
         </header>
@@ -150,71 +147,52 @@
         <div class="mx__line"><span>通过线 · 26 例全部断言通过</span></div>
         <p class="mx__find" data-mx-find><b>归因</b><span>E05 把建议排期写成了承诺</span><i></i><span>E21 解析失败后仍在描述内容</span></p>
         <footer class="mx__ft">
-          <p class="mx__status" data-mx-status aria-live="polite">2 项改善 · 0 项回退 · 等待人批准</p>
+          <p class="mx__status" data-mx-status>2 项改善 · 0 项回退 · 等待人批准</p>
           <button class="mx__approve" type="button" data-mx-approve>批准采纳</button>
         </footer>
+        <p class="sr" data-mx-live aria-live="polite">2 项改善，0 项回退，等待人批准。</p>
         <figcaption>基线与最终结果为实际记录，中间候选的用例位置为示意。<button class="ev" type="button" data-ev="2" aria-label="查看证据 2">2</button></figcaption>
       </figure>
     </div>
 
-    <dl class="proof">
-      <div>
-        <dt><b>71.21</b><i>%</i></dt>
-        <dd>MLE-Bench Lite 奖牌率<br />开源模型 Frontis-MA1，论文自报<button class="ev" type="button" data-ev="1" aria-label="查看证据 1">1</button></dd>
-      </div>
-      <div>
-        <dt><b>24</b><i class="arrow">→</i><b>26</b><i>/26</i></dt>
-        <dd>一次真实进化运行<br />2 项改善，0 项回退<button class="ev" type="button" data-ev="2" aria-label="查看证据 2">2</button></dd>
-      </div>
-      <div>
-        <dt><b>17′55″</b></dt>
-        <dd>一轮模型研究，从测试到报告<br />不含数据处理<button class="ev" type="button" data-ev="3" aria-label="查看证据 3">3</button></dd>
-      </div>
-      <div>
-        <dt><b>35B</b></dt>
-        <dd>模型、代码与实验全部开源<br />任何人都可以复现<button class="ev" type="button" data-ev="4" aria-label="查看证据 4">4</button></dd>
-      </div>
-    </dl>
   </div>
 </section>
 
 <!-- ============ 01 · WHY NOW ============ -->
 <section class="s s--ink" id="why" aria-labelledby="why-t">
   <div class="w">
-    <p class="ix"><b>01</b><span>为什么是现在</span></p>
-    <h2 class="stmt" id="why-t" data-v>Agent 上线只是开始。<br />把它改好，才是真正的成本。</h2>
+    <h2 class="stmt" id="why-t">Agent 上线只是开始。<br />把它改好，才是真正的成本。</h2>
     <ul class="dense">
-      <li data-v="f"><b>调优靠人</b><p>结果不稳定、工具出错，专家和工程师反复排查、修改、测试。每一次修补，都在消耗最贵的人。</p></li>
-      <li data-v="f"><b>经验不留</b><p>一次纠正没有变成可验证的规则与技能。换一个任务，相似的问题再出现一次。</p></li>
-      <li data-v="f"><b>模型在换</b><p>底层模型持续更新，行为悄悄改变。没有回归检查，就不知道什么被改坏了。</p></li>
-      <li data-v="f"><b>数据有边界</b><p>资料、系统与模型受环境约束。改进本身，也必须在授权范围内进行。</p></li>
+      <li><b>调优靠人</b><p>结果不稳定、工具出错，专家和工程师反复排查、修改、测试。每一次修补，都在消耗最贵的人。</p></li>
+      <li><b>经验不留</b><p>一次纠正没有变成可验证的规则与技能。换一个任务，相似的问题再出现一次。</p></li>
+      <li><b>模型在换</b><p>底层模型持续更新，行为悄悄改变。没有回归检查，就不知道什么被改坏了。</p></li>
+      <li><b>数据有边界</b><p>资料、系统与模型受环境约束。改进本身，也必须在授权范围内进行。</p></li>
     </ul>
-    <p class="pivot" data-v="f" data-d>评测工具告诉你哪里错了。<br /><strong>MA 把它改好，并<em>证明改好了</em>。</strong></p>
+    <p class="pivot" data-d>评测工具告诉你哪里错了。<br /><strong>MA 把它改好，并证明改好了。</strong></p>
   </div>
 </section>
 
 <!-- ============ 02 · THE RUN ============ -->
 <section class="s" id="run" aria-labelledby="run-t">
   <div class="w">
-    <p class="ix"><b>02</b><span>怎么做到</span></p>
     <div class="head">
-      <h2 id="run-t" data-v>一次真实的改进，<br />从头看到尾。</h2>
-      <p class="lede" data-v="f">2026 年 11 月 4 日，衔远自己的产品专家 Agent 在 MA 上完成了一次进化。下面是这次运行的六个步骤，数字来自运行记录。<button class="ev" type="button" data-ev="2" aria-label="查看证据 2">2</button></p>
+      <h2 id="run-t">一次真实的改进，<br />从头看到尾。</h2>
+      <p class="lede">2026 年 11 月 4 日，衔远自己的产品专家 Agent 在 MA 上完成了一次进化。下面是这次运行的六个步骤，数字来自运行记录。<button class="ev" type="button" data-ev="2" aria-label="查看证据 2">2</button></p>
     </div>
 
     <ol class="run">
       <li class="step" data-v="s">
-        <div class="step__no"><b>01</b><span>GOAL</span></div>
+        <div class="step__no"><b>1</b></div>
         <div class="step__body">
           <h3>先把「好」定义清楚。</h3>
           <p>用户给出需求文档和评测集。MA 整理成一份质量指南，经用户确认之后，才开始制作用例、开发与评测。</p>
         </div>
         <div class="step__fig">
-          <div class="chips"><span>需求文档</span><span>评测集 · 26 例</span><i aria-hidden="true">→</i><span class="is-ok">guide.md · 已确认</span></div>
+          <div class="chips"><span>需求文档</span><span>评测集 · 26 例</span><i aria-hidden="true"></i><span class="is-ok">guide.md · 已确认</span></div>
         </div>
       </li>
       <li class="step" data-v="s">
-        <div class="step__no"><b>02</b><span>BASELINE</span></div>
+        <div class="step__no"><b>2</b></div>
         <div class="step__body">
           <h3>建立一条可信的基线。</h3>
           <p>26 个用例里，24 个全部断言通过。过程中评分实现出过一次问题，MA 修复后重建了基线，旧分数不拿来计算收益。</p>
@@ -224,7 +202,7 @@
         </div>
       </li>
       <li class="step" data-v="s">
-        <div class="step__no"><b>03</b><span>ATTRIBUTION</span></div>
+        <div class="step__no"><b>3</b></div>
         <div class="step__body">
           <h3>把失败归成可验证的问题。</h3>
           <p>两处真实差距被定位出来，各自对应一条可以复测的断言，而不是一堆逐条修补的日志。</p>
@@ -237,7 +215,7 @@
         </div>
       </li>
       <li class="step" data-v="s">
-        <div class="step__no"><b>04</b><span>CONTRACT</span></div>
+        <div class="step__no"><b>4</b></div>
         <div class="step__body">
           <h3>改之前，先签一份研究合同。</h3>
           <p>目标、预算和允许修改的范围在开始前写死。MA 只能在这个范围里做实验。</p>
@@ -252,7 +230,7 @@
         </div>
       </li>
       <li class="step" data-v="s">
-        <div class="step__no"><b>05</b><span>RETEST</span></div>
+        <div class="step__no"><b>5</b></div>
         <div class="step__body">
           <h3>每个候选，都用同一把尺子复测。</h3>
           <p>中间的候选修好了旧问题，却带来了新的回归，被淘汰。候选 3 完成全量复评：26/26，平均分从 98.08 到 100。</p>
@@ -266,7 +244,7 @@
         </div>
       </li>
       <li class="step" data-v="s">
-        <div class="step__no"><b>06</b><span>ADOPTION</span></div>
+        <div class="step__no"><b>6</b></div>
         <div class="step__body">
           <h3>采纳由人决定，发布另算。</h3>
           <p>MA 先列出改动，人确认后预演合并，再次确认才写入开发包，最终 9 个文件比对一致。采纳不等于发布：发布是另一个由人执行的动作。</p>
@@ -283,7 +261,7 @@
       </li>
     </ol>
 
-    <figure class="shot" data-v="f">
+    <figure class="shot">
       <div class="shot__frame">
         <img class="shot__a" src="./assets/home/ma-approval.webp" alt="MA 工作台中的批准卡片：是否批准本次进化，选项为批准与驳回" width="830" height="445" loading="lazy" decoding="async" />
         <img class="shot__b" src="./assets/home/ma-report.webp" alt="MA 工作台中的进化报告：进化前 4.22，进化后 5.18，环比 +22.7%，认证 3/3 通过" width="1530" height="1200" loading="lazy" decoding="async" />
@@ -291,25 +269,33 @@
       <figcaption><b>真实界面</b>MA 工作台里的批准卡片与进化报告：前后得分、环比，以及回归、目标、边界三项认证。来自另一次运行。<button class="ev" type="button" data-ev="10" aria-label="查看证据 10">10</button></figcaption>
     </figure>
 
-    <aside class="stop" data-v="f">
-      <p class="stop__k">也有不改的时候</p>
-      <h3>达标就停。无效不算分。</h3>
-      <p>另一次运行里，金融研报 Agent 的有效基线是 7/7 达标。固定目标已经满足，MA 没有生成候选，也没有修改 Agent。第一次评测 7 题全部无效，原因是评分环境没有收到轨迹。那不是 Agent 得了 0 分，修复之后的分数也不算作进化带来的提升。<button class="ev" type="button" data-ev="5" aria-label="查看证据 5">5</button></p>
-    </aside>
+    <div class="ledger">
+      <div class="ledger__hd">
+        <h3>三次运行，三种结果。</h3>
+        <p>没改的，和还没赢的，我们也放在这里。</p>
+      </div>
+      <table>
+        <thead><tr><th scope="col">结果</th><th scope="col">对象</th><th scope="col">数字</th><th scope="col">发生了什么</th></tr></thead>
+        <tbody>
+          <tr class="is-pass"><th scope="row">改好了</th><td>产品专家 Agent</td><td class="num">24 → 26 / 26</td><td>就是上面这一次。两处真实差距被修复，全量复评没有回归。<button class="ev" type="button" data-ev="2" aria-label="查看证据 2">2</button></td></tr>
+          <tr><th scope="row">不用改</th><td>金融研报 Agent</td><td class="num">7 / 7</td><td>有效基线已经达标，MA 停止，没有生成候选，也没有修改 Agent。第一次评测 7 题全部无效，原因是评分环境没有收到轨迹。那不是 Agent 得了 0 分，修复之后的分数也不算作进化带来的提升。<button class="ev" type="button" data-ev="5" aria-label="查看证据 5">5</button></td></tr>
+          <tr class="is-short"><th scope="row">还差一点</th><td>基差预测模型</td><td class="num">62.14% 对 63%</td><td>准确率从 57.28% 提到 62.14%，仍低于人工模型的 63%。<button class="ev" type="button" data-ev="6" aria-label="查看证据 6">6</button></td></tr>
+        </tbody>
+      </table>
+    </div>
   </div>
 </section>
 
 <!-- ============ 03 · TRUST ============ -->
 <section class="s s--gray" id="trust" aria-labelledby="trust-t">
   <div class="w">
-    <p class="ix"><b>03</b><span>凭什么信</span></p>
     <div class="head">
-      <h2 id="trust-t" class="hang" data-v>「自进化」谁都能说。<br />我们请你看证据。</h2>
+      <h2 id="trust-t" class="hang">「自进化」谁都能说。<br />我们请你看证据。</h2>
     </div>
 
     <div class="pillars">
-      <article class="pillar" data-v="f">
-        <div class="pillar__k"><b>A</b><span>有证据<small>PROVEN</small></span></div>
+      <article class="pillar">
+        <div class="pillar__k"><b>A</b><span>有证据</span></div>
         <div class="pillar__body">
           <h3>评分的，和改进的，不是同一个。</h3>
           <p>独立评测引擎按业务标准判分，并留存原始证据。MA 只能读取结果，不能修改评分。每一次改进都做前后对比与回归检查。</p>
@@ -322,8 +308,8 @@
           </div>
         </div>
       </article>
-      <article class="pillar" data-v="f">
-        <div class="pillar__k"><b>B</b><span>受控的自主<small>GOVERNED</small></span></div>
+      <article class="pillar">
+        <div class="pillar__k"><b>B</b><span>受控的自主</span></div>
         <div class="pillar__body">
           <h3>研究可以自动，发布必须有人批准。</h3>
           <p>MA 在你给定的授权与预算内连续研究。研究完成、采纳到开发包、正式发布，是三个分开的状态，每一步都留有记录。</p>
@@ -336,8 +322,8 @@
           </ol>
         </div>
       </article>
-      <article class="pillar" data-v="f">
-        <div class="pillar__k"><b>C</b><span>留在企业<small>YOURS</small></span></div>
+      <article class="pillar">
+        <div class="pillar__k"><b>C</b><span>留在企业</span></div>
         <div class="pillar__body">
           <h3>不换平台，不出边界，经验归你。</h3>
           <p>可对接 Dify、HiAgent、Codex 等框架，接入深度按版本评估。可在云端、私有环境或本地一体机运行。规则、技能、评测证据与研究经验留在企业，模型换代也不清零。</p>
@@ -350,19 +336,19 @@
       </article>
     </div>
 
-    <div class="six" data-v="f">
+    <div class="six">
       <h3>每一次改进，<br />都要回答六个问题。</h3>
-      <ol>
-        <li><b>01</b>为什么改</li>
-        <li><b>02</b>改了什么</li>
-        <li><b>03</b>在哪些任务上有效</li>
-        <li><b>04</b>证据够不够</li>
-        <li><b>05</b>谁批准的</li>
-        <li><b>06</b>上线后收益是否兑现</li>
-      </ol>
+      <ul>
+        <li>为什么改</li>
+        <li>改了什么</li>
+        <li>在哪些任务上有效</li>
+        <li>证据够不够</li>
+        <li>谁批准的</li>
+        <li>上线后收益是否兑现</li>
+      </ul>
     </div>
 
-    <div class="where" data-v="f">
+    <div class="where">
       <h3>MA 在你工具栈里的位置。</h3>
       <div class="where__scroll">
         <table>
@@ -387,36 +373,35 @@
 <!-- ============ 04 · RESEARCH ============ -->
 <section class="s" id="research" aria-labelledby="research-t">
   <div class="w">
-    <p class="ix"><b>04</b><span>背后的研究</span></p>
     <div class="head">
-      <h2 id="research-t" data-v>先在公开基准上证明，<br />再带进企业。</h2>
-      <p class="lede" data-v="f">MetaAgent 的方法来自衔远在 AI 自我改进方向的研究。模型、代码与实验全部公开。研究验证方法，产品把方法带进企业，两者同属一条 AI for AI 技术路线。</p>
+      <h2 id="research-t">先在公开基准上证明，<br />再带进企业。</h2>
+      <p class="lede">MetaAgent 的方法来自衔远在 AI 自我改进方向的研究。模型、代码与实验全部公开。<button class="ev" type="button" data-ev="4" aria-label="查看证据 4">4</button>研究验证方法，产品把方法带进企业，两者同属一条 AI for AI 技术路线。</p>
     </div>
 
-    <div class="bench" data-v="f">
+    <div class="bench">
       <div class="bench__main">
-        <p class="bench__k">MLE-BENCH LITE · 奖牌率 MEDAL AVERAGE</p>
+        <p class="bench__k">MLE-Bench Lite 奖牌率</p>
         <ul class="bars" data-bars>
           <li style="--p:39.39"><span>基座模型 + OpenMLE-Evo</span><i></i><b>39.39%</b></li>
           <li style="--p:60.61"><span>Frontis-MA1 + OpenMLE-Evo</span><i></i><b>60.61%</b></li>
           <li style="--p:71.21" class="is-top"><span>Frontis-MA1 + OpenMLE-Evo-Max</span><i></i><b>71.21%</b></li>
         </ul>
-        <p class="bench__cond">35B 参数 · 单张 RTX 4090，显存上限 12GB · 每任务 12 小时 · 论文报告该成绩超过 GPT-5.5 + Codex<button class="ev" type="button" data-ev="1" aria-label="查看证据 1">1</button></p>
+        <p class="bench__cond">35B 参数。单张 RTX 4090，显存上限 12GB，每任务 12 小时。论文报告该成绩超过 GPT-5.5 + Codex。<button class="ev" type="button" data-ev="1" aria-label="查看证据 1">1</button></p>
       </div>
       <div class="bench__side">
-        <p class="bench__k">NATUREBENCH LITE · 未参与训练</p>
+        <p class="bench__k">NatureBench Lite，未参与训练的基准</p>
         <p class="bench__big"><b>50</b><i>→</i><b>70</b><i>%</i></p>
         <p>框架不变，换入 Frontis-MA1 之后，达到已发表最佳结果的任务比例。<button class="ev" type="button" data-ev="7" aria-label="查看证据 7">7</button></p>
       </div>
     </div>
 
-    <ul class="papers" data-v="f">
-      <li><a href="https://huggingface.co/FrontisAI/Frontis-MA1-35B" target="_blank" rel="noopener"><span>MODEL · 35B · OPEN</span><b>Frontis-MA1</b><em>面向机器学习工程自我改进的 AI4AI 模型</em><i aria-hidden="true">↗</i></a></li>
-      <li><a href="https://github.com/FrontisAI/OpenRSI" target="_blank" rel="noopener"><span>FRAMEWORK · CODE</span><b>OpenRSI</b><em>AI 递归自我改进的开放框架，含 OpenMLE 可复现实验</em><i aria-hidden="true">↗</i></a></li>
-      <li><a href="https://github.com/PRIME-RL/TTRL" target="_blank" rel="noopener"><span>PAPER · NEURIPS 2025</span><b>TTRL</b><em>测试时强化学习，探索推理阶段的自我改进</em><i aria-hidden="true">↗</i></a></li>
+    <ul class="papers">
+      <li><a href="https://huggingface.co/FrontisAI/Frontis-MA1-35B" target="_blank" rel="noopener"><span>开源模型，35B</span><b>Frontis-MA1</b><em>面向机器学习工程自我改进的 AI4AI 模型</em><svg class="ic" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.2" /></svg></a></li>
+      <li><a href="https://github.com/FrontisAI/OpenRSI" target="_blank" rel="noopener"><span>开源框架与代码</span><b>OpenRSI</b><em>AI 递归自我改进的开放框架，含 OpenMLE 可复现实验</em><svg class="ic" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.2" /></svg></a></li>
+      <li><a href="https://github.com/PRIME-RL/TTRL" target="_blank" rel="noopener"><span>论文，NeurIPS 2025</span><b>TTRL</b><em>测试时强化学习，探索推理阶段的自我改进</em><svg class="ic" viewBox="0 0 12 12" aria-hidden="true"><path d="M3.5 2.5h6v6M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.2" /></svg></a></li>
     </ul>
 
-    <ol class="years" data-v="f">
+    <ol class="years">
       <li><b>2022</b><span>提出通专融合</span></li>
       <li><b>2024</b><span>SAGE 架构</span></li>
       <li><b>2025</b><span>MetaAgent 技术路线<br />TTRL 发表于 NeurIPS</span></li>
@@ -428,13 +413,12 @@
 <!-- ============ 05 · MARKETS ============ -->
 <section class="s s--gray" id="markets" aria-labelledby="markets-t">
   <div class="w">
-    <p class="ix"><b>05</b><span>用在哪里</span></p>
     <div class="head">
-      <h2 id="markets-t" data-v>为靠 AI 团队迭代速度<br />竞争的行业而建。</h2>
-      <p class="lede" data-v="f">这些行业已经有 Agent 和专业模型在生产运行，有自己的 AI 团队，数据不能出域。我们按证据的成熟度，如实标出每个行业走到了哪一步。</p>
+      <h2 id="markets-t">为靠 AI 团队迭代速度<br />竞争的行业而建。</h2>
+      <p class="lede">这些行业已经有 Agent 和专业模型在生产运行，有自己的 AI 团队，数据不能出域。我们按证据的成熟度，如实标出每个行业走到了哪一步。</p>
     </div>
 
-    <div class="tiers" data-v="f" role="table" aria-label="重点行业与成熟度">
+    <div class="tiers" role="table" aria-label="重点行业与成熟度">
       <div class="tier tier--head" role="row"><span role="columnheader">状态</span><span role="columnheader">行业</span><span role="columnheader">先从哪条线</span><span role="columnheader">第一个任务</span><span role="columnheader">现有证据</span></div>
       <div class="tier" role="row">
         <span role="cell"><em class="badge badge--solid">已交付</em></span>
@@ -466,43 +450,15 @@
       </div>
     </div>
 
-    <div class="results">
-      <div class="results__hd" data-v="f">
-        <h3>三次运行，三种结果。</h3>
-        <p>没改的，和还没赢的，我们也放在这里。</p>
-      </div>
-      <div class="results__grid">
-        <article class="res" data-v="f">
-          <p class="res__k">改好了</p>
-          <p class="res__n"><b>24</b><i>→</i><b>26</b><small>/26</small></p>
-          <h4>产品专家 Agent</h4>
-          <p>两处真实差距被修复，全量复评没有回归。<button class="ev" type="button" data-ev="2" aria-label="查看证据 2">2</button></p>
-        </article>
-        <article class="res" data-v="f">
-          <p class="res__k">不用改</p>
-          <p class="res__n"><b>7</b><small>/7</small></p>
-          <h4>金融研报 Agent</h4>
-          <p>有效基线已经达标，MA 停止，没有修改任何东西。<button class="ev" type="button" data-ev="5" aria-label="查看证据 5">5</button></p>
-        </article>
-        <article class="res" data-v="f">
-          <p class="res__k">还差一点</p>
-          <p class="res__n"><b>62.14</b><small>% 对 63%</small></p>
-          <h4>基差预测模型</h4>
-          <p>准确率从 57.28% 提到 62.14%，仍低于人工模型的 63%。<button class="ev" type="button" data-ev="6" aria-label="查看证据 6">6</button></p>
-        </article>
-      </div>
-    </div>
-
-    <figure class="zero" data-v="f">
+    <figure class="zero">
       <img src="./assets/home/leadeep-family.webp" alt="Leadeep AI 产品家族：笔记本上的工作台、手机端、录音卡与本地一体机" width="1500" height="1074" loading="lazy" decoding="async" />
       <figcaption>
-        <p class="zero__k">第一个用户，是我们自己</p>
         <p class="zero__t" data-d>前两次运行发生在 Leadeep AI 上。那是衔远自己的 Agent 产品，也是 MetaAgent 的第一个用户。</p>
-        <a href="./leadeep.html">了解 Leadeep AI<i aria-hidden="true">→</i></a>
+        <a href="./leadeep.html">了解 Leadeep AI</a>
       </figcaption>
     </figure>
 
-    <div class="logos" data-v="f">
+    <div class="logos">
       <p>衔远已服务的企业</p>
       <ul>
         <li><img src="./assets/home/logos/jd.webp" alt="京东" loading="lazy" decoding="async" /></li>
@@ -521,13 +477,12 @@
 <!-- ============ 06 · START ============ -->
 <section class="s" id="start" aria-labelledby="start-t">
   <div class="w">
-    <p class="ix"><b>06</b><span>开始</span></p>
     <div class="head head--stack">
-      <h2 id="start-t" class="big" data-v>带一个 Agent 来。</h2>
-      <p class="lede" data-v="f">从一个高频、问题明确的任务开始。先建立有效基线，再决定值不值得改。</p>
+      <h2 id="start-t" class="big">带一个 Agent 来。</h2>
+      <p class="lede">从一个高频、问题明确的任务开始。先建立有效基线，再决定值不值得改。</p>
     </div>
 
-    <div class="deal" data-v="f">
+    <div class="deal">
       <div>
         <h3>你准备</h3>
         <ul>
@@ -550,14 +505,8 @@
       <p class="deal__vow" data-d>没有改善，<br />我们也如实交付结果和原因。</p>
     </div>
 
-    <dl class="ways" data-v="f">
-      <div><dt>云端</dt><dd>在 Leadeep AI 平台的进化实验室里直接使用。</dd></div>
-      <div><dt>私有部署</dt><dd>部署在企业自己的环境，对接已有的 Agent 平台。</dd></div>
-      <div><dt>本地一体机</dt><dd>在授权边界内完成整个改进闭环，证据与经验本地留存。</dd></div>
-      <div><dt>伙伴</dt><dd>行业服务商与集成伙伴：把有效的规则、技能和验证方法，用到下一个项目。<a href="mailto:sunlei@frontis.cn">sunlei@frontis.cn</a></dd></div>
-    </dl>
 
-    <div class="faq" data-v="f">
+    <div class="faq">
       <details>
         <summary>已经在用 Dify、HiAgent 或自建 Agent，为什么还需要 MA？</summary>
         <p>业务 Agent 负责完成任务，MA 负责研究怎样把任务做得更好。原有平台可以继续使用。能接入哪些资产、能修改什么，取决于框架、接口与环境，我们会先做适配评估。</p>
@@ -574,6 +523,10 @@
         <summary>能保证提升效果吗？</summary>
         <p>不能事先保证。效果取决于任务、资产和数据。我们先约定样本、指标、预算与成本约束，再用一次验证来回答。</p>
       </details>
+      <details>
+        <summary>我们是行业服务商或集成商，可以合作吗？</summary>
+        <p>可以。伙伴把有效的规则、技能和验证方法，用到自己的下一个项目。联系 <a href="mailto:sunlei@frontis.cn">sunlei@frontis.cn</a>。</p>
+      </details>
     </div>
   </div>
 </section>
@@ -582,18 +535,17 @@
 <section class="s s--ink contact" id="contact" aria-labelledby="contact-t">
   <div class="w contact__grid">
     <div class="contact__copy">
-      <p class="ix"><b>→</b><span>预约验证</span></p>
-      <h2 id="contact-t" data-v>告诉我们，<br />你想改好的那个 Agent。</h2>
+      <h2 id="contact-t">告诉我们，<br />你想改好的那个 Agent。</h2>
       <dl class="mails">
         <div><dt>商务合作</dt><dd><a href="mailto:xianyuan@frontis.ai">xianyuan@frontis.ai</a></dd></div>
         <div><dt>伙伴合作</dt><dd><a href="mailto:sunlei@frontis.cn">sunlei@frontis.cn</a></dd></div>
         <div><dt>加入衔远</dt><dd><a href="mailto:hr-public@frontis.cn">hr-public@frontis.cn</a></dd></div>
       </dl>
     </div>
-    <form class="form" data-form novalidate>
+    <form class="form" data-form novalidate aria-describedby="form-status">
       <div class="form__row">
-        <label for="f-name"><span>姓名</span><input id="f-name" name="name" autocomplete="name" required /></label>
-        <label for="f-company"><span>公司</span><input id="f-company" name="company" autocomplete="organization" required /></label>
+        <label for="f-name"><span>姓名<i>必填</i></span><input id="f-name" name="name" autocomplete="name" required /></label>
+        <label for="f-company"><span>公司<i>必填</i></span><input id="f-company" name="company" autocomplete="organization" required /></label>
       </div>
       <div class="form__row">
         <label for="f-email"><span>邮箱</span><input id="f-email" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" /></label>
@@ -609,8 +561,8 @@
       <label class="form__trap" aria-hidden="true"><span>Website</span><input name="website" autocomplete="off" tabindex="-1" /></label>
       <input type="hidden" name="interest" value="ma" />
       <div class="form__ft">
-        <button class="btn btn--paper" type="submit">提交<i aria-hidden="true">→</i></button>
-        <p class="form__status" data-form-status role="status" aria-live="polite">邮箱和手机至少填一项。我们会在 1 个工作日内联系你。</p>
+        <button class="btn btn--paper" type="submit">发送预约</button>
+        <p class="form__status" id="form-status" data-form-status role="status" aria-live="polite">邮箱和手机至少填一项。我们会在 1 个工作日内联系你。</p>
       </div>
     </form>
   </div>
@@ -644,7 +596,7 @@
       <img src="./assets/logo-dark.svg" alt="FRONTIS 衔远科技" width="124" height="40" loading="lazy" />
       <p data-d>让 AI 改进 AI。<br />每一步，都有证据。</p>
     </div>
-    <nav aria-label="页脚：平台"><h3>平台</h3><a href="#run">一次真实运行</a><a href="#trust">证据与治理</a><a href="#research">研究</a><a href="#markets">行业</a></nav>
+    <nav aria-label="页脚：平台"><h3>平台</h3><a href="#run">一次真实运行</a><a href="#trust">凭什么信</a><a href="#research">研究</a><a href="#markets">行业</a></nav>
     <nav aria-label="页脚：产品"><h3>应用产品</h3><a href="./leadeep.html">Leadeep AI</a><a href="./horizon.html">衔远大观</a><a href="https://ai.frontis.cn/login" rel="noopener">产品登录</a></nav>
     <nav aria-label="页脚：公司"><h3>公司</h3><a href="./about.html">关于衔远</a><a href="./ecosystem.html">生态</a><a href="./en.html" lang="en" hreflang="en">English</a></nav>
   </div>
@@ -654,9 +606,9 @@
   </div>
 </footer>
 
-<div class="pop" data-pop hidden role="dialog" aria-label="证据"><button class="pop__x" type="button" data-pop-x aria-label="关闭">×</button><em data-pop-type></em><div data-pop-body></div><a href="#evidence" data-pop-all>查看全部证据</a></div>
+<div class="pop" data-pop hidden role="dialog" aria-label="证据"><button class="pop__x" type="button" data-pop-x aria-label="关闭"><svg class="ic" viewBox="0 0 12 12" aria-hidden="true"><path d="M2.5 2.5l7 7M9.5 2.5l-7 7" fill="none" stroke="currentColor" stroke-width="1.2" /></svg></button><em data-pop-type></em><div data-pop-body></div><a href="#evidence" data-pop-all>查看全部证据</a></div>
 <div class="evbar" data-evbar hidden><span>证据模式已开启：点击任一编号查看来源</span><a href="#evidence">全部 10 条</a><button type="button" data-ev-toggle>关闭</button></div>
 
-<script src="./components/home.js?v=20261110"></script>
+<script src="./components/home.js?v=20261113"></script>
 </body>
 </html>

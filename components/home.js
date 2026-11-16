@@ -16,35 +16,39 @@
       s3: "候选 2 · 出现回归，淘汰",
       s4: "候选 3 复评中",
       passed: "2 项改善 · 0 项回退 · 等待人批准",
+      passedLive: "运行结束：候选 3 达到 26/26，2 项改善，0 项回退，等待人批准。",
       approved: "已采纳到开发包 · 发布另行执行",
+      approvedLive: "已批准：改动采纳到开发包。发布需要另行执行。",
       approve: "批准采纳",
       approveDone: "已批准",
-      formMissing: "请填写姓名、公司，以及邮箱或手机中的一项。",
-      formEmail: "请填写有效的邮箱地址。",
-      formNoEndpoint: "当前预览环境没有提交服务。请直接发邮件到 xianyuan@frontis.ai。",
-      formSending: "正在提交",
-      formPending: "正在提交，请稍候。",
-      formDone: "已收到。我们会在 1 个工作日内联系你。",
-      formFail: "提交失败，请稍后重试，或发邮件到 xianyuan@frontis.ai。",
+      formMissing: "还差：姓名、公司，以及邮箱或手机中的一项。",
+      formEmail: "这个邮箱地址不完整，请检查后再发送。",
+      formNoEndpoint: "这个预览环境不能发送表单。请直接发邮件到 xianyuan@frontis.ai。",
+      formSending: "正在发送",
+      formPending: "正在发送，请稍候。",
+      formDone: "已发送。我们会在 1 个工作日内联系你。",
+      formFail: "没有发送成功。请稍后再试，或发邮件到 xianyuan@frontis.ai。",
       stack: "Agent 平台",
     },
     en: {
       s0: "Scoring baseline",
       s1: "Baseline 24/26 · 2 gaps located",
-      s2: "Candidate 1 · regression, discarded",
-      s3: "Candidate 2 · regression, discarded",
+      s2: "Candidate 1 · regression, dropped",
+      s3: "Candidate 2 · regression, dropped",
       s4: "Re-testing candidate 3",
       passed: "2 improved · 0 regressed · awaiting human approval",
+      passedLive: "Run finished: candidate 3 reached 26 of 26, 2 improved, 0 regressed, awaiting human approval.",
       approved: "Adopted into the dev package · release is a separate step",
+      approvedLive: "Approved: the changes are adopted into the dev package. Release is a separate step.",
       approve: "Approve",
       approveDone: "Approved",
-      formMissing: "Please add your name, company, and an email or phone number.",
-      formEmail: "Please enter a valid email address.",
-      formNoEndpoint: "This preview has no submission service. Email xianyuan@frontis.ai instead.",
+      formMissing: "Still needed: your name, company, and an email or phone number.",
+      formEmail: "That email address looks incomplete. Check it and send again.",
+      formNoEndpoint: "This preview cannot send forms. Email xianyuan@frontis.ai instead.",
       formSending: "Sending",
       formPending: "Sending your request.",
-      formDone: "Received. We will reply within one business day.",
-      formFail: "Could not send. Please try again, or email xianyuan@frontis.ai.",
+      formDone: "Request sent. We reply within one business day.",
+      formFail: "The request was not sent. Try again, or email xianyuan@frontis.ai.",
       stack: "Agent stack",
     },
   }[lang];
@@ -52,17 +56,7 @@
   function track(name, params) {
     if (typeof window.frontisTrack === "function") window.frontisTrack(name, params || {});
   }
-
   function each(list, fn) { Array.prototype.forEach.call(list, fn); }
-
-  /* ---------- Ready: hero headline enters once fonts are in ---------- */
-  function ready() { root.classList.add("is-ready"); }
-  if (doc.fonts && doc.fonts.ready) {
-    var readyTimer = window.setTimeout(ready, 900);
-    doc.fonts.ready.then(function () { window.clearTimeout(readyTimer); window.requestAnimationFrame(ready); });
-  } else {
-    ready();
-  }
 
   /* ---------- Header ---------- */
   var hd = doc.getElementById("hd");
@@ -77,33 +71,24 @@
     each(doc.querySelectorAll(".hd__nav a"), function (a) { a.addEventListener("click", function () { setMenu(false); }); });
   }
 
-  /* ---------- Threshold: elements are "verified" as they cross the pass line ---------- */
-  var targets = doc.querySelectorAll("[data-v]");
-  function verify(el) { el.classList.add("on"); }
+  /* ---------- The pass line: steps of the run are marked as they cross it ---------- */
+  var steps = doc.querySelectorAll('[data-v="s"]');
+  var run = doc.querySelector(".run");
+  function mark(el) { el.classList.add("on"); }
 
-  if (reduce || !("IntersectionObserver" in window)) {
-    each(targets, verify);
-  } else {
-    var io = new IntersectionObserver(function (entries) {
-      entries.forEach(function (entry) {
-        if (!entry.isIntersecting) return;
-        verify(entry.target);
-        io.unobserve(entry.target);
-      });
-    }, { rootMargin: "0px 0px -" + Math.round((1 - PASS_LINE) * 100) + "% 0px", threshold: 0 });
-    each(targets, function (el) { io.observe(el); });
-  }
-
-  // Fail-open sweep: fast jumps, anchor links and the end of the page must never leave content gray.
   var ticking = false;
   function sweep() {
     ticking = false;
     var line = window.innerHeight * PASS_LINE;
     var atEnd = window.innerHeight + window.scrollY >= root.scrollHeight - 4;
-    each(targets, function (el) {
+    each(steps, function (el) {
       if (el.classList.contains("on")) return;
-      if (atEnd || el.getBoundingClientRect().top < line) verify(el);
+      if (atEnd || el.getBoundingClientRect().top < line) mark(el);
     });
+    if (run) {
+      var box = run.getBoundingClientRect();
+      body.classList.toggle("in-run", box.top < line && box.bottom > line);
+    }
     if (hd) hd.classList.toggle("is-scrolled", window.scrollY > 8);
   }
   function requestSweep() {
@@ -114,7 +99,7 @@
   window.addEventListener("scroll", requestSweep, { passive: true });
   window.addEventListener("resize", requestSweep);
   window.addEventListener("hashchange", function () { window.setTimeout(sweep, 60); });
-  window.addEventListener("beforeprint", function () { each(targets, verify); });
+  window.addEventListener("beforeprint", function () { each(steps, mark); });
   sweep();
 
   /* ---------- Evaluation cells ---------- */
@@ -144,8 +129,8 @@
   /* ---------- Hero matrix: one recorded run, replayed ---------- */
   var mx = doc.querySelector("[data-mx]");
   if (mx) {
-    var hero = doc.querySelector(".hero");
     var status = mx.querySelector("[data-mx-status]");
+    var live = mx.querySelector("[data-mx-live]");
     var approve = mx.querySelector("[data-mx-approve]");
     var replay = mx.querySelector("[data-mx-replay]");
     var timers = [];
@@ -162,6 +147,8 @@
 
     var later = function (fn, ms) { timers.push(window.setTimeout(fn, ms)); };
     var say = function (text) { if (status) status.textContent = text; };
+    // Only outcomes are announced; the per-row progress would be noise for a screen reader.
+    var announce = function (text) { if (live) live.textContent = text; };
 
     var paintRow = function (row) {
       each(row.cells, function (cell, index) { cell.className = stateOf(index, row.fails, row.regs); });
@@ -173,18 +160,17 @@
       if (row.final) row.el.classList.add("is-pass");
     };
 
-    var finish = function () {
+    var finish = function (quiet) {
       mx.classList.add("is-found", "is-passed");
-      if (hero) hero.classList.add("is-passed");
       say(T.passed);
       approve.disabled = false;
+      if (!quiet) announce(T.passedLive);
     };
 
     var reset = function () {
       timers.forEach(window.clearTimeout);
       timers = [];
       mx.classList.remove("is-found", "is-passed", "is-approved");
-      if (hero) hero.classList.remove("is-passed");
       rows.forEach(function (row) {
         row.el.classList.remove("is-live", "is-done", "is-drop", "is-pass");
         each(row.cells, function (cell) { cell.className = ""; });
@@ -193,14 +179,14 @@
       approve.textContent = T.approve;
     };
 
-    var showFinal = function () {
+    var showFinal = function (quiet) {
       rows.forEach(function (row) { paintRow(row); settleRow(row); });
-      finish();
+      finish(quiet);
     };
 
     var play = function () {
       reset();
-      if (reduce) { showFinal(); return; }
+      if (reduce) { showFinal(false); return; }
 
       var at = 250;
       var messages = [T.s0, T.s2, T.s3, T.s4];
@@ -219,7 +205,7 @@
         }, at);
         at += r === 0 ? 1100 : 520;
       });
-      later(finish, at - 380);
+      later(function () { finish(false); }, at - 380);
     };
 
     approve.addEventListener("click", function () {
@@ -228,6 +214,7 @@
       approve.textContent = T.approveDone;
       approve.disabled = true;
       say(T.approved);
+      announce(T.approvedLive);
       if (!reduce) {
         var leap = doc.createElement("div");
         leap.className = "leap";
@@ -240,7 +227,7 @@
     replay.addEventListener("click", function () { play(); track("home_matrix_replay", { lang: lang }); });
 
     // Paint the finished run first so nothing depends on the animation; replay it once when visible.
-    showFinal();
+    showFinal(true);
     if (!reduce && "IntersectionObserver" in window) {
       var once = new IntersectionObserver(function (entries) {
         if (!entries[0].isIntersecting) return;
@@ -260,13 +247,17 @@
   function closePop(returnFocus) {
     if (!pop || pop.hidden) return;
     pop.hidden = true;
-    if (returnFocus && popOpener) popOpener.focus();
+    if (popOpener) {
+      popOpener.setAttribute("aria-expanded", "false");
+      if (returnFocus) popOpener.focus();
+    }
     popOpener = null;
   }
 
   function openPop(marker) {
     var note = doc.getElementById("ev-" + marker.getAttribute("data-ev"));
     if (!pop || !note) return;
+    closePop(false);
     var type = note.querySelector("em");
     var text = note.querySelector("p");
     popType.textContent = marker.getAttribute("data-ev") + " · " + (type ? type.textContent : "");
@@ -280,6 +271,7 @@
     pop.style.left = left + window.scrollX + "px";
     pop.style.top = top + window.scrollY + "px";
     popOpener = marker;
+    marker.setAttribute("aria-expanded", "true");
     track("home_evidence_open", { id: marker.getAttribute("data-ev"), lang: lang });
   }
 
@@ -319,13 +311,27 @@
   if (form) {
     var note = form.querySelector("[data-form-status]");
     var submit = form.querySelector("button[type='submit']");
-    var submitLabel = submit.innerHTML;
+    var submitLabel = submit.textContent;
+    var field = function (name) { return form.querySelector('[name="' + name + '"]'); };
 
     var setStatus = function (type, message) {
       note.textContent = message;
       note.classList.remove("is-error", "is-success");
       if (type) note.classList.add("is-" + type);
     };
+
+    // Mark the fields that need attention and move focus to the first one.
+    var flag = function (names) {
+      ["name", "company", "email", "phone"].forEach(function (name) {
+        var input = field(name);
+        if (!input) return;
+        if (names.indexOf(name) >= 0) input.setAttribute("aria-invalid", "true"); else input.removeAttribute("aria-invalid");
+      });
+      if (names.length) field(names[0]).focus();
+    };
+    form.addEventListener("input", function (event) {
+      if (event.target && event.target.removeAttribute) event.target.removeAttribute("aria-invalid");
+    });
 
     var endpoint = function () {
       if (typeof window.FRONTIS_CTA_ENDPOINT === "string" && window.FRONTIS_CTA_ENDPOINT) return window.FRONTIS_CTA_ENDPOINT.trim();
@@ -368,8 +374,13 @@
         tracking: utm(),
       };
 
-      if (!payload.name || !payload.company || (!payload.email && !payload.phone)) { setStatus("error", T.formMissing); return; }
-      if (payload.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) { setStatus("error", T.formEmail); return; }
+      var missing = [];
+      if (!payload.name) missing.push("name");
+      if (!payload.company) missing.push("company");
+      if (!payload.email && !payload.phone) missing.push("email");
+      if (missing.length) { flag(missing); setStatus("error", T.formMissing); return; }
+      if (payload.email && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(payload.email)) { flag(["email"]); setStatus("error", T.formEmail); return; }
+      flag([]);
 
       var url = endpoint();
       if (!url) { setStatus("error", T.formNoEndpoint); return; }
@@ -396,7 +407,7 @@
         track("frontis_cta_submit_error", { interest: payload.interest, lang: lang });
       }).then(function () {
         submit.disabled = false;
-        submit.innerHTML = submitLabel;
+        submit.textContent = submitLabel;
       });
     });
   }
